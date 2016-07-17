@@ -27,7 +27,7 @@ public class Subsets {
     }
     
     private void helper(List<List<Integer>> res, List<Integer> list, int[] nums, int pos) {
-    	res.add(new ArrayList<Integer>(list)); // Remember to deep copy the list
+    	res.add(new ArrayList<Integer>(list)); // Remember to deep copy the list. Just add, cant return, which is a difference with Permutation
         
         for (int i = pos; i < nums.length; i++) { // Dont repeat yourself. Start from a new point always.
             list.add(nums[i]);

@@ -7,10 +7,6 @@ import java.util.Map;
 
 public class LetterCombinations {
 
-	public static void main(String[] args) {
-
-	}
-	
     public List<String> letterCombinations(String digits) {
         Map<Character, char[]> map = buildMap(); // Key type must be Character. Array can be char[]
         List<String> res = new ArrayList<String>();
@@ -29,8 +25,8 @@ public class LetterCombinations {
         
         int length = sb.length();
         if (length == digits.length()) { // When achieve desired length, done!
-            res.add(sb.toString());
-            return;
+            res.add(sb.toString()); // Usually, we should protect this SB. Why we dont need to make deep copy of StringBuilder
+            return; // This is because sb.toString() will generate a new String object.
         }
         
         char nextDigit = digits.charAt(length); // Get next digit, based on the length of dynamic StringBuilder

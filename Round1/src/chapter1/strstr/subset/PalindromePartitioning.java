@@ -3,6 +3,21 @@ package chapter1.strstr.subset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 131. Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+Return
+
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+ * @author Lei
+ *
+ */
 public class PalindromePartitioning {
 
 	public static void main(String[] args) {

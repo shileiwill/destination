@@ -1,5 +1,12 @@
 package chapter1.strstr.subset;
 
+/**
+ * 28. Implement strStr().
+
+   Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+ * @author Lei
+ *
+ */
 public class StrStr {
 
 	public static void main(String[] args) {

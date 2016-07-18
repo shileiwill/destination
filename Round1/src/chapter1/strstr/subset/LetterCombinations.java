@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 17. Given a digit string, return all possible letter combinations that the number could represent.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+ * @author Lei
+ *
+ */
 public class LetterCombinations {
 
     public List<String> letterCombinations(String digits) {

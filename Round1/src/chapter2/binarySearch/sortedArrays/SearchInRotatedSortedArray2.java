@@ -5,6 +5,8 @@ package chapter2.binarySearch.sortedArrays;
  *
  */
 public class SearchInRotatedSortedArray2 {
+	// The worst case will be O(n), so we can also use just a linear for loop.
+	// For example, 1 1 1 1 1 1 1 1 1 1, while target is 0
     public boolean search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;

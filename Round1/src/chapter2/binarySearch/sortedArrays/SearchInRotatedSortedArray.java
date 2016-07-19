@@ -22,14 +22,14 @@ public class SearchInRotatedSortedArray {
                 return mid;
             }
             
-            if (nums[mid] > nums[0]) {// Left hand in order
-                if (target < nums[mid] && target >= nums[0]) { // Stay on left
+            if (nums[mid] > nums[left]) {// Left hand in order
+                if (target < nums[mid] && target >= nums[left]) { // Stay on left
                     right = mid;
                 } else { // Go to the disorder
                     left = mid;
                 }
             } else { // Right in order
-                if (target > nums[mid] && target <= nums[nums.length - 1]) { // Stay on right
+                if (target > nums[mid] && target <= nums[right]) { // Stay on right
                     left = mid;
                 } else { // Go to the disorder
                     right = mid;

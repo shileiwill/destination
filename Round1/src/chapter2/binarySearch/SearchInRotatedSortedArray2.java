@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 /**
  * 81. What if duplicates are allowed?
  * @author Lei

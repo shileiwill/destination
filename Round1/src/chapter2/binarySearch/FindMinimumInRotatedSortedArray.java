@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 /**
  * 153. Suppose a sorted array is rotated at some pivot unknown to you beforehand.
 

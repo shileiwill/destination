@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 
 public class BinarySearchTemplate {
 

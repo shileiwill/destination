@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 /**
  * 162. A peak element is an element that is greater than its neighbors.
 

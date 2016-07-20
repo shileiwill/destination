@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 /**
  * 154. Follow up for 153 as shown below. What if there are duplicates. What is the worst case complexity? 
  * Suppose a sorted array is rotated at some pivot unknown to you beforehand.

@@ -1,4 +1,4 @@
-package chapter2.binarySearch.sortedArrays;
+package chapter2.binarySearch;
 
 /**
  * 34. Given a sorted array of integers, find the starting and ending position of a given target value.

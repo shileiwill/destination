@@ -1,4 +1,8 @@
 package chapter2.sortedArrays;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 26. Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
 
@@ -16,7 +20,26 @@ public class RemoveDuplicates {
 	public static void main(String[] args) {
 
 	}
-	
+	private int removeDuplicatesWithExtraSpace(int[] nums) {
+        if (nums.length <= 1) {
+            return nums.length;
+        }
+        
+		List<Integer> res = new ArrayList<Integer>();
+		res.add(nums[0]);
+		
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i] != nums[i - 1]) {
+				res.add(nums[i]);
+			}
+		}
+		
+		for (int i = 0; i < res.size(); i++) {
+			nums[i] = res.get(i);
+		}
+		
+		return res.size();
+	}
     public int removeDuplicates(int[] nums) {
         if (nums.length <= 1) {
             return nums.length;

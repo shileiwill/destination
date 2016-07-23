@@ -7,10 +7,15 @@ The maximum depth is the number of nodes along the longest path from the root no
  *
  */
 public class MaxDepth {
-    public int maxDepth(TreeNode root) {
+    public int maxDepthRecursion(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        
+        // Divide
+        int left = maxDepthRecursion(root.left);
+        int right = maxDepthRecursion(root.right);
+        // Conquer
+        return Math.max(left, right) + 1;
     }
 }

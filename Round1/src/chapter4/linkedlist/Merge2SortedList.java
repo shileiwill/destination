@@ -1,4 +1,4 @@
-package chapter2.sortedArrays;
+package chapter4.linkedlist;
 /**
  * 21. Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
  * @author Lei
@@ -21,16 +21,13 @@ public class Merge2SortedList {
             cur = cur.next;
         }
         
-        while (l1 != null) {
+        // Dont need to use while!
+        if (l1 != null) {
             cur.next = l1;
-            l1 = l1.next;
-            cur = cur.next;
-        }
+        } 
         
-        while (l2 != null) {
+        if (l2 != null) {
             cur.next = l2;
-            l2= l2.next;
-            cur = cur.next;
         }
         
         // Both of them must reach null eventually
@@ -68,9 +65,4 @@ public class Merge2SortedList {
         
         return dummy.next;
     }
-}
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
 }

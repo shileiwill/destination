@@ -1,4 +1,4 @@
-package chapter3.binaryTree;
+package chapter3.binaryTree.sort;
 
 public class MergeSort {
 

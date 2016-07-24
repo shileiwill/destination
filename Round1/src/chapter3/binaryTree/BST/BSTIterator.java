@@ -2,6 +2,7 @@ package chapter3.binaryTree.BST;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
 /**
@@ -25,6 +26,7 @@ public class BSTIterator {
         queue.offer(node);
         helper(node.right);
     }
+    // Build a full queue in constructor. It is heavy here
     public BSTIterator(TreeNode root) {
         helper(root);
     }
@@ -40,6 +42,34 @@ public class BSTIterator {
     }
 }
 
+class BSTIterator2 {
+
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    TreeNode cur;
+    
+    public BSTIterator2(TreeNode root) {
+        cur = root;
+    }
+
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return cur != null || !stack.isEmpty();
+    }
+
+    /** @return the next smallest number */
+    public int next() {
+    	while(cur != null) {
+    		stack.push(cur);
+    		cur = cur.left;
+    	}
+    	
+    	cur = stack.pop();
+    	TreeNode node = cur; // Take a note before we make changes to cur
+    	cur = cur.right; // Move to right for next iteration, as the next smallest will be there
+    	
+        return node.val;
+    }
+}
 /**
  * Your BSTIterator will be called like this:
  * BSTIterator i = new BSTIterator(root);

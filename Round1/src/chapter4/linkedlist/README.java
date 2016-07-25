@@ -6,4 +6,5 @@ public class README {
 //	3. Reverse a Linked List
 //	4. Merge Two Linked Lists
 //	5. Find the Middle of a Linked List
+//	6. Make sure set null at the end of list. If not, will cycle
 }

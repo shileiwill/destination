@@ -20,6 +20,24 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
  */
 public class Triangle {
     public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[][] hash = new int[n][n];
+        
+        for (int i = 0; i < n; i++) {
+            hash[n - 1][i] = triangle.get(n - 1).get(i);
+        }
+        // From bottom to top is easy, as there is only 1 top
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                hash[i][j] = Math.min(hash[i + 1][j], hash[i + 1][j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        
+        return hash[0][0];
+    }
+    
+	// This is Divide and Conquer, using recursion. Dynamic Programming will use only FOR loop
+    public int minimumTotalDC(List<List<Integer>> triangle) {
         int[][] hash = new int[triangle.size()][triangle.size()];
         for (int i = 0; i < hash.length; i++) {
             for (int j = 0; j < hash[i].length; j++) {

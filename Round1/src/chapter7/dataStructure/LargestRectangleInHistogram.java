@@ -66,11 +66,11 @@ smaller than current.
      */
     public int largestRectangleArea(int[] heights) {
         int max = 0;
-        
+        // 数组维护的是一个单调递增序列
         Stack<Integer> stack = new Stack<Integer>();
         for (int i = 0; i <= heights.length; i++) { // Include the very end, make it special as -1
             int curHeight = (i == heights.length) ? -1 : heights[i];
-
+            // 碰到递减，就开始行动
             while (!stack.isEmpty() && curHeight <= heights[stack.peek()]) { // 下降趋势，左边的比当前的高, 进行计算
                 int h = heights[stack.pop()]; // Must not be empty this time
                 

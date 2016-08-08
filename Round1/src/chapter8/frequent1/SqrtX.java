@@ -26,7 +26,7 @@ public class SqrtX {
         while (left + 1 < right) {
             long mid = left + (right - left) / 2;
             
-            if (mid * mid == x) {
+            if (mid * mid == x) { // Make everything long. Here we need to make sure mid is long as well
                 return (int)mid;
             } else if (mid * mid > x) {
                 right = mid;

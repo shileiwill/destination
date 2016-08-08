@@ -107,5 +107,70 @@ public class MaxSubArrayDiff {
         
         return diff;
     }
+    
+    public int maxDiffSubArrays2(int[] nums) {
+        int size = nums.length;
+        
+        int[] leftMax = new int[size];
+        int[] leftMin = new int[size];
+        int[] rightMax = new int[size];
+        int[] rightMin = new int[size];
+        // We dont have to use copy array
+        
+        // Max, from left to right
+        int sum = 0;
+        int minSum = 0;
+        //int max = Integer.MIN_VALUE;
+        for (int i = 0; i < size; i++) {
+            sum += nums[i];
+            if (i == 0) { // What if there is no 'max' variable
+                leftMax[i] = sum - minSum;
+            } else {
+                leftMax[i] = Math.max(leftMax[i - 1], sum - minSum);
+            }
+            minSum = Math.min(minSum, sum);
+        }
+        
+        // Max, from right to left
+        sum = 0;
+        minSum = 0;
+        int max = Integer.MIN_VALUE;
+        for (int i = size - 1; i >= 0; i--) {
+            sum += nums[i];
+            rightMax[i] = Math.max(max, sum - minSum);
+            minSum = Math.min(minSum, sum);
+        }
+        
+        // Min, from left to right
+        sum = 0;
+        int maxSum = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < size; i++) {
+            sum += nums[i];
+            leftMin[i] = Math.min(min, sum - maxSum);
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        // Min, from right to left
+        sum = 0;
+        maxSum = 0;
+        min = Integer.MAX_VALUE;
+        for (int i = size - 1; i >= 0; i--) {
+            sum += nums[i];
+            rightMin[i] = Math.min(min, sum - maxSum);
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        // Not as straightforward as the first one, but easy understanding.
+        int res = Integer.MIN_VALUE;
+        for (int i = 0; i < size - 1; i++) {
+            int res1 = Math.abs(leftMax[i] - rightMin[i + 1]);
+            int res2 = Math.abs(rightMax[i + 1] - leftMin[i]);
+            int diff = Math.max(res1, res2); // Remember to keep this diff and compare later
+            res = Math.max(diff, res);
+        }
+        
+        return res;
+    }
 }
 

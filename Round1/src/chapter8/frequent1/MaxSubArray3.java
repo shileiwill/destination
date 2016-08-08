@@ -1,6 +1,6 @@
 package chapter8.frequent1;
 
-// This is not really working, edge cases issue
+// This is not really working, edge cases issue 难题
 public class MaxSubArray3 {
 	
 	public static void main(String[] args) {
@@ -45,9 +45,18 @@ public class MaxSubArray3 {
             hash[0][i] = Integer.MIN_VALUE;
         }
         
+        // 从前i个数中取出i个来, 就是把当前的sum给取出来。为了避免 < 0
+        for (int i = 1; i < sum.length && i <= k; i++) {
+        	hash[i][i] = sum[i];
+        }
+        
         for (int i = 1; i <= sum.length; i++) {
             for (int j = 1; j <= k; j++) {
-                for (int x = 0; x < i; x++) {
+            	if (j > i) {
+            		hash[i][j] = Integer.MIN_VALUE;
+            		continue;
+            	}
+                for (int x = 1; x < i; x++) {
                     hash[i][j] = Math.max(hash[i][j], hash[x][j - 1] + getMaxBetween(x + 1, i, sum));
                 }
             }
@@ -70,12 +79,12 @@ public class MaxSubArray3 {
     }
     
     int getMaxBetween(int start, int end, int[] sum) {
-        if (start >= end) {
-            return 0;
+        if (start == end && start > 1) { // 只能从一个数中找出最大，就是他自己了
+            return sum[start - 1] - sum[start - 2];
         }
         
         int minPrice = sum[start - 1];
-        int maxProfit = 0;
+        int maxProfit = Integer.MIN_VALUE;
         for (int i = start; i < end; i++) {
             maxProfit = Math.max(sum[i] - minPrice, maxProfit);
             minPrice = Math.min(minPrice, sum[i]);

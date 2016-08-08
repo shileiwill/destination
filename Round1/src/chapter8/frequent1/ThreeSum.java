@@ -21,10 +21,10 @@ A solution set is:
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        
-        Arrays.sort(nums);
+        Arrays.sort(nums); // First sort
+        // 先固定一个数，之后另外两个数用2 Sum的思想
         for (int i = 0; i < nums.length - 2; i++) {
-            
+            // Skip all duplicate elements
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
@@ -45,6 +45,7 @@ public class ThreeSum {
                     left++;
                     right--;
                     
+                    // Skip all duplicate elements
                     while (left < right && nums[left] == nums[left - 1]) {
                         left++;
                     }

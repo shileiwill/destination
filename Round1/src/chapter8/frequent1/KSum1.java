@@ -27,7 +27,7 @@ public class KSum1 {
             for (int j = 1; j <= k; j++) {
                 for (int t = 1; t <= target; t++) {
                     hash[i][j][t] = hash[i - 1][j][t];
-                    if (t - A[i - 1] >= 0) {
+                    if (t - A[i - 1] >= 0) { // 前i - 1个数中，取j - 1个数，组成结果为t - A[i - 1]的方案数。 本质就是想利用一下A[i - 1]
                         hash[i][j][t] += hash[i - 1][j - 1][t - A[i - 1]];
                     }
                 }

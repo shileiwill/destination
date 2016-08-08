@@ -21,13 +21,30 @@ public class JumpGame {
             return false;
         }
         int farthest = A[0];
-        for (int i = 1; i < A.length; i++) {
+        for (int i = 1; i < A.length; i++) { // i <= farthest表示这个点reachable
             if (i <= farthest && A[i] + i >= farthest) {
                 farthest = A[i] + i;
             }
         }
         return farthest >= A.length - 1;
     }
+    
+    // Another version
+    public boolean canJump4(int[] A) {
+        boolean[] hash = new boolean[A.length];
+        hash[0] = true;
+        for (int i = 0; i < A.length; i++) {
+            int steps = A[i];
+            for (int s = 1; s <= steps; s++) {
+                if (hash[i] && i + s < A.length) {
+                    hash[i + s] = true;
+                }
+            }
+        }
+    
+        return hash[A.length - 1];
+    }
+    
     public boolean canJump(int[] A) {
         boolean[] can = new boolean[A.length];
         can[0] = true;

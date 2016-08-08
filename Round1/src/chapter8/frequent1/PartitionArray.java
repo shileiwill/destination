@@ -48,6 +48,39 @@ public class PartitionArray {
         }
     }
     
+    // We don't actually need that many parameters
+    public int partitionArray2(int[] nums, int k) {
+	    //write your code here
+	    if (nums == null || nums.length == 0) {
+	        return 0;
+	    }
+	    
+	    int res = partition2(nums, k);
+	    return res;
+    }
+    
+    int partition2(int[] nums, int k) {
+        int left = 0;
+        int right = nums.length - 1;
+        
+        while (left < right) {
+            while (left < right && nums[left] < k) {
+                left++;
+            }
+            while (left < right && nums[right] >= k) {
+                right--;
+            }
+            swap(nums, left, right);
+        }
+        
+        // We dont know where we stopped exactly, so double check
+        // But we know for sure that left == right finally
+        if (nums[left] >= k) {
+            return left;
+        } else {
+            return left + 1;
+        }
+    }
     void swap(int[] nums, int left, int right) {
         int temp = nums[left];
         nums[left] = nums[right];

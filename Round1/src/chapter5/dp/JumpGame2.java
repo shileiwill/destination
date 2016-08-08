@@ -27,7 +27,7 @@ public class JumpGame2 {
         for (int i = 1; i < n; i++) {
             hash[i] = Integer.MAX_VALUE; // Better to iterate here
             for (int j = 0; j < i; j++) {
-                if (hash[j] != Integer.MAX_VALUE && j + nums[j] >= i) {
+                if (hash[j] != Integer.MAX_VALUE && j + nums[j] >= i) { //这个hash[j] != Integer.MAX_VALUE应该不需要， 这个保证j reachable
                     hash[i] = Math.min(hash[i], hash[j] + 1);
                     // Based on experience, the earlier, the shorter.
                     // break; This is an optimization, but not in alignment with DP.

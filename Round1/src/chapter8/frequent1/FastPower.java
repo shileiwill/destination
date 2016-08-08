@@ -28,9 +28,9 @@ public class FastPower {
         if (n == 1) {
             return a % b;
         }
-        
+        // 注意用long 防止溢出
         long product = fastPower(a, b, n / 2);
-        
+        // 时刻取模， 利用%的特点，多%两次不改变结果，而且可以防止溢出
         long res = (product * product) % b;
         
         if (n % 2 == 1) { //Odd

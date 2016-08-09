@@ -85,4 +85,30 @@ smaller than current.
         
         return max;
     }
+    
+    // Another version in round 2
+    public int largestRectangleArea2(int[] height) {
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(0); // Stack中装的是index，这样我们既有下标又有高度
+        
+        int max = 0;
+        for (int i = 1; i <= height.length; i++) {
+            int curHeight = (i == height.length) ? -1 : height[i];
+            
+            if (curHeight >= height[stack.peek()]) { // 还是递增, Just push to stack
+                stack.push(i);
+            } else {
+                while (!stack.isEmpty() && curHeight < height[stack.peek()]) {
+                    int index = stack.pop();
+                    // 注意stack.peek()表示的是pop出来的左边的
+                    int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                    
+                    max = Math.max(max, width * height[index]);
+                }
+                stack.push(i);
+            }
+        }
+        
+        return max;
+    }
 }

@@ -47,7 +47,7 @@ public class MaxTree {
 	 
 	 TreeNode helper(int[] A, int left, int right) {
 		 if (left > right) {
-			 return null;
+			 return null; // Yes，为叶子节点着想, 不能return new TreeNode()
 		 }
 		 
 		 int maxIndex = left;
@@ -56,7 +56,7 @@ public class MaxTree {
 				 maxIndex = i;
 			 }
 		 }
-		 
+		 // 永远只在这里create node
 		 TreeNode root = new TreeNode(A[maxIndex]);
 		 root.left = helper(A, left, maxIndex - 1);
 		 root.right = helper(A, maxIndex + 1, right);
@@ -64,7 +64,7 @@ public class MaxTree {
 		 return root;
 	 }
 	 /** 可以用一个Stack做到O(n)
-	  * 这个题Leetcode上没有，其实这种树叫做笛卡树（ Cartesian tree）。直接递归建树的话复杂度最差会退化到O(n^2)。经典建树方法，用到的是单调堆栈。我们堆栈里存放的树，只有左子树，没有有子树，且根节点最大。
+	  * 这个题Leetcode上没有，其实这种树叫做笛卡树（ Cartesian tree）。直接递归建树的话复杂度最差会退化到O(n^2)。经典建树方法，用到的是单调堆栈。我们堆栈里存放的树，只有左子树，没有右子树，且根节点最大。
 （1） 如果新来一个数，比堆栈顶的树根的数小，则把这个数作为一个单独的节点压入堆栈。
 （2） 否则，不断从堆栈里弹出树，新弹出的树以旧弹出的树为右子树，连接起来，直到目前堆栈顶的树根的数大于新来的数。然后，弹出的那些数，已经形成了一个新的树，这个树作为新节点的左子树，把这个新树压入堆栈。
 

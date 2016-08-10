@@ -74,9 +74,9 @@ public class LRUCache {
         node.next = null;
         node.pre = null;
         
-        if (last == null) {
+        if (last == null) { // Everything empty
             first = node;
-            last = first;
+            last = node;
         } else {
             last.next = node;
             node.pre = last;

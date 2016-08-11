@@ -17,6 +17,7 @@ public class LongestConsecutiveSequence {
 
 	public static void main(String[] args) {
 		int[] nums = {1, 3, 2, 2, 4, 34, 35, 2, 23};
+		int[] nums2 = {1 , -1, 0};
 	}
 
     public int longestConsecutive(int[] nums) {
@@ -42,6 +43,62 @@ public class LongestConsecutiveSequence {
             
             max = Math.max(max, up - down -1);
         }
+        
+        return max;
+    }
+    
+    public int longestConsecutive2(int[] nums) {
+        Set<Integer> set = new HashSet<Integer>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        
+        int max = Integer.MIN_VALUE;
+        
+        // How to use set to iterator. 
+        while (!set.isEmpty()) {
+            int origin = set.iterator().next(); // We cant use get() in Set. but this is how to get an element
+            int num = origin;
+            
+            int count = 1;
+            set.remove(num);
+            
+            while (set.contains(--num)) {
+                count++;
+                set.remove(num);
+            }
+            
+            while (set.contains(++origin)) {
+                count++;
+                set.remove(origin);
+            }
+            
+            max = Math.max(max, count);
+        }
+        
+        // Here is iterating array
+//        for (int num : nums) {
+//            if (!set.contains(num)) {
+//                continue;
+//            }
+//            
+//            int count = 1;
+//            set.remove(num);
+//            
+//            int origin = num; // Keep a note of original state
+//            
+//            while (set.contains(--num)) {
+//                count++;
+//                set.remove(num);
+//            }
+//            
+//            while (set.contains(++origin)) {
+//                count++;
+//                set.remove(origin);
+//            }
+//            
+//            max = Math.max(max, count);
+//        }
         
         return max;
     }

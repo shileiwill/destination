@@ -34,9 +34,9 @@ public class FindMedianFromDataStream {
     public void addNum(int num) {
         // Max heap first
         maxHeap.add(num);
-        minHeap.add(maxHeap.poll());
+        minHeap.add(maxHeap.poll()); // 这两句是为了筛一下
         
-        if (maxHeap.size() < minHeap.size()) {
+        if (maxHeap.size() < minHeap.size()) { // 这个是为了保证max里边总有数据
             maxHeap.add(minHeap.poll());
         }
     }
@@ -48,6 +48,53 @@ public class FindMedianFromDataStream {
         } else {
             return maxHeap.peek();
         }
+    }
+}
+
+// What I did again, which is not good. Time limit exception
+class MedianFinder {
+
+	PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
+	PriorityQueue<Integer> heapHelper = new PriorityQueue<Integer>();
+    
+    // Adds a number into the data structure.
+    public void addNum(int num) {
+        heap.offer(num);    
+    }
+
+    // Returns the median of current data stream
+    public double findMedian() {
+        int size = heap.size();
+        double res = 0.0;
+        if (size % 2 == 0) { // find
+            int k = 0;
+            int n1 = 0;
+            while (k < size / 2) {
+                n1 = heap.poll();
+                k++;
+                heapHelper.offer(n1);
+            }
+            int n2 = heap.poll();
+            heapHelper.offer(n2);
+            
+            res = (n1 + n2) / 2.0;
+        } else {
+            int k = 0;
+            int n = 0;
+            while (k <= size / 2) {
+                n = heap.poll();
+                k++;
+                heapHelper.offer(n);
+            }
+            
+            res = n;
+        }
+        
+        while (!heapHelper.isEmpty()) {
+            heap.offer(heapHelper.poll());
+        }
+        
+        return res;
     }
 };
 

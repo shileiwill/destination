@@ -72,4 +72,28 @@ public class MergeSortedArrays {
     	}
     	
     }
+    
+    // My new implementation
+    public void mergeSameWithAboveOne(int[] nums1, int m, int[] nums2, int n) {
+        int pos1 = m - 1;
+        int pos2 = n - 1;
+        
+        while (pos1 >= 0 && pos2 >= 0) {
+            int num1 = nums1[pos1];
+            int num2 = nums2[pos2];
+            
+            if (num1 >= num2) {
+                nums1[pos1 + pos2 + 1] = num1;
+                pos1--;
+            } else {
+                nums1[pos1 + pos2 + 1] = num2;
+                pos2--;
+            }
+        }
+        
+        while (pos2 >= 0) {
+            nums1[pos2] = nums2[pos2];
+            pos2--;
+        }
+    }
 }

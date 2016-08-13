@@ -110,4 +110,43 @@ public class MedianOf2SortedArrays {
             return val2 == Integer.MAX_VALUE ? val1 : val2;
         }
     }
+    
+    // My new version on 08/12/2016. This is not as good as above 2 solutions.
+    public double findMedianSortedArraysNew(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        
+        if ((m + n) % 2 == 0) { // K is index
+            return (findKth(nums1, nums2, (m + n) / 2) + findKth(nums1, nums2, (m + n) / 2 - 1)) / 2.0;
+        } else {
+            return findKth(nums1, nums2, (m + n) / 2);
+        }
+    }
+    
+    // Keep in mind that nums1 and nums2 are sorted. K is index
+    double findKth(int[] nums1, int[] nums2, int k) {
+        int pos1 = 0;
+        int pos2 = 0;
+        int pos = 0;
+        
+        int res = 0;
+        while (pos1 < nums1.length && pos2 < nums2.length && pos1 + pos2 <= k) {
+            if (nums1[pos1] <= nums2[pos2]) {
+                res = nums1[pos1];
+                pos1++;
+            } else {
+                res = nums2[pos2];
+                pos2++;
+            }
+        }
+        
+        if (pos1 + pos2 > k) { // This is actually (pos1 + pos2 == k + 1)
+            return res;
+        } else {
+            if (pos1 < nums1.length) {
+                return nums1[k - nums2.length];
+            }
+            return nums2[k - nums1.length];
+        }
+    }
 }

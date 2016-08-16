@@ -41,4 +41,35 @@ public class MaxProductSubarray {
         
         return res;
     }
+    
+    // As we are using only previous elements, we can remove the array
+    public int maxProduct2(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int size = nums.length;
+        
+        int prevMax = nums[0];
+        int prevMin = nums[0];
+        
+        int res = nums[0];
+        for (int i = 1; i < size; i++) {
+            int curMax = nums[i]; // 他自己 Initialization
+            int curMin = nums[i];
+            if (nums[i] < 0) {
+                curMax = Math.max(curMax, prevMin * nums[i]);
+                curMin = Math.min(curMin, prevMax * nums[i]);
+            } else { // We dont care about 0. all will be 0
+                curMax = Math.max(curMax, prevMax * nums[i]);
+                curMin = Math.min(curMin, prevMin * nums[i]);
+            }
+            
+            prevMax = curMax;
+            prevMin = curMin;
+            
+            res = Math.max(res, curMax);
+        }
+        
+        return res;
+    }
 }

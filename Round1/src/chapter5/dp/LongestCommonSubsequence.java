@@ -36,6 +36,7 @@ public class LongestCommonSubsequence {
             for (int j = 1; j < B.length(); j++) {
                 if (A.charAt(i) == B.charAt(j)) {
                     hash[i][j] = hash[i - 1][j - 1] + 1;
+                    // hash[i][j] = Math.max(hash[i - 1][j - 1] + 1, Math.max(hash[i - 1][j], hash[i][j - 1]));
                 } else {
                     hash[i][j] = Math.max(hash[i - 1][j], hash[i][j - 1]);
                 }    

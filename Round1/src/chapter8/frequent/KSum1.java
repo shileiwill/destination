@@ -18,7 +18,7 @@ public class KSum1 {
     public int kSum(int A[], int k, int target) {
         int[][][] hash = new int[A.length + 1][k + 1][target + 1];
         
-        // How to initialize
+        // How to initialize 这个题我们没有把impossible的情况置为MIN_VALUE,因为我们没有用min, max() 只是计算方案个数。 不可能就是0个呗
         for (int i = 0; i <= A.length; i++) {
             hash[i][0][0] = 1; // 从前i个数中，取0个数，组成target为0的方案数量
         }

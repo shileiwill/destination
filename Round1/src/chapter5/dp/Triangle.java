@@ -60,4 +60,21 @@ public class Triangle {
         
         return hash[x][y];
     }
+    
+    // Traditional Depth first traversal
+    int min = Integer.MAX_VALUE;
+    public int minimumTotal(int[][] triangle) {
+        dfsHelper(triangle, 0, 0, 0);
+        return min;
+    }
+    
+    void dfsHelper(int[][] triangle, int x, int y, int curBest) {
+        if (x + 1 == triangle.length) { // the end
+            min = Math.min(min, curBest + triangle[x][y]);
+            return;
+        }
+        
+        dfsHelper(triangle, x + 1, y, curBest + triangle[x][y]);
+        dfsHelper(triangle, x + 1, y + 1, curBest + triangle[x][y]);
+    }
 }

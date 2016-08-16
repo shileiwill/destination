@@ -4,10 +4,30 @@ public class PalindromePartitioning2 {
 
 	public static void main(String[] args) {
 		PalindromePartitioning2 p2 = new PalindromePartitioning2();
-		int res = p2.minCut("mmd");
+		int res = p2.minCut5("mmd");
 		System.out.println(res);
 	}
 	
+	// My version
+    public int minCut5(String s) {
+        if (isPalindrome(s)) {
+            return 0;
+        }
+        int[] hash = new int[s.length()];  
+        // 前i个字符, including i, 组成的字符串需要至少多少次cut
+        for (int i = 0; i < s.length(); i++) { // Index is very tricky
+            hash[i] = i; // Worst case is cut everywhere
+            for (int j = 0; j <= i; j++) {
+                String sub = s.substring(j, i + 1); // j + 1 to i
+                if (isPalindrome(sub)) {
+                    hash[i] = Math.min((j == 0 ? 0 : hash[j - 1]) + 1, hash[i]);
+                }
+            }
+        }
+        
+        return hash[s.length() - 1];
+    }
+    
     private boolean[][] getPalindrome(String s) {
         boolean[][] res = new boolean[s.length()][s.length()];
         
@@ -21,6 +41,7 @@ public class PalindromePartitioning2 {
             res[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
         }
         
+        // Len and Start
         // Dynamic length, Great to use start point and length! Easy understanding
         for (int len = 2; len < s.length(); len++) {
             for (int start = 0; start + len < s.length(); start++) {

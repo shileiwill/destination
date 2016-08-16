@@ -1,5 +1,6 @@
 package chapter7.dataStructure;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 /**
@@ -19,7 +20,25 @@ public class LongestConsecutiveSequence {
 		int[] nums = {1, 3, 2, 2, 4, 34, 35, 2, 23};
 		int[] nums2 = {1 , -1, 0};
 	}
-
+	// Brute force
+    public int longestConsecutiveBrute(int[] nums) {
+        int count = 1;
+        Arrays.sort(nums);
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1] + 1) {
+                count++;
+                max = Math.max(max, count);
+            } else if (nums[i] == nums[i - 1]) {
+                continue;
+            } else {
+                count = 1;
+            }
+        }
+        
+        return max;
+    }
+    
     public int longestConsecutive(int[] nums) {
         Set<Integer> set = new HashSet<Integer>();
         for (int num : nums) {

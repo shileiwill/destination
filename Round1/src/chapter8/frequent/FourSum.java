@@ -35,7 +35,7 @@ public class FourSum {
         Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
         
         Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 1; i++) {
+        for (int i = 0; i < nums.length - 1; i++) { // This could be i < nums.length - 3
             
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;

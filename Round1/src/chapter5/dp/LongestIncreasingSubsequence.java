@@ -27,7 +27,7 @@ public class LongestIncreasingSubsequence {
         for (int i = 1; i < nums.length; i++) {
             hash[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
+                if (nums[i] > nums[j]) { // 去前边遍历所有小于nums[i]的数，看看他们的frequency， 并且+1
                     hash[i] = Math.max(hash[i], hash[j] + 1);
                 }
             }
@@ -36,6 +36,41 @@ public class LongestIncreasingSubsequence {
         // Find the maximum
         Arrays.sort(hash);
         
+        return hash[nums.length - 1];
+    }
+    public static void main(String[] args) {
+    	int[] nums = {9,3,6,2,7};
+    	int res = longestIncreasingSubsequence(nums);
+    	
+    }
+    
+    // This is wrong!
+    public static int longestIncreasingSubsequence(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        // write your code here
+        // i 之前 并且以i结尾的，最长increasing sequence
+        int[] hash = new int[nums.length];
+        hash[0] = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                hash[i] = hash[i - 1] + 1;
+            } else if (nums[i] == nums[i - 1]) {
+                hash[i] = hash[i - 1];
+            } else {
+                hash[i] = 1;
+                for (int j = i - 2;j >= 0;j--) {
+                    if (nums[j] < nums[i]) {
+                        hash[i] = hash[j] + 1;
+                        break;
+                    }
+                }
+            }
+            System.out.println(hash[i]);
+        } 
+        Arrays.sort(hash);
         return hash[nums.length - 1];
     }
 }

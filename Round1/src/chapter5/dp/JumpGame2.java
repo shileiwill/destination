@@ -38,4 +38,22 @@ public class JumpGame2 {
         
         return hash[n - 1];
     }
+    
+    // My another version of DP
+    public int jumpDP(int[] A) {
+
+        int[] hash = new int[A.length]; 
+        hash[0] = 0;
+        
+        for (int i = 1; i < A.length; i++) {
+            hash[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < i; j++) {
+                if (j + A[j] >= i) {
+                    hash[i] = Math.min(hash[i], hash[j] + 1);
+                }
+            }
+        }
+        
+        return hash[A.length - 1];
+    }
 }

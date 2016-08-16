@@ -12,7 +12,7 @@ For "abAcD", a reasonable answer is "acbAD"
  * @author Lei
  *
  */
-public class Partition_SortColorsByOrder {
+public class Partition_SortLettersByOrder {
     public void sortLetters(char[] chars) {
 	    //write your code here
 	    if (chars == null || chars.length == 0) {

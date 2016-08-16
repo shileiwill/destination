@@ -29,6 +29,19 @@ public class JumpGame {
         return farthest >= A.length - 1;
     }
     
+    // My new version of greedy
+    public boolean canJumpGreedy(int[] A) {
+        int maxReach = 0;
+        
+        for (int i = 0; i < A.length; i++) {
+            if (i <= maxReach) {
+                maxReach = Math.max(maxReach, i + A[i]);
+            }
+        }
+        
+        return maxReach >= A.length - 1;
+    }
+    
     // Another version
     public boolean canJump4(int[] A) {
         boolean[] hash = new boolean[A.length];

@@ -27,7 +27,7 @@ public class SubArraySum {
         int[] sum = new int[nums.length];
         
         for (int i = 0; i < nums.length; i++) {
-            if (i == 0) {
+            if (i == 0) { // Yes, put the 0 here, so we dont need to have a separate sum[] == 0 check
                 sum[i] = nums[i];
             } else {
                 sum[i] = sum[i - 1] + nums[i];

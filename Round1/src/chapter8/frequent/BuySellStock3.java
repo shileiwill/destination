@@ -6,7 +6,6 @@ Design an algorithm to find the maximum profit. You may complete at most two tra
 
 Note:
 You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
- * @author Lei
  *
  */
 public class BuySellStock3 {

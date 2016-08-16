@@ -51,4 +51,36 @@ public class LongestCommonSubstring {
         
         return max;
     }
+    
+    // My new edition
+    public int longestCommonSubstringNew(String A, String B) {
+        if (A.length() == 0 || B.length() == 0) {
+            return 0;
+        }
+        
+        int[][] hash = new int[A.length()][B.length()];
+        int max = Integer.MIN_VALUE;
+        
+        for (int i = 0; i < A.length(); i++) {
+            hash[i][0] = A.charAt(i) == B.charAt(0) ? 1 : 0; 
+            max = Math.max(max, hash[i][0]);
+        }
+        for (int i = 1; i < B.length(); i++) {
+            hash[0][i] = A.charAt(0) == B.charAt(i) ? 1 : 0;  
+            max = Math.max(max, hash[0][i]);
+        }
+        
+        for (int i = 1; i < A.length(); i++) {
+            for (int j = 1; j < B.length(); j++) {
+                if (A.charAt(i) == B.charAt(j)) {
+                    hash[i][j] = hash[i - 1][j - 1] + 1;
+                    max = Math.max(max, hash[i][j]);
+                } else {
+                    hash[i][j] = 0;                    
+                }            
+            }
+        }
+        
+        return max;
+    }
 }

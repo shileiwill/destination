@@ -7,7 +7,7 @@ public class MaxSubArray3 {
 		MaxSubArray3 m3 = new MaxSubArray3();
 		int[] arr = {-1,-2,-3,-100,-1,-50};
 		int[] nums = {1,2,3};
-		int res = m3.maxSubArray(arr, 2);
+		int res = m3.maxSubArray(nums, 1);
 		
 		System.out.println(res);
 	}
@@ -56,7 +56,7 @@ public class MaxSubArray3 {
             		hash[i][j] = Integer.MIN_VALUE;
             		continue;
             	}
-                for (int x = 1; x < i; x++) {
+                for (int x = 0; x < i; x++) {
                     hash[i][j] = Math.max(hash[i][j], hash[x][j - 1] + getMaxBetween(x + 1, i, sum));
                 }
             }
@@ -85,6 +85,71 @@ public class MaxSubArray3 {
         
         int minPrice = sum[start - 1];
         int maxProfit = Integer.MIN_VALUE;
+        for (int i = start; i < end; i++) {
+            maxProfit = Math.max(sum[i] - minPrice, maxProfit);
+            minPrice = Math.min(minPrice, sum[i]);
+        }
+        
+        return maxProfit;
+    }
+    
+    
+    // Another
+    
+    public int maxSubArray2(int[] nums, int k) {
+        // write your code here
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        int[] sum = new int[nums.length];
+        sum[0] = nums[0];
+        
+        for (int i = 1; i < nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1];
+        }
+        
+        int[][] hash = new int[nums.length + 1][k + 1];
+        
+        for (int i = 0; i <= nums.length; i++) {
+            hash[i][0] = 0;
+        }
+
+        for (int i = 1; i <= k; i++) {
+            hash[0][i] = Integer.MIN_VALUE;
+        }   
+        
+        for (int i = 1; i <= nums.length; i++) {
+            for (int j = 1; j <= k; j++) {
+                if (i == j) {
+                    hash[i][j] = sum[i - 1];
+                    continue;
+                }
+                if (j > i) {
+                    hash[i][j] = Integer.MIN_VALUE;
+                    continue;
+                }
+                for (int x = 0; x < i; x++) {
+                    hash[i][j] = Math.max(hash[i][j], hash[x][j - 1] + getMaxBetween(x+1, i, sum));
+                }
+            }
+        }
+        
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i <= nums.length; i++) {
+            max = Math.max(max, hash[i][k]);
+        }
+        
+        return max;
+    }
+    
+    int getMaxBetween2(int start, int end, int[] sum) {
+        if (start >= end) {
+            return 0;
+        }
+        
+        int minPrice = sum[start - 1];
+        int maxProfit = 0;
         for (int i = start; i < end; i++) {
             maxProfit = Math.max(sum[i] - minPrice, maxProfit);
             minPrice = Math.min(minPrice, sum[i]);

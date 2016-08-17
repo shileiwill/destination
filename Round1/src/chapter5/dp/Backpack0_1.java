@@ -31,7 +31,7 @@ public class Backpack0_1 {
 		}
 		
 		for (int i = 1; i <= nums.length; i++) {
-			for (int j = 1; j <= target; j++) { // Nums 永远是-1
+			for (int j = 1; j <= target; j++) { // Nums 永远是 -1 减一
 				if (hash[i - 1][j] || (j - nums[i - 1] >= 0 && hash[i - 1][j - nums[i - 1]])) {
 					hash[i][j] = true;
 				}

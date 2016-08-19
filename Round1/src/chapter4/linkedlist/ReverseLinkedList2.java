@@ -30,8 +30,9 @@ public class ReverseLinkedList2 {
             head = head.next;
         }
         
+        // M and N nodes are the 2 ends
         ListNode prevMNode = head;
-        ListNode MNode = head.next;
+        ListNode MNode = head.next; // This is the first node, will not move
         ListNode NNode = head.next; // Will keep moving
         ListNode postNNode = NNode.next; // Will keep moving
         

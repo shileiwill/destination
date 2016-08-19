@@ -32,4 +32,32 @@ public class RemoveDuplicatsFromSortedList2 {
         
         return dummy.next;
     }
+    
+    // This is easier to understand
+    public static ListNode deleteDuplicates2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        
+        ListNode cur = head;
+        ListNode next = cur.next;
+        
+        while (cur != null) {
+            while (next != null && next.val == cur.val) {
+                next = next.next; // Search
+            }
+            
+            if (cur.next == next) { // Doesn't go through the while above, which means cur.val is different with next
+                pre.next = cur; // Link
+                pre = pre.next; // Move
+            }
+            
+            cur = next; // Jump directly to the next different one
+        }
+        
+        pre.next = null;
+        return dummy.next;
+    }
 }

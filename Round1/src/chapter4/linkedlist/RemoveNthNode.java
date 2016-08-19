@@ -60,4 +60,28 @@ public class RemoveNthNode {
         
         return slow;
     }
+    
+    // By using length
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        int len = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            len++;
+            cur = cur.next;
+        }
+        
+        int steps = len - n;
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        
+        for (int i = 0; i < steps; i++) {
+            pre.next = head;
+            pre = pre.next;
+            head = head.next;
+        }
+            
+        pre.next = head == null ? null : head.next;
+            
+        return dummy.next;
+    }
 }

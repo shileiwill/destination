@@ -52,7 +52,7 @@ public class HouseRobber3 {
 		int res = rob(root);
 		System.out.println(res);
 	}
-	
+	// Depth First Search
     public static int rob(TreeNode root) {
         if (root == null) {
             return 0;

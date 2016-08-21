@@ -17,7 +17,8 @@ public class ConvertSortedListToBST {
 		n1.next = n2;
 		n2.next = n3;
 		
-		new ConvertSortedListToBST().sortedListToBST(n1);
+		TreeNode res = new ConvertSortedListToBST().sortedListToBST(n1);
+		System.out.println(res.val);
 	}
 
     public TreeNode sortedListToBST(ListNode head) {

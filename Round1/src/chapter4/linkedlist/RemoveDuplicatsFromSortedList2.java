@@ -49,7 +49,7 @@ public class RemoveDuplicatsFromSortedList2 {
                 next = next.next; // Search
             }
             
-            if (cur.next == next) { // Doesn't go through the while above, which means cur.val is different with next
+            if (cur.next == next) { // Doesn't go through the while above, which means cur.val is different with next.val
                 pre.next = cur; // Link
                 pre = pre.next; // Move
             }

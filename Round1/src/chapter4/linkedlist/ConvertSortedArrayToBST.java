@@ -21,7 +21,7 @@ public class ConvertSortedArrayToBST {
         }
         
         if (left > right) { // return null if invalid. we cant new again, because we did that already
-            return null;
+            return null; // return null is necessary
         }
         
         int mid = left + (right - left) / 2;

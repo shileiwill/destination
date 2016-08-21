@@ -10,9 +10,9 @@ public class SortList {
             return head;
         }
         ListNode mid = findMiddle(head);
-        ListNode leftHead = head;
-        ListNode rightHead = mid.next;
-        mid.next = null;
+        ListNode leftHead = head; // 这个其实没必要
+        ListNode rightHead = mid.next; // 这个非常必要
+        mid.next = null; // Must
         
         ListNode leftResult = sortList(leftHead);
         ListNode rightResult = sortList(rightHead);
@@ -22,6 +22,7 @@ public class SortList {
         return mergeResult;
     }
     
+    // How to find middle
     ListNode findMiddle(ListNode head) {
 		if (head == null) {
 			return null;
@@ -51,7 +52,7 @@ public class SortList {
             cur = cur.next;
         }
         
-        while (l1 != null) {
+        while (l1 != null) { // Here use if is enough
             cur.next = l1;
             l1 = l1.next;
             cur = cur.next;

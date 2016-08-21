@@ -25,37 +25,37 @@ The solution is to use a concurrent synchronization method that supports fairnes
  * @author Lei
  *
  */
-class Counter implements Runnable {
-	
-	private int value = 0;
-	private ReentrantLock lock = new ReentrantLock();
-	
-	public void increment() {
-		lock.lock();
-		try {
-			System.out.println(Thread.currentThread().getName() + " : " + value++);
-		} finally {
-			lock.unlock();
-		}
-	}
-	
-	@Override
-	public void run() {
-		while (value <= 1000) {
-			increment();
-		}
-	}
-
-	public static void main(String[] args) {
-		Counter counter1 = new Counter();
-		
-		Thread t1 = new Thread(counter1);
-		Thread t2 = new Thread(counter1);
-		
-		t1.start();
-		t2.start();
-	}
-}
+//class Counter implements Runnable {
+//	
+//	private int value = 0;
+//	private ReentrantLock lock = new ReentrantLock();
+//	
+//	public void increment() {
+//		lock.lock();
+//		try {
+//			System.out.println(Thread.currentThread().getName() + " : " + value++);
+//		} finally {
+//			lock.unlock();
+//		}
+//	}
+//	
+//	@Override
+//	public void run() {
+//		while (value <= 1000) {
+//			increment();
+//		}
+//	}
+//
+//	public static void main(String[] args) {
+//		Counter counter1 = new Counter();
+//		
+//		Thread t1 = new Thread(counter1);
+//		Thread t2 = new Thread(counter1);
+//		
+//		t1.start();
+//		t2.start();
+//	}
+//}
 
 class CounterAtomicInteger implements Runnable {
 	
@@ -67,13 +67,13 @@ class CounterAtomicInteger implements Runnable {
 	
 	@Override
 	public void run() {
-		while (value.intValue() <= 1000) {
+		while (value.intValue() <= 5000) {
 			increment();
 		}
 	}
 
 	public static void main(String[] args) {
-		Counter counter1 = new Counter();
+		CounterAtomicInteger counter1 = new CounterAtomicInteger();
 		
 		Thread t1 = new Thread(counter1);
 		Thread t2 = new Thread(counter1);
@@ -82,71 +82,116 @@ class CounterAtomicInteger implements Runnable {
 		t2.start();
 	}
 }
-
-class CounterSynchronized implements Runnable {
+class AtomicIntegerExample {
 	
-	private int value;
-	
-	public synchronized void increment() {
-		System.out.println(Thread.currentThread().getName() + " : " + value++);
-	}
-	
-	public void decrement() {
-		value--;
-	}
-	
-	public int value() {
-		return value;
-	}
-	
-	@Override
-	public void run() {
-		while (value <= 1000) {
-			increment();
-		}
-	}
-
-	public static void main(String[] args) {
-		Counter counter1 = new Counter();
-		
-		Thread t1 = new Thread(counter1);
-		Thread t2 = new Thread(counter1);
-		
-		t1.start();
-		t2.start();
-	}
+//	private static AtomicInteger at = new AtomicInteger(0);
+	private static int at = 0;
+	static class MyRunnable implements Runnable {
+		private int myCounter;
+		private int myPrevCounter;
+		private int myCounterPlusFive;
+		private boolean isNine;
+		public void run() {
+//			System.out.println(at.intValue());
+////			myCounter = at.getAndIncrement();
+//			System.out.println("Thread " + Thread.currentThread().getId() + "  / Counter : " + at.incrementAndGet());
+////			myPrevCounter = at.getAndIncrement();
+//			System.out.println("Thread " + Thread.currentThread().getId() + " / Previous : " + at.getAndIncrement()); 
+////			myCounterPlusFive = at.addAndGet(5);        
+//			System.out.println("Thread " + Thread.currentThread().getId() + " / plus five : " + at.addAndGet(5));
+//			isNine = at.compareAndSet(9, 3);
+//			if (isNine) {
+//				System.out.println("Thread " + Thread.currentThread().getId() 
+//                    + " / Value was equal to 9, so it was updated to " + at.intValue());
+//			}
+			
+			System.out.println(at);
+//			myCounter = at.getAndIncrement();
+			System.out.println("Thread " + Thread.currentThread().getId() + "  / Counter : " + ++at);
+//			myPrevCounter = at.getAndIncrement();
+			System.out.println("Thread " + Thread.currentThread().getId() + " / Previous : " + at++); 
+//			myCounterPlusFive = at.addAndGet(5);        
+			at = at + 5;
+			System.out.println("Thread " + Thread.currentThread().getId() + " / plus five : " + at);
+//			isNine = at.compareAndSet(9, 3);
+//			if (isNine) {
+//				System.out.println("Thread " + Thread.currentThread().getId() 
+//                    + " / Value was equal to 9, so it was updated to " + at.intValue());
+//			}
+    }
+}
+public static void main(String[] args) {
+    Thread t1 = new Thread(new MyRunnable());
+    Thread t2 = new Thread(new MyRunnable());
+    t1.start();
+    t2.start();
+}
 }
 
-class CounterNotSafe implements Runnable {
-	
-	private int value;
-	
-	public void increment() {
-		System.out.println(Thread.currentThread().getName() + " : " + value++);
-	}
-	
-	public void decrement() {
-		value--;
-	}
-	
-	public int value() {
-		return value;
-	}
-	
-	@Override
-	public void run() {
-		while (value <= 1000) {
-			increment();
-		}
-	}
+//class CounterSynchronized implements Runnable {
+//	
+//	private int value;
+//	
+//	public synchronized void increment() {
+//		System.out.println(Thread.currentThread().getName() + " : " + value++);
+//	}
+//	
+//	public void decrement() {
+//		value--;
+//	}
+//	
+//	public int value() {
+//		return value;
+//	}
+//	
+//	@Override
+//	public void run() {
+//		while (value <= 5000) {
+//			increment();
+//		}
+//	}
+//
+//	public static void main(String[] args) {
+//		CounterSynchronized counter1 = new CounterSynchronized();
+//		
+//		Thread t1 = new Thread(counter1);
+//		Thread t2 = new Thread(counter1);
+//		
+//		t1.start();
+//		t2.start();
+//	}
+//}
 
-	public static void main(String[] args) {
-		Counter counter1 = new Counter();
-		
-		Thread t1 = new Thread(counter1);
-		Thread t2 = new Thread(counter1);
-		
-		t1.start();
-		t2.start();
-	}
-}
+//class CounterNotSafe implements Runnable {
+//	
+//	private int value;
+//	
+//	public void increment() {
+//		System.out.println(Thread.currentThread().getName() + " : " + value++);
+//	}
+//	
+//	public void decrement() {
+//		value--;
+//	}
+//	
+//	public int value() {
+//		return value;
+//	}
+//	
+//	@Override
+//	public void run() {
+//		while (value <= 5000) {
+//			increment();
+//		}
+//	}
+//
+//	public static void main(String[] args) {
+//		CounterNotSafe counter1 = new CounterNotSafe();
+//		
+//		Thread t1 = new Thread(counter1);
+//		Thread t2 = new Thread(counter1);
+//		
+//		t1.start();
+//		t2.start();
+//	}
+//}

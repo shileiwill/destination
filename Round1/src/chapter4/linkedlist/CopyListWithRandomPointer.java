@@ -31,6 +31,33 @@ public class CopyListWithRandomPointer {
 		System.out.println(res.label);
 	}
 
+	// My new version
+    public RandomListNode copyRandomList3(RandomListNode head) {
+        RandomListNode cur = head;
+        while (cur != null) {
+           RandomListNode copy = new RandomListNode(cur.label);
+           RandomListNode next = cur.next;
+           cur.next = copy;
+           copy.next = next;
+           cur = next;
+        }
+        
+        RandomListNode cur2 = head; // Head is double size now
+        while (cur2 != null) {
+            RandomListNode copy = cur2.next;
+            RandomListNode next = cur2.next.next; // 保留现场
+            if (copy.next != null) {
+                copy.next = copy.next.next;
+            }
+            if (cur2.random != null) {
+                copy.random = cur2.random.next;
+            }
+            
+            cur2 = next;
+        }
+        
+        return head.next;
+    }
 	public RandomListNode copyRandomList(RandomListNode head) {
         if (head == null) {
             return head;

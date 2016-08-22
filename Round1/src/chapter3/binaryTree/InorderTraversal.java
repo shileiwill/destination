@@ -30,8 +30,8 @@ public class InorderTraversal {
         // cur is always right children. Stack contains only left children.
         // In this way, we can differentiate nodes. 
         TreeNode cur = root;
-        while (cur != null || !stack.isEmpty()) {
-            while (cur != null) {
+        while (cur != null || !stack.isEmpty()) { // 这个稍微复杂点，得判断当前节点
+            while (cur != null) { // 一直往左走
                 stack.push(cur);
                 cur = cur.left;
             }

@@ -1,6 +1,7 @@
 package chapter3.binaryTree.BST;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
 /**
@@ -24,7 +25,7 @@ public class SearchRange {
         helper(res, root, k1, k2);        
         return res;
     }
-    
+    // This version is more efficient, as we can skip <k1 and >k2
     void helper(ArrayList<Integer> res, TreeNode root, int k1, int k2) {
         if (root == null) {
             return;
@@ -39,5 +40,30 @@ public class SearchRange {
         if (root.val < k2) {
             helper(res, root.right, k1, k2);
         } 
+    }
+    
+    // Another traversal iteration version
+    public ArrayList<Integer> searchRange2(TreeNode root, int k1, int k2) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            
+            TreeNode node = stack.pop();
+            if (node.val >= k1 && node.val <= k2) {
+                res.add(node.val);
+            }
+            if (node.val > k2) { // If it is too big, just stop
+                break;
+            }
+            cur = node.right;
+        }
+        
+        return res;
     }
 }

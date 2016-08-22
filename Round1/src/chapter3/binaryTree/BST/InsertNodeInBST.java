@@ -32,7 +32,7 @@ public class InsertNodeInBST {
                 root.left = node;
                 return root;
             } else {
-                insertNode(root.left, node);
+                insertNode(root.left, node); // Dont give return here, we want to return the initial root
             }
         } else {
             if (root.right == null) {
@@ -46,6 +46,7 @@ public class InsertNodeInBST {
         return root;
     }
     
+    // This one is great!
     // This looks better, but not very straight forward to understand
     public TreeNode insertNode2(TreeNode root, TreeNode node) {
         if (root == null) {

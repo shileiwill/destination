@@ -2,6 +2,7 @@ package chapter3.binaryTree.BST;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
 /**
@@ -61,6 +62,30 @@ public class ValidBinarySearchTree {
         }
         
         return new ResultType(true, Math.max(root.val, right.max), Math.min(root.val, left.min));
+    }
+    
+    // In order traversal, but no recursion
+    public boolean isValidBST3(TreeNode root) {
+        // write your code here
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        
+        TreeNode cur = root;
+        long prev = Long.MIN_VALUE;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            
+            TreeNode node = stack.pop();
+            if (node.val <= prev) {
+                return false;
+            }
+            prev = node.val;
+            cur = node.right;
+        }
+        
+        return true;
     }
     
 	// This way, we need to inOrder traversal, and then compare results, which is not efficient.

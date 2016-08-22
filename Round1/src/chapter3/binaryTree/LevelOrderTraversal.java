@@ -31,6 +31,8 @@ public class LevelOrderTraversal {
         if (root == null) {
             return res;
         }
+        
+        // Here we are using currentLineCount and nextLineCount to track levels. We can also have 2 queues, one for curLevel, the other for nextLevel.
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(root);
         int curLineCount = 1;
@@ -91,5 +93,36 @@ public class LevelOrderTraversal {
         }
         
         return res;
+    }
+    
+    // DFS
+    public ArrayList<ArrayList<Integer>> levelOrderDFS(TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        
+        int maxLevelSoFar = 0;
+        while (true) {
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            dfs(root, list, 0, maxLevelSoFar);
+            if (list.size() == 0) {
+                break;
+            }
+            res.add(list); // Add current level
+            maxLevelSoFar++; // Go to next level
+        }
+        
+        return res;
+    }
+    
+    void dfs(TreeNode root, ArrayList<Integer> list, int curLevel, int maxLevelSoFar) {
+        if (root == null || curLevel > maxLevelSoFar) {
+            return;
+        }
+        if (curLevel == maxLevelSoFar) {
+            list.add(root.val);
+            return;
+        }
+        
+        dfs(root.left, list, curLevel + 1, maxLevelSoFar); // Next Level
+        dfs(root.right, list, curLevel + 1, maxLevelSoFar);
     }
 }

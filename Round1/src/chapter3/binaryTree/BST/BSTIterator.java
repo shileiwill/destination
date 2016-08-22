@@ -1,6 +1,8 @@
 package chapter3.binaryTree.BST;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -75,3 +77,39 @@ class BSTIterator2 {
  * BSTIterator i = new BSTIterator(root);
  * while (i.hasNext()) v[f()] = i.next();
  */
+
+// Another version, which is not efficient, but easy to think/implement
+class BSTIterator3 {
+    List<TreeNode> res = new ArrayList<TreeNode>();
+    int pointer = 0;
+    //@param root: The root of binary tree.
+    public BSTIterator3(TreeNode root) {
+        // write your code here
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+        
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            
+            TreeNode node = stack.pop();
+            res.add(node);
+            cur = node.right;
+        }
+    }
+
+    //@return: True if there has next node, or false
+    public boolean hasNext() {
+        // write your code here
+        return pointer < res.size();
+    }
+    
+    //@return: return next node
+    public TreeNode next() {
+        // write your code here
+        TreeNode next = res.get(pointer++);
+        return next;
+    }
+}

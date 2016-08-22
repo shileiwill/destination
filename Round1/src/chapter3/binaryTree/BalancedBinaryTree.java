@@ -11,7 +11,31 @@ public class BalancedBinaryTree {
 	public static void main(String[] args) {
 		
 	}
-	
+	class ResultType {
+	    boolean isBalanced;
+	    int height;
+	    
+	    ResultType(boolean isBalanced, int height) {
+	        this.isBalanced = isBalanced;
+	        this.height = height;
+	    }
+	}
+	// If use ResultType
+    ResultType helper2(TreeNode node) {
+        if (node == null) {
+            return new ResultType(true, 0);
+        }
+        
+        ResultType left = helper2(node.left);
+        ResultType right = helper2(node.right);
+        
+        if (!left.isBalanced || !right.isBalanced || Math.abs(left.height - right.height) > 1) {
+            return new ResultType(false, -1);
+        }
+        
+        return new ResultType(true, Math.max(left.height, right.height) + 1);
+    }
+    
 	// This solution will take every single node into account
     public boolean isBalanced(TreeNode root) {
         if (root == null) {

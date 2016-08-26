@@ -84,4 +84,60 @@ public class Search2DMatrix2 {
         
         return false;
     }
+    
+    // My new version
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        int top = 0;
+        int bottom = matrix.length - 1;
+        
+        while (top + 1 < bottom) {
+            int mid = top + (bottom - top) / 2;
+            if (matrix[mid][0] == target) {
+                return true;
+            }
+            if (target < matrix[mid][0]) {
+                bottom = mid;
+            } else {
+                top = mid;
+            }
+        }
+        
+        if (target == matrix[top][0] || target == matrix[bottom][0]) {
+            return true;
+        }
+        if (target < matrix[top][0]) {
+            return false;
+        }
+        
+        if (target < matrix[bottom][0]) {
+            bottom = top;
+        }
+        top = 0;
+        int right = matrix[top].length - 1;
+        
+        for (int i = top; i <= bottom; i++) {
+            int left = 0;
+            
+            while (left + 1 < right) {
+                int mid = left + (right - left) / 2;
+                if (matrix[i][mid] == target) {
+                    return true;
+                }
+                if (matrix[i][mid] < target) {
+                    left = mid;
+                } else {
+                    right = mid;
+                }
+            }
+            
+            if (matrix[i][left] == target || matrix[i][right] == target) {
+                return true;
+            }
+            if (matrix[i][right] > target) {
+                right = left;
+            }
+        }
+        
+        return false;
+    }
 }

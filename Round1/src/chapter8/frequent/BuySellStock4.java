@@ -18,6 +18,78 @@ public class BuySellStock4 {
 		System.out.println(res);
 	}
 	
+	// A new version
+    private int greedy(int[] prices) {
+        int r = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                r += prices[i] - prices[i - 1];
+            }
+        }
+        return r;
+    }
+    public int maxProfit2(int k, int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
+    
+        if (k > prices.length / 2) { // buy on day 1 and sell on day 2
+            return greedy(prices);
+        }
+        // 前i天进行j次交易能获得的最大利润
+        int[][] hash = new int[prices.length][k + 1];
+        
+        for (int i = 0; i < hash.length; i++) {
+            hash[i][0] = 0; // 前i天进行0次交易
+        }
+        for (int i = 1; i < hash[0].length; i++) {
+            hash[0][i] = 0; // 前0天进行j次交易
+        }
+        
+        for (int i = 1; i < prices.length; i++) {
+            for (int j = 1; j <= k; j++) {
+                int max = 0;
+                for (int x = 0; x < i; x++) { // Find max
+                    max = Math.max(max, hash[x][j - 1] + prices[i] - prices[x]);
+                }
+                hash[i][j] = Math.max(hash[i - 1][j], max);
+            }
+        }
+        // We dont loop here, as more transactions mean more chance to get more money
+        return hash[prices.length - 1][k];
+    }
+    
+    // O(N2) solution
+    public int maxProfit3(int k, int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
+    
+        if (k > prices.length / 2) {
+            return greedy(prices);
+        }
+        // 前i天进行j次交易能获得的最大利润
+        int[][] hash = new int[prices.length][k + 1];
+        
+        for (int i = 0; i < hash.length; i++) {
+            hash[i][0] = 0; // 前i天进行0次交易
+        }
+        for (int i = 1; i < hash[0].length; i++) {
+            hash[0][i] = 0; // 前0天进行j次交易
+        }
+        
+        for (int j = 1; j <= k; j++) { // Number of transactions
+            int maxDiff = 0 - prices[0]; // maintain a variable here to 之前买了没卖
+            for (int i = 1; i < prices.length; i++) {
+                hash[i][j] = Math.max(hash[i - 1][j], prices[i] + maxDiff);
+                maxDiff = Math.max(maxDiff, hash[i][j - 1] - prices[i]);
+            }
+        }
+        
+        // We dont need to do exactly k transactions, so need to loop.
+        return hash[prices.length - 1][k];
+    }
+    
 	public int maxProfit(int k, int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;

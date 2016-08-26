@@ -14,6 +14,27 @@ transactions = [buy, sell, cooldown, buy, sell]
  *
  */
 public class BuySellStockWithCoolDown {
+	
+    public int maxProfitBruce(int[] prices) {
+        if (prices.length <= 1) {
+            return 0;
+        }
+        
+        int[] max_0 = new int[prices.length]; // no stock in hand
+        int[] max_1 = new int[prices.length]; // 1 stock in hand
+        
+        max_0[0] = 0;
+        max_0[1] = Math.max(prices[1] - prices[0], 0);
+        max_1[0] = -prices[0];
+        max_1[1] = Math.max(-prices[0], -prices[1]);
+        
+        for (int i = 2; i < prices.length; i++) {
+            max_0[i] = Math.max(max_0[i - 1], max_1[i - 1] + prices[i]); // Sell
+            max_1[i] = Math.max(max_1[i - 1], max_0[i - 2] - prices[i]); // Buy
+        }
+        
+        return max_0[prices.length - 1];
+    }
     /**
         Define:
 

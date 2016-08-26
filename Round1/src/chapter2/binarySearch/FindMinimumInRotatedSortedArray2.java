@@ -43,4 +43,35 @@ public class FindMinimumInRotatedSortedArray2 {
         
         return Math.min(Math.min(nums[left], nums[right]), min);
     }
+    
+    // My new version
+    public int findMin2(int[] nums) {
+        // write your code here
+        if (nums.length == 0) {
+            return -1;
+        }
+        int min = nums[0];
+        
+        int left = 0;
+        int right = nums.length - 1;
+        
+        while (left + 1 < right) {
+            if (nums[left] == nums[right]) {
+                left++;
+                // right--; // This doesnt matter, as long as it is moving
+                continue;
+            }
+            int mid = left + (right - left) / 2;
+            if (nums[mid] >= nums[left]) { // left side is ordered
+                min = Math.min(min, nums[left]);
+                left = mid;
+            } else {
+                min = Math.min(min, nums[mid]);
+                right = mid;
+            }
+        }
+        
+        min = Math.min(min, Math.min(nums[left], nums[right]));
+        return min;
+    }
 }

@@ -1,4 +1,4 @@
-package chapter8.frequent;
+package chapter2.binarySearch;
 /**
  * 69. Implement int sqrt(int x).
 

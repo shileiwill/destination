@@ -1,4 +1,4 @@
-package chapter0.pickOne;
+package chapter1.pickOne;
 /**
  * 125. Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 

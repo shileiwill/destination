@@ -1,4 +1,4 @@
-package chapter0.pickOne;
+package chapter1.pickOne;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;

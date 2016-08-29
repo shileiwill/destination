@@ -1,4 +1,4 @@
-package chapter1.strstr.subset;
+package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,5 +76,38 @@ public class CombinationSum2 {
             sum = sum + m.get(i);
         }
         return sum;
+    }
+    
+    //Another version
+    public List<List<Integer>> combinationSum22(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<Integer> list = new ArrayList<Integer>();
+        boolean[] visited = new boolean[candidates.length];
+        Arrays.sort(candidates);
+        dfs(res, list, candidates, target, 0, visited);
+        
+        return res;
+    }
+    
+    void dfs(List<List<Integer>> res, List<Integer> list, int[] candidates, int target, int pos, boolean[] visited) {
+        if (target == 0) {
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        
+        if (target < 0) {
+            return;
+        }
+        
+        for (int i = pos; i < candidates.length; i++) {
+            if (i != 0 && candidates[i] == candidates[i - 1] && !visited[i - 1]) {
+                continue;
+            }
+            visited[i] = true;
+            list.add(candidates[i]);
+            dfs(res, list, candidates, target - candidates[i], i + 1, visited);
+            list.remove(list.size() - 1);
+            visited[i] = false;
+        }
     }
 }

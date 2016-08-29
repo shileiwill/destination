@@ -1,4 +1,4 @@
-package chapter0.pickOne;
+package chapter1.pickOne;
 /**
  * 14. Write a function to find the longest common prefix string amongst an array of strings.
  * @author Lei

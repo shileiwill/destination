@@ -1,4 +1,4 @@
-package chapter1.strstr.subset;
+package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class PermutationsWithDup {
         
         for (int i = 0; i < nums.length; i++) { // Always start from 0. Position matters.
         	// Already visited || Same with previous one, and the previous one is not selected, then skip
-        	if (visited[i] || (i > 0 && nums[i] == nums[i - 1] && visited[i - 1])) {
+        	if (visited[i] || (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1])) {
         		// Why create visited array? We cant use list.contains any longer, as there are duplicates.
         		continue;
         	}

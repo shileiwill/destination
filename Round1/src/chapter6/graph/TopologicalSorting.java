@@ -1,10 +1,4 @@
 package chapter6.graph;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
 /**
  * Given an directed graph, a topological order of the graph nodes is defined as follow:
 
@@ -18,6 +12,12 @@ You can assume that there is at least one topological order in the graph.
  * @author Lei
  *
  */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 public class TopologicalSorting {
     public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
 

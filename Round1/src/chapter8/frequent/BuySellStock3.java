@@ -9,6 +9,31 @@ You may not engage in multiple transactions at the same time (ie, you must sell 
  *
  */
 public class BuySellStock3 {
+    public int maxProfitBruce(int[] prices) {
+        if (prices.length < 2) {
+            return 0;
+        }
+        int[] buy1 = new int[prices.length];
+        int[] sell1 = new int[prices.length];
+        int[] buy2 = new int[prices.length];
+        int[] sell2 = new int[prices.length];
+        
+        buy1[0] = -prices[0];
+        sell1[0] = 0;
+        buy2[0] = Integer.MIN_VALUE;
+        sell2[0] = Integer.MIN_VALUE;
+        
+        for (int i = 1; i < prices.length; i++) {
+            buy1[i] = Math.max(buy1[i - 1], 0 - prices[i]); // First time to buy, not sell1[i - 1] - price
+            sell1[i] = Math.max(sell1[i - 1], buy1[i - 1] + prices[i]);
+            buy2[i] = Math.max(buy2[i - 1], sell1[i - 1] - prices[i]);
+            sell2[i] = Math.max(sell2[i - 1], buy2[i - 1] + prices[i]);
+        }
+        
+        int res = Math.max(sell1[prices.length - 1], sell2[prices.length - 1]);
+        return res;
+    }
+    
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;

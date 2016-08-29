@@ -2,8 +2,10 @@ package chapter6.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 /**
  * 133. Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.
 
@@ -67,6 +69,43 @@ public class CloneGraph {
         }
         
         return map.get(list.get(0));
+    }
+    
+    // A new version using Traditional Queue
+    public UndirectedGraphNode cloneGraphQueue(UndirectedGraphNode node) {
+        if (node == null) {
+            return null;
+        }
+        // write your code here
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+        
+        queue.offer(node);
+        map.put(node, new UndirectedGraphNode(node.label));
+        
+        // Clone Nodes
+        while (!queue.isEmpty()) {
+            UndirectedGraphNode n = queue.poll();
+            
+            for (UndirectedGraphNode nei : n.neighbors) {
+                if (!map.containsKey(nei)) {
+                    queue.offer(nei);
+                    map.put(nei, new UndirectedGraphNode(nei.label));
+                }
+            }
+        }
+        
+        // Clone Edges
+        for (Map.Entry<UndirectedGraphNode, UndirectedGraphNode> entry : map.entrySet()) {
+            UndirectedGraphNode key = entry.getKey();
+            UndirectedGraphNode cloned = entry.getValue();
+            
+            for (UndirectedGraphNode nei : key.neighbors) {
+                cloned.neighbors.add(map.get(nei));
+            }
+        }
+        
+        return map.get(node);
     }
 }
 

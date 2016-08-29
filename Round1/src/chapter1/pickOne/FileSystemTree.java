@@ -1,4 +1,4 @@
-package chapter0.pickOne;
+package chapter1.pickOne;
 
 import java.util.ArrayList;
 import java.util.List;

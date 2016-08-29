@@ -1,4 +1,4 @@
-package chapter6.search.backtracking;
+package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
 import java.util.List;

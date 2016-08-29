@@ -1,4 +1,4 @@
-package chapter1.strstr.subset;
+package chapter6.search.backtracking.dfs;
 
 /**
  * 28. Implement strStr().

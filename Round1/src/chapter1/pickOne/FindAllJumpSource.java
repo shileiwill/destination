@@ -1,4 +1,4 @@
-package chapter0.pickOne;
+package chapter1.pickOne;
 /**
  * <pre>
  *      array  [ 1 3 0 2 4 7]

@@ -1,4 +1,4 @@
-package chapter6.search.backtracking;
+package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,7 +82,7 @@ public class WordLadder2 {
             List<String> list = findNeighbors(cur, wordList);
             for (String next : list) {
                 neighbors.get(next).add(cur);
-                if (!distance.containsKey(next)) { // Out target is to build neighbors and distance
+                if (!distance.containsKey(next)) { // Our target is to build neighbors and distance
                     distance.put(next, distance.get(cur) + 1);
                     queue.offer(next);
                 }

@@ -1,4 +1,4 @@
-package chapter6.search.backtracking;
+package chapter6.search.backtracking.dfs;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -91,5 +91,43 @@ public class WordLadder {
         char[] chars = s.toCharArray();
         chars[index] = c;
         return new String(chars);
+    }
+    
+    // Another easier way
+    public int ladderLength2(String beginWord, String endWord, Set<String> wordList) {
+        if (beginWord.equals(endWord)) {
+            return 1;
+        }
+        
+        Queue<String> queue = new LinkedList<String>();
+        queue.offer(beginWord);
+        wordList.remove(beginWord); // Remove from dictionary
+        int levels = 1;
+        
+        while (!queue.isEmpty()) {
+            
+            int size = queue.size();
+            for (int k = 0; k < size; k++) {
+                String word = queue.poll();
+                for (int i = 0; i < word.length(); i++) {
+                    for (char c = 'a'; c <= 'z'; c++) { // Could also continue when it is the same char with itself
+                        String newWord = word.substring(0, i) + String.valueOf(c) + word.substring(i + 1);
+                        
+                        if (newWord.equals(endWord)) {
+                            return levels + 1;
+                        }
+                        
+                        if (wordList.contains(newWord)) {
+                            queue.offer(newWord);
+                            wordList.remove(newWord);
+                        }
+                    }
+                }
+            }
+            
+            levels++;
+        }
+        
+        return -1;
     }
 }

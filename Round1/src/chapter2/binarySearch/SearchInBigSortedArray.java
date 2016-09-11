@@ -24,7 +24,7 @@ public class SearchInBigSortedArray {
 	    int start = 0;
 	    int end = 0;
 
-	    // find an ROUGH end to start with
+	    // find an ROUGH end to start with. This is the most important part
 	    while(reader.get(end) != -1 && reader.get(end)<target) {
 	        end = end * 2 + 1;
 	    }

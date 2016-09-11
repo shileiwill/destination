@@ -25,7 +25,7 @@ public class FindMinimumInRotatedSortedArray2 {
                 left = left + 1;
                 right = right - 1;
                 min = Math.min(min, nums[mid]);
-            } else if (nums[mid] == nums[left]) {
+            } else if (nums[mid] == nums[left]) { // Left are all the same
                 left = mid;
                 min = Math.min(min, nums[mid]);
             } else if (nums[mid] == nums[right]) {

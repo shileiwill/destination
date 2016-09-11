@@ -1,6 +1,12 @@
 package chapter2.binarySearch;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
- * 302. An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. The black pixels are connected, i.e., there is only one black region. Pixels are connected horizontally and vertically. Given the location (x, y) of one of the black pixels, return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
+ * 302. An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. 
+ * The black pixels are connected, i.e., there is only one black region. Pixels are connected horizontally and vertically. 
+ * Given the location (x, y) of one of the black pixels, return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
 For example, given the following image: 
 [
   "0010",
@@ -62,6 +68,7 @@ public class SmallestRectangle {
         
         return (down - up + 1) * (right - left + 1);
     }
+    
 	public int minArea(char[][] image, int x, int y) {
         int m = image.length, n = image[0].length;
 	    int colMin = binarySearchCol(image, 0, y, true);

@@ -1,4 +1,4 @@
-package cc150.chapter1;
+package cc150.chapter1.array.string;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package cc150;
+package cc150.chapter1.array.string;
 /**
  * What is an elegant way to find all the permutations of a string.
  * E.g. ba, would be ba and ab, but what about abcdefgh? Is there any example Java implementation?

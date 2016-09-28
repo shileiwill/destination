@@ -2,7 +2,7 @@ package chapter3.binaryTree;
 /**
  * 236. Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
-According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+According to the definition of LCA on Wikipedia: ï¿½The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).ï¿½
 
         _______3______
        /              \
@@ -40,5 +40,35 @@ public class LowestCommonAncestor {
         
         // Found nothing
         return null;
+    }
+    
+    // An easier to understand way
+    // If P and Q are both on the left of the node, branch left to look for the common ancestor. When P and Q are no longer on the same side, found
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+    	if (!covers(root, p) || !covers(root, q)) { // Error check, if P or Q is not in tree
+    		return null;
+    	}
+    	
+    	boolean isPOnLeft = covers(root.left, p);
+    	boolean isQOnLeft = covers(root.left, q);
+    	
+    	if (isPOnLeft != isQOnLeft) {
+    		return root;
+    	}
+    	
+    	TreeNode nextSide = isPOnLeft ? root.left : root.right;
+    	
+    	return lowestCommonAncestor2(nextSide, p, q);
+    }
+    
+    boolean covers(TreeNode root, TreeNode node) {
+    	if (root == null) {
+    		return false;
+    	}
+    	if (root == node) {
+    		return true;
+    	}
+    	
+    	return covers(root.left, node) || covers(root.right, node);
     }
 }

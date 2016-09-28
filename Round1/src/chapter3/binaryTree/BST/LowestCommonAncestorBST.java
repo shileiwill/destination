@@ -15,4 +15,20 @@ public class LowestCommonAncestorBST {
             return root;
         }
     }
+    
+    public TreeNode lowestCommonAncestorIteration(TreeNode root, TreeNode p, TreeNode q) {// Suppose p.val is smaller
+    	while (root != null) {
+    		if (p.val < root.val && q.val > root.val) {
+    			return root;
+    		}
+    		if (p.val < root.val && q.val < root.val) {
+    			root = root.left;
+    		} else {
+    			root = root.right;
+    		}
+    		
+    	}
+    	
+    	return null;
+    }
 }

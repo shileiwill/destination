@@ -56,4 +56,26 @@ public class JumpGame2 {
         
         return hash[A.length - 1];
     }
+    
+    // From program creek
+    public int jump0(int[] nums) {
+        int maxReach = 0;
+        int lastReach = 0;
+        int step = 0;
+        
+        for (int i = 0; i <= maxReach && i < nums.length; i++) {
+            if (i > lastReach) { //when last jump can not reach current i, increase the step by 1
+                step++;
+                lastReach = maxReach;
+            }
+            
+            maxReach = Math.max(maxReach, i + nums[i]); 
+        }
+        
+        if (maxReach < nums.length - 1) {
+            return 0; // Cant reach the end
+        }
+        
+        return step;
+    }
 }

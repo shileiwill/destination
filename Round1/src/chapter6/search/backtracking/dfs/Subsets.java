@@ -1,6 +1,7 @@
 package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,13 +27,13 @@ If nums = [1,2,3], a solution is:
  */
 public class Subsets {
 
-	public static void main(String[] args) {
-		Subsets subsets = new Subsets();
-		int[] nums = {1, 2, 3};
-		
-		List<List<Integer>> res = subsets.subsets(nums);
-		
-	}
+//	public static void main(String[] args) {
+//		Subsets subsets = new Subsets();
+//		int[] nums = {1, 2, 3};
+//		
+//		List<List<Integer>> res = subsets.subsets(nums);
+//		
+//	}
 
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -56,4 +57,35 @@ public class Subsets {
             list.remove(list.size() - 1);
         }
     }
+    
+    // Iteration
+    public static final int [] input = new int [] {1 , 2, 3};
+    
+    public static List<List<Integer>> combinationOf(int[] arr){
+        
+        Arrays.sort(arr);
+        List<List<Integer>> r = new ArrayList();
+        r.add(new ArrayList());
+        for(int i=0;i<arr.length;i++){
+            int cur = arr[i];
+            
+            int size = r.size();
+            for(int j=0; j<size; j++){
+                List <Integer> one = r.get(j);
+                List<Integer> clone = new ArrayList(one);
+                clone.add(cur);
+                r.add(clone);
+
+            }
+
+        }
+        return r;
+    }
+    
+    public static void main(String[] args) {
+       List<List<Integer>> r =  combinationOf(new int[]{1,2,3});
+       for(List <Integer> one : r){
+           System.out.println(Arrays.toString(one.toArray()));
+       }
+     }
 }

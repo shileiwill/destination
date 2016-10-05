@@ -1,4 +1,4 @@
-package array;
+package leetcode1.array;
 /**
  * 106. Given inorder and postorder traversal of a tree, construct the binary tree.
 

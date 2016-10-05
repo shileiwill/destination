@@ -1,4 +1,4 @@
-package array;
+package leetcode1.array;
 
 import java.util.Arrays;
 
@@ -79,5 +79,18 @@ public class FindDuplicateNumber {
         }
         
         return finder;
+    }
+    
+    // Use Bucket sort principle
+    public int findDuplicate0(int[] nums) {
+        while (true) {
+            if (nums[0] == nums[nums[0]]) {
+                return nums[0];
+            }
+            // Swap 0, nums[0]
+            int temp = nums[0];
+            nums[0] = nums[temp]; // Must use temp, as nums[0] is changing
+            nums[temp] = temp;
+        }
     }
 }

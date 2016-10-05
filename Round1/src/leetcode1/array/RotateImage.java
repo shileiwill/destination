@@ -1,4 +1,4 @@
-package array;
+package leetcode1.array;
 /**
  * 48. You are given an n x n 2D matrix representing an image.
 

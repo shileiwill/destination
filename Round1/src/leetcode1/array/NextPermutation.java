@@ -1,4 +1,4 @@
-package array;
+package leetcode1.array;
 /**
  * 31. Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 

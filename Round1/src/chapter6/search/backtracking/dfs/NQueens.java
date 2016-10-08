@@ -1,6 +1,7 @@
 package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -99,4 +100,110 @@ public class NQueens {
             }
         }
     }
+}
+
+class NQueens1 {
+	static int n = 8;
+	static int count = 0;
+	static int[] solution = new int[n];
+	static List<int[]> res = new ArrayList<int[]>();
+	
+	public static void main(String[] args) {
+		dfs(0);
+		System.out.println(count);
+		System.out.println(res.size());
+		
+		for (int[] arr : res) {
+			for (int val : arr) {
+				System.out.print(val + " - ");
+			}
+			System.out.println();
+		}
+	}
+	
+	static void dfs(int row) {
+		for (int col = 0; col < n; col++) {
+			boolean ok = true;
+			for (int i = 0; i < row; i++) {
+				if (col == solution[i] || row - col == i - solution[i] || row + col == solution[i] + i) {
+					ok = false; // As long as one mistake, just break, false
+					break;
+				}
+			}
+			
+			if (!ok) {
+				continue; // Next row
+			}
+			
+			solution[row] = col;
+			if (row == n - 1) {
+				count++; // The end, one solution found.
+				res.add(Arrays.copyOf(solution, n));// Can also save the solution here
+			} else {
+				dfs(row + 1);
+			}
+		}
+	}
+}
+
+class NQueens2 {
+	static int n = 8;
+	static int count = 0;
+	static boolean[] shu = new boolean[n];
+	static boolean[] pie = new boolean[2 * n - 1];
+	static boolean[] na = new boolean[2 * n -1];
+	
+	public static void main(String[] args) {
+		dfs(0);
+		System.out.println(count);
+	}
+	
+	static void dfs(int row) {
+		for (int col = 0; col < n; col++) {
+			int j = row + col; // 唯一标示撇， 从0到6
+			int k = col - row + n - 1; // 唯一表示捺  因为col - row is from -(n - 1) to 0 to (n - 1), so need to differentiate
+			
+			if (shu[col] || pie[j] || na[k]) {
+				continue;
+			}
+			
+			if (row == n - 1) {
+				count++;
+			} else {
+				shu[col] = true; pie[j] = true; na[k] = true;
+				dfs(row + 1);
+				shu[col] = false; pie[j] = false; na[k] = false;
+			}
+		}
+	}
+}
+
+class NQueens3 {
+	static int n = 8;
+	static int count = 0;
+	static int shu, pie, na;
+	
+	public static void main(String[] args) {
+		dfs(0);
+		System.out.println(count);
+	}
+	
+	static void dfs(int row) {
+		for (int col = 0; col < n; col++) {
+			int j = row + col; // 唯一标示撇， 从0到6
+			int k = col - row + n - 1; // 唯一表示捺  因为col - row is from -(n - 1) to 0 to (n - 1), so need to differentiate
+			
+			if ((((shu >> col) | (pie >> j) | (na >> k)) & 1) != 0) { // See if there is any 1 in the 3 positions
+				continue;
+			}
+			
+			if (row == n - 1) {
+				count++;
+			} else {
+				shu ^= (1 << col); pie ^= (1 << j); na ^= (1 << k); // Flip
+				dfs(row + 1);
+				shu ^= (1 << col); pie ^= (1 << j); na ^= (1 << k); // Flip back
+			}
+		}
+	}
 }

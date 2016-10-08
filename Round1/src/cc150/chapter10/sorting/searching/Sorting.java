@@ -7,7 +7,7 @@ public class Sorting {
 	public static void main(String[] args) {
 		Sorting bubble = new Sorting();
 		int[] arr = {12, 4, 2, 17, 11, 28, 5, 2};
-		bubble.radixSort(arr);
+		bubble.insertionSort(arr);
 //		bubble.quickSort(arr, 0, arr.length - 1);
 		for (int val : arr) {
 			System.out.print(val + " - ");
@@ -15,6 +15,17 @@ public class Sorting {
 		System.out.println();
 	}
 
+	// https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort
+	void insertionSort(int[] arr) {
+		for (int i = 1; i < arr.length; i++) {
+			int cur = i;
+			while (cur > 0 && arr[cur] < arr[cur - 1]) { // Compare from right to left until find the correct place
+				swap(arr, cur, cur - 1);
+				cur--;
+			}
+		}
+	}
+	
 	void bubbleSort(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			for (int j = i + 1; j < arr.length; j++) {

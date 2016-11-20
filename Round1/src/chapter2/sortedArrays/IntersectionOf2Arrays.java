@@ -3,7 +3,7 @@ package chapter2.sortedArrays;
  * 349. Given two arrays, write a function to compute their intersection.
 
 Example:
-hello!
+Hello World!
 Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
 
 Note:

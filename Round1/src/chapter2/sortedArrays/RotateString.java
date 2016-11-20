@@ -9,6 +9,8 @@ offset=1 => "gabcdef"
 offset=2 => "fgabcde"
 offset=3 => "efgabcd"
  * @author Lei
+ 
+ 
  *
  */
 public class RotateString {

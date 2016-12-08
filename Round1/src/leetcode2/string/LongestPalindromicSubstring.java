@@ -1,0 +1,47 @@
+package leetcode2.string;
+/**
+ * 5. Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example:
+
+Input: "babad"
+
+Output: "bab"
+
+Note: "aba" is also a valid answer.
+Example:
+
+Input: "cbbd"
+
+Output: "bb"
+ */
+public class LongestPalindromicSubstring {
+    int left = 0, len = 0;
+    public String longestPalindrome(String s) {
+        if (s.length() < 2) {
+            return s;
+        }
+        
+        for (int i = 0; i < s.length() - 1; i++) {
+            // Try 2 different scenarios, and compare all
+            extendPalindrome(s, i, i); // Odd
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                extendPalindrome(s, i, i + 1); // Even
+            }
+        }
+        
+        return s.substring(left, left + len);
+    }
+    
+    void extendPalindrome(String s, int i, int j) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            i--;
+            j++; // Decrease and increase together
+        }
+        
+        if (len < j - i - 1) {
+            len = j - i - 1;
+            left = i + 1;
+        }
+    }
+}

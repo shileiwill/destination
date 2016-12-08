@@ -35,7 +35,8 @@ isUnique("make") ->
 true
  */
 public class ValidWordAbbr {
-
+// A word's abbreviation is unique if no other word from the dictionary has the same abbreviation.
+     // no other word
     Set<String> set = new HashSet<String>();
     
     public ValidWordAbbr(String[] dictionary) {
@@ -48,6 +49,47 @@ public class ValidWordAbbr {
     public boolean isUnique(String word) {
         String abbr = calAbbreviation(word);
         return set.contains(abbr);
+    }
+    
+    private String calAbbreviation(String word) {
+        int len = word.length();
+        if (len <= 2) {
+            return word;
+        }
+        
+        return "" + word.charAt(0) + (len - 2) + word.charAt(len - 1);
+    }
+}
+
+class ValidWordAbbr2 {
+    Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+    
+    public ValidWordAbbr(String[] dictionary) {
+        for (String s : dictionary) {
+            String abbr = calAbbreviation(s);
+            if (!map.containsKey(abbr)) {
+                map.put(abbr, new HashSet<String>());
+            }
+            map.get(abbr).add(s);
+        }
+    }
+
+    public boolean isUnique(String word) {
+        if (map.isEmpty()) {
+            return true;
+        }
+        
+        String abbr = calAbbreviation(word);
+        if (!map.containsKey(abbr)) {
+            return true;
+        }
+        
+        Set<String> set = map.get(abbr);
+        if (set.size() == 1 && set.contains(word)) {
+            return true;
+        }
+        
+        return false;
     }
     
     private String calAbbreviation(String word) {

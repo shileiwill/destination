@@ -1,6 +1,8 @@
 package leetcode4.hashtable;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 /**
  * 288. An abbreviation of a word follows the form <first letter><number><last letter>. Below are some examples of word abbreviations:
@@ -64,7 +66,7 @@ public class ValidWordAbbr {
 class ValidWordAbbr2 {
     Map<String, Set<String>> map = new HashMap<String, Set<String>>();
     
-    public ValidWordAbbr(String[] dictionary) {
+    public ValidWordAbbr2(String[] dictionary) {
         for (String s : dictionary) {
             String abbr = calAbbreviation(s);
             if (!map.containsKey(abbr)) {

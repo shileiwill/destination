@@ -63,4 +63,9 @@ public class MaxSizeSubarray {
         
         return max;
     }
+    
+    public static void main(String[] args) {
+		String a = "lsasl";
+		System.out.println(a.substring(4));
+	}
 }

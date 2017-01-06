@@ -80,7 +80,6 @@ public class SmallestRectangle {
     }
     
     int binarySearchRow(char[][] image, int lower, int upper, boolean isTop) {
-        int res = upper; // Anything
         while (lower + 1 < upper) {
             int mid = lower + (upper - lower) / 2;
             if (isTop) {
@@ -111,7 +110,6 @@ public class SmallestRectangle {
     }
     
     int binarySearchCol(char[][] image, int left, int right, boolean isLeft) {
-        int res = right; // Anything, could depend on isLeft
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
             if (isLeft) {

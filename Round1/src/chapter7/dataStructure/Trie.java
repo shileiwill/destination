@@ -4,7 +4,6 @@ package chapter7.dataStructure;
 
 Note:
 You may assume that all inputs are consist of lowercase letters a-z.
- * @author Lei
  *
  */
 public class Trie {

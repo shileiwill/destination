@@ -16,7 +16,7 @@ public class GenerializedAbbreviation {
     }
     
     void backtrack(List<String> res, String word, int pos, String curStr, int count) {
-        if (pos == word.length()) {
+        if (pos == word.length()) { // Eventual situation
             if (count == 0) {
                 res.add(curStr);
             } else {
@@ -26,6 +26,38 @@ public class GenerializedAbbreviation {
         }
         
         backtrack(res, word, pos + 1, curStr, count + 1); // Use numbers
-        backtrack(res, word, pos + 1, curStr + (count > 0 ? count : "") + word.charAt(pos), 0); 
+        backtrack(res, word, pos + 1, curStr + (count > 0 ? count : "") + word.charAt(pos), 0); // Apply current number
+    }
+    
+    // A little easier to see the backtracking
+    public List<String> generateAbbreviations2(String word) {
+        List<String> res = new ArrayList<String>();
+        StringBuilder sb = new StringBuilder();
+        char[] chars = word.toCharArray();
+        
+        dfs(res, sb, chars, 0, 0);
+        return res;
+    }
+    
+    void dfs(List<String> res, StringBuilder sb, char[] chars, int i, int count) {
+        int len = sb.length();
+        
+        if (i == chars.length) {
+            if (count != 0) {
+                sb.append(count);
+            }    
+            res.add(sb.toString());
+        } else {
+            // Abbrevation
+            dfs(res, sb, chars, i + 1, count + 1);
+            
+            // Add
+            if (count != 0) {
+                sb.append(count);
+            }
+            dfs(res, sb.append(chars[i]), chars, i + 1, 0);
+        }
+        
+        sb.setLength(len);
     }
 }

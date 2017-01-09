@@ -28,16 +28,18 @@ public class AndroidUnlockPatterns {
     int res = 0;
     public int numberOfPatterns(int m, int n) {
         boolean[] visited = new boolean[10];
-        dfs(0, 0, m, n, visited);
+        dfs(0, 0, m, n, visited); // Cur starts from 0, which is illegal, but doesnt matter, will skip the switch
         return res;
     }
     
     void dfs(int cur, int len, int m, int n, boolean[] visited) {
         if (len >= m && len <= n) {
             res++;
+            // return; // Here should not return
         }
+        // It doesnt matter if you dont return here, by using return, it will be faster
         if (len > n) {
-            return;
+            return; // Here return
         }
         for (int i = 1; i <= 9; i++) {
             if (visited[i]) {

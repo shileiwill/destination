@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
 
@@ -82,5 +83,52 @@ public class ClosestBSTValue2 {
         }
         
         return res;
+    }
+    
+    /*
+    The idea is to compare the predecessors and successors of the closest node to the target, we can use two stacks to track the predecessors and successors, then like what we do in merge sort, we compare and pick the closest one to the target and put it to the result list.
+
+    As we know, inorder traversal gives us sorted predecessors, whereas reverse-inorder traversal gives us sorted successors.
+    */
+    public List<Integer> closestKValuesStack(TreeNode root, double target, int k) {
+        List<Integer> res = new ArrayList<Integer>();
+        Stack<Integer> predecessor = new Stack<Integer>();
+        Stack<Integer> successor = new Stack<Integer>();
+        
+        inorder(root, target, k, true, successor);
+        inorder(root, target, k, false, predecessor);
+        
+        while (k > 0) {
+            if (predecessor.isEmpty()) {
+                res.add(successor.pop());
+            } else if (successor.isEmpty()) {
+                res.add(predecessor.pop());
+            } else if (Math.abs(predecessor.peek() - target) < Math.abs(successor.peek() - target)) {
+                res.add(predecessor.pop());
+            } else {
+                res.add(successor.pop());
+            }
+            
+            k--;
+        }
+        
+        return res;
+    }
+    
+    void inorder(TreeNode node, double target, int k, boolean reverse, Stack<Integer> stack) {
+        if (node == null) {
+            return;
+        }
+        
+        inorder(reverse ? node.right : node.left, target, k, reverse, stack);
+        
+        // Stop, no need to go through the whole tree
+        // One with =, while the other doeen't. This is to avoid double the target value(if it exists in tree)
+        if ((reverse && node.val <= target) || (!reverse && node.val > target)) {
+            return;
+        }
+        stack.push(node.val);
+        
+        inorder(reverse ? node.left : node.right, target, k, reverse, stack);
     }
 }

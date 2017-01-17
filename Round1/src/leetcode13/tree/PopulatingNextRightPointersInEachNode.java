@@ -1,4 +1,8 @@
 package leetcode13.tree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 116. Given a binary tree
 
@@ -61,6 +65,35 @@ public class PopulatingNextRightPointersInEachNode {
             }
             
             levelStart = levelStart.left;
+        }
+    }
+    
+    // Level order traversal
+    public void connect2(TreeLinkNode root) {
+        if (root == null) return;
+        
+        Queue<TreeLinkNode> queue = new LinkedList<TreeLinkNode>();
+        queue.offer(root);
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            
+            TreeLinkNode prev = null;
+            for (int i = 0; i < size; i++) {
+                TreeLinkNode cur = queue.poll();
+                
+                if (cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
+                
+                if (prev != null) {
+                    prev.next = cur;
+                }
+                prev = cur;
+            }
         }
     }
 }

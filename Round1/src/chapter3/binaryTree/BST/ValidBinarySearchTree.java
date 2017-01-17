@@ -66,7 +66,6 @@ public class ValidBinarySearchTree {
     
     // In order traversal, but no recursion
     public boolean isValidBST3(TreeNode root) {
-        // write your code here
         Stack<TreeNode> stack = new Stack<TreeNode>();
         
         TreeNode cur = root;

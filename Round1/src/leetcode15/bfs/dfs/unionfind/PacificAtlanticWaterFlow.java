@@ -1,4 +1,4 @@
-package leetcode15.bfs.unionfind;
+package leetcode15.bfs.dfs.unionfind;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

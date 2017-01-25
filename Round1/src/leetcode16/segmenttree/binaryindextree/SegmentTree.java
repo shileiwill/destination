@@ -1,4 +1,4 @@
-package leetcode16.segmenttree;
+package leetcode16.segmenttree.binaryindextree;
 
 public class SegmentTree {
 

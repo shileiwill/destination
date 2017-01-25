@@ -1,4 +1,4 @@
-package leetcode16.segmenttree;
+package leetcode16.segmenttree.binaryindextree;
 /**
  * Write a function that, for a given no n, finds a number p which is greater than or equal to n and is a power of 2.
  */

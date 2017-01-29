@@ -3,6 +3,7 @@ package chapter6.search.backtracking.dfs;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 /**
@@ -130,4 +131,95 @@ public class WordLadder {
         
         return -1;
     }
+    
+    public int ladderLengthIterative(String beginWord, String endWord, List<String> wordAsList) {
+        if(!wordAsList.contains(endWord)) return 0;
+        
+        Set<String> wordList = new HashSet<String>(wordAsList);
+        Set<String> start = new HashSet<String>();
+        Set<String> end = new HashSet<String>();
+        int length = 1;
+        start.add(beginWord); end.add(endWord);
+        wordList.remove(beginWord); wordList.remove(endWord);
+        
+        while(!start.isEmpty()){
+            Set<String> next = new HashSet<String>();
+            for(String word: start){
+                char[] wordArray = word.toCharArray();
+                for(int i=0; i<word.length(); i++){
+                    char old = wordArray[i];
+                    for(char c='a'; c<='z'; c++){
+                        wordArray[i] = c;
+                        String str = String.valueOf(wordArray);
+                        if(end.contains(str))
+                            return length+1;
+                        if(wordList.contains(str)){
+                            next.add(str);
+                            wordList.remove(str);
+                        }
+                    }
+                    wordArray[i] = old; // Change back
+                }
+            }
+            start = next.size() < end.size() ? next: end;
+            end = start.size() < end.size() ? end : next;
+            length++;
+        }
+        return 0;
+    }
+    
+    // Two-end BFS Recursion
+    public int ladderLength(String start, String end, List<String> dict) {
+    
+        if (!dict.contains(end)) {
+            return 0;
+        }
+        
+        Set<String> set1 = new HashSet<String>();
+        Set<String> set2 = new HashSet<String>();
+        
+        set1.add(start);
+        set2.add(end);
+        
+        return helper(dict, set1, set2, 1);
+    }
+    
+    int helper(List<String> dict, Set<String> set1, Set<String> set2, int level) {
+        if (set1.isEmpty()) return 0;
+        
+        if (set1.size() > set2.size()) return helper(dict, set2, set1, level);
+        
+        // remove words from both ends
+        for (String word : set1) { dict.remove(word); };
+        for (String word : set2) { dict.remove(word); };
+        
+        // the set for next level
+        Set<String> set = new HashSet<String>();
+        
+        // for each string in the current level
+        for (String str : set1) {
+            for (int i = 0; i < str.length(); i++) {
+                char[] chars = str.toCharArray();
+                
+                // change letter at every position
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    chars[i] = ch; // This guy doesnt need to change back
+                    String word = new String(chars);
+                    
+                    // found the word in other end(set)
+                    if (set2.contains(word)) {
+                        return level + 1;
+                    }
+                    
+                    // if not, add to the next level
+                    if (dict.contains(word)) {
+                        set.add(word);
+                    }
+                }
+            }
+        }
+        
+        return helper(dict, set2, set, level + 1);
+    }
+    
 }

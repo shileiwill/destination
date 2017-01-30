@@ -2,7 +2,7 @@ package chapter3.binaryTree.BST;
 
 import chapter3.binaryTree.TreeNode;
 
-// This is for Binary Search Tree. As it is sequential, we can decide either go left or right
+// 235. This is for Binary Search Tree. As it is sequential, we can decide either go left or right
 public class LowestCommonAncestorBST {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {

@@ -28,8 +28,8 @@ public class RotateImage {
 	        int len = matrix.length; // this is both width and height
 	       
 	        // Swap [i][j], [j][i]
-	        for (int i = 0; i < len; i++) { // i is row(height)
-	            for (int j = i + 1; j < len; j++) { // j is col(width). Make it only half the square
+	        for (int i = 0; i < len; i++) { // i is row(height) // Row
+	            for (int j = i + 1; j < len; j++) { // j is col(width). Make it only half the square // Col
 	                int temp = matrix[i][j];
 	                matrix[i][j] = matrix[j][i];
 	                matrix[j][i] = temp;
@@ -37,7 +37,7 @@ public class RotateImage {
 	        }
 	       
 	        // Swap [i][j], [i][len - 1 - j]
-	        for (int i = 0; i < len; i++) {
+	        for (int i = 0; i < len; i++) { // Each row
 	            for (int j = 0; j < len / 2; j++) { // Only need half the cols
 	                int temp = matrix[i][j];
 	                matrix[i][j] = matrix[i][len - 1 - j];

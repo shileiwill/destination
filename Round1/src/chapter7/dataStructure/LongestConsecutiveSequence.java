@@ -121,4 +121,80 @@ public class LongestConsecutiveSequence {
         
         return max;
     }
+    
+    public int longestConsecutiveUnionFind(int[] nums) {
+        UnionFind uf = new UnionFind(nums.length);
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                continue;
+            }
+            
+            map.put(nums[i], i); // value, index
+            
+            if (map.containsKey(nums[i] + 1)) {
+                uf.union(i, map.get(nums[i] + 1));
+            }
+            
+            if (map.containsKey(nums[i] - 1)) {
+                uf.union(i, map.get(nums[i] - 1));
+            }
+        }
+        
+        return uf.maxUnion();
+    }
+    
+    class UnionFind {
+        int[] parent = null;
+        
+        UnionFind(int totalNodes) {
+            parent = new int[totalNodes];
+            for (int i = 0; i < totalNodes; i++) {
+                parent[i] = i;
+            }
+        }
+        
+        void union(int id1, int id2) {
+            int parent1 = find(id1);
+            int parent2 = find(id2);
+            
+            if (parent1 != parent2) {
+                parent[parent1] = parent2; // Share the same ancestor now
+            }
+        }
+        
+        int find(int id) {
+            while (parent[id] != id) {
+                parent[id] = parent[parent[id]];
+                id = parent[id]; // id goes up 1 level
+            }
+            
+            return parent[id]; // return the ancestor
+        }
+        
+        int findRecursion(int id) {
+            if (parent[id] == id) {
+                return id;
+            }
+            
+            parent[id] = findRecursion(parent[id]); // Recursion to find the ancestor
+            return parent[id]; // return the ancestor
+        }
+        
+        boolean isConnected(int id1, int id2) {
+            return find(id1) == find(id2);
+        }
+        
+        int maxUnion() {
+            int max = 0;
+            int[] count = new int[parent.length];
+            for (int i = 0; i < parent.length; i++) {
+                count[find(i)]++;
+                max = Math.max(max, count[find(i)]);
+            }
+            
+            return max;
+        }
+    }
 }

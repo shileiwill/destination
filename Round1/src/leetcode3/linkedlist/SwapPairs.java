@@ -12,6 +12,34 @@ import java.util.Stack;
 import chapter4.linkedlist.ListNode;
 
 public class SwapPairs {
+	
+    public ListNode swapPairsNew(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        
+        while (head != null && head.next != null) {
+            ListNode next = head.next.next;
+            
+            ListNode first = head.next;
+            ListNode second = head;
+            second.next = next; // Dont need to set to null;
+            first.next = second;
+            
+            pre.next = first;
+            head = next;
+            pre = second;
+        }
+        
+        // if (head != null) {
+        //     pre.next = head;
+        // }
+        
+        return dummy.next;
+    }
+    
 	public ListNode swapPairs2(ListNode head) {
         ListNode dummy = new ListNode(-1);
         ListNode pre = dummy;

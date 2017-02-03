@@ -107,6 +107,30 @@ public class CloneGraph {
         
         return map.get(node);
     }
+    
+    Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+    public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
+        return dfs(node);
+    }
+    
+    UndirectedGraphNode dfs(UndirectedGraphNode node) {
+        if (node == null) {
+            return null;
+        }
+        
+        if (map.containsKey(node)) {
+            return map.get(node);
+        }
+        
+        UndirectedGraphNode clone = new UndirectedGraphNode(node.label);
+        map.put(node, clone);
+        
+        for (UndirectedGraphNode nei : node.neighbors) {
+            clone.neighbors.add(dfs(nei));
+        }
+        
+        return clone;
+    }
 }
 
 class UndirectedGraphNode {

@@ -3,22 +3,24 @@ package leetcode16.segmenttree.binaryindextree;
 public class SegmentTree {
 
 	public static void main(String[] args) {
-//		int[] arr = {-1, 2, 4, 0};
-		int[] arr = {-1, 2, 4, 0, 5, 3, 8};
+//		int[] arr = {-1, 2, 4, 6, 3};
+		int[] arr = {-1, 2, 4, 7, 5, 3, 8};
 		SegmentTree st = new SegmentTree();
 		
 		int[] tree = st.constructTree(arr);
 		for (int t : tree) {
 			System.out.print(t + "**");
 		}
-		int min = st.rangeMinQuery(tree, 4, 6, 0, arr.length - 1, 0);
+		int min = st.rangeMinQuery(tree, 2, 6, 0, arr.length - 1, 0);
 		System.out.println();
 		System.out.println(min);
 	}
 	
 	
 	int[] constructTree(int[] arr) {
+		// If len is square of 2, it can build a complete tree, and the max nodes is 2*n - 1 with n leaves
 		int[] tree = new int[2 * NextPowerOfTwo.nextPowerOf2(arr.length) - 1];
+//		int[] tree = new int[2 * arr.length + 1]; // This works!
 		helper(tree, arr, 0, arr.length - 1, 0);
 		return tree;
 	}

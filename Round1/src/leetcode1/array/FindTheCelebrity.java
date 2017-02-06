@@ -12,6 +12,7 @@ You are given a helper function bool knows(a, b) which tells you whether A knows
 Note: There will be exactly one celebrity if he/she is in the party. Return the celebrity's label if there is a celebrity in the party. If there is no celebrity, return -1.
  */
 public class FindTheCelebrity {
+	// Dude, set is useless! Not used at all.
     public int findCelebrity(int n) {
         Set<String> hash = new HashSet<String>();
         for (int i = 0; i < n; i++) { // Each person as potential celebrity
@@ -28,6 +29,30 @@ public class FindTheCelebrity {
                 
                 if (knows(i, j)) {
                     hash.add(key); // Just figured, i knows j, i cant be celebrity any more
+                    break;
+                }
+                
+                if (!knows(j, i)) { // j doesnt know i, i cant be celebrity any more
+                    break;
+                }
+            }
+            if (j == n) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    public int findCelebrity4(int n) {
+        for (int i = 0; i < n; i++) { // Each person as potential celebrity
+            int j = 0;
+            for (; j < n; j++) { // Ask every one else
+                if (i == j) { // Same person, pass
+                    continue;
+                }
+                
+                if (knows(i, j)) {
                     break;
                 }
                 

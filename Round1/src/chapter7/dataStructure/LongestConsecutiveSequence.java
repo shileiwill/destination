@@ -1,7 +1,9 @@
 package chapter7.dataStructure;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 /**
  * 128. Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
@@ -178,6 +180,7 @@ public class LongestConsecutiveSequence {
                 return id;
             }
             
+            // This will make it faster
             parent[id] = findRecursion(parent[id]); // Recursion to find the ancestor
             return parent[id]; // return the ancestor
         }

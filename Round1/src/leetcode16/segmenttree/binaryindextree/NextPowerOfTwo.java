@@ -14,7 +14,7 @@ public class NextPowerOfTwo {
 			return num;
 		}
 		
-		while ((num & (num - 1)) != 0) {
+		while ((num & (num - 1)) != 0) { // The end point is very important, dont go a little further
 			num = (num & (num - 1));
 		}
 		

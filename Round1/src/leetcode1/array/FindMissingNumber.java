@@ -12,6 +12,25 @@ Note:
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
  */
 public class FindMissingNumber {
+	
+    // Bucket
+    public int missingNumber3(int[] nums) {
+        int len = nums.length;
+        int[] bucket = new int[len + 1];
+        
+        for (int i = 0; i < len; i++) {
+            bucket[nums[i]]++;
+        }
+        
+        for (int i = 0; i < len + 1; i++) {
+            if (bucket[i] == 0) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
     public int missingNumber2(int[] nums) {
         int res = nums.length;
         for (int i = 0; i < nums.length; i++) {

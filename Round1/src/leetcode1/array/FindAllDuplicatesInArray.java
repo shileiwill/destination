@@ -24,7 +24,7 @@ public class FindAllDuplicatesInArray {
             int pos = Math.abs(nums[i]) - 1;
             if (nums[pos] < 0) {
                 res.add(Math.abs(nums[i]));
-            } else {
+            } else { // Flip to negative once found
                 nums[pos] = -nums[pos];
             }
         }

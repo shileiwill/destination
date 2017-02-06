@@ -74,4 +74,31 @@ public class FindMinimumInRotatedSortedArray2 {
         min = Math.min(min, Math.min(nums[left], nums[right]));
         return min;
     }
+    
+    // Newer version on 02/04/2017
+    public int findMin3(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        int min = nums[0];
+        
+        int left = 0;
+        int right = nums.length - 1;
+        
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[left] == nums[mid]) { // If the same, move one step
+                left++;
+            } else if (nums[mid] > nums[left]) { // left side is ordered
+                min = Math.min(min, nums[left]);
+                left = mid;
+            } else {
+                min = Math.min(min, nums[mid]);
+                right = mid;
+            }
+        }
+        
+        min = Math.min(min, Math.min(nums[left], nums[right]));
+        return min;
+    }
 }

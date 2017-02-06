@@ -28,6 +28,30 @@ Binary tree [1,2,3], return false.
  */
 public class ValidBinarySearchTree {
 	
+	// My new version using inorder iteration
+    // In order traversal using iteration
+    public boolean isValidBST5(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+        TreeNode prev = null;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) { // Here is cur, not cur.next
+                stack.push(cur);
+                cur = cur.left;
+            }
+            
+            TreeNode node = stack.pop();
+            if (prev != null && prev.val >= node.val) {
+                return false;
+            }
+            
+            prev = node;
+            cur = node.right;
+        }
+        
+        return true;
+    }
+    
     class ResultType {
         boolean isBST;
         long max;

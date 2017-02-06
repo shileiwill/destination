@@ -65,9 +65,8 @@ class BSTIterator2 {
     		cur = cur.left;
     	}
     	
-    	cur = stack.pop();
-    	TreeNode node = cur; // Take a note before we make changes to cur
-    	cur = cur.right; // Move to right for next iteration, as the next smallest will be there
+    	TreeNode node = stack.pop();
+    	cur = node.right; // Move to right for next iteration, as the next smallest will be there
     	
         return node.val;
     }
@@ -84,7 +83,7 @@ class BSTIterator3 {
     int pointer = 0;
     //@param root: The root of binary tree.
     public BSTIterator3(TreeNode root) {
-        // write your code here
+        // 这实际上就是inorder traversal的iteration
         Stack<TreeNode> stack = new Stack<TreeNode>();
         TreeNode cur = root;
         

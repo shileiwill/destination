@@ -165,8 +165,9 @@ public class NumberOfIslands {
                 return id;
             }
             
-            parent[id] = find(parent[id]); // Recursion to find the ancestor
-            return parent[id]; // return the ancestor
+//            parent[id] = find(parent[id]); // Recursion to find the ancestor
+//            return parent[id]; // return the ancestor
+            return parent[id]; // This is good enough
         }
     }
 }

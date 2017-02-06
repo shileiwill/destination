@@ -79,11 +79,23 @@ public class NumberOfIslands2 {
         return res;
     }
     
-    int find(int[] islands, int id) {
+    // Not efficient enough
+    int find2(int[] islands, int id) {
         while (islands[id] != id) {
             id = islands[id];
         }
         
         return islands[id];
+    }
+    
+    int find(int[] islands, int id) {
+    	// Try to use Path compression
+    	while(id != islands[id]) {
+            // islands[id] = islands[islands[id]];   // only one line added. Point to its parent's parent
+            // It can also be below, even faster! or add more.
+            islands[id] = islands[islands[islands[id]]];
+            id = islands[id];
+        }
+        return id;
     }
 }

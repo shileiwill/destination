@@ -42,6 +42,7 @@ public class MeetingScheduler {
 		
 		for (int i = 1; i < meetings.length; i++) {
 			Meeting m = heap.poll(); // This is the earliest finished meeting
+//			Meeting m = heap.peek(); // Must Poll(), and then offer() back, if not, Heap will not do the sorting.
 			if (meetings[i].startTime >= m.endTime) {
 				// Can use the same meeting room, just update the end time, and put back to heap
 				m.endTime = meetings[i].endTime;
@@ -58,17 +59,32 @@ public class MeetingScheduler {
 	
 	public static void main(String[] args) {
 		MeetingScheduler ms = new MeetingScheduler();
+		// [[2,15],[36,45],[9,29],[16,23],[4,9]]
+		Meeting m1 = new Meeting(2,15);
+		Meeting m2 = new Meeting(36,45);
+		Meeting m3 = new Meeting(9,29);
+		Meeting m4 = new Meeting(16,23);
+		Meeting m5 = new Meeting(4,9);
+//		Meeting m6 = new Meeting(2, 3);
+//		Meeting m7 = new Meeting(3, 5);
+//		Meeting m8 = new Meeting(1, 2);
 		
-		Meeting m1 = new Meeting(1, 2);
-		Meeting m2 = new Meeting(1, 4);
-		Meeting m3 = new Meeting(3, 5);
-		Meeting m4 = new Meeting(6, 7);
-		Meeting m5 = new Meeting(8, 10);
-		Meeting m6 = new Meeting(2, 3);
-		Meeting m7 = new Meeting(3, 5);
-		Meeting m8 = new Meeting(1, 2);
+//		Meeting[] meetings = {m1, m2, m3, m4, m5, m6, m7, m8};
+		Meeting[] meetings = {m1, m2, m3, m4, m5};
 		
-		Meeting[] meetings = {m1, m2, m3, m4, m5, m6, m7, m8};
+		Comparator<Meeting> compareByEndTime = new Comparator<Meeting>() {
+			public int compare(Meeting m1, Meeting m2) {
+				return m1.endTime - m2.endTime;
+			}
+		};
+		
+//		PriorityQueue<Meeting> heap = new PriorityQueue<Meeting>(compareByEndTime);
+//		heap.offer(m1);
+//		Meeting m = heap.peek();
+//		m.endTime = 1000;
+//		System.out.println(heap.size());
+//		System.out.println(heap.peek().endTime);
+		
 		
 		int res = ms.minRoom(meetings);
 		System.out.println(res);

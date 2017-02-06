@@ -50,4 +50,46 @@ public class SearchInRotatedSortedArray2 {
         
         return false;
     }
+    
+    // A new version on 02/04/2017
+    public boolean search2(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            
+            if (nums[mid] == target) {
+                return true;
+            }
+            
+            if (nums[mid] == nums[left]) { // The only change compared with non-duplicate is here. just move a step further
+                left++;
+            } else if (nums[mid] > nums[left]) {// Left hand in order
+                if (target < nums[mid] && target >= nums[left]) { // Stay on left
+                    right = mid;
+                } else { // Go to the disorder
+                    left = mid;
+                }
+            } else { // Right in order
+                if (target > nums[mid] && target <= nums[right]) { // Stay on right
+                    left = mid;
+                } else { // Go to the disorder
+                    right = mid;
+                }
+            }
+        }
+        
+        if (nums[left] == target) {
+            return true;
+        }
+        if (nums[right] == target) {
+            return true;
+        }
+        
+        return false;
+    }
 }

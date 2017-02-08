@@ -32,7 +32,7 @@ public class ContainerWithMostWater {
         int right = heights.length - 1;
         
         int max = 0;
-        while (left < right) {
+        while (left < right) { // I dont care any other lines in between
             if (heights[left] <= heights[right]) {
                 max = Math.max(max, (right - left) * heights[left]);
                 left++;

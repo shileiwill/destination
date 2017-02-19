@@ -28,6 +28,31 @@ AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
                   | 0 0 1 |
  */
 public class SparseMatrixMultiplication {
+	
+    public int[][] multiplyTwoLookUpTablesBruteForce(int[][] A, int[][] B) {
+        if (A[0].length != B.length) {
+            throw new IllegalArgumentException("A's column number must match B's row number");
+        }
+        
+        int common = A[0].length;
+        int row = A.length, col = B[0].length;
+        int[][] res = new int[row][col];
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int k = 0, sum = 0;
+                while (k < common) {
+                    sum += (A[i][k] * B[k][j]);
+                    k++;
+                }
+                res[i][j] = sum;                
+            }
+        }
+        
+        return res;
+    }
+    
+    // Good
     public int[][] multiplyTwoLookUpTables(int[][] A, int[][] B) {
         if (A[0].length != B.length) {
             throw new IllegalArgumentException("A's column number must match B's row number");

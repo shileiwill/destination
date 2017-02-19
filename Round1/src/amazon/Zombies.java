@@ -29,7 +29,7 @@ public class Zombies {
 	}
 
 	ListNode shotZombies(ListNode node, int k) {
-		while (node.next != node) {
+		while (node.next != node) { // 剩下一个Node
 			ListNode preK = find(node, k);
 			preK.next = preK.next.next;
 			node = preK.next;

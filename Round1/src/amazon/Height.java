@@ -12,7 +12,7 @@ import java.util.Stack;
 3, 因为是最右, 肯定是NULL, 然后把 3放到stack里; 2, 发现stack的top比2大, 于是就是3, 然后把2也放进stack里;
 7, 发现2比7小, pop, 发现3 比7小, pop, stack空了 所以是NULL, 然后把7放进stack里;
 6, 发现top=7>6, 所以就是7, 然后把6放进stack里;
-3, 发现top=6>3, 所以就是3, 然后把3放进stack里;.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+3, 发现top=6>3, 所以就是3, 然后把3放进stack里;
 
 时间空间复杂度都是O(n)
  */

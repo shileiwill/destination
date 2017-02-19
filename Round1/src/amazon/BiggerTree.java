@@ -74,7 +74,7 @@ public class BiggerTree {
 		TreeNodeWithParent next = nextNode(node);
 		if (next != null) {
 			int originalValInNext = next.val;
-			helper(next, root);
+			helper2(next);
 			node.val = next.val + originalValInNext;
 		} else {
 			node.val = 0;

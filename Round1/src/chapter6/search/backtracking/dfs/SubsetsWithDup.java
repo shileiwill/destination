@@ -2,7 +2,10 @@ package chapter6.search.backtracking.dfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 90. Given a collection of integers that might contain duplicates, nums, return all possible subsets.
@@ -28,6 +31,27 @@ public class SubsetsWithDup {
 	public static void main(String[] args) {
 
 	}
+	
+	// Using Set
+    public List<List<Integer>> subsetsWithDupSet(int[] nums) {
+        Set<List<Integer>> set = new HashSet<List<Integer>>();
+        List<Integer> list = new ArrayList<Integer>();
+        
+        helper(set, list, nums, 0);
+        return new ArrayList<List<Integer>>(set);
+    }
+    
+    void helper(Set<List<Integer>> set, List<Integer> list, int[] nums, int pos) {
+        List<Integer> add = new ArrayList<Integer>(list);
+        Collections.sort(add);
+        set.add(add);
+        
+        for (int i = pos; i < nums.length; i++) {
+            list.add(nums[i]);
+            helper(set, list, nums, i + 1);
+            list.remove(list.size() - 1);
+        }
+    }
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();

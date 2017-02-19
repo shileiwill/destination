@@ -35,6 +35,36 @@ public class CombinationSum3 {
 		
 	}
 	
+	// New Version, better
+    public List<List<Integer>> combinationSum3New(int k, int n) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<Integer> list = new ArrayList<Integer>();
+        
+        if (k <= 0) {
+            return null;
+        }
+        
+        helper(k, res, list, n, 1);
+        
+        return res;
+    }
+    
+    private void helper(int k, List<List<Integer>> res, List<Integer> list, int target, int pos) {
+        if (list.size() == k) {
+            if (target == 0) {
+            	res.add(new ArrayList<Integer>(list));
+            	return; // Once satisfied, return.
+            }
+            return;
+        }
+        
+        for (int i = pos; i <= 9; i++) {
+            list.add(i);
+            helper(k, res, list, target - i, i + 1); // Keep moving forward, including itself
+            list.remove(list.size() - 1);
+        }
+    }
+    
     public List<List<Integer>> combinationSum3(int k, int n) {
         int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         List<List<Integer>> res = new ArrayList<List<Integer>>();

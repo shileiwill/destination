@@ -70,11 +70,11 @@ public class CombinationSum {
         return sum;
     }
     
-    // Another version
+    // Another version, better!
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         List<Integer> list = new ArrayList<Integer>();
-        Arrays.sort(candidates);
+        Arrays.sort(candidates); // Do we need to sort? I believe not
         dfs(res, list, candidates, target, 0);
         
         return res;

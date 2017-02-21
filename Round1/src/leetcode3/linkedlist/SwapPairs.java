@@ -13,6 +13,34 @@ import chapter4.linkedlist.ListNode;
 
 public class SwapPairs {
 	
+    public ListNode swapPairsAnotherNewVersion02_20_2017(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        
+        while (head != null && head.next != null) {
+            ListNode first = head;
+            ListNode second = head.next;
+            ListNode next = head.next.next;
+            
+            first.next = null;
+            
+            pre.next = second;
+            second.next = first;
+            pre = first;
+            
+            head = next;
+        }
+        
+        if (head != null) {
+            pre.next = head;
+        }
+        
+        return dummy.next;
+    }
+    
     public ListNode swapPairsNew(ListNode head) {
         if (head == null || head.next == null) {
             return head;

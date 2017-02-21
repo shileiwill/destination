@@ -26,4 +26,16 @@ public class ExcelSheetColumnTitle {
         return sb.toString();
     }
 
+    public String convertToTitleWithString(int n) {
+        String res = "";
+        
+        while (n != 0) {
+            n--; // Because we will add from 'A'
+            char now = (char)('A' + n % 26);
+            res = now + res;
+            n = n / 26;
+        }
+        
+        return res;
+    }
 }

@@ -80,14 +80,15 @@ public class SumOfLeftLeaves {
             if (node.left != null) {
                 if (node.left.left == null && node.left.right == null) { // If it is a leaf
                     sum += node.left.val;
-                } else {
+                } 
+                // else { // Doesn't matter
                     stack.push(node.left);
-                }
+                // }
             }
             if (node.right != null) { // Push to stack only if the right node has children, basically not a leaf
-                if (node.right.left != null || node.right.right != null) {
+                // if (node.right.left != null || node.right.right != null) { // Doesn't matter
                     stack.push(node.right);
-                }
+                // }
             }
         }
         

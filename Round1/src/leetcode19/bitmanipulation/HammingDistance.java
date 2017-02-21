@@ -33,5 +33,17 @@ public class HammingDistance {
         
         return count;
     }
-
+    
+    // Faster, inspired by "Number of 1 bits"
+    public int hammingDistanceFaster(int x, int y) {
+        int z = x ^ y;
+        
+        int count = 0;
+        while (z != 0) {
+            count++;
+            z = (z & (z - 1));
+        }
+        
+        return count;
+    }
 }

@@ -78,7 +78,7 @@ public class RemoveDuplicates2 {
         return cur;
     }
     
-    public int removeDuplicates(int[] nums) {
+    public int removeDuplicatesGood(int[] nums) {
         if (nums.length <= 1) {
             return nums.length;
         }
@@ -89,10 +89,12 @@ public class RemoveDuplicates2 {
         for (int i = 1; i < nums.length; i++) {
         	int now = nums[i];
         	
-        	if (now == nums[i - 1] && open) { // Equals but amount <= 2, will add, but no more.
-        		nums[size++] = now;
-        		open = false;
-        	} else if (now != nums[i - 1]) { // Not equal, will add for sure
+        	if (now == nums[i - 1]) { // Equals but amount <= 2, will add, but no more.
+        		if (open) {
+            		nums[size++] = now;
+            		open = false;
+        		}
+        	} else { // Not equal, will add for sure
         		nums[size++] = now;
         		open = true;
         	}

@@ -1,8 +1,12 @@
 package leetcode14.topologicalsort;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * 207. There are a total of n courses you have to take, labeled from 0 to n - 1.
@@ -30,6 +34,49 @@ Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera expla
 Topological sort could also be done via BFS.
  */
 public class CourseSchedule {
+	
+    // Very Similar to Alien Dictionary
+    public boolean canFinishGood(int N, int[][] P) {
+        Map<Integer, Set<Integer>> courses = new HashMap<Integer, Set<Integer>>();
+        Map<Integer, Integer> degrees = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < P.length; i++) {
+            int first = P[i][0];
+            int second = P[i][1]; // first relies on second, second is the prerequisite
+            
+            if (!courses.containsKey(second)) {
+                courses.put(second, new HashSet<Integer>());
+            }
+            courses.get(second).add(first);
+            degrees.put(first, degrees.getOrDefault(first, 0) + 1);
+        }
+        
+        Queue<Integer> queue = new LinkedList<Integer>();
+        for (int i = 0; i < N; i++) {
+            if (!degrees.containsKey(i)) {
+                queue.offer(i);
+            }
+        }
+        
+        int count = 0;
+        
+        while (!queue.isEmpty()) {
+            int now = queue.poll();
+            count++;
+            
+            if (courses.containsKey(now)) {
+                for (int next : courses.get(now)) {
+                    degrees.put(next, degrees.get(next) - 1);
+                    if (degrees.get(next) == 0) {
+                        queue.offer(next);
+                    }
+                }
+            }
+        }
+        
+        return count == N;
+    }
+    
     public boolean canFinishBFS(int numCourses, int[][] prerequisites) {
         ArrayList[] graph = new ArrayList[numCourses];
         int[] degree = new int[numCourses];

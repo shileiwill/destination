@@ -8,7 +8,6 @@ Expected runtime complexity is in O(log n) and the input is sorted.
  */
 public class HIndex2 {
     // There can be duplicate
-    
     public int hIndex2(int[] citations) {
         if (citations == null || citations.length == 0) {
             return 0;
@@ -25,6 +24,35 @@ public class HIndex2 {
         }
         
         return 0;
+    }
+    
+    public int hIndexNewer(int[] citations) {
+        if (citations == null || citations.length == 0) {
+            return 0;
+        }
+        
+        int len = citations.length;
+        int left = 0, right = len - 1;
+        
+        if (citations[0] > len) {
+            return len;
+        }
+        
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            
+            if (citations[mid] >= len - mid) {
+                right = mid; // Go Left, try to find a smaller index
+            } else {
+                left = mid; // Go right
+            }
+        }
+        
+        if (citations[left] >= len - left) {
+            return len - left;
+        } 
+        // To deal with [0], a single paper with citation 0
+        return citations[right] == 0 ? 0 : len - right;
     }
     
     /*

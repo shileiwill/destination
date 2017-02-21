@@ -64,7 +64,7 @@ public class AlienDictionary {
                     break; // Found the first different char, no need to go further
                 } else {
                     // To deal with : "wrt" must appears before "wrtkj"
-                    if(j + 1 <= cur.length()-1 && j + 1 > next.length() - 1) {
+                	if(j < cur.length() - 1 && j == next.length() - 1) {
                         return "";
                     }
                 }

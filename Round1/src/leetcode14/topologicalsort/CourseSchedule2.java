@@ -1,8 +1,12 @@
 package leetcode14.topologicalsort;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * 210. There are a total of n courses you have to take, labeled from 0 to n - 1.
@@ -32,7 +36,51 @@ Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera expla
 Topological sort could also be done via BFS.
  */
 public class CourseSchedule2 {
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    public int[] findOrderGood(int N, int[][] P) {
+        Map<Integer, Set<Integer>> courses = new HashMap<Integer, Set<Integer>>();
+        Map<Integer, Integer> degrees = new HashMap<Integer, Integer>();
+        int[] res = new int[N];
+        int index = 0;
+        
+        for (int i = 0; i < P.length; i++) {
+            int first = P[i][0];
+            int second = P[i][1]; // first relies on second, second is the prerequisite
+            
+            if (!courses.containsKey(second)) {
+                courses.put(second, new HashSet<Integer>());
+            }
+            courses.get(second).add(first);
+            degrees.put(first, degrees.getOrDefault(first, 0) + 1);
+        }
+        
+        Queue<Integer> queue = new LinkedList<Integer>();
+        for (int i = 0; i < N; i++) {
+            if (!degrees.containsKey(i)) {
+                queue.offer(i);
+            }
+        }
+        
+        while (!queue.isEmpty()) {
+            int now = queue.poll();
+            res[index++] = now;
+            
+            if (courses.containsKey(now)) {
+                for (int next : courses.get(now)) {
+                    degrees.put(next, degrees.get(next) - 1);
+                    if (degrees.get(next) == 0) {
+                        queue.offer(next);
+                    }
+                }
+            }
+        }
+        
+        if (index == N) {
+            return res;
+        }
+        return new int[]{}; // No solution!
+    }
+    
+    public int[] findOrder2(int numCourses, int[][] prerequisites) {
         int[] res = new int[numCourses];
         ArrayList[] graph = new ArrayList[numCourses];
         int[] degree = new int[numCourses];

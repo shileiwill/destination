@@ -25,8 +25,9 @@ According to the definition of tree on Wikipedia: “a tree is an undirected gra
 Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
  */
 public class GraphValidTree {
-    // https://discuss.leetcode.com/topic/22486/ac-java-solutions-union-find-bfs-dfs
+	// https://discuss.leetcode.com/topic/22486/ac-java-solutions-union-find-bfs-dfs
     public boolean validTreeBFS(int n, int[][] edges) {
+        // Can also use Map<Integer, Set<Integer>>
         List<Set<Integer>> connections = new ArrayList<Set<Integer>>();
         for (int i = 0; i < n; i++) {
             connections.add(new HashSet<Integer>());
@@ -36,6 +37,7 @@ public class GraphValidTree {
             int p1 = edge[0];
             int p2 = edge[1];
             
+            // Put both
             connections.get(p1).add(p2);
             connections.get(p2).add(p1);
         }
@@ -115,12 +117,12 @@ public class GraphValidTree {
     
     // https://discuss.leetcode.com/topic/21712/ac-java-union-find-solution
     public boolean validTree(int n, int[][] edges) {
-        int[] union = new int[n]; // Number of isolated islands
-        Arrays.fill(union, -1);
+
+        UnionFind uf = new UnionFind(n);
         
         for (int[] conn : edges) {
-            int p1 = find(union, conn[0]);
-            int p2 = find(union, conn[1]);
+            int p1 = uf.find(conn[0]);
+            int p2 = uf.find(conn[1]);
             
             // If p1 and p2 are connected and they share the same parent, circle found
             if (p1 == p2) {
@@ -128,17 +130,32 @@ public class GraphValidTree {
             }
             
             // Union
-            union[p1] = p2;
+            uf.union(p1, p2);
         }
-        // Why?
+        // Why? Make sure no isolated nodes
         return edges.length == n - 1;
     }
     
-    int find(int[] nums, int index) {
-        if (nums[index] == -1) {
-            return index;
+    class UnionFind {
+        int[] parent = null;
+        
+        UnionFind(int n) {
+            parent = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+            }
         }
         
-        return find(nums, nums[index]);
+        void union(int id1, int id2) {
+            parent[id1] = id2;
+        }
+        
+        int find(int id) {
+            while (parent[id] != id) {
+                parent[id] = parent[parent[id]];
+                id = parent[id];
+            }
+            return id;
+        }
     }
 }

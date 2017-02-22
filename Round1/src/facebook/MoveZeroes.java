@@ -33,4 +33,21 @@ public class MoveZeroes {
         nums[left] = nums[right];
         nums[right] = temp;
     }
+    
+   public void moveZeroesBetter(int[] N) {
+        for (int left = 0; left < N.length; left++) {
+                while (left < N.length && N[left] != 0) {
+                    left++;
+                }
+                
+                int right = left + 1;
+                while (right < N.length && N[right] == 0) {
+                    right++;
+                }
+                
+                if (left < N.length && right < N.length) {
+                    swap(N, left, right);
+                }
+        }
+    }
 }

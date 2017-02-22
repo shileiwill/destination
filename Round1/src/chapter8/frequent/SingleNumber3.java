@@ -24,6 +24,7 @@ public class SingleNumber3 {
         
         // We want to separate A and B into 2 groups, so we can use XOR again
         int lastDigit = xor - (xor & (xor - 1)); // This is to find the last different bit. One is enough to differentiate A, B
+        // To get the last 1 digit, can also use (xor & (xor ^ (xor - 1)))
         // Eg. lastDigit = 00000000000000010000000
         int group1 = 0, group2 = 0;
         for (int i = 0; i < nums.length; i++) {

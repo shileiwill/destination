@@ -23,8 +23,8 @@ public class SingleNumber2 {
         for (int i = 0; i < 32; i++) { // Every bit in integer
             for (int j = 0; j < nums.length; j++) { // Every number in array
                 bits[i] += (nums[j] >> i & 1); // Move ith bit to the very end, and mask other bits as 0. Here 1 is 0000...00001
-                bits[i] %= 3; // Mode 3 every time. Since same number will appear at most 3 times, bits[i] <= 3
             }
+            bits[i] %= 3; // Either 0 or 1
             res |= (bits[i] << i); // Move ith bit back to its original place and construct result bit by bit
         }
         

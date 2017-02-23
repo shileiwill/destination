@@ -52,6 +52,29 @@ public class ValidBinarySearchTree {
         return true;
     }
     
+    // In order traversal using recursion
+    public boolean isValidBSTRecursion(TreeNode root) {
+        return helperRecursion(root);
+    }
+    
+    TreeNode pre = null;
+    boolean helperRecursion(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        
+        boolean left = helperRecursion(node.left);
+        
+        if (pre != null && pre.val >= node.val) {
+            return false;
+        }
+        
+        pre = node;
+        boolean right = helperRecursion(node.right);
+        
+        return left && right;
+    }
+    
     class ResultType {
         boolean isBST;
         long max;

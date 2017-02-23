@@ -30,6 +30,29 @@ public class LexicographicalNumbers {
         return intList;
     }
     
+    public List<Integer> lexicalOrderGood(int n) {
+        List<Integer> res = new ArrayList<Integer>();
+        for (int i = 1; i <= 9; i++) { // The first digit cant be 0
+            if (i > n) {
+                return res; // break is also fine
+            }
+            
+            dfsGood(i, n, res);
+        }
+        return res;
+    }
+    
+    void dfsGood(int cur, int n, List<Integer> res) {
+        res.add(cur); // Only valid numbers come here. Add here only
+        for (int i = 0; i <= 9; i++) { // All following possible digits
+            int next = cur * 10 + i;
+            if (next > n) {
+                return;
+            }
+            dfsGood(next, n, res);
+        }
+    }
+    
     // Make it a tree, but not binary tree
     public List<Integer> lexicalOrder(int n) {
         List<Integer> res = new ArrayList<Integer>();

@@ -22,6 +22,11 @@ import java.util.PriorityQueue;
 // 求集合的最大值 最小值 用Heap
 // 此题是Linear求k小的follow up. 对于原题，用quick sort 的partition. Find kth element in an array
 public class KthSmallestElementInMatrix {
+	
+    // A Binary search solution:
+    // https://discuss.leetcode.com/topic/52865/my-solution-using-binary-search-in-c/13
+	
+	
     public int kthSmallest(int[][] matrix, int k) {
         Comparator<Node> comp = new Comparator<Node>() {
           public int compare(Node n1, Node n2) {

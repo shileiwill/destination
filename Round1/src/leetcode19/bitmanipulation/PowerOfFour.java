@@ -17,7 +17,7 @@ public class PowerOfFour {
     
     public boolean isPowerOfFour(int num) {
         while (num != 0) {
-            if (num == 1) {
+            if (num == 1) { // It is 4/4 eventually
                 return true;
             }
             

@@ -5,12 +5,15 @@ package leetcode16.segmenttree.binaryindextree;
 public class BinaryIndexTree {
 
 	// (index & -index) is to get the last digit of 1. How to get complement: 所有位取反， +1
-	int getParent(int index) {
-		return index - (index & -index);
+	int getParent(int index) { // Remove the last 1
+//		return index - (index & -index);
+		return (index & (index - 1));
 	}
 	
 	int getNext(int index) {
-		return index + (index & -index);
+//		return index + (index & -index);
+		return index + (index - (index & (index - 1))); //  the second half is to find only the last digit one, like0000100000
+//		return index + (index & (index - 1));
 	}
 	
 	int[] buildTree(int[] nums) {
@@ -26,7 +29,7 @@ public class BinaryIndexTree {
 	void updateTree(int[] tree, int val, int pos) {
 		while (pos < tree.length) {
 			tree[pos] += val;
-			pos = getNext(pos);
+			pos = getNext(pos); // All these will be in the same level, with same number of 1s
 		}
 	}
 	

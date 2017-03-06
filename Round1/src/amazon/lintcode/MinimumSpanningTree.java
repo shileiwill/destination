@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Given a list of Connections, which is the Connection class (the city name at both ends of the edge and a cost between them), find some edges, connect all the cities and spend the least amount.
+ * Given a list of Connections, which is the Connection class (the city name at both ends of the edge and a cost between them), find some edges, 
+ * connect all the cities and spend the least amount.
 Return the connects if can connect all the cities, otherwise return empty list.
  
 Notice

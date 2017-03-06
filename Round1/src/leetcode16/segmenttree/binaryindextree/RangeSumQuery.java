@@ -14,7 +14,7 @@ The array is only modifiable by the update function.
 You may assume the number of calls to update and sumRange function is distributed evenly.
  */
 public class RangeSumQuery {
-
+	// Refer to NumArray for Binary Indexed Tree implementation
     
     // https://discuss.leetcode.com/topic/29918/17-ms-java-solution-with-segment-tree
     // http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/

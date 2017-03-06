@@ -123,15 +123,15 @@ class NQueens1 {
 	
 	static void dfs(int row) {
 		for (int col = 0; col < n; col++) {
-			boolean ok = true;
-			for (int i = 0; i < row; i++) {
+			int i = 0;
+			for (i = 0; i < row; i++) {
 				if (col == solution[i] || row - col == i - solution[i] || row + col == solution[i] + i) {
-					ok = false; // As long as one mistake, just break, false
+//					ok = false; // As long as one mistake, just break, false
 					break;
 				}
 			}
 			
-			if (!ok) {
+			if (i < row) {
 				continue; // Next row
 			}
 			

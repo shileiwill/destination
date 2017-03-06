@@ -1,0 +1,132 @@
+package leetcode18.greedy;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+// http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/
+// http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
+public class DijkstraShortestPath {
+
+	public static void main(String[] args) {
+
+	}
+
+	final List<Node> nodes;
+	final List<Edge> edges;
+	Set<Node> settledNodes = new HashSet<Node>();
+	Set<Node> unsettledNodes = new HashSet<Node>();
+	Map<Node, Integer> distance = new HashMap<Node, Integer>(); // 距离source的距离
+	Map<Node, Node> predecessor = new HashMap<Node, Node>(); // 目标是构建这个Map, 能够回溯出所有点到source的路径
+	
+	DijkstraShortestPath(Graph graph) {
+		this.nodes = graph.nodes;
+		this.edges = graph.edges;
+	}
+	
+	void execute(Node source) {
+		distance.put(source, 0);
+		unsettledNodes.add(source);
+		
+		while (!unsettledNodes.isEmpty()) {
+			Node now = findMinInUnsettled(unsettledNodes);
+			unsettledNodes.remove(now);
+			settledNodes.add(now);
+			updateMinDistance(now);
+		}
+	}
+	
+	Node findMinInUnsettled(Set<Node> unsettledNodes) {
+		Node min = null;
+		for (Node node : unsettledNodes) {
+			if (min == null) {
+				min = node;
+			} else {
+				if (getShortestDistance(node) < getShortestDistance(min)) {
+					min = node;
+				}
+			}
+		}
+		
+		return min;
+	}
+	
+	int getShortestDistance(Node node) {
+		Integer dis = distance.get(node);
+		if (dis == null) {
+			return Integer.MAX_VALUE;
+		} else {
+			return dis;
+		}
+	}
+	
+	void updateMinDistance(Node node) {
+		List<Node> neighbors = findUnsettledNeighbors(node);
+		
+		for (Node target : neighbors) {
+			int oldDist = getShortestDistance(target);
+			int newDist = getShortestDistance(node) + getDistance(node, target);
+			
+			if (oldDist > newDist) { // Update
+				distance.put(target, newDist);
+				predecessor.put(target, node);
+				unsettledNodes.add(target);
+			}
+		}
+	}
+	
+	List<Node> findUnsettledNeighbors(Node node) {
+		List<Node> neighbors = new ArrayList<Node>();
+		for (Edge edge : edges) {
+			if (edge.src == node && !settledNodes.contains(node)) {
+				neighbors.add(edge.dest); // Add the destination side
+			}
+		}
+		return neighbors;
+	}
+	
+	int getDistance(Node src, Node dest) {
+		for (Edge edge : edges) {
+			if (edge.src == src && edge.dest == dest) {
+				return edge.weight;
+			}
+		}
+		
+		throw new IllegalArgumentException("Src and Dest are not connected");
+	}
+	
+	// This is to print the shortest path of a given node
+	List<Node> getPath(Node dest) {
+		List<Node> path = new LinkedList<Node>();
+		
+		if (!predecessor.containsKey(dest)) {
+			return path;
+		}
+		
+		while (dest != null) {
+			path.add(dest);
+			dest = predecessor.get(dest);
+		}
+		
+		return path;
+	}
+}
+
+class Node {
+	int val;
+}
+
+class Edge {
+	Node src;
+	Node dest;
+	int weight;
+}
+
+class Graph {
+	List<Node> nodes;
+	List<Edge> edges;
+}

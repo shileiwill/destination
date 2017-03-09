@@ -69,7 +69,7 @@ public class NQueens {
         int row = list.size();
         for (int i = 0; i < list.size(); i++) {
             int pos = list.get(i);
-            if (col == pos) {
+            if (col == pos) { // Same Column
                 return false;
             }
             
@@ -92,7 +92,7 @@ public class NQueens {
             return;
         }
         
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // Try every col. res.size() is recording the rows
             if (isValid(list, i)) {
                 list.add(i);
                 search(res, list, n);
@@ -122,9 +122,9 @@ class NQueens1 {
 	}
 	
 	static void dfs(int row) {
-		for (int col = 0; col < n; col++) {
+		for (int col = 0; col < n; col++) { // Every column
 			int i = 0;
-			for (i = 0; i < row; i++) {
+			for (i = 0; i < row; i++) { // Check validity
 				if (col == solution[i] || row - col == i - solution[i] || row + col == solution[i] + i) {
 //					ok = false; // As long as one mistake, just break, false
 					break;
@@ -132,15 +132,18 @@ class NQueens1 {
 			}
 			
 			if (i < row) {
-				continue; // Next row
+				continue; // This col doesnt work. Try next col
 			}
 			
+			// Found a solution
 			solution[row] = col;
+			
+			// Done?
 			if (row == n - 1) {
 				count++; // The end, one solution found.
 				res.add(Arrays.copyOf(solution, n));// Can also save the solution here
 			} else {
-				dfs(row + 1);
+				dfs(row + 1); // Go to next row
 			}
 		}
 	}

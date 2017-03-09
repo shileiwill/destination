@@ -19,7 +19,7 @@ public class DijkstraShortestPath {
 	final List<Node> nodes;
 	final List<Edge> edges;
 	Set<Node> settledNodes = new HashSet<Node>();
-	Set<Node> unsettledNodes = new HashSet<Node>();
+	Set<Node> unsettledNodes = new HashSet<Node>(); // This could be a PriorityQueue, as we want MIN each time
 	Map<Node, Integer> distance = new HashMap<Node, Integer>(); // 距离source的距离
 	Map<Node, Node> predecessor = new HashMap<Node, Node>(); // 目标是构建这个Map, 能够回溯出所有点到source的路径
 	
@@ -35,8 +35,8 @@ public class DijkstraShortestPath {
 		while (!unsettledNodes.isEmpty()) {
 			Node now = findMinInUnsettled(unsettledNodes);
 			unsettledNodes.remove(now);
-			settledNodes.add(now);
-			updateMinDistance(now);
+			settledNodes.add(now); // Finalize this node, done
+			updateMinDistanceInNeighbors(now);
 		}
 	}
 	
@@ -64,15 +64,15 @@ public class DijkstraShortestPath {
 		}
 	}
 	
-	void updateMinDistance(Node node) {
+	void updateMinDistanceInNeighbors(Node node) {
 		List<Node> neighbors = findUnsettledNeighbors(node);
 		
 		for (Node target : neighbors) {
 			int oldDist = getShortestDistance(target);
-			int newDist = getShortestDistance(node) + getDistance(node, target);
+			int newDist = getShortestDistance(node) + getDistance(node, target); // What about going through the new settled node?!
 			
 			if (oldDist > newDist) { // Update
-				distance.put(target, newDist);
+				distance.put(target, newDist); // Here is the only place we put and add. If old <= new, that means the distance is not MAX_VALUE, it is already put.
 				predecessor.put(target, node);
 				unsettledNodes.add(target);
 			}

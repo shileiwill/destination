@@ -83,9 +83,9 @@ public class ImplementStrStr {
                 i++;
             }else{
                 if(index != 0){
-                    index = lps[index-1]; // 没有set数组
+                    index = lps[index-1]; // 没有set数组, just try
                 }else{
-                    lps[i] =0;
+                    lps[i] = 0; // Already the beginning, give up, just set 0
                     i++;
                 }
             }

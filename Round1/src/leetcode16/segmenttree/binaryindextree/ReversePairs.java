@@ -18,11 +18,11 @@ All the numbers in the input array are in the range of 32-bit integer.
  */
 public class ReversePairs {
     class Node {
-        int val, count;
+        int val, count; // Elements <= current element
         Node left, right;
         Node(int val) {
             this.val = val;
-            this.count = 1;
+            this.count = 1; // Itself
         }
     }
     public int reversePairs(int[] N) {

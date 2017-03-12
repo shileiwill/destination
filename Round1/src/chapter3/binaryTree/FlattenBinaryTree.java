@@ -30,7 +30,21 @@ If you notice carefully in the flattened tree, each node's right child points to
 import java.util.Stack;
 
 public class FlattenBinaryTree {
-    public void flatten(TreeNode root) {
+    TreeNode prev = null;
+    public void flatten(TreeNode root) { // PostOrder traversal
+        if (root == null) {
+            return;
+        }
+        
+        flatten(root.right);
+        flatten(root.left);
+        
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+    
+    public void flattenStack(TreeNode root) {
         if (root == null) {
             return;
         }

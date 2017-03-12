@@ -1,4 +1,9 @@
 package chapter2.sortedArrays;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 4. There are two sorted arrays nums1 and nums2 of size m and n respectively.
 
@@ -21,11 +26,50 @@ public class MedianOf2SortedArrays {
 
 	public static void main(String[] args) {
 		MedianOf2SortedArrays m = new MedianOf2SortedArrays();
-		int[] nums1 = {3};
-		int[] nums2 = {};
-		double res = m.findMedianSortedArrays(nums1, nums2);
+		Integer[] arr1 = {-50, -41, -40, -19, 5, 21, 28};
+		Integer[] arr2 = {-50, -21, -10, 12};
+		
+		List<Integer> a = new ArrayList<Integer>(Arrays.asList(arr1));
+		List<Integer> b = new ArrayList<Integer>(Arrays.asList(arr2));
+		
+		double res = m.findMedianSortedArrays(a, b);
 		System.out.println(res);
 	}
+	
+	
+	public double findMedianSortedArrays(final List<Integer> a, final List<Integer> b) {
+	     int len = a.size() + b.size();
+	     
+	     if (len % 2 == 0) {
+	         return (findKth(a, 0, b, 0, len / 2 - 1) + findKth(a, 0, b, 0, len / 2)) / 2.0; 
+	     } else {
+	         return (double)findKth(a, 0, b, 0, len / 2);
+	     }
+	}
+	
+	double findKth(List<Integer> a, int aStart, List<Integer> b, int bStart, int k) {
+	    if (aStart >= a.size()) {
+	        return b.get(bStart + k);
+	    }
+	    
+	    if (bStart >= b.size()) {
+	        return a.get(aStart + k);
+	    }
+	    
+	    if (k == 0) {
+	        return Math.min(a.get(aStart), b.get(bStart));
+	    }
+	    
+	    int aMid = (aStart + k / 2 < a.size()) ? a.get(aStart + k / 2) : Integer.MAX_VALUE;
+	    int bMid = (bStart + k / 2 < b.size()) ? b.get(bStart + k / 2) : Integer.MAX_VALUE;
+	    
+	    if (aMid <= bMid) {
+	        return findKth(a, aStart + k / 2 + 1, b, bStart, k - k / 2);
+	    } else {
+	        return findKth(a, aStart, b, bStart + k / 2 + 1, k - k / 2);
+	    }
+	}
+	
     public double findMedianSortedArrays(int[] A, int[] B) {
         // Based on isEven, find either mid or (mid - 1, mid)
         int len = A.length + B.length;

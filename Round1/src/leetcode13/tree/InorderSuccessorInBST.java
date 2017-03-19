@@ -19,7 +19,7 @@ public class InorderSuccessorInBST {
             return cur;
         }
         
-        // If no right node, the inorder successor is its parent or null
+        // If no right node, the inorder successor is its parent(itself is the left child of this parent node) or null
         TreeNode successor = null;
         while (root.val != p.val) {
             if (root.val < p.val) { // Go right

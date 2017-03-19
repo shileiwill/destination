@@ -3,7 +3,8 @@ package amazon;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * You are given an integer N. You have to find smallest multiple of N which consists of digits 0 and 1 only. Since this multiple could be large, return it in form of a string.
+ * You are given an integer N. You have to find smallest multiple of N which consists of digits 0 and 1 only. 
+ * Since this multiple could be large, return it in form of a string.
 
 Note:
 - Returned string should not contain leading zeroes.

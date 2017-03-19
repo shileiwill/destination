@@ -43,7 +43,7 @@ public class Height {
 				while (!stack.isEmpty()) {
 					if (stack.peek() > arr[i]) {
 						res[i] = stack.peek();
-//						stack.push(arr[i]);
+//						stack.push(arr[i]); // Wait, wait!
 						break;
 					}
 					stack.pop();

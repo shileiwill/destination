@@ -19,8 +19,54 @@ The length sum of the given matchsticks is in the range of 0 to 10^9.
 The length of the given matchstick array will not exceed 15.
  */
 public class MatchsticksToSquare {
-    // https://discuss.leetcode.com/topic/72569/java-dfs-solution-with-various-optimizations-sorting-sequential-partition-dp
+	
+    // https://discuss.leetcode.com/topic/72107/java-dfs-solution-with-explanation
+    // Essentially, it is to partition the array to 4 parts, with the same individual sum
     public boolean makesquare(int[] nums) {
+        if (nums.length < 4) {
+            return false;
+        }    
+        
+        int sum = 0;
+        for (int n : nums) {
+            sum += n;
+        }
+        
+        if (sum % 4 != 0) {
+            return false;
+        }
+        
+        // Arrays.sort(nums, Collections.reverseOrder()); this will make it far faster!
+        int target = sum / 4;
+        
+        return dfs(nums, new int[4], 0, target);
+    }
+    
+    boolean dfs(int[] nums, int[] sum, int index, int target) {
+        if (index == nums.length) {
+            if (sum[0] == target && sum[1] == target && sum[2] == target) {
+                return true;
+            }
+            return false;
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            if (sum[i] + nums[index] > target) { // Try to add this stick(index) to this side(i)
+                continue;
+            }
+            
+            sum[i] += nums[index];
+            if (dfs(nums, sum, index + 1, target)) { // Once we found the first solution, return
+                return true;
+            }
+            sum[i] -= nums[index];
+        }
+        
+        return false;
+    }
+    
+    // https://discuss.leetcode.com/topic/72569/java-dfs-solution-with-various-optimizations-sorting-sequential-partition-dp
+    public boolean makesquare2(int[] nums) {
         if (nums.length < 4) {
             return false;
         }

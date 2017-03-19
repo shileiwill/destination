@@ -7,7 +7,8 @@ The numbers can be arbitrarily large and are non-negative.
 Converting the input string to integer is NOT allowed.
 You should NOT use internal library such as BigInteger.
 
-Start from right to left, perform multiplication on every pair of digits, and add them together. Let's draw the process! From the following draft, we can immediately conclude:
+Start from right to left, perform multiplication on every pair of digits, and add them together. Let's draw the process! 
+From the following draft, we can immediately conclude:
 
  `num1[i] * num2[j]` will be placed at indices `[i + j`, `i + j + 1]` 
  */

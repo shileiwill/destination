@@ -68,7 +68,7 @@ public class DecodeString {
         Stack<String> strStack = new Stack<String>();
         Stack<Integer> intStack = new Stack<Integer>();
     
-        strStack.push("");
+        strStack.push(""); // The very first beginning. This will guarantee stack is never empty
         int i = 0;
         
         while (i < s.length()) {
@@ -80,10 +80,10 @@ public class DecodeString {
                     count = count * 10 + (s.charAt(i) - '0');
                 }
                 
-                i--;
+                i--; // Will have another i++ at the end
                 intStack.push(count);
             } else if (c == '[') {
-                strStack.push("");
+                strStack.push(""); // Push an empty string, so it will be easier to append later
             } else if (c == ']') {
                 String item = strStack.pop();
                 int count = intStack.pop();

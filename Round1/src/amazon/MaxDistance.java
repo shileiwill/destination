@@ -56,7 +56,7 @@ public class MaxDistance {
             rightMax[i] = Math.max(a.get(i), rightMax[i + 1]);
         }
         
-        int i = 0, j = 0, res = -1;
+        int i = 0, j = 0, res = -1; // 2 pointers start from the beginning 
         while (i < len && j < len) {
             if (leftMin[i] <= rightMax[j]) {
                 res = Math.max(res, j - i);

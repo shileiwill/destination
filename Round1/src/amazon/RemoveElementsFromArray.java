@@ -61,7 +61,7 @@ public class RemoveElementsFromArray {
 	        if (a.get(i) == b) {
 	            count++;
 	        } else {
-	            a.set(i - count, a.get(i));
+	            a.set(i - count, a.get(i)); // The new index of this guy
 	        }
 	    }
 	    

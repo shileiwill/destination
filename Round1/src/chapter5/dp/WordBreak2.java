@@ -4,7 +4,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+/**
+ * 140. Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word. You may assume the dictionary does not contain duplicate words.
 
+Return all such possible sentences.
+
+For example, given
+s = "catsanddog",
+dict = ["cat", "cats", "and", "sand", "dog"].
+
+A solution is ["cats and dog", "cat sand dog"].
+ */
 public class WordBreak2 {
 	
 	// We can also build a dictionary, the use this in helper()
@@ -48,7 +58,7 @@ public class WordBreak2 {
     	long estimatedTime = System.nanoTime() - startTime;
     	System.out.println(estimatedTime);
     	for (String str : list) {
-    		System.out.print(str + "--");
+    		System.out.println(str + "--");
     	}
     }
     // Here is the solution

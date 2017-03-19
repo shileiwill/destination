@@ -24,12 +24,12 @@ public class DistinctNumbersInK {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         
         int left = 0, right = 0;
-        while (right < B) {
+        while (right < B) { // First group with K elements
             int now = A.get(right);
             map.put(now, map.getOrDefault(now, 0) + 1);
             right++;
         }
-        res.add(map.size());
+        res.add(map.size()); // How many distinct numbers in this first group
         
 //        right++;
         while (left < A.size() - B && right <= A.size()) { // left is the index to remove, right is to add
@@ -54,7 +54,7 @@ public class DistinctNumbersInK {
             
             res.add(map.size());
             
-            left++;
+            left++; // Increase left, right pointers at the same time
             right++;
         }
         

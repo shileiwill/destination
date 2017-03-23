@@ -1,11 +1,13 @@
 package amazon.new_03_16;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class CallCenter {
 	List<List<Representative>> handlers = new ArrayList<List<Representative>>();
-	List<List<Call>> calls = new ArrayList<List<Call>>();
+	List<LinkedList<Call>> calls = new ArrayList<LinkedList<Call>>();
 	
 	public void dispatchCall(Caller caller) {
 		Call call = new Call(caller); // Add additional atttribute like call-in time
@@ -26,6 +28,12 @@ public class CallCenter {
 		
 		if (call.handler == null) {
 			call.setRank(+1);
+			if (call.getRank() < 4) {
+				dispatchCall(call);
+			} else {
+				//wait in queue
+				calls.get(call.getRank()).offer(call);
+			}
 		}
 	}
 	
@@ -37,7 +45,7 @@ abstract class Representative {
 	Call currentCall = null; // This will also decide if this representative is available or not
 	
 	void escalateCallToNextLeval(Call call) {
-		call.setRank(call.getRank() + 1);
+		call.setRank(call.getRank().getRank() + 1);
 		
 		CallCenter.dispatchCall(call);
 	}
@@ -88,6 +96,14 @@ class Call {
 	
 	void setHandler(Representative handler) {
 		this.handler = handler;
+	}
+	
+	public Rank getRank() {
+		return rank;
+	}
+
+	public void setRank(Rank rank) {
+		this.rank = rank;
 	}
 }
 

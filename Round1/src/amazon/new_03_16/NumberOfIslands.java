@@ -93,6 +93,9 @@ public class NumberOfIslands {
 		
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
+				if (grid[i][j] == '0') {
+					continue;
+				}
 				int id = i * n + j;
 				for (int[] dir : directions) {
 					int x1 = i + dir[0];

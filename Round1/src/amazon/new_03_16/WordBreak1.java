@@ -35,8 +35,27 @@ public class WordBreak1 {
 		return can[s.length()];
 	}
 	
+	// As there is max length for words, we can optimize this by first get the max length, and then ignore any longer ones
+    public boolean wordBreak(String s, Set<String> wordDict, int start) {
+        if (start == s.length()) {
+            return true;
+        }
+        
+        for (int i = start; i < s.length(); i++) {
+            for (int len = 1; len < s.length() - i; len++) { // add if <= maxLen here
+                String sub = s.substring(i, i + len);
+                if (wordDict.contains(sub) && wordBreak(s, wordDict, i + len)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+	
 	public static void main(String[] args) {
-    	String s = "hereistexaswhereisveryhot";
+//    	String s = "hereistexaswhereisveryhot";
+		String s = "hewhere";
     	Set<String> wordDict = new HashSet<String>();
     	wordDict.add("he");
     	wordDict.add("where");
@@ -49,11 +68,12 @@ public class WordBreak1 {
     	wordDict.add("here");
     	wordDict.add("reis");
     	
-    	WordBreak2 wb2 = new WordBreak2();
-    	List<String> list = wb2.wordBreak(s, wordDict);
-    	for (String str : list) {
-    		System.out.println(str + "--");
-    	}
+    	WordBreak1 wb2 = new WordBreak1();
+    	boolean res = wb2.wordBreak(s, wordDict, 0);
+    	System.out.println(res + "--");
+//    	for (String str : list) {
+//    		System.out.println(str + "--");
+//    	}
 	}
 }
 

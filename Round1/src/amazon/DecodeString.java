@@ -54,8 +54,9 @@ public class DecodeString {
 		return res;
 	}
 	
-	static  void helper(List<String> res, StringBuilder sb, String s, int pos) {
+	static void helper(List<String> res, StringBuilder sb, String s, int pos) {
 		if (pos >= s.length()) {
+			
 			res.add(sb.toString());
 			return;
 		}

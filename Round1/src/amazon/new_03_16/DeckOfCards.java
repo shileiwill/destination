@@ -38,7 +38,7 @@ abstract class Card {
 }
 
 class Deck <T extends Card> {
-	List<T> cards = new ArrayList<T>();
+	List<T> cards = new ArrayList<T>(); // This can be a queue, first in first out
 	int dealtIndex = 0;
 	
 	void shuffle() {
@@ -62,9 +62,9 @@ class Deck <T extends Card> {
 	}
 }
 
-class Player <T extends Card> {
-	Deck<T> deck = null;
-	List<T> cards = null;
+class Player <T extends Card> { // Hand
+	Deck<T> deck = null; // 1 Player can be only on 1 Deck
+	List<T> cards = null; // The cards this Hand holds
 	
 	Player(Deck<T> deck) {
 		this.deck = deck;

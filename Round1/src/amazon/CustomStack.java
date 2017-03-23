@@ -32,4 +32,15 @@ public class CustomStack<K> {
 		}
 		return arr[--top];
 	}
+	
+	public static void main(String[] args) {
+		Integer i1 = new Integer(1);
+		Integer i2 = new Integer(2);
+		
+		int i3 = 3;
+		int i4 = 4;
+		
+		System.out.println(i1.equals(i2));
+//		System.out.println(i3.equals(i4));
+	}
 }

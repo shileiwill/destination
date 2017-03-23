@@ -113,4 +113,18 @@ public class PathSum {
 	    
 	    return left || right;
 	}
+	
+	// Better
+    public boolean hasPathSumBetter(TreeNode root, int sum) {
+        if (root == null) {
+			return false;
+		}
+        if (root.left == null && root.right == null) {
+			return root.val == sum;
+		}
+		
+		int res = sum - root.val;
+		
+		return (hasPathSumBetter(root.left, res) || hasPathSumBetter(root.right, res));
+    }
 }

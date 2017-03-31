@@ -1,6 +1,8 @@
 package company.tripadvisor.trialpay;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class WordDict {
@@ -13,14 +15,19 @@ public class WordDict {
 		dict.add("hell");
 		dict.add("helloworld");
 		dict.add("lldef");
+		dict.add("hela");
+		dict.add("helabc");
+		dict.add("held");
 		
 		WordDict wd = new WordDict();
 		wd.buildTrie(dict);
 		
 		char[][] M = {{'h', 't', 'l', 'd'}, {'e', 'l', 'r', 'o'}, {'f', 'l', 'o', 'w'}, {'e', 'd', 'r', 'o'}};
-		Set<String> res = wd.wordDict(M);
 		
-		for (String s : res) {
+		Set<String> childrenByPrefix = wd.root.getChildrenByPrefix("hel");
+//		Set<String> res = wd.wordDict(M);
+		
+		for (String s : childrenByPrefix) {
 			System.out.println(s);
 		}
 	}
@@ -124,5 +131,47 @@ class TrieNode {
 		}
 		
 		return children[pos].startsWith(s, index + 1);
+	}
+	
+	TrieNode startsWith2(String s, int index) {
+		if (index == s.length()) {
+			return this;
+		}
+		
+		int pos = s.charAt(index) - 'a';
+		if (children[pos] == null) {
+			return null;
+		}
+		
+		return children[pos].startsWith2(s, index + 1);
+	}
+	
+	// Auto completion
+	Set<String> getChildrenByPrefix(String s) {
+		TrieNode node = startsWith2(s, 0);
+		
+		Set<String> res = new HashSet<String>();
+		for (int i = 0; i < 26; i++) {
+			StringBuilder sb = new StringBuilder();
+			dfs(res, sb, node, i);
+		}
+		
+		return res;
+	}
+	
+	void dfs(Set<String> res, StringBuilder sb, TrieNode node, int i) {
+		TrieNode child = node.children[i];
+		if (child == null) {
+			if (sb.length() != 0) {
+				res.add(sb.toString());
+			}
+			return;
+		}
+		
+		sb.append((char)(i + 'a'));
+		for (int j = 0; j < 26; j++) {
+			dfs(res, sb, child, j);
+		}
+		sb.setLength(sb.length() - 1);
 	}
 }

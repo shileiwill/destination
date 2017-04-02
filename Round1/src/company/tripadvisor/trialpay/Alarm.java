@@ -22,10 +22,9 @@ public class Alarm {
 		queue.addLast(req);
 		if (!req.success) {
 			map.put(req.requestName, map.getOrDefault(req.requestName, 0) + 1);
-		}
-		
-		if (map.get(req.requestName) >= alarm) {
-			System.out.println(req.requestName + " failed too often");
+			if (map.get(req.requestName) >= alarm) {
+				System.out.println(req.requestName + " failed too often");
+			}
 		}
 	}
 	

@@ -34,6 +34,32 @@ public class FindPeak {
 		return -1;
 	}
 	
+	void anotherVersion() {
+		//找出数组中，比前面所有数都大，比后面所有数都小的数。
+		int[] arr = {21,11,45,56,9,66,77,89,78,68,100,120,111};
+		
+		int len = arr.length;
+		int[] left = new int[len];
+		int[] right = new int[len];
+		
+		left[0] = arr[0];
+		for (int i = 1; i < len; i++) {
+			left[i] = Math.max(left[i - 1], arr[i]);
+		}
+		
+		right[len - 1] = arr[len - 1];
+		for (int i = len - 2; i >= 0; i--) {
+			right[i] = Math.min(right[i + 1], arr[i]);
+		}
+		
+		for (int i = 0; i < len; i++) {
+			if (left[i] <= right[i]) {
+				System.out.println(arr[i]);
+//				break;
+			}
+		}
+	}
+	
 	// O(N2)
 	int findPeak(int[] N) {
 		int max = N[0];

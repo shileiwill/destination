@@ -13,6 +13,7 @@ public class LeaveOneSpace {
 	int[] arr = {1, 3, 5, 4, 6, 2, 9, 6, 4, 3, 7, 8, 9, 10};
 	int pos = 0; // Next possible index
 	
+	// Iterator of Even numbers only
 	int next() {
 		if (!hasNext()) {
 			throw new RuntimeException();

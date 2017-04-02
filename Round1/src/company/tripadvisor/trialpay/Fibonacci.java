@@ -1,9 +1,9 @@
 package company.tripadvisor.trialpay;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import cc150.chapter2.linkedlist.DeleteMidNode;
 import chapter4.linkedlist.ListNode;
 
 public class Fibonacci {
@@ -26,8 +26,13 @@ public class Fibonacci {
 		node4.next = node5;
 		node5.next = node6;
 		
-		Fibonacci rd = new Fibonacci();
-		rd.removeFibonacciIndexedNode(node4);
+//		Fibonacci rd = new Fibonacci();
+//		rd.removeFibonacciIndexedNode(node4);
+		
+		FibIterator fi = new FibIterator();
+		for (int i = 0; i < 10; i++) {
+			System.out.print(fi.next() + "===");
+		}
 	}
 
 	// Get Nth Fibonacci number
@@ -104,4 +109,25 @@ public class Fibonacci {
 		}
 		return len;
 	}
+}
+
+class FibIterator {
+	int num1 = -1;
+	int num2 = -1;
+
+	public int next() {
+		if (num1 == -1) {
+			num1 = 0;
+			return num1;
+		} else if (num2 == -1) {
+			num2 = 1;
+			return num2;
+		} else {
+			int num3 = num1 + num2;
+			num1 = num2;
+			num2 = num3;
+			return num3;
+		}
+	}
+	
 }

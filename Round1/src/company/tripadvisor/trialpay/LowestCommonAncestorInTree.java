@@ -60,29 +60,18 @@ public class LowestCommonAncestorInTree {
 			res.add(next);
 		}
 		
-		boolean allNull = true;
-		boolean allNotNull = true;
 		Node notNullNode = null;
 		int countOfNotNull = 0;
 		for (Node next : res) {
-			if (next == null) {
-				allNotNull = false;
-			} else {
+			if (next != null) {
 				notNullNode = next;
-				allNull = false;
 				countOfNotNull++;
 			}
 		}
 		
-		if (allNull) {
+		if (countOfNotNull == 0) {
 			return null;
-		}
-		
-		if (allNotNull) {
-			return root;
-		}
-		
-		if (countOfNotNull == 1) {
+		} else if (countOfNotNull == 1) {
 			return notNullNode;
 		} else {
 			return root; // Found the 2 nodes on 2 children

@@ -8,6 +8,7 @@ public class WildMatch {
 		
 		WildMatch wm = new WildMatch();
 		wm.partialMatch(s, p);
+		
 	}
 
 	void partialMatch(String s, String p) {

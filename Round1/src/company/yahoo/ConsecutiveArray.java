@@ -8,7 +8,7 @@ public class ConsecutiveArray {
 
 	public static void main(String[] args) {
 		ConsecutiveArray ca = new ConsecutiveArray();
-		int[] arr = {3, 1, 0, 4, 1};
+		int[] arr = {3, 1, 0, 4, 0};
 		boolean res = ca.isConsecutiveNoExtraSpace(arr);
 		System.out.println(res);
 		

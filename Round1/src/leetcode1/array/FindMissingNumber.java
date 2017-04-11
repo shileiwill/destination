@@ -2,6 +2,8 @@ package leetcode1.array;
 
 import java.util.Arrays;
 
+import sun.applet.Main;
+
 /**
  * 268. Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
 
@@ -12,7 +14,48 @@ Note:
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
  */
 public class FindMissingNumber {
+	public static void main(String[] args) {
+		FindMissingNumber miss = new FindMissingNumber();
+		
+		int[] nums = {2, 0};
+		int res = miss.missingNumber4(nums);
+		System.out.println(res);
+	}
 	
+    public int missingNumber4(int[] nums) {
+        boolean value0IsGood = false;
+        boolean hasN = false;
+        
+        for (int i = 0; i < nums.length; i++) {
+            int val = Math.abs(nums[i]);
+            
+            if (val == nums.length) {
+                hasN = true;
+            } else {
+                if (nums[val] > 0) {
+                    nums[val] = -nums[val];
+                } else if (nums[val] == 0) {
+                    value0IsGood = true;
+                }
+                // If already negative, which means this number appears several times, just move on
+            }
+        }
+        
+        if (!hasN) {
+            return nums.length;
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                return i;
+            } else if (nums[i] == 0 && !value0IsGood) {
+                return i;
+            }    
+        }
+        
+        return -1;
+    }
+    
     // Bucket
     public int missingNumber3(int[] nums) {
         int len = nums.length;

@@ -54,7 +54,7 @@ public class SwapPairInLinkedList {
 		return node;
 	}
 	
-	
+	// Good
 	ListNode swap2(ListNode node) {
 		ListNode dummy = new ListNode(-1);
 		ListNode prev = dummy;
@@ -82,7 +82,7 @@ public class SwapPairInLinkedList {
 	ListNode swapStack(ListNode node, int k) {
 		ListNode dummy = new ListNode(-1);
 		ListNode prev = dummy;
-		Stack<ListNode> stack = new Stack<ListNode>();
+		Stack<ListNode> stack = new Stack<ListNode>(); // Use LinkedList instead
 		
 		while (node != null) {
 			while (!stack.isEmpty()) {

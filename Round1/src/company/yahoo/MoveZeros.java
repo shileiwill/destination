@@ -25,7 +25,7 @@ public class MoveZeros {
 			} // Left is the first 0
 			
 			if (left < len) {
-				right = left + 1;
+				right = Math.max(right, left + 1);
 				while (right < len && nums[right] == 0) {
 					right++;
 				} // Right is the first non-0

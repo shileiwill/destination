@@ -11,17 +11,17 @@ public class LongestConsecutive {
 	
 	int findLongestConsecutive(int[] arr) {
 		int max = 1;
-		int cur = 1;
+		int len = 1;
 		
 		for (int i = 1; i < arr.length;) {
 			while (i < arr.length && arr[i] == arr[i - 1] + 1) {
-				cur++;
+				len++;
 				i++;
 			}
-			max = Math.max(cur, max);
+			max = Math.max(len, max);
 			
 			if (i < arr.length) { // Still have other possibilities
-				cur = 1; // Save current char
+				len = 1; // Save current char, reset
 				i++; // Go to next char
 			}
 		}

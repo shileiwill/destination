@@ -113,7 +113,7 @@ public class Skyline {
         int h1 = 0, h2 = 0;
         
         while (!b1.isEmpty() && !b2.isEmpty()) {
-            int x, h;
+            int x, h = 0;
             if (b1.getFirst()[0] < b2.getFirst()[0]) { // Find the smaller X
                 x = b1.getFirst()[0];
                 h1 = b1.getFirst()[1];
@@ -130,7 +130,7 @@ public class Skyline {
                 x = b1.getFirst()[0];
                 h1 = b1.getFirst()[1];
                 h2 = b2.getFirst()[1];
-                h = Math.max(h1, h2);
+                h = Math.max(Math.max(h, h1), h2);
                 
                 b1.removeFirst();
                 b2.removeFirst();

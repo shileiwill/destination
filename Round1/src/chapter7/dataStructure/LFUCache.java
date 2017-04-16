@@ -50,9 +50,9 @@ public class LFUCache {
      return valueMap.getOrDefault(key, -1);
  }
  
- void increaseCount (int key) {
+ void increaseCount(int key) {
      Node node = nodeMap.get(key);
-     node.keys.remove(key);
+     node.keys.remove(key); // Remove from LinkedHashSet - node.keys
      
      if (node.next == null) {
          node.next = new Node(node, null, node.count + 1, key);
@@ -63,22 +63,27 @@ public class LFUCache {
          node.next.prev = newNode;
          node.next = newNode;
      }
+     nodeMap.put(key, node.next); // Replace in nodeMap
      
-     nodeMap.put(key, node.next);
      if (node.keys.isEmpty()) {
-         remove(node);
+         remove(node); // remove after all above operations
      }
  }
  
  void remove(Node node) {
-     if (head == node) {
+     Node prev = node.prev;
+     Node next = node.next;
+     
+     if (prev == null) {
          head = node.next;
      } else {
-         node.prev.next = node.next;
+         prev.next = node.next;
      }
      
-     if (node.next != null) {
-         node.next.prev = node.prev;
+     if (next == null) {
+         
+     } else {
+         next.prev = node.prev;
      }
  }
  
@@ -91,6 +96,7 @@ public class LFUCache {
          valueMap.put(key, value);
          increaseCount(key); // Put will also increase count
      } else { // A new member/key
+         // Add to 3 places
          valueMap.put(key, value);
          if (nodeMap.size() == capacity) {
              remove(); // By default, it is remove the least frequency, which is the head
@@ -115,7 +121,7 @@ public class LFUCache {
      valueMap.remove(oldest);
  }
  
- // This is to add to nodeMap, valueMap is already done, easy
+ // This is to add to nodeMap and doubly linked list, valueMap is already done, easy
  void add(int key) {
      if (head == null) {
          head = new Node(null, null, 1, key);

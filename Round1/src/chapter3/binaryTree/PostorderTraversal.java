@@ -71,4 +71,9 @@ public class PostorderTraversal {
         helper(res, root.right);
         res.add(root.val);
     }
+    
+    public static void main(String[] args) {
+		String s = "a\bcdabcdabc";
+		System.out.println(s.lastIndexOf("bc"));
+	}
 }

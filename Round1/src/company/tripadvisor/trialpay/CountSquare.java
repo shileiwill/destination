@@ -3,7 +3,39 @@ package company.tripadvisor.trialpay;
 public class CountSquare {
 
 	public static void main(String[] args) {
-
+//		int num = 123;
+//		int res = 0;
+//		
+//		while (num != 0) {
+//			int digit = num % 10;
+//			num = num / 10;
+//			
+//			res = res * 10 + digit;
+//		}
+//		
+//		System.out.println(res);
+		
+		CountSquare cs = new CountSquare();
+		int[] arr = {1, 2, 4, 5, 6, 9};
+		cs.helper(arr, 0);
+		
+		System.out.println(cs.oddSum + "===" + cs.evenSum);
+	}
+	
+	int oddSum = 0;
+	int evenSum = 0;
+	
+	void helper(int[] arr, int i) {
+		if (i >= arr.length) {
+			return;
+		}
+		if (i % 2 == 0) {
+			evenSum += arr[i];
+		} else {
+			oddSum += arr[i];
+		}
+		
+		helper(arr, i + 1);
 	}
 
 	public int countSquare (boolean[][] ver , boolean[][] hor) {

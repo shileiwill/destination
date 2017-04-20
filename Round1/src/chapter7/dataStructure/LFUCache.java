@@ -45,9 +45,10 @@ public class LFUCache {
  public int get(int key) {
      if (valueMap.containsKey(key)) {
          increaseCount(key);
+         return valueMap.get(key);
      }
      
-     return valueMap.getOrDefault(key, -1);
+     return -1;
  }
  
  void increaseCount(int key) {

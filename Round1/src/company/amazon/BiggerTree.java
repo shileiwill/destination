@@ -10,6 +10,20 @@ import leetcode13.tree.InorderSuccessorInBST;
 我用stack可以n做出来,他说那你 写,我写啊写,写好了,他说不明白,给解释了很久,最后他终于明白了,简直要哭。
 这里 我明白一个道理,你要是解法和面试官不一样,他们很多时候就懵了,也不好意思说看不 懂,然后很长时间就在怀疑你。
 不过,面试后遇到cmu女神,她说这题见过,递归就行了, 我听着就泪奔了,还是要多训练,差距太大
+
+538. Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
+
+Example:
+
+Input: The root of a Binary Search Tree like this:
+              5
+            /   \
+           2     13
+
+Output: The root of a Greater Tree like this:
+             18
+            /   \
+          20     13
  */
 public class BiggerTree {
 	void newTreeOf2(TreeNode root) {

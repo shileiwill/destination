@@ -67,22 +67,20 @@ public class RemoveDuplicates {
         
         int size = 0;
         int prevIndex = 0; // The first appearance of this value
-        int prevValue = nums[0];
         
         for (int i = 1; i < nums.length; i++) {
-        	if (nums[i] == prevValue) {
+        	if (nums[i] == nums[prevIndex]) {
         		continue;
         	} else {
         		if (i == prevIndex + 1) { // This means prevValue appears only once
-        			nums[size++] = prevValue;
+        			nums[size++] = nums[prevIndex];
         		}
         		prevIndex = i;
-        		prevValue = nums[i];
         	}
         }
         
         if (prevIndex == nums.length - 1) {
-        	nums[size++] = prevValue;
+        	nums[size++] = nums[prevIndex];
         }
         
         print(nums, size);

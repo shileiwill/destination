@@ -9,6 +9,33 @@ You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
  */
 public class MoveZeroes {
+	
+	// By myself!!!
+    public void moveZeroesBest(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        
+        int left = 0, right = 0;
+        while (right < nums.length) {
+            while (left < nums.length && nums[left] != 0) {
+                left++; // left will be the first one which is 0
+            }
+            
+            right = Math.max(right, left + 1);
+            while (right < nums.length && nums[right] == 0) {
+                right++; // Right will be the first non-0 after left
+            }
+            
+            if (right < nums.length) {
+                swap(nums, left, right);
+            }
+            
+            left++;
+            right++;
+        }
+    }
+    
 	// left指向左边的0， right指向left之后的第一个非零
     public void moveZeroes(int[] nums) {
         for (int left = 0; left < nums.length; left++) {

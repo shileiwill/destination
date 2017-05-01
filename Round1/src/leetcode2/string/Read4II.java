@@ -93,3 +93,52 @@ public class Read4II {
 	}
 
 }
+
+/* The read4 API is defined in the parent class Reader4.
+int read4(char[] buf); */
+
+class ANewVersionByMyself extends Reader4 {
+/**
+* @param buf Destination buffer
+* @param n   Maximum number of characters to read
+* @return    The number of characters read
+*/
+
+LinkedList<Character> leftOver = new LinkedList<Character>();
+public int read(char[] buf, int n) {
+  int index = 0;
+  
+  // Use cache
+  while (!leftOver.isEmpty() && index < n) {
+          buf[index++] = leftOver.removeFirst();
+  }
+  
+  if (index == n) {
+      return n; // Cache is enough
+  }
+  
+  while (index < n) {
+      char[] arr = new char[4];
+      int count = read4(arr);
+  
+      int i = 0;
+      while (i < count && index < n) {
+          buf[index++] = arr[i++];
+      }
+      
+      // Enough, and have some extra, save to leftOver
+      if (index == n) {
+          while (i < count) {
+              leftOver.addLast(arr[i++]);
+          }
+      }
+      
+      // Can't get more
+      if (count < 4) {
+          return index;
+      }
+  }
+  
+  return index;
+}
+}

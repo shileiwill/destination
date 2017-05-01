@@ -50,7 +50,7 @@ class PeekingIterator implements Iterator<Integer> {
 	// Override them if needed.
 	@Override
 	public Integer next() {
-     if (next == null && !hasNext()) {
+     if (!hasNext()) {
          return null;
      }
      

@@ -44,4 +44,43 @@ public class LongestPalindromicSubstring {
             left = i + 1;
         }
     }
+    
+    // Here is my version
+
+    public String longestPalindromeHomeMade(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        
+        String res = "";
+        for (int i = 0; i < s.length(); i++) {
+            String single = extend(s, i, i);
+            
+            String doubleS = "";
+            if (i < s.length() - 1 && s.charAt(i) == s.charAt(i + 1)) {
+                doubleS = extend(s, i, i + 1);
+            }
+            
+            String longer = doubleS.length() > single.length() ? doubleS : single;
+            res = res.length() > longer.length() ? res : longer;
+        }
+        
+        return res;
+    }
+    
+    String extend(String s, int left, int right) {
+        left--;
+        right++;
+        while (left >= 0 && right < s.length()) {
+            if (s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+            } else {
+                return s.substring(left + 1, right);
+            }
+        }
+        
+        return s.substring(left + 1, right);
+    }
+
 }

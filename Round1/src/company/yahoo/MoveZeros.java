@@ -19,7 +19,7 @@ public class MoveZeros {
 		int right = 1;
 		int len = nums.length;
 		
-		while (right < len) {
+		while (left < len && right < len) {
 			while (left < len && nums[left] != 0) {
 				left++;
 			} // Left is the first 0

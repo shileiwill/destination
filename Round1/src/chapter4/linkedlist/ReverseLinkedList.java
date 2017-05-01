@@ -11,7 +11,12 @@ public class ReverseLinkedList {
 		node1.next = node2;
 		
 		ReverseLinkedList rll = new ReverseLinkedList();
-		rll.reverseList(node1);
+		rll.reverseRecursion(node1);
+		
+		while (rll.res != null) {
+			System.out.println(rll.res.val);
+			rll.res = rll.res.next;
+		}
 	}
 	// In place. Swap every 2. Most important thing is to use Prev node
     public ListNode reverseList(ListNode head) {
@@ -29,6 +34,25 @@ public class ReverseLinkedList {
         }
         
         return prev;
+    }
+    
+    // Use recursion!
+    ListNode pre = null;
+    ListNode res = null;
+    void reverseRecursion(ListNode node) {
+    	if (node == null) {
+    		return;
+    	}
+    	reverseRecursion(node.next);
+    	
+    	if (pre == null) {
+    		pre = node;
+    		res = node;
+    	} else {
+    		pre.next = node;
+    		pre = node;
+    		pre.next = null; // Set null
+    	}
     }
     
     public ListNode reverseList2(ListNode head) {

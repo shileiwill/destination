@@ -11,7 +11,7 @@ public class DeleteInsertNodeInBST {
 		}
 		
 		TreeNode prev = null;
-		TreeNode cur = null;
+		TreeNode cur = root;
 		
 		while (cur != null) {
 			prev = cur;
@@ -22,12 +22,10 @@ public class DeleteInsertNodeInBST {
 			}
 		}
 		
-		if (prev != null) {
-			if (prev.val < node.val) {
-				prev.right = node;
-			} else {
-				prev.left = node;
-			}
+		if (prev.val < node.val) {
+			prev.right = node;
+		} else {
+			prev.left = node;
 		}
 		
 		return root;

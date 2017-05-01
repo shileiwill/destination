@@ -52,6 +52,26 @@ public class SparseMatrixMultiplication {
         return res;
     }
     
+    // Better brute force
+    public int[][] multiply2(int[][] A, int[][] B) {
+        int len1 = A.length; // A's row count
+        int len2 = A[0].length; // A's col count and B's row count
+        int len3 = B[0].length; // B's col count
+        int[][] res = new int[len1][len3];
+        
+        for (int i = 0; i < len1; i++) {
+            for (int j = 0; j < len2; j++) {
+                if (A[i][j] != 0) {
+                    for (int k = 0; k < len3; k++) {
+                        res[i][k] += A[i][j] * B[j][k];
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }
+    
     // Good
     public int[][] multiplyTwoLookUpTables(int[][] A, int[][] B) {
         if (A[0].length != B.length) {

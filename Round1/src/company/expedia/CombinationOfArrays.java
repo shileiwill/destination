@@ -37,6 +37,7 @@ class CombinationOfArrays
         combination_sub(arrays, 0, result);
         return result;
     }
+    
     static void combination_sub(ArrayList<int[]> arrays, int idx, ArrayList<Integer> result)
     {
         if (arrays.size() == idx)

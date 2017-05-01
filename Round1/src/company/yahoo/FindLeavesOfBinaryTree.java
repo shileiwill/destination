@@ -22,7 +22,10 @@ public class FindLeavesOfBinaryTree {
 			return 0;
 		}
 		
-		int height = Math.max(helper(res,  root.left), helper(res, root.right)) + 1;
+		int left = helper(res,  root.left);
+		int right = helper(res, root.right);
+		
+		int height = Math.max(left, right) + 1;
 		
 		if (height > res.size()) {
 			res.add(new ArrayList<Integer>());

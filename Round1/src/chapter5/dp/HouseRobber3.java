@@ -23,6 +23,55 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
  */
 import java.util.HashMap;
 
+class ILikeMyOwnSolution {
+    public int rob(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        ResultType rt = helper(root);
+        return Math.max(rt.rob, rt.noRob);
+    }
+    
+    ResultType helper(TreeNode node) {
+        if (node == null) {
+            return null;
+        }
+        
+        if (node.left == null && node.right == null) {
+            return new ResultType(node.val, 0);
+        }
+        
+        ResultType left = helper(node.left);
+        ResultType right = helper(node.right);
+        
+        if (left != null && right != null) {
+            return new ResultType(node.val + left.noRob + right.noRob, Math.max(left.rob, left.noRob) + Math.max(right.rob, right.noRob));
+        }
+        
+        if (left != null) {
+            return new ResultType(node.val + left.noRob, Math.max(left.rob, left.noRob));
+        }
+        
+        if (right != null) {
+            return new ResultType(node.val + right.noRob, Math.max(right.rob, right.noRob));
+        }
+        
+        // Should never come here. Leaf node
+        return null;
+    }
+}
+
+class ResultType {
+    int rob;
+    int noRob;
+    
+    ResultType(int rob, int noRob) {
+        this.rob = rob;
+        this.noRob = noRob;
+    }
+}
+
 public class HouseRobber3 {
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(300);

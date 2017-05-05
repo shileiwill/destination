@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import company.facebook.Interval;
-
 public class MergeInterval {
 	public static void main(String[] args) {
 		// [1,2],[3,5],[6,7],[8,10],[12,16]

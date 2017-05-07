@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
+// This is a good question, including merge interval and insert interval
 public class MergeInterval {
 	public static void main(String[] args) {
 		// [1,2],[3,5],[6,7],[8,10],[12,16]
@@ -58,6 +58,7 @@ public class MergeInterval {
 		
 		for (int i = 1; i < list.size(); i++) {
 			if (list.get(i).start > curEnd) {
+				// We can change this place to get Square from API, using Interval(curStart, curEnd)
 				totalLen += curEnd - curStart + 1;
 				curStart = list.get(i).start;
 				curEnd = list.get(i).end;

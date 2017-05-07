@@ -1,9 +1,12 @@
 package chapter6.search.backtracking.dfs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 /**
@@ -34,8 +37,8 @@ public class WordLadder {
 		String[] arr = {"hot","dot","dog","lot","log"};
 		Set<String> wordList = new HashSet<String>(Arrays.asList(arr));
 		
-		int res = wl.ladderLength("hit", "cog", wordList);
-		System.out.println(res);
+		wl.ladderLengthSolution("hit", "log", wordList);
+//		System.out.println(res);
 	}
 
     public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
@@ -130,6 +133,64 @@ public class WordLadder {
         }
         
         return -1;
+    }
+    
+    // I want to get the solution
+    public List<String> ladderLengthSolution(String beginWord, String endWord, Set<String> wordList) {
+        if (beginWord.equals(endWord)) {
+            List<String> res = new ArrayList<>();
+            res.add(beginWord);
+        	return res;
+        }
+        
+        Map<String, String> map = new HashMap<String, String>();
+        Queue<String> queue = new LinkedList<String>();
+        queue.offer(beginWord);
+        wordList.remove(beginWord); // Remove from dictionary
+        
+        while (!queue.isEmpty()) {
+            
+            int size = queue.size();
+            for (int k = 0; k < size; k++) {
+                String word = queue.poll();
+                for (int i = 0; i < word.length(); i++) {
+                    for (char c = 'a'; c <= 'z'; c++) { // Could also continue when it is the same char with itself
+                        String newWord = word.substring(0, i) + String.valueOf(c) + word.substring(i + 1);
+                        
+                        if (newWord.equals(endWord)) {
+                        	map.put(newWord, word);
+                        	List<String> res = convertMapToList(map, beginWord, endWord);
+                            return res;
+                        }
+                        
+                        if (wordList.contains(newWord)) {
+                        	map.put(newWord, word);
+                            queue.offer(newWord);
+                            wordList.remove(newWord);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    List<String> convertMapToList(Map<String, String> map, String beginWord, String endWord) {
+    	LinkedList<String> res = new LinkedList<String>();
+    	
+    	while (!map.get(endWord).equals(beginWord)) {
+    		res.add(endWord);
+    		endWord = map.get(endWord);
+    	}
+    	
+    	res.add(endWord);
+    	res.add(beginWord);
+    	
+    	for (int i = res.size() - 1; i >= 0; i--) {
+    		System.out.print(res.get(i) + "==");
+    	}
+    	return res;
     }
     
     public int ladderLengthIterative(String beginWord, String endWord, List<String> wordAsList) {

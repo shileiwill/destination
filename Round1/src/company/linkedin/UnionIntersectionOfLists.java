@@ -11,19 +11,19 @@ public class UnionIntersectionOfLists {
 	public static void main(String[] args) {
 		UnionIntersectionOfLists unionIntersect = new UnionIntersectionOfLists();
 		
-		Integer[] arr1 = {1, 2, 3, 4, 5, 6, 8};
-		Integer[] arr2 = {0, 2, 4, 5, 8, 9};
+		Integer[] arr1 = {1, 1, 1, 2};
+		Integer[] arr2 = {1, 1, 3};
 		List<Integer> list1 = Arrays.asList(arr1);
 		List<Integer> list2 = Arrays.asList(arr2);
 		
-		List<Integer> res = unionIntersect.unionIterator(list1, list2);
+		List<Integer> res = unionIntersect.intersection(list1, list2);
 		for (int val : res) {
 			System.out.print(val + "==");
 		}
 	}
 
 	// If the List is LinkedList, get() will be O(N)
-	List<Integer> union(List<Integer> list1, List<Integer> list2) {
+	List<Integer> union(List<Integer> list1, List<Integer> list2) { // 并集
 		List<Integer> res = new ArrayList<Integer>();
 		Collections.sort(list1);
 		Collections.sort(list2);
@@ -35,8 +35,12 @@ public class UnionIntersectionOfLists {
 			if (list1.get(pos1) < list2.get(pos2)) {
 				res.add(list1.get(pos1));
 				pos1++;
-			} else {
+			} else if (list1.get(pos1) > list2.get(pos2)) {
 				res.add(list2.get(pos2));
+				pos2++;
+			} else { // equal
+				res.add(list2.get(pos2));
+				pos1++;
 				pos2++;
 			}
 		}
@@ -78,8 +82,12 @@ public class UnionIntersectionOfLists {
 			if (w1.val < w2.val) {
 				res.add(w1.val);
 				getNext(w1);
-			} else {
+			} else if (w1.val > w2.val) {
 				res.add(w2.val);
+				getNext(w2);
+			} else {
+				res.add(w1.val);
+				getNext(w1);
 				getNext(w2);
 			}
 		}
@@ -98,7 +106,7 @@ public class UnionIntersectionOfLists {
 	}
 	
 	// If the List is LinkedList, get() will be O(N)
-	List<Integer> intersection(List<Integer> list1, List<Integer> list2) {
+	List<Integer> intersection(List<Integer> list1, List<Integer> list2) { // 交集
 		List<Integer> res = new ArrayList<Integer>();
 		Collections.sort(list1);
 		Collections.sort(list2);

@@ -2,9 +2,12 @@ package company.linkedin;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+
+import company.linkedin.MergeIntervalWithLessGetCall.http.can.BlockedQueue;
 // http://n00tc0d3r.blogspot.com/2013/08/implement-bounded-blocking-queue.html
 /**
  * Write a multithreaded bounded Blocking Queue where the capacity of the queue is limited. Implement size, add, remove, and peek methods.
@@ -174,6 +177,47 @@ class BoundedBlockingQueue1<E> {
 			return queue.peek();
 		} finally {
 			removeLock.unlock();
+		}
+	}
+}
+
+class BlockedQueueWithSemaphore<T> implements BlockedQueue<T>{
+	Queue<T> queue = null;
+	Semaphore addSemaphore = null;
+	Semaphore mutex = null;
+	Semaphore removeSemaphore = null;
+	
+	// permits - the initial number of permits available. This value may be negative, in which case releases must occur before any acquires will be granted.
+	BlockedQueueWithSemaphore(int capacity) {
+		this.queue = new LinkedList<T>();
+		this.addSemaphore = new Semaphore(capacity);
+		this.mutex = new Semaphore(1);
+		this.removeSemaphore = new Semaphore(0);
+	}
+	
+	void add(T t) {
+		addSemaphore.acquire();
+		
+		try {
+			mutex.acquire();
+			queue.offer(t);
+			removeSemaphore.release();
+		} finally {
+			mutex.release();
+		}
+		
+	}
+	
+	T remove() {
+		removeSemaphore.acquire(); // Since it is 0, you have to release it at least once before use it, that means, add first, then remove
+		
+		try {
+			mutex.acquire();
+			T res = queue.poll();
+			addSemaphore.release();
+			return res;
+		} finally {
+			mutex.release();
 		}
 	}
 }

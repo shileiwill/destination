@@ -4,9 +4,9 @@ public class Sqrt {
 
 	public static void main(String[] args) {
 		Sqrt s = new Sqrt();
-		double value = 22.2323242433333333333333333333333333333333333333333333333333333333333333333333334342;
+		double value = 22.45433;
 //		System.out.println(Math.sqrt(value));
-		System.out.println(s.sqrt(value));
+		System.out.println(s.sqrtBinarySearch(value));
 	}
 	// If input is integer, use binary search
 
@@ -25,6 +25,7 @@ public class Sqrt {
 //				break;
 //			}
 			
+			// 根据精度terminate
 			if (Math.abs(sqr * sqr - x) <= 0.00001) {
 				break;
 			}
@@ -32,6 +33,78 @@ public class Sqrt {
 			if (sqr * sqr > x) { // 有点大了
 				sqr -= offset; // value调低
 				offset /= 10; // 粒度调小
+			}
+
+			sqr += offset;
+		}
+
+		return sqr;
+
+	}
+	
+	double sqrtBinarySearch(double x) {
+		double left = 0;
+		double right = x;
+		double precision = 0.0000000000000000000000001;
+		
+		while (left < right) {
+			double mid = (left + right) / 2.0;
+			
+			if (Math.abs(mid * mid - x) <= precision) {
+				return mid;
+			}
+			
+			if (mid * mid > x) {
+				right = mid;
+			} else {
+				left = mid;
+			}
+		}
+		
+		return -1; // It will never come here. So, You can use while(true)
+	}
+	
+	double cubicRoot(double x) {
+		double left = 0;
+		double right = x;
+		double precision = 0.00000000000000000000001;
+		
+		while (true) {
+			double mid = (left + right) / 2.0;
+			
+			if (Math.abs(mid * mid * mid) <= precision) {
+				return mid;
+			}
+			
+			if (mid * mid * mid > x) {
+				right = mid;
+			} else {
+				left = mid;
+			}
+		}
+	}
+	
+	// Not working
+	double sqrt2(double x) {
+		double sqr = 0;
+		double offset = 1;
+		int count = 0;
+
+		while (true) {
+			if (sqr * sqr == x) {
+				break;
+			} 
+			
+			// 根据小数位数terminate
+			if (count == 2) {
+				break;
+			}
+			
+			if (sqr * sqr > x) { // 有点大了
+				sqr = sqr - 1;
+				sqr += offset; // value调低
+				offset /= 10; // 粒度调小
+				count++;//直接比较double不准，所以用count
 			}
 
 			sqr += offset;

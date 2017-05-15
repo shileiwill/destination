@@ -3,14 +3,14 @@ package company.linkedin;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MinDistance {
+public class MinWordDistance {
 
 	public static void main(String[] args) {
 		String[] arr = {"practice", "makes", "perfect", "coding", "makes"};
 		String word1 = "makes";
 		String word2 = "coding";
 		
-		MinDistance md = new MinDistance();
+		MinWordDistance md = new MinWordDistance();
 		System.out.println(md.shortestDistance(arr, word1, word2));
 	}
 

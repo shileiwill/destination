@@ -9,7 +9,7 @@ public class BinaryIndexTree {
 //		return index - (index & -index);
 		return (index & (index - 1));
 	}
-	
+	// Next 是横着的后边一个
 	int getNext(int index) {
 //		return index + (index & -index);
 		return index + (index - (index & (index - 1))); //  the second half is to find only the last digit one, like 0000100000

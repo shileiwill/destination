@@ -1,0 +1,142 @@
+package company.linkedin;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class CustomizedHashMap<K, V> {
+
+	public static void main(String[] args) {
+
+	}
+
+	static class Entry<K, V> {
+		Entry<K, V> next;
+		K key;
+		V val;
+		
+		Entry(K key, V val) {
+			this.key = key;
+			this.val = val;
+		}
+	}
+	
+	Entry<K, V>[] arr = null;
+	int capacity = 0;
+	List<ReentrantReadWriteLock> locks = null;
+	
+	CustomizedHashMap(int capacity) {
+		arr = (Entry<K, V>[])new Object[capacity];
+		this.capacity = capacity;
+		
+		locks = new ArrayList<ReentrantReadWriteLock>(capacity);
+		for (int i = 0; i < capacity; i++) {
+			locks.add(new ReentrantReadWriteLock());
+		}
+	}
+	
+	boolean isEmpty() {
+		return arr.length == 0;
+	}
+	
+	boolean isFull() {
+		return arr.length == capacity;
+	}
+	
+	void put(K key, V val) {
+		if (isFull()) {
+			throw new RuntimeException("Map is full");
+		}
+		
+		int index = key.hashCode() % capacity;
+		Entry<K, V> newEntry = new Entry<K, V>(key, val);
+		
+		try {
+			locks.get(index).writeLock().lock();
+			if (arr[index] == null) {
+				arr[index] = newEntry;
+			} else {
+				Entry<K, V> curEntry = arr[index];
+				Entry<K, V> preEntry = null;
+				
+				while (curEntry != null) {
+					if (curEntry.key.equals(key)) {
+						curEntry.val = val;
+						return;
+					}
+					preEntry = curEntry;
+					curEntry = curEntry.next;
+				}
+				
+				preEntry.next = newEntry;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			locks.get(index).writeLock().unlock();
+		}
+	}
+	
+	V get(K key) {
+		if (isEmpty()) {
+			throw new RuntimeException("Map is empty");
+		}
+		
+		int index = key.hashCode() % capacity;
+		
+		try {
+			locks.get(index).readLock().lock();
+			if (arr[index] == null) {
+				return null;
+			} else {
+				Entry<K, V> curEntry = arr[index];
+				
+				while (curEntry != null) {
+					if (curEntry.key.equals(key)) {
+						return curEntry.val;
+					}
+					curEntry = curEntry.next;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			locks.get(index).readLock().unlock();
+		}
+		
+		return null;
+	}
+	
+	boolean remove(K key) {
+		if (isEmpty()) {
+			throw new RuntimeException("Map is empty");
+		}
+		
+		int index = key.hashCode() % capacity;
+		
+		if (arr[index] == null) {
+			return false;
+		} else {
+			Entry<K, V> curEntry = arr[index];
+			Entry<K, V> preEntry = null;
+			
+			while (curEntry != null) {
+				if (curEntry.key.equals(key)) {
+					if (preEntry == null) {
+						arr[index] = curEntry.next;
+					} else {
+						preEntry.next = curEntry.next;
+					}
+					
+					return true;
+				}
+				
+				preEntry = curEntry;
+				curEntry = curEntry.next;
+			}
+		}
+		
+		return false;
+	}
+}

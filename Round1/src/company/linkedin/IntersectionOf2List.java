@@ -1,16 +1,15 @@
 package company.linkedin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import chapter4.linkedlist.ListNode;
 
 public class IntersectionOf2List {
-
-	public static void main(String[] args) {
-
-	}
-
 	public ListNode getIntersectionNodeSet(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<ListNode>();
         
@@ -196,4 +195,51 @@ public class IntersectionOf2List {
     	
     	return null;
     }
+}
+
+// Question:Get the intersection of two sorted array. Input interface:
+class IntersectionWithIterator {
+		Iterable<Integer> intersection(Iterator<Integer> a, Iterator<Integer> b) {
+			List<Integer> res = new ArrayList<Integer>();
+			Integer val1 = null;
+			Integer val2 = null;
+			
+			while ((val1 != null || a.hasNext()) && (val2 != null || b.hasNext())) {
+				if (val1 == null) {
+					val1 = a.next();
+				}
+				
+				if (val2 == null) {
+					val2 = b.next();
+				}
+				
+				if (val1 == val2) {
+					res.add(val1);
+					val1 = null;
+					val2 = null;
+				} else if (val1 < val2) {
+					val1 = null;
+				} else {
+					val2 = null;
+				}
+			}
+			
+			return res;
+		}
+		
+		public static void main(String[] args) {
+			Integer[] arr1 = {3, 4, 8, 9, 12, 14, 18};
+			Integer[] arr2 = {1, 4, 7, 8, 10, 14, 19};
+			List<Integer> list1 = Arrays.asList(arr1);
+			List<Integer> list2 = Arrays.asList(arr2);
+			Iterator<Integer> a = list1.iterator();
+			Iterator<Integer> b = list2.iterator();
+			
+			IntersectionWithIterator in = new IntersectionWithIterator();
+			Iterable<Integer> res = in.intersection(a, b);
+			
+			for (int val : res) {
+				System.out.println(val);
+			}
+		}
 }

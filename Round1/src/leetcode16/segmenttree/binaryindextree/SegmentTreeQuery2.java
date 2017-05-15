@@ -6,7 +6,7 @@ Design a query method with three parameters root, start and end, find the number
 
  Notice
 
-It is much easier to understand this problem if you finished Segment Tree Buildand Segment Tree Query first.
+It is much easier to understand this problem if you finished Segment Tree Build and Segment Tree Query first.
 
 Have you met this question in a real interview? Yes
 Example

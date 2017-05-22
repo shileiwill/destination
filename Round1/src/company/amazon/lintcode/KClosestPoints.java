@@ -14,15 +14,22 @@ return [[1,1],[2,5],[4,4]]
  */
 public class KClosestPoints {
 
-/**
-* Definition for a point.
-* class Point {
-*     int x;
-*     int y;
-*     Point() { x = 0; y = 0; }
-*     Point(int a, int b) { x = a; y = b; }
-* }
-*/
+	static class Point {
+		     int x;
+		     int y;
+		     Point() { x = 0; y = 0; }
+		     Point(int a, int b) { x = a; y = b; }
+		}
+	
+	static class Wrapper {
+	    Point p;
+	    int distance;
+	   
+	    Wrapper(Point p, int distance) {
+	        this.p = p;
+	        this.distance = distance;
+	    }
+	}
     /**
      * @param points a list of points
      * @param origin a point
@@ -65,15 +72,5 @@ public class KClosestPoints {
         }
        
         return res;
-    }
-}
- 
-class Wrapper {
-    Point p;
-    int distance;
-   
-    Wrapper(Point p, int distance) {
-        this.p = p;
-        this.distance = distance;
     }
 }

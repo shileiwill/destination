@@ -1,8 +1,10 @@
 package company.amazon;
 /**
- * Given expression with operands and operators (OR , AND , XOR) , in how many ways can you evaluate the expression to true, by grouping in different ways? Operands are only true and false.
+ * Given expression with operands and operators (OR , AND , XOR) , in how many ways can you evaluate the expression to true, 
+ * by grouping in different ways? Operands are only true and false.
 Input:
- string : T|F&T^T here '|' will represent or operator '&' will represent and operator '^' will represent xor operator 'T' will represent true operand 'F' will false 
+ string : T|F&T^T here '|' will represent or operator '&' will represent and operator '^' will represent xor operator 
+ 'T' will represent true operand 'F' will false 
 
 Output:
  different ways % MOD where MOD = 1003 

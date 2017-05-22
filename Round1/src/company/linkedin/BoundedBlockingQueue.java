@@ -56,7 +56,7 @@ public class BoundedBlockingQueue<E> {
 	public synchronized E remove() throws InterruptedException {
 		E element;
 		
-		while (count.get() == capacity) {
+		while (count.get() == 0) {
 			this.wait();
 		}
 		

@@ -35,8 +35,6 @@ public class DistinctNumbersInK {
         while (left < A.size() - B && right <= A.size()) { // left is the index to remove, right is to add
             int leftVal = A.get(left);
             
-            System.out.println(map);
-            System.out.println(leftVal);
             int leftCount = map.get(leftVal);
             if (leftCount > 1) {
                 map.put(leftVal, leftCount - 1);

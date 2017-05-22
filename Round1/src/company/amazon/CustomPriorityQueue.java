@@ -16,7 +16,7 @@ public class CustomPriorityQueue {
 	CustomPriorityQueue (int size) {
 		arr = new int[size];
 		this.size = size;
-		this.pos = pos;
+		this.pos = 0;
 	}
 	
 	boolean isEmpty() {

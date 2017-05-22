@@ -37,7 +37,7 @@ public class ExistPath {
 		int idTo = to[0] * n + to[1];
 		
 		Set<Integer> visited = new HashSet<Integer>();
-		visited.add(idFrom);
+		visited.add(idFrom); // Because of this visited SET, need to use integer rather than int[]
 		
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.offer(idFrom);

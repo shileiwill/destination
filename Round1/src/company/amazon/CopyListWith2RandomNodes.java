@@ -36,6 +36,8 @@ public class CopyListWith2RandomNodes {
 	Map<Node, Node> map = new HashMap<Node, Node>();
 	
 	Node deepCopy(Node head) {
+		map.put(head, new Node(head.label));
+		visited.add(head);
 		copyToMap(head);
 		System.out.println("head : " + head.label); // Still the head, dont worry. The above method will not change head
 		mapToList();

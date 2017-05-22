@@ -20,9 +20,7 @@ public class RemoveDuplicates {
 	    int left = 0, right = 0;
 	    while (right < a.size()) {
 	        while (right < a.size() && a.get(right).equals(a.get(left))) {
-	        	System.out.println(a.get(right) == a.get(left));
-	        	System.out.println(right < a.size());
-	            right++;
+	            right++; // Right is the first num which is not equal to left
 	        }
 	        
 	        if (right < a.size() && left + 1 < a.size() && left + 1 != right) {

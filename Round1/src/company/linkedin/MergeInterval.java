@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+class Interval {
+	int start;
+	int end;
+	
+	Interval(int start, int end) {
+		this.start = start;
+		this.end = end;
+	}
+}
+
 // This is a good question, including merge interval and insert interval
 public class MergeInterval {
 	public static void main(String[] args) {

@@ -7,6 +7,15 @@ public class Divide {
 		
 		int res = d.divide(1200, -32);
 		System.out.println(res);
+		
+		String a = "ab";
+		System.out.println(a.hashCode());
+		
+		int val = 'a';
+		System.out.println(val);
+		
+		int val1 = 'b';
+		System.out.println(val1);
 	}
 	// a / b
 	int divide(int a, int b) {

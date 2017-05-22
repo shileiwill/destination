@@ -14,14 +14,11 @@ Given l1 = [0, 8], r1 = [8, 0], l2 = [6, 6], r2 = [10, 0], return true
 Given l1 = [0, 8], r1 = [8, 0], l2 = [9, 6], r2 = [10, 0], return false
  */
 public class RectangleOverlap {
-/**
-* Definition for a point.
-* class Point {
-*     public int x, y;
-*     public Point() { x = 0; y = 0; }
-*     public Point(int a, int b) { x = a; y = b; }
-* }
-*/
+	class Point {
+		     public int x, y;
+		     public Point() { x = 0; y = 0; }
+		     public Point(int a, int b) { x = a; y = b; }
+	}
  
     /**
      * @param l1 top-left coordinate of first rectangle

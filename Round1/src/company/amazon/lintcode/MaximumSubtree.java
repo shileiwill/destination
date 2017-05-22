@@ -1,4 +1,7 @@
 package company.amazon.lintcode;
+
+import chapter3.binaryTree.TreeNode;
+
 /**
  * Given a binary tree, find the subtree with maximum sum. Return the root of the subtree.
  Notice

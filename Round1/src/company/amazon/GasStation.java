@@ -95,9 +95,6 @@ public class GasStation {
 //	    boolean found = false;
 	    int i = 0;
 	    for (i = 0; i < N; i++) {
-	    	if (i == 96) {
-	    		System.out.println("come");
-	    	}
 //	        if (i == N - 1 && leftover + gas.get(i) - cost.get(i) >= 0) {
 //	            found = true;
 //	        }

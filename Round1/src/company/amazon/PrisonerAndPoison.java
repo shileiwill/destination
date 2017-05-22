@@ -26,7 +26,8 @@ bottle 1 = 0000000001 (10 digit binary)
 bottle 2 = 0000000010
 bottle 500 = 0111110100
 bottle 1000 = 1111101000
-Now take 10 prisoners and number them 1 to 10, now let prisoner 1 take a sip from every bottle that has a 1 in its least significant bit. Let prisoner 10 take a sip from every bottle with a 1 in its most significant bit. etc.
+Now take 10 prisoners and number them 1 to 10, now let prisoner 1 take a sip from every bottle that has a 1 in its least significant bit. 
+Let prisoner 10 take a sip from every bottle with a 1 in its most significant bit. etc.
 
 prisoner =  10 9 8 7 6 5 4 3 2 1
 bottle 924 = 1 1 1 0 0 1 1 1 0 0

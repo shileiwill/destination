@@ -79,7 +79,7 @@ public class MinimumSpanningTree {
 	}
 
 	String findRoot(String city, Map<String, String> cityToRoot) {
-		while (cityToRoot.get(city).equals(city)) {
+		while (!cityToRoot.get(city).equals(city)) {
 			city = cityToRoot.get(city);
 		}
 		return city;

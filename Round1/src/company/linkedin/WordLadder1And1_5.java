@@ -39,7 +39,6 @@ public class WordLadder1And1_5 {
         int levels = 1;
         
         while (!queue.isEmpty()) {
-            
             int size = queue.size();
             for (int k = 0; k < size; k++) {
                 String word = queue.poll();

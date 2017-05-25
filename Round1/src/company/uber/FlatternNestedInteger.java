@@ -43,3 +43,20 @@ public class FlatternNestedInteger {
 		return false;
 	}
 }
+
+class NestedInteger {
+	Integer intValue = null;
+	List<NestedInteger> listValue = null;
+	
+	int getInteger() {
+		return intValue;
+	}
+	
+	List<NestedInteger> getList() {
+		return listValue;
+	}
+	
+	boolean isInteger() {
+		return intValue != null;
+	}
+}

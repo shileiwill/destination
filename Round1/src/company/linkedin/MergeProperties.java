@@ -68,7 +68,7 @@ public class MergeProperties {
 			String now = queue.poll();
 			System.out.println(now + "=========" + map1.get(now));
 
-			if (map.containsKey(now)) {
+			if (map.containsKey(now)) { // 有人依赖他
 				for (String next : map.get(now)) {
 					map1.put(next, map1.get(now));
 					

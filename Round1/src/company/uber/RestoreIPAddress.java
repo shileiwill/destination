@@ -39,7 +39,7 @@ public class RestoreIPAddress {
         }
         
         for (int len = 1; pos + len <= s.length() && len <= 3; len++) {
-            String sub = s.substring(pos, pos + len);
+            String sub = s.substring(pos, pos + len); // Next section
             
             if (!isValidSection(sub)) {
                 continue;

@@ -21,9 +21,9 @@ public class PaintHouse2 {
 			
 			for (int j = 0; j < cc; j++) {
 				if (j != last1) {
-					hash[i][j] = costs[i][j] + last1 < 0 ? 0 : last1;
+					hash[i][j] = costs[i][j] + (last1 < 0 ? 0 : last1);
 				} else {
-					hash[i][j] = costs[i][j] + last2 < 0 ? 0 : last2;
+					hash[i][j] = costs[i][j] + (last2 < 0 ? 0 : last2);
 				}
 				
 				if (min1 < 0 || hash[i][j] <= hash[i][min1]) {

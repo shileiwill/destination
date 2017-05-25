@@ -15,7 +15,7 @@ return temp之后，temp指向下一行。大概讲了一下思路就开始写�
 他们还是最近的4,5行都看不到，三哥要换到stypi去，英国人说没时间换了凑合着吧，于是就是我写一段，自己存下来，refresh screen,再贴上去我写的，
 写完过了几个case: null file, large file, grep(就是一直call next())，这时已经55分钟了，于是我开始问问题。
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=132118&extra=page%3D7%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-Implement a (Java) Iterable object that iterates lines one by one from a text file.. more info on 1point3acres.com
+Implement a (Java) Iterable object that iterates lines one by one from a text file
 
 ** A reference to a file. 
 public class TextFile implements Iterable<String>

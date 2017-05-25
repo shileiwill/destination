@@ -84,7 +84,7 @@ public class MergeInterval {
 	}
 	
 	int wholeLen = 0;
-    public void insert(int start, int end) {
+    public void insert(int start, int end) { // Insert的时候保证排好序
     	Interval newInterval = new Interval(start, end);
         List<Interval> res = new ArrayList<Interval>();
         

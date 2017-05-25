@@ -12,8 +12,8 @@ public class BasicCalculator {
 
 	int calculator(String s) {
 		Stack<Integer> stack = new Stack<Integer>();
-		int num = 0;
-		char sign = '+';
+		int num = 0; // To be prepared
+		char sign = '+'; // This sign is the sign before num.
 		
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
@@ -22,7 +22,7 @@ public class BasicCalculator {
 				num = num * 10 + (c - '0');
 			}
 			
-			if ((!Character.isDigit(c) && c != ' ') || i == s.length() - 1) {
+			if ((!Character.isDigit(c) && c != ' ') || i == s.length() - 1) { // It is an operator or it is the last digit
 				switch (sign) {
 					case '+':
 						stack.push(num);

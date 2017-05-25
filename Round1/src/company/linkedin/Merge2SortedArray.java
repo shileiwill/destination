@@ -1,12 +1,7 @@
 package company.linkedin;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * 1. 找出一个数组里面只出现过一次的数字； 2. 合并两个有序数组； 3. 合并K个有序数组。

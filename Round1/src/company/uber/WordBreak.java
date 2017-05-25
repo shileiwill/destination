@@ -36,17 +36,17 @@ public class WordBreak {
 		return res;
 	}
 
-	private void helper(List<String> res, String s, List<String> dict, String now, int pos) {
-		if (pos == s.length()) {
+	private void helper(List<String> res, String s, List<String> dict, String now, int start) {
+		if (start == s.length()) {
 			res.add(now);
 			return;
 		}
 		
-		for (int len = 1; len <= s.length() - pos; len++) {
-			String sub = s.substring(pos, pos + len);
+		for (int len = 1; len <= s.length() - start; len++) {
+			String sub = s.substring(start, start + len);
 			
 			if (dict.contains(sub)) {
-				helper(res, s, dict, pos == 0 ? sub : " " + sub, pos + len);
+				helper(res, s, dict, start == 0 ? sub : " " + sub, start + len);
 			}
 		}
 	}

@@ -28,8 +28,8 @@ public class MaxProductSubarray {
 	
 	boolean targetProduct(int[] nums, int target) {
 		int left = 0, right = 0;
-		int sign = 1;
-		int now = 1;
+		int sign = 1; // Keep track of the sign
+		int now = 1; // now, doesnt care about the sign
 		
 		while (left <= right && right < nums.length) {
 			while (now != 0 && right < nums.length && now < Math.abs(target)) {
@@ -38,25 +38,21 @@ public class MaxProductSubarray {
 				right++;
 			}
 
-			if (now == Math.abs(target)) {
-				if (target * sign > 0) {
-					return true;
-				}
-				left++;
-			}
-			
 			if (now == 0) {
 				if (target == 0) {
 					return true;
 				}
-//				right++;
-				left = right;
+				left = right; // Reset
 				now = 1;
 				sign = 1;
-				continue;
-			}
-			
-			if (now > Math.abs(target)) {
+			} else if (now == Math.abs(target)) {
+				if (target * sign > 0) {
+					return true;
+				}
+				now = now / Math.abs(nums[left]);
+				sign = nums[left] < 0 ? -sign : sign;
+				left++;
+			} else if (now > Math.abs(target)) {
 				now = now / Math.abs(nums[left]);
 				sign = nums[left] < 0 ? -sign : sign;
 				left++;
@@ -70,7 +66,7 @@ public class MaxProductSubarray {
 		MaxProductSubarray p = new MaxProductSubarray();
 		
 		int[] nums = {1, -2, 3, 4, -5, 6};
-		int target = -24;
+		int target = 24;
 		
 		System.out.println(p.targetProduct(nums, target));
 	}

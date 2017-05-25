@@ -38,6 +38,7 @@ public class InvertedIndex {
 				} else {
 					Map<Integer, Integer> curMap = new HashMap<Integer, Integer>();
 					curMap.put(lineNumber, 1); // 在当前行，出现了一次
+					map.put(curWord, curMap);
 				}
 			}
 			

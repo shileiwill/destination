@@ -23,7 +23,8 @@ Here is an implementation with synchronized.
 
 One shortcoming of using synchronization is that it only allow one thread access the queue at the same time, either consumer or producer.)
 
-Plus, we need to use notifyAll instead of notify since there could be multiple waiting producers and consumers and notify can wake up any thread which could be a producer or a consumer. This stackoverflow post gives a detailed example to explain notify vs. notifyAll.
+Plus, we need to use notifyAll instead of notify since there could be multiple waiting producers and consumers and notify can wake up any thread 
+which could be a producer or a consumer. This stackoverflow post gives a detailed example to explain notify vs. notifyAll.
  */
 public class BoundedBlockingQueue<E> {
 	Queue<E> queue = new LinkedList<E>();
@@ -84,9 +85,17 @@ We only need to emit such notifications in the above two cases since otherwise t
 
 Here is an implementation with locks.
 
-We use two Reentrant Locks to replace the use of synchronized methods. With separate locks for put and take, a consumer and a producer can access the queue at the same time (if it is neither empty nor full). A reentrant lock provides the same basic behaviors as a Lock does by using synchronized methods and statements. Beyond that, it is owned by the thread last successfully locking and thus when the same thread invokes lock() again, it will return immediately without lock it again.
+We use two Reentrant Locks to replace the use of synchronized methods. With separate locks for put and take, 
+a consumer and a producer can access the queue at the same time (if it is neither empty nor full). 
+A reentrant lock provides the same basic behaviors as a Lock does by using synchronized methods and statements. 
+Beyond that, it is owned by the thread last successfully locking and thus when the same thread invokes lock() again, 
+it will return immediately without lock it again.
 
-Together with lock, we use Condition to replace the object monitor (wait and notifyAll). A Condition instance is intrinsically bound to a lock. Thus, we can use it to signal threads that are waiting for the associated lock. Even better, multiple condition instances can be associated with one single lock and each instance will have its own wait-thread-set, which means instead of waking up all threads waiting for a lock, we can wake up a predefined subset of such threads. Similar to wait(), Condition.await() can atomically release the associated lock and suspend the current thread.
+Together with lock, we use Condition to replace the object monitor (wait and notifyAll). 
+A Condition instance is intrinsically bound to a lock. Thus, we can use it to signal threads that are waiting for the associated lock. 
+Even better, multiple condition instances can be associated with one single lock and each instance will have its own wait-thread-set, 
+which means instead of waking up all threads waiting for a lock, we can wake up a predefined subset of such threads. 
+Similar to wait(), Condition.await() can atomically release the associated lock and suspend the current thread.
 
 We use Atomic Integer for the count of elements in the queue to ensure that the count will be updated atomically.
  */
@@ -142,7 +151,7 @@ class BoundedBlockingQueue1<E> {
 		try {
 			removeLock.lock();
 			
-			while (count.get() == capacity) {
+			while (count.get() == 0) {
 				removeCondition.await();
 			}
 			

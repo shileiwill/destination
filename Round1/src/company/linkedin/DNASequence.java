@@ -17,7 +17,8 @@ public class DNASequence {
 
 	/**
 	 * Post Java7 O(N) on substring
-	 * the behaviour of substring changed to create a copy - so every String refers to a char[] which is not shared with any other object, as far as I'm aware.
+	 * the behaviour of substring changed to create a copy - so every String refers to a char[] which is not shared with any other object, 
+	 * as far as I'm aware.
 	 * So at that point, substring() became an O(n) operation.
 	 * 
 	 * Pre Java7 O(1) on substring

@@ -30,7 +30,9 @@ public class RangeSumQuery {
 		root.left = helper(arr, left, mid);
 		root.right = helper(arr, mid + 1, right);
 		
-		root.sum = (root.left != null ? root.left.sum : 0) + (root.right != null ? root.right.sum : 0);
+		// it will never be null
+		root.sum = root.left.sum + root.right.sum;
+//		root.sum = (root.left != null ? root.left.sum : 0) + (root.right != null ? root.right.sum : 0);
 		
 		return root;
 	}
@@ -49,7 +51,7 @@ public class RangeSumQuery {
 			return 0;
 		}
 		
-		if (start <= node.start && end >= node.end) {
+		if (start <= node.start && end >= node.end) { // 完全包括
 			return node.sum;
 		}
 		
@@ -115,7 +117,7 @@ class RangeSumQueryBinaryIndexedTree {
 		this.helper = new int[nums.length + 1];
 		
 		for (int i = 0; i < nums.length; i++) {
-			build(i + 1, nums[i]);
+			build(i + 1, nums[i]); // Index in helper array, Value
 		}
 	}
 	

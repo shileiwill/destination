@@ -11,7 +11,8 @@ public class FactorCombination {
 		FactorCombination fc = new FactorCombination();
 		fc.combination(12);
 	}
-
+	
+	// Backtracking
 	List<List<Integer>> combination(int num) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -19,8 +20,8 @@ public class FactorCombination {
 		return res;
 	}
 
-	private void helper(List<List<Integer>> res, List<Integer> list, int num, int pos) {
-		if (num == 1) {
+	private void helper(List<List<Integer>> res, List<Integer> list, int target, int factor) {
+		if (target == 1) {
 			for (int val : list) {
 				System.out.print(val + "--");
 			}
@@ -29,10 +30,10 @@ public class FactorCombination {
 			return;
 		}
 		
-		for (int i = pos; i >= 2; i--) {
-			if (num % i == 0) {
+		for (int i = factor; i >= 2; i--) {
+			if (target % i == 0) {
 				list.add(i);
-				helper(res, list, num / i, i);
+				helper(res, list, target / i, i);
 				list.remove(list.size() - 1);
 			}
 		}

@@ -12,11 +12,26 @@ public class CombinationSum {
 
 	public static void main(String[] args) {
 		CombinationSum cs = new CombinationSum();
-		int[] arr = {1, 2, 3, 3, 4, 5};
+		int[] arr = {5, 1};
 		int target = 6;
-		System.out.println(cs.combination(arr, target));
+		System.out.println(cs.dp(arr, target));
 	}
 
+	int dp(int[] arr, int target) {
+		int[] hash = new int[target + 1];
+		hash[0] = 1;
+		
+		for (int i = 1; i <= target; i++) {
+			for (int j = 0; j < arr.length; j++) {
+				if (i - arr[j] >= 0) {
+					hash[i] += hash[i - arr[j]];
+				}
+			}
+		}
+		
+		return hash[target]; // This includes 1, 1, 1, 1, 1, 1
+	}
+	
 	int res = 0;
 	int combination(int[] arr, int target) {
 		Arrays.sort(arr);

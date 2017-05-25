@@ -76,10 +76,10 @@ public class SudokuSolver {
 						if (isValid(board, i, j, c)) {
 							board[i][j] = c;
 							
-							if (solve(board)) {
+							if (solve(board)) { // DFS
 								return true;
 							} else {
-								board[i][j] = '.';
+								board[i][j] = '.'; // Reset
 							}
 						}
 					}

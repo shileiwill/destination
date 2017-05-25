@@ -2,25 +2,30 @@ package company.linkedin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
+import company.uber.SerializeDeserializeTree.Node;
 
 /**
  * Given a tree string expression in balanced parenthesis format:
 [A[B[C][D]][E][F]]
 Construct a tree and return the root of the tree.
-                A. 1point3acres.com/bbs
+                A. 
             /   |  \
           B    E   F
          / \
        C   D
+       
+       Refer to Uber -> SerializeDeserializeTree
  */
 public class ConstructTreeFromString {
 
 	/**
 	 * You need to construct a binary tree from a string consisting of parenthesis and integers.
 
-The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
+The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. 
+The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
 
 You always start to construct the left child node of the parent first if it exists.
 
@@ -107,6 +112,42 @@ An empty tree is represented by "" instead of "()".
 			} else {
 				break;
 			}
+		}
+		
+		return root;
+	}
+	
+	Node deserialize(String s) {
+		Node root = null;
+		Node parent = null;
+		Stack<Node> stack = new Stack<Node>();
+		int pos = 0;
+		
+		while (pos < s.length()) {
+			char c = s.charAt(pos);
+			
+			if (c == '(') {
+				pos++; // Next must be a number
+				
+				Node node = new Node(s.charAt(pos) - '0');
+				if (root == null) {
+					root = node; // Will come here only once
+				}
+				if (parent != null) {
+					parent.children.add(node);
+				}
+				
+				parent = node;
+				stack.push(node); // 记录一下
+			} else if (c == ')') {
+				stack.pop(); // 弹出来
+				
+				if (!stack.isEmpty()) {
+					parent = stack.peek(); // Change parent node, 1 level above
+				}
+			}
+			
+			pos++;
 		}
 		
 		return root;

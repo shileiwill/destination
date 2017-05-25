@@ -20,7 +20,7 @@ import java.util.Set;
 etc...
 问可不可能会发生世界大战 返回true or false
 
-死活想不出是graph的bfs graph都自己在白板上画出来了 bfs都自己过出来了一遍就是想不到bfs 45分钟基本都在自我纠结linear扫过这个列表的时候 6到底应该assign group A还是group B.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+死活想不出是graph的bfs graph都自己在白板上画出来了 bfs都自己过出来了一遍就是想不到bfs 45分钟基本都在自我纠结linear扫过这个列表的时候 6到底应该assign group A还是group B
 最后面试官看不下去了 随便给了一道bst inorder traversal 再随便给了道graph的bfs 然后面试官问再看看这道题...
  */
 public class BipartiteGraph {

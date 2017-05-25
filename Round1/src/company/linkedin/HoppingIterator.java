@@ -15,7 +15,7 @@ import java.util.List;
 *
 * If the original iterator returns: [1, 2, 3, 4, 5] in order, then the hopping
 * iterator will return [1, 4] in order when the hop value is 2.
-*. from: 1point3acres.com/bbs 
+*
 * If the original iterator returns: [1, 2, 3, 4, 5] in order, then the hopping
 * iterator will return [1, 5] in order when the hop value is 3.
 * 
@@ -40,7 +40,7 @@ public class HoppingIterator<T> implements Iterator<T> {
 	public boolean hasNext() {
 		if (firstTime) {
 			firstTime = false;
-			return true;
+			return iterator.hasNext();
 		} else {
 			int count = 0;
 			while (count < hops && iterator.hasNext()) {

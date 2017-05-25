@@ -17,7 +17,7 @@ public class SerializeDeserializeTree {
 
 		sb.append("(");
 		sb.append(root.val);
-		for (Node child : root.children) {
+		for (Node child : root.children) { // 有孩子就往里加，没有就(5)
 			sb.append(serialize(child));
 		}
 		sb.append(")");
@@ -51,7 +51,7 @@ public class SerializeDeserializeTree {
 				stack.pop(); // 弹出来
 				
 				if (!stack.isEmpty()) {
-					parent = stack.peek(); // Change parent node
+					parent = stack.peek(); // Change parent node, 1 level above
 				}
 			}
 			

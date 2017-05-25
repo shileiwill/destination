@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import chapter3.binaryTree.LevelOrderTraversal;
 import chapter3.binaryTree.TreeNode;
 /**
  * Given  a root of a tree. The tree may be of any depth and width. 

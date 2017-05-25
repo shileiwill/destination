@@ -36,7 +36,7 @@ public class MaxSubarray {
 		sum.add(0);
 	}
 	
-    public void add(int num) {
+    public void add(int num) { // When you add, calculate min and max
         sum.add(sum.get(sum.size() - 1) + num);
         
         max = Math.max(max, sum.get(sum.size() - 1) - min);

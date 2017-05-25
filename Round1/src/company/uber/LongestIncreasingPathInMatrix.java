@@ -6,7 +6,8 @@ import java.util.Map;
 /**
  * 329. Given an integer matrix, find the length of the longest increasing path.
 
-From each cell, you can either move to four directions: left, right, up or down. You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
+From each cell, you can either move to four directions: left, right, up or down. 
+You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
 
 Example 1:
 
@@ -39,7 +40,7 @@ public class LongestIncreasingPathInMatrix {
 		
 		Integer[][] hash = new Integer[matrix.length][matrix[0].length];
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[i].length; j++) {
+			for (int j = 0; j < matrix[i].length; j++) { // Each point can be a start point
 				int res = dfs(matrix, hash, i, j);
 				max = Math.max(res, max);
 			}
@@ -57,14 +58,14 @@ public class LongestIncreasingPathInMatrix {
 			return hash[i][j];
 		}
 		
-		int max = 1;
+		int max = 1; // Default is itself
 		for (int[] dir : directions) {
 			int x = i + dir[0];
 			int y = j + dir[1];
 			
 			if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] > matrix[i][j]) {
 				map.put(matrix[x][y], matrix[i][j]); // 怎么得到路径？
-				int len = 1 + dfs(matrix, hash, x, y);
+				int len = 1 + dfs(matrix, hash, x, y); // Increase by 1 each time
 				
 				if (len > max) {
 					last = matrix[x][y];

@@ -6,9 +6,9 @@ public class CombinationSum {
 
 	public static void main(String[] args) {
 		CombinationSum cs = new CombinationSum();
-		int[] candidates = {1, 2, 3};
-		int target = 4;
-		cs.combinationSum5(candidates, target);
+		int[] candidates = {1, 1, 2, 2, 3, 4};
+		int target = 5;
+		cs.combinationSum4_5(candidates, target);
 	}
 
 	/**
@@ -201,6 +201,34 @@ public class CombinationSum {
 		
 		System.out.println(hash[target]);
 		return hash[target];
+	}
+	
+	// 每个元素只能用一次，求装满书包的可能性. 这个可以有重复元素
+	public int combinationSum4_5(int[] nums, int target) {
+		int[][] hash = new int[nums.length + 1][target + 1];
+		hash[0][0] = 1;
+		
+		// 前i个物品中取 书包体积为0
+		for (int i = 1; i < hash.length; i++) {
+			hash[i][0] = 1;
+		}
+		
+		// 前0个物品中取 书包体积为i
+		for (int i = 1; i < hash[0].length; i++) {
+			hash[0][i] = 0;
+		}
+		
+		for (int i = 1; i <= nums.length; i++) {
+			for (int t = 1; t <= target; t++) {
+				hash[i][t] = hash[i - 1][t];
+				if (t - nums[i - 1] >= 0) {
+					hash[i][t] += hash[i - 1][t - nums[i - 1]]; // 又多一种可能
+				}
+			}
+		}
+		
+		System.out.println(hash[nums.length][target]);
+		return hash[nums.length][target];
 	}
 	
 	// What if negative numbers exist

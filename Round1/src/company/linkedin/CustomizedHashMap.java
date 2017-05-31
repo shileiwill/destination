@@ -139,4 +139,23 @@ public class CustomizedHashMap<K, V> {
 		
 		return false;
 	}
+	
+	void resize() {
+		int oldSize = this.capacity;
+		this.capacity = this.capacity * 2;
+		this.arr = (Entry<K, V>[])new Object[this.capacity];
+		
+		// Rehash
+		for (int i = 0; i < oldSize; i++) {
+			Entry<K, V> entry = arr[i];
+			
+			while (entry != null) {
+				K key = entry.key;
+				V val = entry.val;
+				
+				put(key, val); // Set to a new position
+				entry = entry.next;
+			}
+		}
+	}
 }

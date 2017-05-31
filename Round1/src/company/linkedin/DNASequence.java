@@ -116,7 +116,7 @@ public class DNASequence {
         arr['G' - 'A'] = 2; //10
         arr['T' - 'A'] = 3; //11
         
-        for (int i = 0; i < s.length() - 9; i++) {
+        for (int i = 0; i <= s.length() - 10; i++) {
             int v = 0;
             for (int j = i; j < i + 10; j++) { // All the 10 digits
                 v <<= 2; // Move 2 digits left, the 2 digits stand for 1 letter

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-// 261
+// 261   3 ways: Topological Sort, DFS/BFS, Union Find
 public class GraphValidTree {
 
 	public static void main(String[] args) {

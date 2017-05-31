@@ -26,7 +26,7 @@ public class PathSum {
 
 	int sum = 0;
 	int pathSum2(TreeNode root) {
-		int[] cur = {root.val};
+		int[] cur = {root.val}; // 必须得用数组
 		helper(root, cur);
 		return sum;
 	}

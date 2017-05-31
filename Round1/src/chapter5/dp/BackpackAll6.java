@@ -96,7 +96,8 @@ public class BackpackAll6 {
 	
 	/**
 	 * Problem 重复选择+唯一排列+装满可能性总数
-	   Given n items with size nums[i] which an integer array and all positive numbers, no duplicates. An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
+	   Given n items with size nums[i] which an integer array and all positive numbers, no duplicates. 
+	   An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
 	   Each item may be chosen unlimited number of times
 	 */
 	int backpack4(int[] A, int m) {
@@ -128,7 +129,8 @@ public class BackpackAll6 {
 	
 	/**
 	 * Problem 单次选择+装满可能性总数
-	   Given n items with size nums[i] which an integer array and all positive numbers. An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
+	   Given n items with size nums[i] which an integer array and all positive numbers. 
+	   An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
        Each item may only be used once
 	 */
 	int backpack5(int[] A, int m) {
@@ -161,7 +163,8 @@ public class BackpackAll6 {
 	/**
 	 * Backpack VI aka: Combination Sum IV
 	   Problem 重复选择+不同排列+装满可能性总数
-	   Given an integer array nums with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
+	   Given an integer array nums with all positive numbers and no duplicates, 
+	   find the number of possible combinations that add up to a positive integer target.
 	   The different sequences are counted as different combinations. This is the same with climbing stairs
 	 */
 	int backpack6(int[] A, int m) {

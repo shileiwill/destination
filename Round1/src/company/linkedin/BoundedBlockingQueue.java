@@ -129,7 +129,7 @@ class BoundedBlockingQueue1<E> {
 			
 			queue.offer(element);
 			int oldCount = count.getAndIncrement(); // There is also increamentAndGet()
-			if (oldCount + 1 < this.capacity) {
+			if (oldCount + 1 < this.capacity) { // 因为有lock 这个可能不需要呢
 				addCondition.signal(); // Release add condition
 			}
 		} finally {

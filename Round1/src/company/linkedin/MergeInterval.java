@@ -3,7 +3,9 @@ package company.linkedin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 class Interval {
 	int start;
@@ -117,3 +119,64 @@ public class MergeInterval {
     	return wholeLen;
     }
 }
+
+// Above is based on call frequencey. what about using TreeSet, which could sort as well.
+class IntervalTreeSet {
+	// Here we can use TreeSet to sort based on start time/end time
+	TreeSet<Interval> treeSet = new TreeSet<Interval>(new Comparator<Interval>(){
+		public int compare(Interval in1, Interval in2) {
+			if (in1.start != in2.start) {
+				return in1.start - in2.start;
+			}
+			return in1.end - in2.end;
+		}
+	});
+	
+	
+	
+	void add(int start, int end) {
+		if (start > end) {
+			return;
+		}
+		treeSet.add(new Interval(start, end)); // O(NLog(N))
+	}
+	
+	int getLength() { // O(N)
+		int totalLen = 0;
+		
+		Iterator<Interval> it = treeSet.iterator();
+		if (!it.hasNext()) {
+			return 0;
+		}
+		
+		Interval cur = it.next();
+		
+		int curStart = cur.start;
+		int curEnd = cur.end;
+		
+		while (it.hasNext()) {
+			Interval next = it.next();
+			if (next.start > curEnd) {
+				// We can change this place to get Square from API, using Interval(curStart, curEnd)
+				totalLen += curEnd - curStart + 1;
+				curStart = next.start;
+				curEnd = next.end;
+			} else {
+				curEnd = Math.max(curEnd, next.end);
+			}
+		}
+		
+		totalLen += curEnd - curStart + 1;
+		
+		return totalLen;
+	}
+}
+
+/*
+Meeting Schedule
+An easy way is to sort first, and then iterate. This approach is O(NLogN)
+
+// This is like Bucket Sort. A good question may be if starttime and endtime are inclusive
+要你找出一坨meeting是否overlap，meeting有starttime endtime, 
+然后表示format自己定，然后要求O（n），meeting全部限制在一天内，并且时间都是用minute表示。就把一天分割成60*60*24个element就可以了 
+*/

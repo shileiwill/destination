@@ -72,7 +72,7 @@ public class Sqrt {
 		while (true) {
 			double mid = (left + right) / 2.0;
 			
-			if (Math.abs(mid * mid * mid) <= precision) {
+			if (Math.abs(mid * mid * mid - x) <= precision) {
 				return mid;
 			}
 			

@@ -89,3 +89,77 @@ public class WallAndGates {
 		}
 	}
 }
+
+/**
+ * 给一个字符矩阵，里面只能forward slash '\' 或者backslash '/'. 
+ * \ \ / / 
+ * / / / \ 
+ * 把这些slash对应链接起来就对应一个图（undirect graph）. 然后需要用dfs或者bfs的搜索路径。
+ */
+class SlashGraph {
+	public static void main(String[] args) {
+		char[][] matrix = {{'\\', '\\', '/', '/'}, {'/', '/', '/', '\\'}, {'\\', '\\', '\\', '/'}, {'\\', '/', '/', '/'}};
+		int[] from = {0, 0};
+		int[] to = {3, 3};
+		
+		SlashGraph sg = new SlashGraph();
+		sg.prepare();
+		boolean res = sg.findPath(matrix, from, to);
+		System.out.println(res);
+	}
+	
+	Map<Character, int[][]> map = new HashMap<Character, int[][]>();
+	int m = 0;
+	int n = 0;
+	
+	void prepare() {
+		int[][] arr1 = {{-1, -1}, {1, 1}};
+		int[][] arr2 = {{-1, 1}, {1, -1}};
+		
+		map.put('\\', arr1);
+		map.put('/', arr2);
+	}
+	
+	boolean findPath(char[][] matrix, int[] from, int[] to) {
+		m = matrix.length;
+		n = matrix[0].length;
+		
+		int id1 = from[0] * n + from[1];
+		int id2 = to[0] * n + to[1];
+		
+		if (id1 == id2) {
+			return true;
+		}
+		
+		Set<Integer> visited = new HashSet<Integer>();
+		visited.add(id1);
+		
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.offer(id1);
+		
+		while (!queue.isEmpty()) {
+			int now = queue.poll();
+			int x = now / n;
+			int y = now % n;
+			
+			int[][] directions = map.get(matrix[x][y]);
+			
+			for (int[] dir : directions) {
+				int newX = x + dir[0];
+				int newY = y + dir[1];
+				int newId = newX * n + newY;
+				
+				if (newId == id2) {
+					return true;
+				}
+				
+				if (newX >= 0 && newX < m && newY >= 0 && newY < n && !visited.contains(newId)) {
+					visited.add(newId);
+					queue.offer(newId);
+				}
+			}
+		}
+		
+		return false;
+	}
+}

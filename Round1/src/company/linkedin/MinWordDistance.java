@@ -72,12 +72,15 @@ public class MinWordDistance {
 			if (index1 < index2 && index1 < index3) {
 				int manhattan = index2 - index1 + index3 - index1 + Math.abs(index2 - index3);
 				res = Math.min(res, manhattan);
+				pos1++;
 			} else if (index2 < index1 && index2 < index3) {
 				int manhattan = index1 - index2 + index3 - index2 + Math.abs(index1 - index3);
 				res = Math.min(res, manhattan);
+				pos2++;
 			} else { // index3 is the smallest
 				int manhattan = index2 - index3 + index1 - index3 + Math.abs(index2 - index1);
 				res = Math.min(res, manhattan);
+				pos3++;
 			}
 		}
 		

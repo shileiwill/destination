@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
-import company.uber.SerializeDeserializeTree.Node;
 
 /**
  * Given a tree string expression in balanced parenthesis format:
@@ -76,6 +75,62 @@ An empty tree is represented by "" instead of "()".
 		return root;
 	}
 	
+	// If above is difficult to remember and not generic. Refer to following one. Binary Tree only
+	TreeNode str2tree(String s) {
+        if (s.length() == 0) {
+            return null;
+        }
+        
+        s = "(" + s + ")";
+        
+		TreeNode root = null;
+		TreeNode parent = null;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		int pos = 0;
+		
+		while (pos < s.length()) {
+			char c = s.charAt(pos);
+			
+			if (c == '(') {
+				pos++; // Next must be a number
+				// If number could be multi digits, use a while loop here
+				int num = 0;
+				while (pos < s.length() && Character.isDigit(s.charAt(pos))) {
+				    num = num * 10 + (s.charAt(pos) - '0');
+				    pos++;
+				}
+				pos--; // pos will point to the char immediately after last digit
+				
+				TreeNode node = new TreeNode(num);
+				if (root == null) {
+					root = node; // Will come here only once
+				}
+				if (parent != null) {
+					// If the tree is guaranteed to be binary, you can easily change above code to
+					if (parent.left == null) {
+						parent.left = node;
+					} else {
+						parent.right = node;
+					}
+				}
+				
+				
+				parent = node;
+				stack.push(node); // 记录一下
+			} else if (c == ')') {
+				stack.pop(); // 弹出来
+				
+				if (!stack.isEmpty()) {
+					parent = stack.peek(); // Change parent node, 1 level above
+				}
+			}
+			
+			pos++;
+		}
+		
+		return root;
+	}
+	
 	public NaryTreeNode build(String input) {
 		if (input == null || input.length() <= 2) {
 			return null;
@@ -128,13 +183,13 @@ An empty tree is represented by "" instead of "()".
 			
 			if (c == '(') {
 				pos++; // Next must be a number
-				
+				// If number could be multi digits, use a while loop here
 				Node node = new Node(s.charAt(pos) - '0');
 				if (root == null) {
 					root = node; // Will come here only once
 				}
 				if (parent != null) {
-					parent.children.add(node);
+					parent.children.add(node); 
 				}
 				
 				parent = node;

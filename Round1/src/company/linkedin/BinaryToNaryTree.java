@@ -10,6 +10,8 @@ import chapter3.binaryTree.TreeNode;
  * Given  a root of a tree. The tree may be of any depth and width. 
 Transform it in a way that each node(except probably one) would either have N or 0 children
 
+convert a binary tree to a N-ary complete tree
+
  * 可以把所有的节点先放到一个数组里面。然后把这些点连成一个N叉树。连起来的时候需要注意，因为你可以连成一个完全树，所以A[i]的N个儿子分别是i*N+1到i*N+N。这样一个个连起来就好了，
  * 连起来很方便。所以就是1.按level 遍历存到数组里面，preorder应该也可以。
  * 这样保证不违反那个sibling的条件。2.在数组里面连出一个full N tree. 主要考察的是遍历和完全树的trick
@@ -64,22 +66,22 @@ public class BinaryToNaryTree {
 		Node newRoot = null;
 		Queue<Node> visitedNodes = new LinkedList<Node>();
 		for (int i = 0; i < list.size(); i++) {
-			Node node = null;
+			Node parent = null;
 			if (i == 0) {
-				node = new Node(list.get(i).val);
-				newRoot = node;
+				parent = new Node(list.get(i).val);
+				newRoot = parent;
 			} else {
-				node = visitedNodes.poll();
+				parent = visitedNodes.poll(); // Always get from queue, no need to new
 			}
 			
-			for (int j = i * N + 1; j <= i * N + N; j++) {
+			for (int j = i * N + 1; j <= i * N + N; j++) { // Children section
 				if (j >= list.size()) {
 					break;
 				}
 				Node nextNode = new Node(list.get(j).val);
 				visitedNodes.offer(nextNode);
 				
-				node.children.add(nextNode);
+				parent.children.add(nextNode);
 			}
 		}
 		

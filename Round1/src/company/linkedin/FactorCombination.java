@@ -49,8 +49,8 @@ public class FactorCombination {
 	}
 	
 	void helper(List<List<Integer>> res, List<Integer> list, int target, int factor) {
-		if (target == 1) {
-			res.add(list);
+		if (target == 1) { // Termination point is 1
+			res.add(new ArrayList<>(list));
 			return;
 		}
 		

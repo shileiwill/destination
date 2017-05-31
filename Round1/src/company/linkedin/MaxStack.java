@@ -2,6 +2,7 @@ package company.linkedin;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 //实现一个maxstack 功能有pop peek peekMax popMax, popMax要求O(1) 应该是挂在这上了 最后没想出来popMax O(1)怎么做
 public class MaxStack {
@@ -94,12 +95,31 @@ public class MaxStack {
 	}
 }
 
-class Node {
+class Node implements Comparable<Node> {
 	Node prev = null;
 	Node next = null;
 	int val = -1;
 	
 	Node(int val) {
 		this.val = val;
+	}
+	
+	public int compareTo(Node that) {
+		return that.val - this.val; // Sort from big to small
+	}
+}
+
+// You can replace PriorityQueue with TreeSet, which also provides O(1) getMax
+class MaxStackTreeSet {
+	TreeSet<Node> treeSet = new TreeSet<Node>();
+	
+	void add(int val) {
+		Node node = new Node(val);
+		treeSet.add(node);
+	}
+	
+	int popMax() { // First is the biggest
+		Node max = treeSet.pollFirst();
+		return max.val;
 	}
 }

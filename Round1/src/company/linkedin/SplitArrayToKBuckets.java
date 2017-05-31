@@ -15,7 +15,7 @@ public class SplitArrayToKBuckets {
 	public static void main(String[] args) {
 		SplitArrayToKBuckets s = new SplitArrayToKBuckets();
 		int[] arr = {1,2, 4, 5, 3, 8, 9, 4, 1, 3};
-		int k = 4;
+		int k = 5;
 		System.out.println(s.canSplitBruteForce(arr, k));
 	}
 
@@ -69,6 +69,12 @@ public class SplitArrayToKBuckets {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		helper(arr, target, k, res, list, 0, 0);
 		
+		for (List<Integer> list0 : res) {
+			for (int val : list0) {
+				System.out.print(val + "--");
+			}
+			System.out.println();
+		}
 		return flag;
 	}
 
@@ -77,16 +83,19 @@ public class SplitArrayToKBuckets {
 		if (flag) {
 			return;
 		}
-		if (pos == arr.length) {
-			if (curSum == target) {
-				res.add(new ArrayList<>(list));
-				if (res.size() == k) {
-					flag = true;
-				}
+		
+		if (curSum == target) {
+			res.add(new ArrayList<>(list));
+			if (res.size() == k) {
+				flag = true;
 			}
-			
 			return;
 		}
+		
+		if (pos == arr.length) {
+			return;
+		}
+		
 		if (res.size() == k) {
 			return;
 		}

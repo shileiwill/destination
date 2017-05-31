@@ -23,6 +23,7 @@ public class UnionIntersectionOfLists {
 	}
 
 	// If the List is LinkedList, get() will be O(N)
+	// Here we are assuming there is no duplicate in each list
 	List<Integer> union(List<Integer> list1, List<Integer> list2) { // 并集
 		List<Integer> res = new ArrayList<Integer>();
 		Collections.sort(list1);

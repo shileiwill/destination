@@ -78,4 +78,11 @@ public class StrStr {
 		
 		return pos2 == pattern.length() ? pos1 - pos2 : -1;
 	}
+	
+	/**
+	 * 把所有自然数串成一个字符串"12345678910111213"，给定一个数，找其在串的起始位置
+	 */
+	int find(String source, String pattern) {
+		
+	}
 }

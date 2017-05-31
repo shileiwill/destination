@@ -58,7 +58,6 @@ public class Intervals {
 		return res;
 	}
 	
-	// 这样用俩指针不好使，还不如直接挨个遍历两个List, 一个一个往res里加
 	List<Interval> union(List<Interval> A, List<Interval> B) {
 		List<Interval> res = new ArrayList<Interval>();
 		int pos1 = 1;

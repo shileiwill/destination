@@ -72,13 +72,13 @@ public class CombinationSum {
 	}
 	
 	void helper(int[] arr, int target, int pos) {
-		if (pos == arr.length) {
-			return;
-		}
-		
 		if (target == 0 && pos != 0) {
 			res++;
 //			return;
+		}
+
+		if (pos == arr.length) {
+			return;
 		}
 		
 		for (int i = pos; i < arr.length; i++) {

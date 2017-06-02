@@ -114,7 +114,6 @@ An empty tree is represented by "" instead of "()".
 					}
 				}
 				
-				
 				parent = node;
 				stack.push(node); // 记录一下
 			} else if (c == ')') {

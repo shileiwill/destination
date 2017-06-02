@@ -7,7 +7,7 @@ import java.util.Stack;
 import chapter3.binaryTree.TreeNode;
 
 public class SerializeDeserializeTree {
-
+	// Nary tree
 	String serialize(Node root) {
 		if (root == null) {
 			return "";

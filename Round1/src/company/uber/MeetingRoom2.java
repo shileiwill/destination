@@ -8,6 +8,8 @@ import java.util.PriorityQueue;
 /**
  * 
 半小时前的电面，面试官直接上题。类似LC里的meeting room II那题，但更难一点要求返回需要的room数量以及相应的时间段(频率最高的时间段)。应该也是道面经题。
+找频率最高的时间段，refer to Uber->IntervalMaxHeight
+
 follow up是考虑time period的inclusive和exclusive两种不同的情况（其实是我一开始问的，结果面试官就说这个问题好，就作为follow up吧），
 也就是inclusive的情况[1,2]和[2,3]要两个room，exclusive的情况只需要一个room。test了一下相应的corner case。
 面得很惊险，中间有个bug卡了一下一度以为自己肯定挂了，靠print才找出bug来，还好最后跑出了面试官想要的结果。

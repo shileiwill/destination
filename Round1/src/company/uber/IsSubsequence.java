@@ -54,6 +54,7 @@ public class IsSubsequence {
 		return false;
 	}
 	
+	// This will be better if there are multiple strings to compare with s. So better to build a dictionary on S
 	boolean isSubsequence(String s, String t) {
 		// This could also be -> List<Integer>[] hash = new List<Integer>[26];
 		Map<Character, List<Integer>> map = new HashMap<Character, List<Integer>>(); // Indexes of each char

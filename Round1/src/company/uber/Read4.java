@@ -15,13 +15,13 @@ public class Read4 {
 		while (list.size() != n) {
 			char[] arr = new char[4];
 			
-			char[] cur = read4(arr);
+			int k = read4(arr);
 			
-			for (int i = 0; i < cur.length && list.size() < n; i++) {
-				list.add(cur[i]);
+			for (int i = 0; i < k && list.size() < n; i++) {
+				list.add(arr[i]);
 			}
 			
-			if (cur.length < 4) {
+			if (k < 4) {
 				// No more
 				break;
 			}
@@ -44,20 +44,20 @@ public class Read4 {
 		while (index < n) {
 			char[] arr = new char[4];
 			
-			char[] cur = read4(arr);
+			int k = read4(arr);
 			
 			int i = 0;
-			for (; i < cur.length && index < n; i++) {
-				list.add(cur[i]);
+			for (; i < k && index < n; i++) {
+				list.add(arr[i]);
 				index++;
 			}
 			
-			while (i < cur.length) { // Means there is leftOver
-				leftOver.addLast(cur[i]);
+			while (i < k) { // Means there is leftOver
+				leftOver.addLast(arr[i]);
 				i++;
 			}
 			
-			if (cur.length < 4) {
+			if (k < 4) { // No more from the stream
 				break;
 			}
 		}

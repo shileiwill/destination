@@ -91,7 +91,7 @@ class Logger {
         }
     }
     
-    /**
+    /** 这个貌似是hit counter啊
      * 问的是dropbox经典的那道log request rate的题。就是让写一个function来决定一个IP address在过去一秒/分钟里是否made more than 100 requests
 我就傻白甜地先说了比较intuitive的queue的方法，在需要optimize的时候又写了circular buffer的方法
      */

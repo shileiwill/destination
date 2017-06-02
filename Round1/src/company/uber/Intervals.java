@@ -16,8 +16,8 @@ public class Intervals {
 		
 		Interval in1 = new Interval(1, 3);
 		Interval in2 = new Interval(5, 7);
-		Interval in3 = new Interval(4, 6);
-		Interval in4 = new Interval(8, 12);
+		Interval in3 = new Interval(1, 2);
+		Interval in4 = new Interval(2, 3);
 		
 		List<Interval> A = new ArrayList<Interval>();
 		A.add(in1);
@@ -27,7 +27,7 @@ public class Intervals {
 		B.add(in3);
 		B.add(in4);
 		
-		i.union(A, B);
+		i.intersection(A, B);
 	}
 
 	List<Interval> intersection(List<Interval> A, List<Interval> B) {
@@ -46,8 +46,13 @@ public class Intervals {
 			} else {
 				Interval in = new Interval(Math.max(in1.start, in2.start), Math.min(in1.end, in2.end));
 				res.add(in);
-				pos1++;
-				pos2++;
+				
+				// Move the one which ends earlier
+				if (in1.end < in2.end) {
+					pos1++;
+				} else {
+					pos2++;
+				}
 			}
 		}
 		
@@ -75,7 +80,7 @@ public class Intervals {
 					res.add(in1);
 					pos1++;
 				} else {
-					prev.end = in1.end;
+					prev.end = Math.max(prev.end, in1.end);
 					pos1++;
 				}
 			} else {
@@ -83,7 +88,7 @@ public class Intervals {
 					res.add(in2);
 					pos2++;
 				} else {
-					prev.end = in2.end;
+					prev.end = Math.max(prev.end, in2.end);
 					pos2++;
 				}
 			}

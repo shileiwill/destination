@@ -77,7 +77,8 @@ Given words = ["oath","pea","eat","rain"] and board =
 ]
 Return ["eat","oath"].
 
-给定一个字典 和 一个字符串数组 找出说有可能出现在字符串中的字符可以组成字典里面的字，  也就是字符串数组是个2 维char矩阵，不过没给字符可以走八个方向。DFS 解决 然后问了下为啥不用BFS
+给定一个字典 和 一个字符串数组 找出所有可能出现在字符串中的字符可以组成字典里面的字，  也就是字符串数组是个2 维char矩阵，不过没给字符可以走八个方向。DFS 解决 然后问了下为啥不用BFS
+The magic is to move trieNode
  */
 class WordSearch2 {
 	public static void main(String[] args) {

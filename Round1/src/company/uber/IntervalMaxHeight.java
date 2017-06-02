@@ -3,11 +3,7 @@ package company.uber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import jdk.nashorn.internal.ir.Block;
 
 public class IntervalMaxHeight {
 
@@ -26,12 +22,16 @@ public class IntervalMaxHeight {
 
     // Pass all tests on hackerrank https://www.hackerrank.com/challenges/crush
     public static void main(String[] args) {
+    	new IntervalMaxHeight().findHighestInterval();
+    }
+    
+    void findHighestInterval() {
     	List<Interval> sortedByStart = new ArrayList<Interval>();
     	List<Interval> sortedByEnd = new ArrayList<Interval>();
     	
-    	Interval in1 = new Interval(1, 2, 100);
-    	Interval in2 = new Interval(4, 5, 100);
-    	Interval in3 = new Interval(3, 6, 100);
+    	Interval in1 = new Interval(1, 4, 1);
+    	Interval in2 = new Interval(3, 5, 1);
+    	Interval in3 = new Interval(3, 6, 1);
     	sortedByStart.add(in1);
     	sortedByStart.add(in2);
     	sortedByStart.add(in3);
@@ -64,6 +64,8 @@ public class IntervalMaxHeight {
 
         long curSum = sortedByStart.get(0).height;
         long max = sortedByStart.get(0).height;
+        int start = sortedByStart.get(0).start;
+        int end = sortedByStart.get(0).end;
 
         int curEnd = 0;
 
@@ -75,8 +77,14 @@ public class IntervalMaxHeight {
             }
             
             curSum += bi.height;
-            max = Math.max(max, curSum);
+            if (curSum > max) {
+            	max = curSum;
+            	start = Math.max(bi.start, sortedByEnd.get(curEnd).start);
+            	end = Math.min(bi.end, sortedByEnd.get(curEnd).end);
+            }
         }
-        System.out.print(max);
+        System.out.println(max);
+        System.out.println(start);
+        System.out.println(end);
     }
 }

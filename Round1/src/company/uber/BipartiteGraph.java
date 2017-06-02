@@ -1,9 +1,12 @@
 package company.uber;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 /**
@@ -45,7 +48,29 @@ public class BipartiteGraph {
 		
 		List<Node> list = new ArrayList<Node>();
 		list.add(node1);
-		boolean res = new BipartiteGraph().isGraphBipartite(list);
+//		boolean res = new BipartiteGraph().isGraphBipartite(list);
+//		System.out.println(res);
+		
+		Map<Integer, Set<Integer>> graph = new HashMap<Integer, Set<Integer>>();
+		graph.put(1, new HashSet<Integer>());
+		graph.put(2, new HashSet<Integer>());
+		graph.put(3, new HashSet<Integer>());
+		graph.put(4, new HashSet<Integer>());
+		graph.put(5, new HashSet<Integer>());
+		
+		Integer[] arr1 = {2, 3, 4, 5};
+		graph.get(1).addAll(Arrays.asList(arr1));
+		
+		graph.get(2).add(1);
+		graph.get(2).add(5);
+		
+		graph.get(3).add(1);
+		graph.get(4).add(1);
+		
+		graph.get(5).add(2);
+		graph.get(5).add(1);
+		
+		boolean res = new BipartiteGraph().isGraphBipartite(graph);
 		System.out.println(res);
 	}
 
@@ -56,6 +81,46 @@ public class BipartiteGraph {
 		Node(int val) {
 			this.val = val;
 		}
+	}
+	
+	// If the graph has more than 1 independent parts, this Map couldnt cover all.
+	boolean isGraphBipartite(Map<Integer, Set<Integer>> graph) {
+		Set<Integer> group1 = new HashSet<Integer>();
+		Set<Integer> group2 = new HashSet<Integer>();
+		boolean isGroup1 = true;
+		
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.offer(graph.keySet().iterator().next());
+		
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			
+			for (int i = 0; i < size; i++) {
+				Integer now = queue.poll();
+				
+				if (isGroup1) {
+					if (group2.contains(now)) {
+						return false;
+					}
+					group1.add(now);
+				} else {
+					if (group1.contains(now)) {
+						return false;
+					}
+					group2.add(now);
+				}
+				
+				for (Integer child : graph.get(now)) {
+					queue.offer(child);
+					graph.get(child).remove(now); // Remove the other side
+				}
+
+				graph.remove(now);
+			}
+			isGroup1 = !isGroup1;
+		}
+		
+		return true;
 	}
 	
 	boolean isGraphBipartite(List<Node> graph) {

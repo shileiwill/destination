@@ -50,8 +50,6 @@ public class LongestIncreasingPathInMatrix {
 	}
 
 	int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-	int last = -1;
 	
 	private int dfs(int[][] matrix, Integer[][] hash, int i, int j) { // 不用visited check, 因为递增的肯定不会变小
 		if (hash[i][j] != null) {
@@ -62,14 +60,10 @@ public class LongestIncreasingPathInMatrix {
 		for (int[] dir : directions) {
 			int x = i + dir[0];
 			int y = j + dir[1];
-			
+			// 一个小变种是，如果想找+1的序列呢
 			if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] > matrix[i][j]) {
-				map.put(matrix[x][y], matrix[i][j]); // 怎么得到路径？
 				int len = 1 + dfs(matrix, hash, x, y); // Increase by 1 each time
 				
-				if (len > max) {
-					last = matrix[x][y];
-				}
 				max = Math.max(max, len);
 			}
 		}

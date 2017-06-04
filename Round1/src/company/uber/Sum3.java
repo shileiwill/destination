@@ -1,5 +1,8 @@
 package company.uber;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 3sum 变形 很简单 就要O(n^2)做法就可以了 给三个sorted array 和target sum 每个array拿一个加起来是target sum
  * 
@@ -14,7 +17,10 @@ public class Sum3 {
 		int[] C = {2, 4, 8, 9};
 		
 		Sum3 s3 = new Sum3();
-		s3.sum3(A, B, C, 22);
+		s3.sum3(A, B, C, 93);
+		
+		boolean bool = s3.sum3Map(A, B, C, 93);
+		System.out.println(bool);
 	}
 
 	void sum3(int[] A, int[] B, int[] C, int target) {
@@ -35,5 +41,26 @@ public class Sum3 {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 给了三个array, 和target, 问能不能从三个array 里面分别取一个数，加起来等于target. 
+	 * Solution: 用HashMap 存前两个array 中所有数之和，然后遍历第三个array,判断map是否包含target-num。 O(n^2) time complexity
+	 */
+	
+	boolean sum3Map(int[] A, int[] B, int[] C, int target) {
+		Set<Integer> set = new HashSet<Integer>();
+		for (int i = 0; i < A.length; i++) {
+			for (int j = 0; j < B.length; j++) {
+				set.add(A[i] + B[j]);
+			}
+		}
+		
+		for (int i = 0;  i < C.length; i++) {
+			if (set.contains(target - C[i])) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

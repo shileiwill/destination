@@ -130,3 +130,25 @@ class Interval {
 		this.end = end;
 	}
 }
+
+/**
+ * 要你找出一坨meeting是否overlap，meeting有starttime endtime, 然后表示format自己定，然后要求O（n），
+ * meeting全部限制在一天内，并且时间都是用minute表示。就把一天分割成60*24个element就可以了 
+ */
+class FindIfOverlap {
+	// If you sort, it will be O(NLogN). This is MeetingRoom 1. Once you saw the requirement is O(N), bucket sort
+	boolean ifOverlap(List<Interval> list) {
+		boolean[] hash = new boolean[24 * 60];
+		
+		for (Interval in : list) {
+			for (int i = in.start; i <= in.end; i++) {
+				if (hash[i]) {
+					return false;
+				}
+				hash[i] = true;
+			}
+		}
+		
+		return true;
+	}
+}

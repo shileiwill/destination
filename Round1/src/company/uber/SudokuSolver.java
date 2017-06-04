@@ -8,6 +8,7 @@ public class SudokuSolver {
 
 	}
 
+	// For this guy, chars are 1 to 9. If 0 are also allowed, just extend the boolean[] to length 10
 	boolean isValidSudoku(char[][] board) {
 		boolean[] visited = new boolean[9];
 		

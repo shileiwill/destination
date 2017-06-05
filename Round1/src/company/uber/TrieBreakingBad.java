@@ -217,6 +217,7 @@ class RootWordReplace {
 					break;
 				} else if (node.hasWord) {
 					arr[i] = node.word;
+					break;
 				} else {
 					// has this prefix, continue
 				}

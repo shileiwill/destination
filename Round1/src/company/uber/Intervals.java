@@ -8,6 +8,8 @@ import java.util.List;
 				 B: <4,6>.
 输出交集 <5,6>
 输出并集 <1,7> 要求是如果前一个interval的end是后一个的start-1要合并
+
+维护双指针，但是最重要的原则是，比较两个指针but每次只移动一个指针
  */
 public class Intervals {
 
@@ -47,7 +49,7 @@ public class Intervals {
 				Interval in = new Interval(Math.max(in1.start, in2.start), Math.min(in1.end, in2.end));
 				res.add(in);
 				
-				// Move the one which ends earlier
+				// Move the one which ends earlier. Great!!!
 				if (in1.end < in2.end) {
 					pos1++;
 				} else {

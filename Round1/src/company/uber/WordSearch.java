@@ -222,14 +222,3 @@ class WordSearch2 {
         }
     }
 }
-
-/**
- * 题目是给一个list of word， 每个word 叫做root word
-然后还有个input string 是sentence，
-要求是把sentence 中的单词如果有root word 是单词的prefix， 就把这个单词替换成root word。最后返回替换后的sentence
-例子：
-root word ["abc", "car", "race"] // Build Trie Tree with these root words
-sentence "abcde cars ca bounse"
-return: "abc car ca bounse". 
-另外不会有某个root word 是另外一个root word的prefix
-**/

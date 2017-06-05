@@ -43,35 +43,35 @@ public class BipartiteGraph {
 		
 		node2.children.add(node6);
 		node6.children.add(node5);
-		node5.children.add(node3);
+		node5.children.add(node6);
 //		node4.children.add(node3);
 		
 		List<Node> list = new ArrayList<Node>();
 		list.add(node1);
-//		boolean res = new BipartiteGraph().isGraphBipartite(list);
-//		System.out.println(res);
-		
-		Map<Integer, Set<Integer>> graph = new HashMap<Integer, Set<Integer>>();
-		graph.put(1, new HashSet<Integer>());
-		graph.put(2, new HashSet<Integer>());
-		graph.put(3, new HashSet<Integer>());
-		graph.put(4, new HashSet<Integer>());
-		graph.put(5, new HashSet<Integer>());
-		
-		Integer[] arr1 = {2, 3, 4, 5};
-		graph.get(1).addAll(Arrays.asList(arr1));
-		
-		graph.get(2).add(1);
-		graph.get(2).add(5);
-		
-		graph.get(3).add(1);
-		graph.get(4).add(1);
-		
-		graph.get(5).add(2);
-		graph.get(5).add(1);
-		
-		boolean res = new BipartiteGraph().isGraphBipartite(graph);
+		boolean res = new BipartiteGraph().isGraphBipartite(list);
 		System.out.println(res);
+		
+//		Map<Integer, Set<Integer>> graph = new HashMap<Integer, Set<Integer>>();
+//		graph.put(1, new HashSet<Integer>());
+//		graph.put(2, new HashSet<Integer>());
+//		graph.put(3, new HashSet<Integer>());
+//		graph.put(4, new HashSet<Integer>());
+//		graph.put(5, new HashSet<Integer>());
+//		
+//		Integer[] arr1 = {2, 3, 4, 5};
+//		graph.get(1).addAll(Arrays.asList(arr1));
+//		
+//		graph.get(2).add(1);
+//		graph.get(2).add(5);
+//		
+//		graph.get(3).add(1);
+//		graph.get(4).add(1);
+//		
+//		graph.get(5).add(2);
+//		graph.get(5).add(1);
+//		
+//		boolean res = new BipartiteGraph().isGraphBipartite(graph);
+//		System.out.println(res);
 	}
 
 	static class Node {
@@ -83,6 +83,7 @@ public class BipartiteGraph {
 		}
 	}
 	
+	// Using Map is better, easier
 	// If the graph has more than 1 independent parts, this Map couldnt cover all.
 	boolean isGraphBipartite(Map<Integer, Set<Integer>> graph) {
 		Set<Integer> group1 = new HashSet<Integer>();
@@ -115,7 +116,7 @@ public class BipartiteGraph {
 					graph.get(child).remove(now); // Remove the other side
 				}
 
-				graph.remove(now);
+				graph.remove(now); // 直接从Map中移除当前node
 			}
 			isGroup1 = !isGroup1;
 		}
@@ -128,10 +129,10 @@ public class BipartiteGraph {
 		Set<Node> group2 = new HashSet<Node>();
 		boolean isGroup1 = true;
 		
-		Set<Node> visited = new HashSet<Node>();
+//		Set<Node> visited = new HashSet<Node>();
 		Queue<Node> queue = new LinkedList<Node>();
 		for (Node node : graph) {
-			visited.add(node);
+//			visited.add(node);
 			queue.offer(node);
 		}
 		
@@ -153,12 +154,14 @@ public class BipartiteGraph {
 					group2.add(now);
 				}
 				
-				for (Node child : now.children) {
-					if (!visited.contains(child)) {
-						visited.add(now);
-						queue.offer(child);
+//				if (!visited.contains(now)) {
+					for (Node child : now.children) {
+//						if (!visited.contains(child)) {
+//							visited.add(child);
+							queue.offer(child);
+//						}
 					}
-				}
+//				}
 			}
 			
 			isGroup1 = !isGroup1;

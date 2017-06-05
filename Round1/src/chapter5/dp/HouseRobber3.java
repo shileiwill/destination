@@ -32,7 +32,22 @@ class ILikeMyOwnSolution {
         ResultType rt = helper(root);
         return Math.max(rt.rob, rt.noRob);
     }
+    // Good
+    ResultType helperGood(TreeNode node) {
+        if (node == null) {
+            return new ResultType(0, 0);
+        }
+        
+        ResultType left = helperGood(node.left);
+        ResultType right = helperGood(node.right);
+        
+        int rob = node.val + left.noRob + right.noRob;
+        int noRob = Math.max(left.rob, left.noRob) + Math.max(right.rob, right.noRob); // rob is not necessarily bigger
+        
+        return new ResultType(rob, noRob);
+    }
     
+    // Not as good
     ResultType helper(TreeNode node) {
         if (node == null) {
             return null;

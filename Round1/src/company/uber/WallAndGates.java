@@ -36,7 +36,7 @@ public class WallAndGates {
 	public void wallsAndGatesMultiEndBFS(int[][] rooms) {
 		m = rooms.length;
 		n = rooms[0].length;
-		Queue<Integer> queue = new LinkedList<Integer>();
+		Queue<Integer> queue = new LinkedList<Integer>(); // Better to use int[]
 		
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {

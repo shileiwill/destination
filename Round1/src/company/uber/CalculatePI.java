@@ -17,7 +17,7 @@ public class CalculatePI {
 		int inside = 0;
 		
 		for (int i = 0; i < N; i++) {
-			double x = ran.nextDouble(); // 0.0 - 1.0
+			double x = ran.nextDouble(); // 0.0 - 1.0, not include 1
 			double y = ran.nextDouble();
 			
 			if ((x * x + y * y) <= 1) {

@@ -28,9 +28,8 @@ public class ConvexHull {
 				if (isLeft(cur, list.get(i), list.get(leftMost))) {
 					leftMost = i;
 				}
-				// Output and move on.
-				cur = list.get(leftMost);
 			}
+			cur = list.get(leftMost);
 		} while (cur != root);
 	}
 	

@@ -11,7 +11,8 @@ import leetcode13.tree.InorderSuccessorInBST;
 这里 我明白一个道理,你要是解法和面试官不一样,他们很多时候就懵了,也不好意思说看不 懂,然后很长时间就在怀疑你。
 不过,面试后遇到cmu女神,她说这题见过,递归就行了, 我听着就泪奔了,还是要多训练,差距太大
 
-538. Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
+538. Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST 
+is changed to the original key plus sum of all keys greater than the original key in BST.
 
 Example:
 
@@ -24,14 +25,44 @@ Output: The root of a Greater Tree like this:
              18
             /   \
           20     13
+          
+          Check ConvertBSTToGreaterTree.java under Amazon for a better solution
  */
 public class BiggerTree {
+	public static void main(String[] args) {
+		TreeNode n3 = new TreeNode(13);
+		TreeNode n9 = new TreeNode(9);
+		TreeNode n20 = new TreeNode(20);
+		TreeNode n15 = new TreeNode(15);
+		TreeNode n7 = new TreeNode(27);
+		
+		n3.left = n9;
+		n3.right = n20;
+		n20.left = n15;
+		n20.right = n7;
+		
+		BiggerTree bt = new BiggerTree();
+		bt.newTreeOf2(n3);
+		
+		System.out.println(n3.val);
+	}
+	
 	void newTreeOf2(TreeNode root) {
 		if (root == null) {
 			return;
 		}
 		BSTIterator it = new BSTIterator(root);
-		helper(root, it);
+		
+		TreeNode smallest = it.next();
+		helper538(smallest, it);
+	}
+	
+	void helper538(TreeNode node, BSTIterator it) { // node is one level above iterator
+		if (it.hasNext()) {
+			TreeNode next = it.next(); // This returns Node.
+			helper538(next, it); // DFS, go!
+			node.val += next.val; // next.val is changed already
+		}
 	}
 	
 	void helper(TreeNode node, BSTIterator it) {

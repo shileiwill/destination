@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// This is very similar to Number of Islands
 public class ComponentsInGraph {
 	public static void main(String[] args) {
 		Node n1 = new Node(1);

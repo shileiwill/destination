@@ -8,6 +8,7 @@ public class CountInSortedArray {
 		System.out.println(count);
 	}
 	
+	// This is same with Find range in sorted array
 	static int count (int[] arr, int target) {
 		int left = 0;
 		int right = arr.length - 1;

@@ -49,7 +49,7 @@ public class PathSum {
 		n20.right = n7;
 		
 		PathSum lot = new PathSum();
-		int res = lot.minDepth(n3);
+		int res = lot.hasPathSum(n3, 30);
 		System.out.println(res);
 	}
 
@@ -58,7 +58,24 @@ public class PathSum {
 	        return 0;
 	    }
 	    
-	    return helper(a);
+	    helperMyStyle(a, 1);
+	    return min;
+	}
+	
+	int min = Integer.MAX_VALUE;
+	void helperMyStyle(TreeNode node, int level) {
+	    if (node.left == null && node.right == null) {
+	        min = Math.min(min, level);
+	        return;
+	    }
+	    
+	    if (node.left != null) {
+    	    helperMyStyle(node.left, level + 1);
+	    }
+	    
+	    if (node.right != null) {
+    	    helperMyStyle(node.right, level + 1);
+	    }
 	}
 	
 	int helper(TreeNode node) {
@@ -86,7 +103,28 @@ public class PathSum {
 	        return 0;
 	    }
 	    int[] res = {b};
-        return helper2(a, res) ? 1 : 0;	    
+        return helper2MyStyle(a, b) ? 1 : 0;	    
+	}
+	
+	boolean helper2MyStyle(TreeNode node, int res) {
+	    if (node.left == null && node.right == null) { // Leaf
+	        if (res == node.val) {
+	            return true;
+	        }
+	        return false;
+	    }
+	    
+	    boolean left = false;
+	    if (node.left != null) {
+    	    left = helper2MyStyle(node.left, res - node.val);
+	    }
+	    
+	    boolean right = false;
+	    if (node.right != null) {
+    	    right = helper2MyStyle(node.right, res - node.val);
+	    }
+	    
+	    return left || right;
 	}
 	
 	boolean helper2(TreeNode node, int[] res) {

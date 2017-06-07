@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 /**
- * Mediator pattern is used to reduce communication complexity between multiple objects or classes. 
+ * Mediator pattern is used to reduce communication complexity between multiple objects or classes. Sounds like Event Bus
  * This pattern provides a mediator class which normally handles all the communications between different classes 
  * and supports easy maintenance of the code by loose coupling.
  * 
@@ -56,7 +56,8 @@ class Airport {
 	Mediator mediator = new Mediator();
 	List<Runway> runways = new ArrayList<Runway>();
 	
-	List<Flight> comingFlights = new ArrayList<Flight>(); // Once flight takes off from original airport, register to the destination's comingFlight to receive messages
+	// Once flight takes off from original airport, register to the destination's comingFlight to receive messages
+	List<Flight> comingFlights = new ArrayList<Flight>(); 
 	
 	void broadcast(String message) {
 		for (Flight flight : comingFlights) {

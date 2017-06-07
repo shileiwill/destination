@@ -5,7 +5,8 @@ import chapter3.binaryTree.TreeNode;
 /**
  * 536. You need to construct a binary tree from a string consisting of parenthesis and integers.
 
-The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
+The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. 
+The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
 
 You always start to construct the left child node of the parent first if it exists.
 
@@ -21,6 +22,8 @@ Output: return the tree root node representing the following tree:
 Note:
 There will only be '(', ')', '-' and '0' ~ '9' in the input string.
 An empty tree is represented by "" instead of "()".
+
+Check my generic solution in Uber or LinkedIn
  */
 public class ConstructBinaryTreeFromString {
 

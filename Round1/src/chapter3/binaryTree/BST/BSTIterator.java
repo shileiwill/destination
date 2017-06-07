@@ -39,8 +39,8 @@ public class BSTIterator {
     }
 
     /** @return the next smallest number */
-    public int next() {
-        return queue.poll().val;
+    public TreeNode next() {
+        return queue.poll();
     }
 }
 

@@ -54,6 +54,17 @@ public class CopyListWith2RandomNodes {
 		node.label = 100;
 	}
 	
+	void copyToMapMyStyle(Node node) { // This is far better
+		if (node == null || visited.contains(node)) {
+			return;
+		}
+		
+		visited.add(node);
+		map.put(node, new Node(node.label));
+		copyToMapMyStyle(node.ran1); // DFS
+		copyToMapMyStyle(node.ran2);
+	}
+	
 	// DFS all nodes and put to Map
 	void copyToMap(Node node) {
 		if (node == null) {

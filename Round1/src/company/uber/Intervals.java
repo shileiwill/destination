@@ -49,7 +49,7 @@ public class Intervals {
 				Interval in = new Interval(Math.max(in1.start, in2.start), Math.min(in1.end, in2.end));
 				res.add(in);
 				
-				// Move the one which ends earlier. Great!!!
+				// Move the one which ends earlier. Great!!! 还是有问题啊
 				if (in1.end < in2.end) {
 					pos1++;
 				} else {

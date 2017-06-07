@@ -11,10 +11,33 @@ public class ArrayToInterval {
 
 	public static void main(String[] args) {
 		int[] N = {1, 2, 3, 5, 7, 8, 10, 11};
-		List<Interval> res = arrayToInterval(N);
+		List<Interval> res = arrayToIntervalMyStyle(N);
 		for (Interval in : res) {
 			System.out.println(in.start + "==" + in.end);
 		}
+	}
+	
+	// Better
+	static List<Interval> arrayToIntervalMyStyle(int[] N) {
+		List<Interval> res = new ArrayList<Interval>();
+		int start = N[0];
+		int end = N[0];
+		
+		for (int i = 1; i < N.length; i++) {
+			if (N[i] == end + 1) {
+				end = N[i];
+			} else {
+				Interval in = new Interval(start, end);
+				res.add(in);
+				start = N[i];
+				end = N[i];
+			}
+		}
+		
+		Interval last = new Interval(start, end);
+		res.add(last);
+		
+		return res;
 	}
 	
 	static List<Interval> arrayToInterval(int[] N) {

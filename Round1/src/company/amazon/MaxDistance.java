@@ -1,7 +1,7 @@
 package company.amazon;
 
 import java.util.List;
-
+// 相隔最远的两个数 A, B, 并且A < B, 返回indexOf(B) - indexOf(A)
 public class MaxDistance {
 	public int maximumGap2(final List<Integer> a) {
 	    if (a == null || a.size() == 0) {
@@ -26,6 +26,7 @@ public class MaxDistance {
 	    return res;
 	}
 	
+	// This is a good 2 pointers question
 	/**
 	 * To solve this problem, we need to get two optimum indexes of arr[]: left index i and right index j. 
 	 * For an element arr[i], we do not need to consider arr[i] for left index if there is an element smaller than arr[i] on left side of arr[i]. 

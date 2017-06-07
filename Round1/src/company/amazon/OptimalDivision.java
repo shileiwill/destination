@@ -28,11 +28,11 @@ There is only one optimal division for each test case.
 public class OptimalDivision {
     public String optimalDivision(int[] nums) {
         ResultType[][] hash = new ResultType[nums.length][nums.length];
-        ResultType res = helper(nums, 0, nums.length - 1, "", hash);
+        ResultType res = helper(nums, 0, nums.length - 1, hash);
         return res.maxStr;
     }
     
-    ResultType helper(int[] nums, int left, int right, String s, ResultType[][] hash) {
+    ResultType helper(int[] nums, int left, int right, ResultType[][] hash) {
         if (hash[left][right] != null) {
             return hash[left][right];
         }
@@ -53,8 +53,8 @@ public class OptimalDivision {
         rt.maxVal = Integer.MIN_VALUE;
         rt.minStr = rt.maxStr = "";
         for (int i = left; i < right; i++) { // Less than right
-            ResultType leftRT = helper(nums, left, i, "", hash);
-            ResultType rightRT = helper(nums, i + 1, right, "", hash);
+            ResultType leftRT = helper(nums, left, i, hash);
+            ResultType rightRT = helper(nums, i + 1, right, hash);
             
             if (rt.minVal > leftRT.minVal / rightRT.maxVal) {
                 rt.minVal = leftRT.minVal / rightRT.maxVal;

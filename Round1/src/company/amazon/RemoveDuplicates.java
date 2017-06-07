@@ -6,12 +6,30 @@ import java.util.Arrays;
 public class RemoveDuplicates {
 
 	public static void main(String[] args) {
-		Integer[] arr = {5000, 5000, 5000};
+		Integer[] arr = {5000, 5000, 6000};
 		ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(arr));
-		int res = removeDuplicates(a);
+		int res = removeDuplicatesAnotherVersion(a);
 		System.out.println(res);
 	}
 
+	public static int removeDuplicatesAnotherVersion(ArrayList<Integer> list) {
+	    if (list.size() <= 1) {
+	        return list.size();
+	    }
+	    
+	    int size = 0;
+	    for (int i = 1; i < list.size(); i++) {
+	    	if (list.get(i).equals(list.get(size))) {
+	    		continue;
+	    	} else {
+	    		swap(list, size + 1, i);
+	    		size++;
+	    	}
+	    }
+	    
+	    return size + 1;
+	}
+	
 	public static int removeDuplicates(ArrayList<Integer> a) {
 	    if (a.size() <= 1) {
 	        return a.size();

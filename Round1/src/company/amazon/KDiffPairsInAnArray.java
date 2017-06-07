@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import sun.applet.Main;
+
 /**
  * integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k.
 
@@ -27,6 +29,14 @@ All the integers in the given input belong to the range: [-1e7, 1e7].
  */
 public class KDiffPairsInAnArray {
 
+	public static void main(String[] args) {
+		KDiffPairsInAnArray kd = new KDiffPairsInAnArray();
+		int[] nums = {1, 3, 1, 5, 4};
+		int k = 0;
+		int res = kd.findPairs2MyStyle(nums, k);
+		System.out.println(res);
+	}
+	
     public int findPairs(int[] nums, int k) {
         int left = 0, right = 1;
         int res = 0;
@@ -52,7 +62,37 @@ public class KDiffPairsInAnArray {
         return res;
     }
     
-    // Easier to understand
+    public int findPairs2MyStyle(int[] nums, int k) {
+        if (k < 0) {
+            return 0;
+        }
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int res = 0;
+        
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int value = entry.getKey();
+            int count = entry.getValue();
+            int toFind = k + value; // Care about only 1 side
+            
+            if (toFind == value) {
+            	if (count >= 2) {
+            		res++;
+            	}
+            } else {
+            	if (map.containsKey(toFind)) {
+            		res++;
+            	}
+            }
+        }
+        
+        return res;
+    }
+    
+    // Easier to understand?
     public int findPairs2(int[] nums, int k) {
         if (k < 0) {
             return 0;

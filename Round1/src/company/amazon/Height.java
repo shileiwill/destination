@@ -22,10 +22,44 @@ public class Height {
 //		int[] arr = {3, 6, 7, 2, 3};
 		int[] arr = {9,1,2,8,6,2,1,3,6,7,2,3};
 		int[] res = nextHigher(arr);
+		int[] res2 = nextHigherMyStyle(arr);
 		
 		for (int val : res) {
-			System.out.print(val + "==");
+			System.out.print(val + "  ");
 		}
+		
+		System.out.println();
+		for (int val : res2) {
+			System.out.print(val + "  ");
+		}
+	}
+	
+	// This looks far better
+	static int[] nextHigherMyStyle(int[] arr) {
+		int len = arr.length;
+		int[] res = new int[len];
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		res[len - 1] = -1;
+		stack.push(arr[len - 1]);
+		
+		for (int i = arr.length - 2; i >= 0; i--) {
+			int now = arr[i];
+			
+			while (!stack.isEmpty() && now >= stack.peek()) {
+				stack.pop(); // Pop up all the shorter ones on the right
+			}
+			
+			if (stack.isEmpty()) {
+				res[i] = -1;
+				stack.push(now);
+			} else {
+				res[i] = stack.peek();
+				stack.push(now);
+			}
+		}
+		
+		return res;
 	}
 	
 	static int[] nextHigher(int[] arr) {

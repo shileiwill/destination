@@ -3,6 +3,7 @@ package company.amazon;
 import java.util.Arrays;
 
 /**
+ * This is a very good question
  * LC上一道题的变体，说把一个array分成两个subsequence（不是subarray），让这两个subsequence的和最接近，返回这两个subsequence。 
  */
 public class PartitionSubsetSum {
@@ -14,7 +15,8 @@ public class PartitionSubsetSum {
 		int res = sub.closestSubsetSum(N);
 		System.out.println(res);
 	}
-
+	
+	// Transform, then apply Binary Search
 	int closestSubsetSum(int[] N) {
 		Arrays.sort(N);
 		
@@ -49,6 +51,26 @@ public class PartitionSubsetSum {
 	}
 	
 	// 416 0-1 backpack
+	/**
+	 * Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+		Note:
+		Each of the array element will not exceed 100.
+		The array size will not exceed 200.
+		Example 1:
+		
+		Input: [1, 5, 11, 5]
+		
+		Output: true
+		
+		Explanation: The array can be partitioned as [1, 5, 5] and [11].
+		Example 2:
+		
+		Input: [1, 2, 3, 5]
+		
+		Output: false
+		
+		Explanation: The array cannot be partitioned into equal sum subsets.
+	 */
 	public boolean canPartition(int[] nums) {
 		int sum = 0;
 		int len = nums.length;
@@ -77,7 +99,7 @@ public class PartitionSubsetSum {
 				hash[i][j] = hash[i - 1][j];
 				
 				if (j - nums[i - 1] >= 0) {
-					hash[i][j] = hash[i][j] || hash[i][j - nums[i - 1]];
+					hash[i][j] = hash[i][j] || hash[i - 1][j - nums[i - 1]]; // Must be i - 1, since items cant be used repeatedly
 				}
 			}
 		}

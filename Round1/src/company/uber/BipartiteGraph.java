@@ -84,7 +84,7 @@ public class BipartiteGraph {
 	}
 	
 	// Using Map is better, easier
-	// If the graph has more than 1 independent parts, this Map couldnt cover all.
+	// If the graph has more than 1 independent parts, this Map couldn't cover all.
 	boolean isGraphBipartite(Map<Integer, Set<Integer>> graph) {
 		Set<Integer> group1 = new HashSet<Integer>();
 		Set<Integer> group2 = new HashSet<Integer>();

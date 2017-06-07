@@ -3,6 +3,7 @@ package company.amazon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DistinctNumbersInK {
@@ -10,52 +11,48 @@ public class DistinctNumbersInK {
 	public static void main(String[] args) {
 		Integer[] arr = {2, 7, 7, 81, 81};
 		ArrayList<Integer> A = new ArrayList<Integer>(Arrays.asList(arr));
-		DistinctNumbersInK.dNums(A, 1);
+		List<Integer> res = DistinctNumbersInK.distinctElements(A, 2);
+		
+		for (int val : res) {
+			System.out.println(val);
+		}
 	}
-
-    public static ArrayList<Integer> dNums(ArrayList<Integer> A, int B) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        
-        int len = A.size();
-        if (B > len) {
-            return res;
-        }
-        
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        
-        int left = 0, right = 0;
-        while (right < B) { // First group with K elements
-            int now = A.get(right);
-            map.put(now, map.getOrDefault(now, 0) + 1);
-            right++;
-        }
-        res.add(map.size()); // How many distinct numbers in this first group
-        
-//        right++;
-        while (left < A.size() - B && right <= A.size()) { // left is the index to remove, right is to add
-            int leftVal = A.get(left);
-            
-            int leftCount = map.get(leftVal);
-            if (leftCount > 1) {
-                map.put(leftVal, leftCount - 1);
-            } else {
-                map.remove(leftVal);
-            }
-            
-            if (right == A.size()) {
-                res.add(map.size());
-                break;
-            }
-            
-            int now = A.get(right);
-            map.put(now, map.getOrDefault(now, 0) + 1);
-            
-            res.add(map.size());
-            
-            left++; // Increase left, right pointers at the same time
-            right++;
-        }
-        
-        return res;
-    }
+	
+	// 以K个元素为一组，判断里边有多少distinct elements.
+	public static List<Integer> distinctElements(List<Integer> list, int K) {
+		List<Integer> res = new ArrayList<Integer>();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		
+		int left = 0;
+		int right = 0;
+		
+		while (right < K && right < list.size()) {
+			int num = list.get(right);
+			map.put(num, map.getOrDefault(num, 0) + 1);
+			right++;
+		}
+		
+		if (right < K) {
+			return res;
+		}
+		
+		res.add(map.size()); // First K
+		while (right < list.size()) {
+			int leftVal = list.get(left);
+			int rightVal = list.get(right);
+			
+			map.put(leftVal, map.get(leftVal) - 1);
+			if (map.get(leftVal) == 0) {
+				map.remove(leftVal);
+			}
+			
+			map.put(rightVal, map.getOrDefault(rightVal, 0) + 1);
+			res.add(map.size());
+			
+			left++;
+			right++;
+		}
+		
+		return res;
+	}
 }

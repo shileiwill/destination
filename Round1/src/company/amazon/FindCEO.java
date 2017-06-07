@@ -1,7 +1,9 @@
 package company.amazon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FindCEO {
 
@@ -21,7 +23,7 @@ public class FindCEO {
 		employees.add(e5);
 		employees.add(e6);
 		
-		UnionFind uf = new UnionFind(employees.size());
+		UnionFindMyStyle uf = new UnionFindMyStyle();
 		for (Employee e : employees) {
 			uf.union(e.selfId, e.bossId);
 		}
@@ -36,6 +38,35 @@ class Employee {
 	public Employee(int selfId, int bossId) {
 		this.selfId = selfId;
 		this.bossId = bossId;
+	}
+}
+
+class UnionFindMyStyle {
+	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+	
+	void union(int x, int y) { // X reports to Y
+		if (!map.containsKey(x)) {
+			map.put(x, x); // By default, the parent is itself
+		}
+		
+		if (!map.containsKey(y)) {
+			map.put(y, y);
+		}
+		
+		int parentX = find(x);
+		int parentY = find(y);
+		
+		if (parentX != parentY) {
+			map.put(parentX, parentY);
+		}
+	}
+	
+	int find(int x) {
+		while (x != map.get(x)) {
+			x = map.get(x);
+		}
+		
+		return x;
 	}
 }
 

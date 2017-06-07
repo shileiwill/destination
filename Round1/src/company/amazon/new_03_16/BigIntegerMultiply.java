@@ -7,10 +7,6 @@ From the following draft, we can immediately conclude:
  */
 public class BigIntegerMultiply {
 
-	public static void main(String[] args) {
-
-	}
-	
 	public int[] multiply(int[] num1, int[] num2) {
 		int m = num1.length;
 		int n = num2.length;
@@ -35,6 +31,7 @@ public class BigIntegerMultiply {
 
 	int divide2Integers(int val1, int val2) {
 		int flag = ((val1 < 0 && val2 > 0) || (val1 > 0 && val2 < 0)) ? -1 : 1;
+		boolean flag2 = (val1 < 0) ^ (val2 < 0);
 		
 		long num1 = Math.abs(Long.valueOf(val1));
 		long num2 = Math.abs(Long.valueOf(val2));
@@ -64,6 +61,47 @@ public class BigIntegerMultiply {
 				left = mid + 1;
 			}
 		}
+	}
+	
+	static String divide2Strings(String val1, String val2) {
+		StringBuilder sb = new StringBuilder();
+		int val2Int = Integer.valueOf(val2);
+		int carry = 0;
+		int pos = 0;
 		
+		while (pos < val1.length()) {
+			String num = "";
+			
+			if (carry != 0) {
+				num += carry;
+			}
+			
+			num += val1.charAt(pos);
+			int val = Integer.valueOf(num);
+			
+			int digit = val / val2Int;
+			carry = val % val2Int;
+			
+			if (digit == 0) {
+				if (sb.length() != 0) {
+					sb.append(digit);
+				}
+			} else {
+				sb.append(digit);
+			}
+			
+			pos++;
+		}
+		
+//		if (carry != 0) {
+//			sb.append(carry);
+//		}
+		
+		System.out.println(sb);
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		divide2Strings("338", "6");
 	}
 }

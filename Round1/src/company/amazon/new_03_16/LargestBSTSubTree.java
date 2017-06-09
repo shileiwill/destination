@@ -25,7 +25,7 @@ public class LargestBSTSubTree {
                                 visited[i]--;
                         }
                         else if(visited[i]==1)
-                        {		// now.length() will be current character's potential position
+                        {		// now.length() will be current character's potential position, must be exactly i space apart
                                 if(now.length()-i >= 0&&now.charAt(now.length()-i) == '0' + i) // i positions ahead of current position should be i
                                 {
                                         visited[i]=2;

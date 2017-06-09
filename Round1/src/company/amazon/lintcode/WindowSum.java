@@ -1,9 +1,7 @@
 package company.amazon.lintcode;
 /**
- * Given an array of n integer, and a moving window(size k), move the window at each iteration from the start of the array, find the sumof the element inside the window at each moving.
-Have you met this question in a real interview? 
-Yes
-Example
+ * Given an array of n integer, and a moving window(size k), move the window at each iteration from the start of the array, 
+ * find the sum of the element inside the window at each moving.
 For array [1,2,7,8,5], moving window size k = 3. 
 1 + 2 + 7 = 10
 2 + 7 + 8 = 17
@@ -16,7 +14,6 @@ public class WindowSum {
      * @return the sum of the element inside the window at each moving.
      */
     public int[] winSum(int[] nums, int k) {
-        // write your code here
         if (nums == null || nums.length == 0) {
             return new int[]{};
         }

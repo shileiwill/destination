@@ -143,11 +143,12 @@ public class CustomizedHashMap<K, V> {
 	void resize() {
 		int oldSize = this.capacity;
 		this.capacity = this.capacity * 2;
+		Entry<K, V>[] oldArr = copyFromOld();
 		this.arr = (Entry<K, V>[])new Object[this.capacity];
 		
 		// Rehash
 		for (int i = 0; i < oldSize; i++) {
-			Entry<K, V> entry = arr[i];
+			Entry<K, V> entry = oldArr[i];
 			
 			while (entry != null) {
 				K key = entry.key;

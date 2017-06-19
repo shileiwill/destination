@@ -67,4 +67,26 @@ public class ContiguousArray {
         return max;
     }
 
+    // 2 Pointers: 这个方法不行 [0, 1, 0, 1] 啥时候移动left pointer是一个问题，虽然当前不满足，但是后边可能catch up
+    public int findMaxLength2Pointers(int[] nums) {
+        int left = 0, right = 0;
+        int sum = 0;
+        int max = 0;
+        
+        while (right < nums.length) {
+            int rightDigit = nums[right];
+            sum += (rightDigit == 0) ? -1 : 1;
+            
+            if (sum == 0) {
+                max = Math.max(max, right - left + 1);        
+                int leftDigit = nums[left];
+                sum += (leftDigit == 0) ? -1 : 1;
+                left++;
+            }
+            
+            right++;
+        }
+        
+        return max;
+    }
 }

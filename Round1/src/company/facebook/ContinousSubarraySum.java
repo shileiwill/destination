@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 523. Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.
+ * 523. Given a list of non-negative numbers and a target integer k, write a function to check 
+ * if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.
 
 Example 1:
 Input: [23, 2, 4, 6, 7],  k=6
@@ -55,11 +56,7 @@ public class ContinousSubarraySum {
         }
         
         for (int i = 0; i <= len; i++) {
-            for (int j = i + 1; j <= len; j++) {
-                if (j - i < 2) {
-                    continue;
-                }
-                
+            for (int j = i + 2; j <= len; j++) {
                 int value = sum[j] - sum[i];
                 
                 if (k == 0) {

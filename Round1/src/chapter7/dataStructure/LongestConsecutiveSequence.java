@@ -97,30 +97,6 @@ public class LongestConsecutiveSequence {
             max = Math.max(max, count);
         }
         
-        // Here is iterating array
-//        for (int num : nums) {
-//            if (!set.contains(num)) {
-//                continue;
-//            }
-//            
-//            int count = 1;
-//            set.remove(num);
-//            
-//            int origin = num; // Keep a note of original state
-//            
-//            while (set.contains(--num)) {
-//                count++;
-//                set.remove(num);
-//            }
-//            
-//            while (set.contains(++origin)) {
-//                count++;
-//                set.remove(origin);
-//            }
-//            
-//            max = Math.max(max, count);
-//        }
-        
         return max;
     }
     

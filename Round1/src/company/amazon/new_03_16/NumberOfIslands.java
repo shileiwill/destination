@@ -2,13 +2,19 @@ package company.amazon.new_03_16;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * 这个Follow up是经典 number of distinct islands
+比之前的明显要难些。 需要用到hashing得思想。 
+每一个岛将遍历完的点id(每个cell 可以分配一个id, id = i*m+j) 组合起来， 返回字符串，比如 “1/2/3/5”  这个岛有四个点。如果另一个岛是 "11/12/13/15"  只要把它offset下， 第一位归1， 它也变成"1/2/3/5"， 所以这2个岛的shape是一样的。 将这些第一位归1的字符串往set里丢。自然就除重了
+中心思想： 将CELL ID组合来表示一个岛(hash to string)，然后变形string, 最后往set里丢。 done
+ */
 public class NumberOfIslands {
 
 	public static void main(String[] args) {
 
 	}
 
+	// 如果要计算最大的岛的面积，每个cube是一平方米
 	int[][] directions = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 	public int numIslandsDFS(char[][] grid) {
 		int count = 0;
@@ -19,7 +25,9 @@ public class NumberOfIslands {
 			for (int j = 0; j < n; j++) {
 				if (grid[i][j] == '1') {
 					count++;
-					dfs(grid, i, j);
+					int[] area = {1};
+					dfs(grid, i, j, area);
+					System.out.println("This area of this island : " + area[0]);
 				}
 			}
 		}
@@ -27,7 +35,7 @@ public class NumberOfIslands {
 		return count;
 	}
 	
-	void dfs(char[][] grid, int i, int j) {
+	void dfs(char[][] grid, int i, int j, int[] area) {
 		grid[i][j] = '0';
 		
 		for (int[] dir : directions) {
@@ -36,7 +44,8 @@ public class NumberOfIslands {
 			
 			if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == '1') {
 				grid[x][y] = '0';
-				dfs(grid, x, y);
+				area[0] = area[0] + 1;
+				dfs(grid, x, y, area);
 			}
 		}
 	}

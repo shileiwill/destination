@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Tree is not binary tree
-public class LowestCommonAncestorInTree {
+public class LowestCommonAncestorInNaryTree {
 
 	public static void main(String[] args) {
 		Node n3 = new Node(3);
@@ -39,7 +39,7 @@ public class LowestCommonAncestorInTree {
 		list4.add(n115);
 		n15.children = list4;
 		
-		LowestCommonAncestorInTree lca = new LowestCommonAncestorInTree();
+		LowestCommonAncestorInNaryTree lca = new LowestCommonAncestorInNaryTree();
 		Node res = lca.findLowestCommonAncestor(n3, n7, n31);
 		System.out.println(res.val);
 	}

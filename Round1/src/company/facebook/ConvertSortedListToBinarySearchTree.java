@@ -35,8 +35,8 @@ public class ConvertSortedListToBinarySearchTree {
             return null;
         }
         
+        ListNode prev = null;
         ListNode slow = head;
-        ListNode prev = slow;
         ListNode fast = head.next;
         
         while (fast != null && fast.next != null) {
@@ -48,4 +48,21 @@ public class ConvertSortedListToBinarySearchTree {
         return prev;
     }
 
+    TreeNode sortedArrayToBST(int[] arr) {
+    	return helper(arr, 0, arr.length - 1);
+    }
+    
+    TreeNode helper(int[] arr, int left, int right) {
+    	if (left > right) {
+    		return null;
+    	}
+    	
+    	int mid = (left + right) / 2;
+    	TreeNode root = new TreeNode(arr[mid]);
+    	
+    	root.left = helper(arr, left, mid - 1);
+    	root.right = helper(arr, mid + 1, right);
+    	
+    	return root;
+    }
 }

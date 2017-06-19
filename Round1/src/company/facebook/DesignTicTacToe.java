@@ -80,7 +80,6 @@ public class DesignTicTacToe {
     }
     
     boolean checkBoard(int row, int col, char c) {
-        
         boolean isRow = true;
         for (int i = 0; i < board[row].length; i++) {
             if (board[row][i] != c) {

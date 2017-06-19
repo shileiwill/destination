@@ -2,7 +2,9 @@ package company.facebook;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class NearestKPoints {
@@ -32,6 +34,7 @@ public class NearestKPoints {
 		System.out.println(p.x + "==" + p.y);
 	}
 
+	// Using Heap: N * KlogK
 	public List<Point> findNearestPoints(Point p, int k, Point[] points) {
 		PriorityQueue<Point> heap = new PriorityQueue<Point>(k + 1, new Comparator<Point>(){
 			public int compare(Point p1, Point p2) {
@@ -54,8 +57,51 @@ public class NearestKPoints {
 		return res;
 	}
 	
+	// Another O(N) approach is using bucket sort
+	public List<Point> findNearestPointsBucketSort(Point p0, int k, Point[] points) {
+		Map<Point, Integer> map = new HashMap<Point, Integer>();
+		
+		int longest = 0;
+		for (Point p : points) {
+			map.put(p, getDistance(p, p0));
+			longest = Math.max(longest, map.get(p));
+		}
+		
+		List<Point>[] bucket = new List[longest + 1];
+		
+		for (Map.Entry<Point, Integer> entry : map.entrySet()) {
+			Point p = entry.getKey();
+			int distance = entry.getValue();
+			
+			if (bucket[distance] == null) {
+				bucket[distance] = new ArrayList<Point>();
+			}
+			
+			bucket[distance].add(p);
+		}
+		
+		List<Point> res = new ArrayList<Point>();
+		for (int i = 0; i < bucket.length && res.size() < k; i++) {
+			if (bucket[i] != null) {
+				res.addAll(bucket[i]); // 有可能会超了K
+			}
+		}
+		
+		return res;
+	}
+	
+	/**
+	 * Quickselect uses the same overall approach as quicksort, 
+	 * choosing one element as a pivot and partitioning the data in two based on the pivot, 
+	 * accordingly as less than or greater than the pivot. However, instead of recursing into both sides, 
+	 * as in quicksort, quickselect only recurses into one side – the side with the element it is searching for. 
+	 * This reduces the average complexity from O(n log n) to O(n), with a worst case of O(n2).
+	 * Time complexity of quick sort, worst case is O(n2). Merge sort worst case is O(nlogn)
+	 */
 	public Point findNearestKthPoint(Point[] points, Point p, int k) {
 		return helper(points, p, k - 1, 0, points.length - 1);
+		
+		// If want to find the k points, just use a for loop, searching for index 0 to k - 1
 	}
 	
 	Point helper(Point[] points, Point p, int k, int left, int right) {

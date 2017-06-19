@@ -9,27 +9,27 @@ You are given an API bool isBadVersion(version) which will return whether versio
  *
  */
 public class FirstBadVersion {
-//    public int firstBadVersion(int n) {
-//        int left = 1;
-//        int right = n;
-//        
-//        while (left + 1 < right) {
-//            int mid = left + (right - left) / 2;
-//            
-//            if (isBadVersion(mid)) {
-//                right = mid;
-//            } else {
-//                left = mid;
-//            }
-//        }
-//        
-//        if (isBadVersion(left)) {
-//            return left;
-//        }
-//        
-//        if (isBadVersion(right)) {
-//            return right;
-//        }
-//        return -1;
-//    }
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+        
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            
+            if (isBadVersion(mid)) {
+                right = mid;
+            } else {
+                left = mid;
+            }
+        }
+        
+        if (isBadVersion(left)) {
+            return left;
+        }
+        
+        if (isBadVersion(right)) {
+            return right;
+        }
+        return -1;
+    }
 }

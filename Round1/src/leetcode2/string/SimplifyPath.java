@@ -20,41 +20,6 @@ Another corner case is the path might contain multiple slashes '/' together, suc
 In this case, you should ignore redundant slashes and return "/home/foo".
  */
 public class SimplifyPath {
-    // Doesn't work
-    public String simplifyPath2(String path) {
-        String[] arr = path.split("/");
-        Stack<String> stack = new Stack<String>();
-        
-        for (String str : arr) {
-            System.out.println(str);
-            if (str.equals(".") || str.equals("")) {
-                continue;
-            } else if (str.equals("..")) {
-                if (stack.isEmpty()) {
-                    return "/";
-                } else {
-                    stack.pop();
-                }
-            } else { // abc
-                stack.push(str);
-            }
-        }
-        
-        StringBuilder sb = new StringBuilder("/");
-        List<String> list = new ArrayList<String>(stack);
-
-        for (String x : list)
-        {
-            sb.append(x + "/");
-        }
-        
-        if (path.charAt(path.length() - 1) != '/') {
-            sb = new StringBuilder(sb.substring(0, sb.length() - 1));
-        }
-        
-        return sb.toString();
-    }
-    
     // Use LinkedList as Stack and StringBuilder    
     public String simplifyPath1(String path) {
         String[] arr = path.split("/");

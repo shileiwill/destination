@@ -59,10 +59,7 @@ public class Subsets {
     }
     
     // Iteration
-    public static final int [] input = new int [] {1 , 2, 3};
-    
     public static List<List<Integer>> combinationOf(int[] arr){
-        
         Arrays.sort(arr);
         List<List<Integer>> r = new ArrayList();
         r.add(new ArrayList());

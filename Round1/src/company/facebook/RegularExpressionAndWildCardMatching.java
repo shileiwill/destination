@@ -3,7 +3,9 @@ package company.facebook;
 public class RegularExpressionAndWildCardMatching {
 
 	public static void main(String[] args) {
-
+		RegularExpressionAndWildCardMatching re = new RegularExpressionAndWildCardMatching();
+		boolean res = re.matchByDPBetter("aa", "*");
+		System.out.println(res);
 	}
 
 	// 给两个字符串，pattern里边可能有*, ?. * match 前边任意数量的字符， ? match 一个
@@ -56,6 +58,33 @@ public class RegularExpressionAndWildCardMatching {
 		return hash[m][n];
 	}
 	
+	boolean matchByDPBetter(String s, String p) {
+		int m = s.length();
+		int n = p.length();
+		
+		boolean[][] hash = new boolean[m + 1][n + 1];
+		hash[0][0] = true;
+		
+		for (int i = 1; i <= n; i++) {
+			hash[0][i] = hash[0][i - 1] && p.charAt(i - 1) == '*';
+		}
+		
+		for (int i = 1; i <= m; i++) {
+			boolean flag = false; // Flag is to track if there was a success previously
+			
+			for (int j = 1; j <= n; j++) {
+				flag = flag || hash[i - 1][j - 1];
+				if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?') {
+					hash[i][j] = hash[i - 1][j - 1];
+				} else if (p.charAt(j - 1) == '*') {
+					hash[i][j] = (i == 1) || flag;
+				}
+			}
+		}
+		
+		return hash[m][n];
+	}
+	
 	/**
 		10. Implement regular expression matching with support for '.' and '*'.
 	
@@ -94,7 +123,7 @@ public class RegularExpressionAndWildCardMatching {
 	        boolean[][] state = new boolean[s.length() + 1][p.length() + 1];
 	        state[0][0] = true;
 	        
-	        for (int j = 1; j < state[0].length; j++) {
+	        for (int j = 1; j <= p.length(); j++) {
 	            if (p.charAt(j - 1) == '*') {
 	                if (state[0][j - 1] || (j > 1 && state[0][j - 2])) { // [j - 2] 可以让前边的一个出现0次
 	                    state[0][j] = true;
@@ -102,13 +131,11 @@ public class RegularExpressionAndWildCardMatching {
 	            } 
 	        }
 	        
-	        for (int i = 1; i < state.length; i++) {
-	            for (int j = 1; j < state[i].length; j++) {
+	        for (int i = 1; i <= s.length(); i++) {
+	            for (int j = 1; j <= p.length(); j++) {
 	                if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
 	                    state[i][j] = state[i - 1][j - 1];
-	                }
-	                
-	                if (p.charAt(j - 1) == '*') {
+	                } else if (p.charAt(j - 1) == '*') {
 	                    if (s.charAt(i - 1) != p.charAt(j - 2) && p.charAt(j - 2) != '.') {
 	                        state[i][j] = state[i][j - 2]; // * can only stand for 0
 	                    } else {

@@ -28,7 +28,7 @@ The flattened tree should look like:
             \
              6
  */
-public class FlattenBinaryTreeToLinkedList {
+public class BinaryTreeFlattenToLinkedList {
 
     TreeNode prev = null;
     public void flatten(TreeNode root) {

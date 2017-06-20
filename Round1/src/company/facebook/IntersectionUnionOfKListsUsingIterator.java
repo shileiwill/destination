@@ -68,7 +68,7 @@ public class IntersectionUnionOfKListsUsingIterator {
 			if (node.it.hasNext()) {
 				node.val = node.it.next();
 				heap.offer(node);
-			} // If there is no next(), dont add back to heap
+			} // If there is no next(), don't add back to heap
 		}
 		
 		for (int val : res) {

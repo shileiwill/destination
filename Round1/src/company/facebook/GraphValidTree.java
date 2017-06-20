@@ -90,6 +90,8 @@ public class GraphValidTree {
                 visited.add(next);
                 queue.offer(next);
             }
+            
+            // Can remove now from map? map.remove(now)
         }
         
         return n == visited.size();

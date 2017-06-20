@@ -55,7 +55,7 @@ public class TaskCoolDown {
 				int oldIndex = map.get(c);
 				int newIndex = sb.length();
 				
-				if (newIndex - oldIndex <= coolDown + 1) { 
+				if (newIndex - oldIndex <= coolDown + 1) {
 					for (int i = 0; i < coolDown - (newIndex - oldIndex) + 1; i++) {
 						sb.append("*");
 					}

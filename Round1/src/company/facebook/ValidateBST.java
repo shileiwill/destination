@@ -29,6 +29,29 @@ public class ValidateBST {
 		return true;
 	}
 	
+	// Recursion. This is easier
+    public boolean isValidBST(TreeNode root) {
+        return helper(root);
+    }
+    
+    TreeNode pre = null; // Keep track of previous node
+    boolean helper(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        
+        boolean left = helper(node.left);
+        
+        if (pre != null && pre.val >= node.val) {
+            return false;
+        }
+        
+        pre = node;
+        boolean right = helper(node.right);
+        
+        return left && right;
+    }
+    
 	boolean validateBST(TreeNode root) {
 		ResultType rt = dfs(root);
 		return rt.isBST;

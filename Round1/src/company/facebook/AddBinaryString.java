@@ -1,5 +1,8 @@
 package company.facebook;
-
+/**
+ * follow-up 如果不是只加兩個數 是加a list of string nums
+想到用寫好的function (也想到LC 23 Merge 2 sorted list) 兩兩處理 討論時間空間複雜度 O(k n). k 是 num個數, n是一個binary string的長度
+ */
 public class AddBinaryString {
 
 	public static void main(String[] args) {

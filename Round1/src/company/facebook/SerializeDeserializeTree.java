@@ -117,7 +117,7 @@ public class SerializeDeserializeTree {
 		return root;
 	}
 	
-	// Given a String, construct binary tree
+	// Given a String, construct binary tree. Is this good? No
 	TreeNode constructBinaryTree(String s) {
 		if (s.length() == 0) {
 			return null;

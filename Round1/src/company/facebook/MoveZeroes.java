@@ -36,6 +36,24 @@ public class MoveZeroes {
         }
     }
     
+    // Use insert index. 这个的write比上边的方案多
+    public void moveZeroesUsingInsertIndex(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
+        
+        int insertPos = 0;
+        for (int i = 0; i < nums.length; i++) {
+        	if (nums[i] != 0) { // 非零，往左边插
+        		nums[insertPos++] = nums[i]; 
+        	}
+        }
+        
+        while (insertPos < nums.length) {
+        	nums[insertPos++] = 0;
+        }
+    }
+    
 	// left指向左边的0， right指向left之后的第一个非零
     public void moveZeroes(int[] nums) {
         for (int left = 0; left < nums.length; left++) {

@@ -38,6 +38,7 @@ public class BinaryTreeMaximumPathSumAndLongestPath {
 	/*
 	 * 给定一个二叉树，任意两个节点之间必然是有一条路径相通的，假定父节点和它的孩子节点的距离为单位1，求二叉树中相距最远的两个节点间的路径长度
 	 * 二叉树最长路径 不必经过root
+	 * Leaf to Leaf longest path
 	 */
 	int max = 0;
 	public int longestPath(TreeNode root) {

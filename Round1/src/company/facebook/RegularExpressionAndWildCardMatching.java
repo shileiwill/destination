@@ -58,31 +58,32 @@ public class RegularExpressionAndWildCardMatching {
 		return hash[m][n];
 	}
 	
+	// 把string 和 pattern 反过来
 	boolean matchByDPBetter(String s, String p) {
-		int m = s.length();
 		int n = p.length();
+		int m = s.length();
 		
-		boolean[][] hash = new boolean[m + 1][n + 1];
+		boolean[][] hash = new boolean[n + 1][m + 1]; // pattern, string
 		hash[0][0] = true;
 		
 		for (int i = 1; i <= n; i++) {
-			hash[0][i] = hash[0][i - 1] && p.charAt(i - 1) == '*';
+			hash[i][0] = hash[i - 1][0] && p.charAt(i - 1) == '*';
 		}
 		
-		for (int i = 1; i <= m; i++) {
-			boolean flag = false; // Flag is to track if there was a success previously
-			
-			for (int j = 1; j <= n; j++) {
-				flag = flag || hash[i - 1][j - 1];
-				if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?') {
+		for (int i = 1; i <= n; i++) { // Pattern first
+		    boolean flag = false;
+		    
+		    for (int j = 1; j <= m; j++) { // Each char in String
+			    flag = flag || hash[i - 1][j]; // As long as 1 char is true, flag is true
+				if (s.charAt(j - 1) == p.charAt(i - 1) || p.charAt(i - 1) == '?') {
 					hash[i][j] = hash[i - 1][j - 1];
-				} else if (p.charAt(j - 1) == '*') {
-					hash[i][j] = (i == 1) || flag;
+				} else if (p.charAt(i - 1) == '*') {
+				    hash[i][j] = (i == 1) || flag; // (i == 1) Pattern中第一个就是*， 这个可以match无限个char
 				}
 			}
 		}
 		
-		return hash[m][n];
+		return hash[n][m];
 	}
 	
 	/**
@@ -125,7 +126,7 @@ public class RegularExpressionAndWildCardMatching {
 	        
 	        for (int j = 1; j <= p.length(); j++) {
 	            if (p.charAt(j - 1) == '*') {
-	                if (state[0][j - 1] || (j > 1 && state[0][j - 2])) { // [j - 2] 可以让前边的一个出现0次
+	                if (state[0][j - 1] || (j >= 2 && state[0][j - 2])) { // [j - 2] 可以让前边的一个出现0次
 	                    state[0][j] = true;
 	                }
 	            } 

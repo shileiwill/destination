@@ -7,7 +7,7 @@ If it is overflow, return MAX_INT.
 public class Divide2Integers {
 
 	public static void main(String[] args) {
-		System.out.println(divide(265, 12));
+		System.out.println(divideMod(265, 12));
 	}
 
 	static int divide(int A, int B) {
@@ -48,6 +48,41 @@ public class Divide2Integers {
 			return (int)right;
 		} else {
 			return (int)left;
+		}
+	}
+	
+	static int divideMod(int C, int D) {
+		int flag = 1;
+		
+		if ((C > 0 && D < 0) || (C < 0 && D > 0)) {
+			flag = -1;
+		}
+		
+		if (C == 0 || C < D) {
+			return 0;
+		}
+		
+		if (D == 0) {
+			return flag == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+		}
+		
+		int left = 1;
+		int right = C;
+		
+		while (true) {
+			int mid = left + (right - left) / 2;
+			
+			double val = (C * 1.0 / D);
+			if (mid == val) {
+				return 0;
+			} else if (mid < val) {
+				if ((mid + 1) > val) {
+					return (C - mid * D) * flag;
+				}
+				left = mid + 1;
+			} else {
+				right = mid - 1;
+			}
 		}
 	}
 }

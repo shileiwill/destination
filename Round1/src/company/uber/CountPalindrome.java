@@ -1,6 +1,6 @@
 package company.uber;
 /**
- * Given a string, the task is to count all palindrome substring in a given string. Length of palindrome substring is greater then or equal to 2.
+ * Given a string, the task is to count all palindrome substring in a given string. Length of palindrome substring is greater than or equal to 2.
 Examples:
 
 Input : str = "abaab"

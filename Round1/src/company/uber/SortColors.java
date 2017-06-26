@@ -8,7 +8,13 @@ Here, we will use the integers 0, 1, and 2 to represent the color red, white, an
 public class SortColors {
 
 	public static void main(String[] args) {
-
+		int[] nums = {2, 1, 0, 0, 1, 2, 1, 0, 0, 1, 2};
+		SortColors sc = new SortColors();
+		sc.sortColors(nums);
+		
+		for (int val : nums) {
+			System.out.print(val + "--");
+		}
 	}
 
 
@@ -17,8 +23,8 @@ public class SortColors {
             return;
         }
         
-        int pos = helper(nums, 0, nums.length - 1, 0);
-        helper(nums, pos, nums.length - 1, 1);
+        int pos = helper2(nums, 0, nums.length - 1, 0);
+        helper2(nums, pos, nums.length - 1, 1);
     }
     
     int helper(int[] nums, int start, int end, int val) {
@@ -40,6 +46,28 @@ public class SortColors {
         }
         
         return left;
+    }
+    
+    // 这一招也行， 指针在两侧
+    int helper2(int[] nums, int start, int end, int val) {
+        while (start <= end) {
+            while (start <= end && nums[start] == val) {
+            	start++;
+            } // Left will be the first non-val
+            
+            while (start <= end && nums[end] != val) {
+            	end--;
+            } // Right will be the first val
+            
+            if (start <= end) {
+            	swap(nums, start, end);
+            }
+            
+            start++;
+            end--;
+        }
+        
+        return start;
     }
     
     void swap(int[] nums, int left, int right) {

@@ -10,13 +10,13 @@ public class LongestValidParenthesis {
 
 	public int longestValidParentheses(String s) {
 		Stack<Integer> stack = new Stack<Integer>(); // Stack contains indexes
-		stack.push(-1);
+		stack.push(-1); // 起始
 		int res = 0;
 		
 		for (int i = 0; i < s.length(); i++) {
 			char now = s.charAt(i);
 			
-			if (now == ')' && stack.size() > 1 && s.charAt(stack.peek()) == '(') {
+			if (now == ')' && stack.size() > 1 && s.charAt(stack.peek()) == '(') { // 这一串条件很关键
 				stack.pop(); // Throw the left (
 				res = Math.max(res, i - stack.peek() + 1);
 			} else { // Could be ( and )

@@ -82,9 +82,12 @@ public class LowestCommonAncestorInNaryTree {
 	
 	/**
 	 * 第一题问最低公共节点。LC236。 然后是问最深节点的最低公共节点。不一定是Binary Tree，做出来了面试官没说有什么问题然后时间到了让分析一下复杂度。
-	 * 跟二叉树一样，不用先求深度，可以one pass。   对于root，每个孩子遍历一遍，如果孩子深度大于max，就更新max，然后返回的是孩子，如果等于max，说明有多个孩子深度一样，那么返回root
+	 * 跟二叉树一样，不用先求深度，可以one pass。   对于root，每个孩子遍历一遍，如果孩子深度大于max，就更新max，然后返回的是孩子，
+	 * 如果等于max，说明有多个孩子深度一样，那么返回root
 	 * 
 	 * Brute force is to find the lowest nodes first, and then find common ancestor
+	 * 
+	 * 这个是二叉树的解法, 还需要好好寻思寻思
 	 */
 	public Result deepestRoot(TreeNode node) {
 		if (node == null) {
@@ -109,6 +112,7 @@ public class LowestCommonAncestorInNaryTree {
 		return res;
 	}
 	
+	// This is N-ary tree
 	public Result deepestRoot(Node node) {
 		if (node == null) {
 			return new Result(0, null);

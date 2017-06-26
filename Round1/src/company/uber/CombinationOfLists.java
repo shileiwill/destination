@@ -36,6 +36,7 @@ public class CombinationOfLists {
 		col.combinations(source);
 	}
 
+	// Do we need the visited set?
 	List<List<Integer>> combinations(List<List<Integer>> source) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> list = new ArrayList<Integer>();

@@ -27,6 +27,7 @@ public class LinkedListRandomNode {
     // }
     
     /*
+     * This is just reseverior sampling
     http://blog.jobbole.com/42550/
     When we read the first node head, if the stream ListNode stops here, we can just return the head.val. The possibility is 1/1.
 

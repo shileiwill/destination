@@ -56,6 +56,9 @@ public class BSTToLinkedList {
 		}
 		
 		return true;
+		
+		// This is better, because of lazy initialization
+		// return isFullTree(node.left) && isFullTree(node.right);
 	}
 	
 	// You can also use Map, BFS. Anyway, need to traverse through the tree

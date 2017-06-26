@@ -19,10 +19,24 @@ Follow up: Could you improve it to O(n log n) time complexity?
  *
  */
 public class LongestIncreasingSubsequence {
+	
+    public static void main(String[] args) {
+    	LongestIncreasingSubsequence lis = new LongestIncreasingSubsequence();
+    	int[] arr = {10, 9, 2, 5, 3, 7, 101, 18};
+    	int res = lis.lengthOfLIS(arr);
+    	System.out.println(res);
+    	
+    	int res2 = lis.lengthOfLongestConsecutiveIncreasingSequence(arr);
+    	System.out.println(res2);
+	}
+    
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
+        
+        int max = 0;
+        
         // i 之前，并且以i结尾的字符，最长序列长度
         int[] hash = new int[nums.length];
         hash[0] = 1;
@@ -31,15 +45,13 @@ public class LongestIncreasingSubsequence {
             hash[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) { // 去前边遍历所有小于nums[i]的数，看看他们的frequency， 并且+1
-                    hash[i] = Math.max(hash[i], hash[j] + 1);
+                    hash[i] = Math.max(hash[i], hash[j] + 1); // 必须得遍历，因为数组是unsorted.
                 }
             }
+            max = Math.max(max, hash[i]);
         }
         
-        // Find the maximum
-        Arrays.sort(hash);
-        
-        return hash[nums.length - 1];
+        return max;
     }
     
     // This question is very similar to Longest Increasing Subsequence, but easier
@@ -57,6 +69,8 @@ public class LongestIncreasingSubsequence {
 	
 	Given [5, 4, 3, 2, 1],
 	return false.
+	
+	To achieve O(n) time, you can use TreeMap
      */
     public boolean increasingTriplet(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -93,6 +107,7 @@ public class LongestIncreasingSubsequence {
         return false;
     }
     
+    // Wrong
     public int lengthOfLongestConsecutiveIncreasingSequence(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -104,7 +119,7 @@ public class LongestIncreasingSubsequence {
         for (int i = 1; i < nums.length; i++) {
             hash[i] = 1;
             if (nums[i] > nums[i - 1]) { // 去前边遍历所有小于nums[i]的数，看看他们的frequency， 并且+1
-                hash[i] = hash[i - 1] + 1;
+                hash[i] = hash[i - 1] + 1; // Will not work, need to loop
             }
         }
         
@@ -114,13 +129,5 @@ public class LongestIncreasingSubsequence {
         return hash[nums.length - 1];
     }
     
-    public static void main(String[] args) {
-    	LongestIncreasingSubsequence lis = new LongestIncreasingSubsequence();
-    	int[] arr = {10, 9, 2, 5, 3, 7, 101, 18};
-    	int res = lis.lengthOfLIS(arr);
-    	System.out.println(res);
-    	
-    	int res2 = lis.lengthOfLongestConsecutiveIncreasingSequence(arr);
-    	System.out.println(res2);
-	}
+
 }

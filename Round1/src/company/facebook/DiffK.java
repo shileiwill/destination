@@ -1,6 +1,10 @@
 package company.facebook;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Given an array ‘A’ of sorted integers and another non negative integer k, find if there exists 2 indices i and j such that A[i] - A[j] = k, i != j.
@@ -16,9 +20,16 @@ Try doing this in less than linear space complexity.
 public class DiffK {
 
 	public static void main(String[] args) {
-
+		Integer[] arr = {1, 3, 3};
+		int target = 0;
+		
+		List<Integer> list = Arrays.asList(arr);
+		DiffK dk = new DiffK();
+		boolean res = dk.diffPossibleMap(list, target);
+		System.out.println(res);
 	}
 
+	// 2 pointers because array is sorted
 	public int diffPossible(ArrayList<Integer> a, int b) {
 	    int left = 0, right = 1;
 	    
@@ -38,5 +49,27 @@ public class DiffK {
 	    }
 	    
 	    return 0;
+	}
+	
+	public boolean diffPossibleMap(List<Integer> list, int target) {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (int i = 0; i < list.size(); i++) {
+			int num = list.get(i);
+			int toFind = num - target; // Need to sort list first?
+			
+			if (map.containsKey(toFind)) {
+				if (target == 0) {
+					if (map.get(toFind) >= 1) {
+						return true;
+					}
+				} else {
+					return true;
+				}
+			}
+			
+			map.put(num, map.getOrDefault(num, 0) + 1);
+		}
+		
+		return false;
 	}
 }

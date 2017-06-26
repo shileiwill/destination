@@ -41,4 +41,22 @@ public class CutWallBrick {
 		
 		return minCut;
 	}
+	
+	// 这个是不是更好理解？
+	int minCutBetter(int[][] matrix) {
+		// Cutting point, from left start point, Count
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		int max = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			int sum = 0;
+			for (int j = 0; j < matrix[i].length; j++) {
+				sum += matrix[i][j];
+				
+				map.put(sum, map.getOrDefault(sum, 0) + 1);
+				max = Math.max(max, map.get(sum));
+			}
+		}
+		
+		return matrix.length - max;
+	}
 }

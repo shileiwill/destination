@@ -7,6 +7,7 @@ package company.facebook;
 Longest common substring
 
 找两个字符串中长度为N以上的共同子串
+这么经典的DP要记得啊
  */
 public class LongestCommonSubstring {
 

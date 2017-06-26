@@ -77,7 +77,7 @@ Given words = ["oath","pea","eat","rain"] and board =
 ]
 Return ["eat","oath"].
 
-给定一个字典 和 一个字符串数组 找出所有可能出现在字符串中的字符可以组成字典里面的字，  也就是字符串数组是个2 维char矩阵，不过没给字符可以走八个方向。DFS 解决 然后问了下为啥不用BFS
+给定一个字典 和 一个char二维数组 找出所有可能出现在char[][]中的可以组成字典里面的字，  也就是字符串数组是个2 维char矩阵，不过每个字符可以走八个方向。DFS 解决 然后问了下为啥不用BFS
 The magic is to move trieNode
  */
 class WordSearch2 {
@@ -137,7 +137,7 @@ class WordSearch2 {
             }
         }
         
-        if (root.children.containsKey(board[i][j])) {
+        if (root.children.containsKey(board[i][j])) { // This is the start point
             for (int[] dir : directions) {
                 int x = i + dir[0];
                 int y = j + dir[1];
@@ -198,7 +198,7 @@ class WordSearch2 {
             return node != null && node.hasWord;
         }
         
-        // To solve following question
+        // To solve following question, 如果一个长字符串中有字典中的单词，替换
         TrieNode containsPrefix(String word, int pos) { // Word is in sentence
         	if (pos == word.length()) {
         		if (this.hasWord) {

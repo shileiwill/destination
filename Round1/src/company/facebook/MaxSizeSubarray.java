@@ -45,7 +45,35 @@ public class MaxSizeSubarray {
     }
     
     // longest subarray sum to target
-    public int maxSubArrayLen(int[] nums, int k) {
+    public static int maxSubArrayLenMyStyle(int[] nums, int target) {
+        int max = 0;
+        int len = nums.length;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        int[] sum = new int[len + 1];
+        
+        for (int i = 1; i < len + 1; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1];
+        }
+        
+        for (int i = 0; i <= len; i++) {
+            int now = sum[i];
+            int toFind = target - now;
+            
+        	if (map.containsKey(toFind)) {
+                max = Math.max(max, i - map.get(toFind));
+            }
+            
+            // If sum exists before, it must be a better one, so don't overwrite
+            if (!map.containsKey(now)) {
+                map.put(now, i);
+            }
+        }
+        
+        return max;
+    }
+    
+    public static int maxSubArrayLen(int[] nums, int k) {
         int max = 0;
         int sum = 0;
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -98,8 +126,11 @@ public class MaxSizeSubarray {
     }
     
     public static void main(String[] args) {
-		int[] nums = {0, 1, 0, 0, 1, 1, 0};
-    	int res = maxSubArrayLen(nums);
+		int[] nums = {1, -1, 5, -2, 3};
+    	int res = maxSubArrayLen(nums, 3);
 		System.out.println(res);
+		
+    	int res2 = maxSubArrayLenMyStyle(nums, 3);
+		System.out.println(res2);
 	}
 }

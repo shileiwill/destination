@@ -55,6 +55,10 @@ public class TrieBreakingBad {
 			return res;
 		}
 		
+		if (node.hasWord) {
+			res.add(node.word);
+		}
+		
 		dfs(res, node); 
 		return res;
 	}

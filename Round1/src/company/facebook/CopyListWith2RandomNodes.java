@@ -44,12 +44,13 @@ public class CopyListWith2RandomNodes {
 		return map.get(head);
 	}
 	
+	//这个方法只是为了构建Map
 	void copyToMapMyStyle(Node node) { // This is far better
-		if (node == null || visited.contains(node)) {
+		if (node == null || visited.contains(node)) { // 不能把Map也当visited用? 可以！
 			return;
 		}
 		
-		visited.add(node);
+		visited.add(node); // Visited保证每个点只访问一次
 		map.put(node, new Node(node.label));
 		copyToMapMyStyle(node.ran1); // DFS
 		copyToMapMyStyle(node.ran2);

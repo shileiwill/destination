@@ -100,7 +100,7 @@ public class CombinationSum {
 			return;
 		}
 		
-		for (int i = pos; i < candidates.length; i++) { // 其实不需要这个visited
+		for (int i = pos; i < candidates.length; i++) { // 其实不需要这个visited, haha!
 			if (i != pos && candidates[i] == candidates[i - 1] && !visited.contains(i - 1)) {
 				continue;
 			}
@@ -163,7 +163,8 @@ public class CombinationSum {
 	}
 	
 	/**
-	 * Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
+	 * Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to 
+	 * a positive integer target.
 	Example:
 	
 	nums = [1, 2, 3]

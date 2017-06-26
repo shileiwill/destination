@@ -29,6 +29,8 @@ arr1[] : [4, 7, 30]
 arr2[] : [1, 2]
 arr3[] : [20, 40]
 The smallest range is [2 20]  
+
+这是一个好题
  */
 public class FindSmallestRangeContainingElementsFromKArrays {
 
@@ -97,7 +99,7 @@ public class FindSmallestRangeContainingElementsFromKArrays {
 					max = now.val;
 				}
 				heap.offer(now);
-			} else {
+			} else { // 只要有一个list穷尽了，就结束了
 				System.out.println(start + "===" + end);
 				break;
 			}

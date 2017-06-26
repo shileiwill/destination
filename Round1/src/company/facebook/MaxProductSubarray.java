@@ -26,36 +26,37 @@ public class MaxProductSubarray {
 		return res;
 	}
 	
-	boolean targetProduct(int[] nums, int target) {
+	boolean targetProductMyStyle(int[] arr, int target) {
 		int left = 0, right = 0;
+		int flag = target < 0 ? -1 : 1;
+		target = Math.abs(target);
+		
 		int sign = 1; // Keep track of the sign
 		int now = 1; // now, doesnt care about the sign
 		
-		while (left <= right && right < nums.length) {
-			while (now != 0 && right < nums.length && now < Math.abs(target)) {
-				now = Math.abs(now * nums[right]);
-				sign = nums[right] < 0 ? -sign : sign;
-				right++;
+		while (right < arr.length) {
+			int rightVal = arr[right];
+			if (rightVal < 0) {
+				sign = -sign;
+				rightVal = -rightVal;
 			}
-
-			if (now == 0) {
-				if (target == 0) {
+			now *= rightVal;
+			right++;
+			
+			while (now > target) {
+				int leftVal = arr[left];
+				if (leftVal < 0) {
+					sign = -sign;
+					leftVal = -leftVal;
+				}
+				now /= leftVal;
+				left++;
+			}
+			
+			if (now == target) {
+				if (flag == sign) {
 					return true;
 				}
-				left = right; // Reset
-				now = 1;
-				sign = 1;
-			} else if (now == Math.abs(target)) {
-				if (target * sign > 0) {
-					return true;
-				}
-				now = now / Math.abs(nums[left]);
-				sign = nums[left] < 0 ? -sign : sign;
-				left++;
-			} else if (now > Math.abs(target)) {
-				now = now / Math.abs(nums[left]);
-				sign = nums[left] < 0 ? -sign : sign;
-				left++;
 			}
 		}
 		
@@ -65,9 +66,9 @@ public class MaxProductSubarray {
 	public static void main(String[] args) {
 		MaxProductSubarray p = new MaxProductSubarray();
 		
-		int[] nums = {1, -2, 3, 4, -5, 6};
-		int target = 24;
+		int[] nums = {1, -2, 3, 4, 3, 7};
+		int target = -24;
 		
-		System.out.println(p.targetProduct(nums, target));
+		System.out.println(p.targetProductMyStyle(nums, target));
 	}
 }

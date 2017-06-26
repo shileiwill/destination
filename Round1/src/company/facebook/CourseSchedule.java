@@ -33,7 +33,7 @@ public class CourseSchedule {
 			
 			map.get(c2).add(c1);
 			inDegree.put(c1, inDegree.getOrDefault(c1, 0) + 1);
-			if (!inDegree.containsKey(c2)) {
+			if (!inDegree.containsKey(c2)) { // 这是一个好习惯，甭管 A, B 都往degree Map里放， degree为0的就是起始点
 				inDegree.put(c2, 0);
 			}
 		}

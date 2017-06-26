@@ -46,6 +46,8 @@ public class Sum3 {
 	/**
 	 * 给了三个array, 和target, 问能不能从三个array 里面分别取一个数，加起来等于target. 
 	 * Solution: 用HashMap 存前两个array 中所有数之和，然后遍历第三个array,判断map是否包含target-num。 O(n^2) time complexity
+	 * 
+	 * 跟4Sum II的思路是一模一样的， 先算俩的，再算俩的
 	 */
 	
 	boolean sum3Map(int[] A, int[] B, int[] C, int target) {

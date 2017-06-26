@@ -1,4 +1,8 @@
 package company.facebook;
+
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * 334. Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
 
@@ -14,8 +18,9 @@ return true.
 Given [5, 4, 3, 2, 1],
 return false.
  */
-public class IncreasingTripletSubsequence {
+public class LIncreasingTripletSubsequence {
     // This question is very similar to Longest Increasing Subsequence, but easier
+	// DP的时间复杂度不大好
     public boolean increasingTriplet(int[] nums) {
         if (nums == null || nums.length == 0) {
             return false;
@@ -38,4 +43,38 @@ public class IncreasingTripletSubsequence {
         
         return false;
     }
+    
+    // 用TreeMap的思想 O(N) space, time
+    public static boolean increasingTripletTreeMap(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        
+        // TreeMap记录的是<= Key的count
+        TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            Map.Entry<Integer, Integer> entry = map.floorEntry(nums[i]);
+            
+            if (entry == null) {
+            	map.put(nums[i], 1);
+            } else {
+            	int count = entry.getValue();
+            	
+            	if (count >= 2) {
+            		return true;
+            	}
+            	
+            	map.put(nums[i], count + 1);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static void main(String[] args) {
+		int[] arr = {5, 4, 3, 2, 1};
+		boolean res = increasingTripletTreeMap(arr);
+		System.out.println(res);
+	}
 }

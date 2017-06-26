@@ -194,7 +194,7 @@ public class CombinationSum {
 			hash[t] = 0;
 			for (int i = 0; i < nums.length; i++) {
 				if (t - nums[i] >= 0) {
-					hash[t] += hash[t - nums[i]];
+					hash[t] = hash[t] + hash[t - nums[i]];
 				}
 			}
 		}

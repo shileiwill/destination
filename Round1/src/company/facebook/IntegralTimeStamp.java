@@ -66,7 +66,7 @@ public class IntegralTimeStamp {
 				set.add(i);
 			} else if (hash[i - min] > maxCount) {
 				maxCount = hash[i - min];
-				set = new HashSet<Integer>();
+				set = new HashSet<Integer>(); // 这是一个好主意，不用再单独遍历一遍数组了，直接将最大的保存下来了
 				set.add(i);
 			}
 		}

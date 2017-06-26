@@ -13,7 +13,6 @@ public class IntervalMaxHeight {
         Integer end; // 0 based index
 
         public Interval(int start, int end, long heigh) {
-
             this.height = heigh;
             this.start = start;
             this.end = end;

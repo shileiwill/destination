@@ -31,7 +31,7 @@ public class RangeSumQuery {
 		root.right = helper(arr, mid + 1, right);
 		
 		// it will never be null
-		root.sum = root.left.sum + root.right.sum;
+		root.sum = root.left.sum + root.right.sum; // What about yourself?
 //		root.sum = (root.left != null ? root.left.sum : 0) + (root.right != null ? root.right.sum : 0);
 		
 		return root;

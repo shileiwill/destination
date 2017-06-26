@@ -24,7 +24,7 @@ public class InOrderSuccessorInBST {
             }
             
             TreeNode node = stack.pop();
-            if (pre != null && pre == p) {
+            if (pre != null && pre == p) { // 直接 pre != p?
                 return node;
             }
             

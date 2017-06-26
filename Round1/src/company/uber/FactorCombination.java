@@ -39,5 +39,23 @@ public class FactorCombination {
 		}
 	}
 	
+	// 从小往大行吗， 不行啊，2， 3 这些小数字可能是下一步的factor
+	private void helper2(List<List<Integer>> res, List<Integer> list, int target, int factor) {
+		if (target == 1) {
+			for (int val : list) {
+				System.out.print(val + "--");
+			}
+			System.out.println();
+			res.add(new ArrayList<Integer>(list));
+			return;
+		}
 		
+		for (int i = factor; i >= 2; i--) {
+			if (target % i == 0) {
+				list.add(i);
+				helper(res, list, target / i, i);
+				list.remove(list.size() - 1);
+			}
+		}
+	}
 }

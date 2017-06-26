@@ -28,6 +28,10 @@ etc...
 
 二分图是一类图(G,E)，其中G是顶点的集合，E为边的集合，并且G可以分成两个不相交的集合U和V，E中的任意一条边的一个顶点属于集合U，另一顶点属于集合V
 http://blog.csdn.net/edward2jason/article/details/19619243
+
+刚刚面完的fb一面，题目就是给一个图，验证是不是二分图，开始想用matrix表示图，被否了，
+定义了一个结构表示图节点，直接bfs，问了问复杂度，跟recursive比有什么区别，
+感觉他可能最开始想问recursive的，然后followup成iterative就这么一道题，看大家都是两三道，估计是悬了，不过还是求小哥抬一手给个二面
  */
 public class BipartiteGraph {
 
@@ -46,12 +50,14 @@ public class BipartiteGraph {
 		
 		node2.children.add(node6);
 		node6.children.add(node5);
-		node5.children.add(node6);
-//		node4.children.add(node3);
+//		node5.children.add(node6);
+		node4.children.add(node3);
+		
+		node2.children.add(node3); // This will make it false
 		
 		List<Node> list = new ArrayList<Node>();
 		list.add(node1);
-		boolean res = new BipartiteGraph().isGraphBipartite(list);
+		boolean res = new BipartiteGraph().isGraphBipartiteDFS(list);
 		System.out.println(res);
 		
 //		Map<Integer, Set<Integer>> graph = new HashMap<Integer, Set<Integer>>();
@@ -93,6 +99,7 @@ public class BipartiteGraph {
 		Set<Integer> group2 = new HashSet<Integer>();
 		boolean isGroup1 = true;
 		
+		// while (!map.isEmpty()) 可以在外边check一下map, 这样就能保证isolated的graph也能check到
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.offer(graph.keySet().iterator().next());
 		
@@ -132,11 +139,11 @@ public class BipartiteGraph {
 		Set<Node> group2 = new HashSet<Node>();
 		boolean isGroup1 = true;
 		
-//		Set<Node> visited = new HashSet<Node>();
+		Set<Node> visited = new HashSet<Node>(); // Visited is to avoid A -> B and B -> A
 		Queue<Node> queue = new LinkedList<Node>();
 		for (Node node : graph) {
-//			visited.add(node);
-			queue.offer(node);
+			//visited.add(node);
+			queue.offer(node); // 头上这一堆node放一组
 		}
 		
 		while (!queue.isEmpty()) {
@@ -157,17 +164,49 @@ public class BipartiteGraph {
 					group2.add(now);
 				}
 				
-//				if (!visited.contains(now)) {
-					for (Node child : now.children) {
-//						if (!visited.contains(child)) {
-//							visited.add(child);
-							queue.offer(child);
-//						}
+				visited.add(now); // 只有真正访问过, 放到某个group里后， 才会放到set中
+				for (Node child : now.children) {
+					if (!visited.contains(child)) { // Prepare for next iteration, don't dead loop
+						queue.offer(child);
 					}
-//				}
+				}
 			}
 			
 			isGroup1 = !isGroup1;
+		}
+		
+		return true;
+	}
+	
+	boolean isGraphBipartiteDFS(List<Node> graph) {
+		Set<Node> group1 = new HashSet<Node>();
+		Set<Node> group2 = new HashSet<Node>();
+		boolean isGroup1 = true;
+		
+		boolean res = dfs(graph, group1, group2, isGroup1);
+		
+		return res;
+	}
+
+	// If there are A -> B and B -> A at the same time, need to use visited set to avoid stack over flow
+	private boolean dfs(List<Node> graph, Set<Node> group1, Set<Node> group2, boolean isGroup1) {
+		for (Node node : graph) {
+			if (isGroup1) {
+				if (group2.contains(node)) {
+					return false;
+				}
+				group1.add(node);
+			} else {
+				if (group1.contains(node)) {
+					return false;
+				}
+				group2.add(node);
+			}
+			
+			boolean res = dfs(node.children, group1, group2, !isGroup1);
+			if (!res) {
+				return false;
+			}
 		}
 		
 		return true;

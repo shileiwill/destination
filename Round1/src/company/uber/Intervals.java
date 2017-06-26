@@ -32,6 +32,7 @@ public class Intervals {
 		i.intersection(A, B);
 	}
 
+	// 可以用bucket sort的思想
 	List<Interval> intersection(List<Interval> A, List<Interval> B) {
 		List<Interval> res = new ArrayList<Interval>();
 		int pos1 = 0;

@@ -45,6 +45,7 @@ public class BSTIterator {
     }
 }
 
+// Better
 class BSTIterator2 {
 
     Stack<TreeNode> stack = new Stack<TreeNode>();

@@ -8,7 +8,7 @@ public class RegularExpressionAndWildCardMatching {
 		System.out.println(res);
 	}
 
-	// 给两个字符串，pattern里边可能有*, ?. * match 前边任意数量的字符， ? match 一个
+	// 给两个字符串，pattern里边可能有*, ?. * match 自己前边任意数量的字符， ? match 一个
 	/**
 	'?' Matches any single character.
 	'*' Matches any sequence of characters (including the empty sequence).

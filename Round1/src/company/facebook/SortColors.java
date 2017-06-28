@@ -14,7 +14,6 @@ public class SortColors {
 
 	}
 
-
     public void sortColors(int[] nums) {
         if (nums == null || nums.length == 0) {
             return;
@@ -65,7 +64,7 @@ Given colors=[3, 2, 2, 1, 4], k=4, your code should sort colors in-place to [1, 
 Challenge 
 A rather straight forward solution is a two-pass algorithm using counting sort. That will cost O(k) extra memory. Can you do it without using extra memory?
      */
-    // Quick Sort
+    // Like Quick Sort, O(N*K)
     public void sortColors2(int[] colors, int k) {
         int left = 0;
         for (int i = 1; i <= k; i++) {
@@ -89,4 +88,60 @@ A rather straight forward solution is a two-pass algorithm using counting sort. 
             return left;
         }
     }
+    
+    /**
+     * 大家很多人提到了一道sort color的变种，我今天就遇到了，趁现在还记得详细跟大家说一下。
+给定一个API getCategory(int n)， return {L| M| H} 三种category
+第一问 --- 给定一个Array， [4,2,5,7,8,9], 对于每一个int，有一个category，sort them by category
+很简单，用sortcolor 就可以解决，两个ptr，一个前一个后。LZ不小心有一个bug （for loop 不太对），但是测试的时候找到了
+第二问 ---- 如果这个时候有K个category， 应该怎么办
+顺着上一题的思路，我的想法是将（0,1，。。。，k-1） category 分成（0）--> L, (1, k-2) -->M, (k-1) --> H， 
+然后相同的思想继续call之前的function，然后reduce为 （1，k-2）的range，重复之前的事情
+大家可以再仔细想想这里面有什么问题。
+第一要注意的是，之前的function应该变成：
+sortCategory（nums, low, high） (low and high is the corresponding int of the "L" and "H" category)
+要记得把front和back一个指针变一下，如下：
+while（getCategory(nums[front]) < low） front++;
+while（getCategory(nums[back]) > high） back--;
+     */
+    //  O(nlogk), the best algorithm based on comparing 好题
+    public void sortColors2Best(int[] colors, int k) {
+        if (colors == null || colors.length == 0) {
+            return;
+        }
+        rainbowSort(colors, 0, colors.length - 1, 1, k);
+    }
+    
+    public void rainbowSort(int[] colors, int left, int right, int colorFrom, int colorTo) {
+        if (colorFrom == colorTo) {
+            return;
+        }
+        
+        if (left >= right) {
+            return;
+        }
+        
+        int colorMid = (colorFrom + colorTo) / 2;
+        int l = left, r = right;
+        while (l <= r) {
+            while (l <= r && colors[l] <= colorMid) {
+                l++;
+            }
+            while (l <= r && colors[r] > colorMid) {
+                r--;
+            }
+            if (l <= r) {
+                int temp = colors[l];
+                colors[l] = colors[r];
+                colors[r] = temp;
+                
+                l++;
+                r--;
+            }
+        }
+        
+        rainbowSort(colors, left, r, colorFrom, colorMid);
+        rainbowSort(colors, l, right, colorMid + 1, colorTo);
+    }
+
 }

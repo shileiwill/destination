@@ -1,4 +1,4 @@
-package chapter7.dataStructure;
+package company.facebook;
 
 import java.util.ArrayList;
 import java.util.Comparator;

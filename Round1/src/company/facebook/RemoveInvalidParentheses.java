@@ -112,4 +112,59 @@ public class RemoveInvalidParentheses {
         
         return count == 0;
     }
+    
+    /*
+     * fb问的remove parenthese都是只要一个正确答案，而不是所有，所以走一遍O(n)就行，如果要找出所有，不可能O（n）搞定吧。
+     */
+    String findOneValid(String s) {
+    	int open = 0;
+    	int close = 0;
+    	StringBuilder sb = new StringBuilder();
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		char c = s.charAt(i);
+    		
+    		if (c == '(') {
+    			open++;
+    			sb.append(c);
+    		} else if (c == ')') {
+    			if (open > close) {
+    				close++;
+    				sb.append(c);
+    			}
+    		} else {
+    			sb.append(c);
+    		}
+    	}
+    	
+    	// After above, there could be redundant leading (
+    	int extra = open - close;
+    	
+    	for (int i = 0; i < s.length() && extra > 0; i++) {
+			if (s.charAt(i) == '(') {
+				extra--;
+				// if i is the only element, it will throw exception
+				if (i + 1 == s.length()) {
+					return "";
+				}
+				sb.deleteCharAt(i);
+				
+			}
+		}
+    	
+    	return sb.toString();
+    }
+    
+    public static void main(String[] args) {
+		RemoveInvalidParentheses ri = new RemoveInvalidParentheses();
+		String s1 = "()())()";
+		String s2 = "(a)())()";
+		String s3 = ")(";
+		String res1 = ri.findOneValid(s1);
+		String res2 = ri.findOneValid(s2);
+		String res3 = ri.findOneValid(s3);
+		System.out.println(res1);
+		System.out.println(res3);
+		System.out.println(res2);
+	}
 }

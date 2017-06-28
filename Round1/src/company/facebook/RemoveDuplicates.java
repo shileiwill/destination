@@ -12,6 +12,8 @@ public class RemoveDuplicates {
 		rd.removeDuplicates3(arr);
 		arr = new int[]{1, 3, 3, -3, 4, -4, -4, 4, 5, -9, 9, -10, 10};
 		rd.moveNegative(arr);
+		
+		rd.moveNegativeMyStyle(arr);
 	}
 	// 26. Leave one in final array
     public int removeDuplicates1(int[] nums) {
@@ -108,7 +110,35 @@ public class RemoveDuplicates {
     	print(arr, arr.length);
     }
     
-    void print(int[] arr, int size) {
+    void moveNegativeMyStyle(int[] arr) {
+    	int left = 0, right = 0;
+    	while (left < arr.length && right < arr.length) {
+    		while (left < arr.length && arr[left] < 0) {
+    			left++;
+    		}
+    		right = Math.max(left + 1, right);
+    		while (right < arr.length && arr[right] >= 0) {
+    			right++;
+    		}
+    		
+    		if (right < arr.length) {
+    			swap(arr, left, right);
+    		}
+    		
+    		left++;
+    		right++;
+    	}
+    	
+    	print(arr, arr.length);
+    }
+    
+    private void swap(int[] arr, int left, int right) {
+		int tmp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = tmp;
+		
+	}
+	void print(int[] arr, int size) {
     	for (int i = 0; i < size; i++) {
     		System.out.print(arr[i] + "==");
     	}

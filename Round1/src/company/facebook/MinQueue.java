@@ -62,6 +62,7 @@ public class MinQueue {
 	}
 }
 
+// Implement a Min Stack
 class MinStack {
     
     Stack<Integer> stack = new Stack<Integer>();
@@ -99,6 +100,7 @@ class MinStack {
     }
 }
 
+// Implement Queue with 2 Stacks
 class MyQueue {
     Stack<Integer> in = new Stack<Integer>();
     Stack<Integer> out = new Stack<Integer>();

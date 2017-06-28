@@ -1,6 +1,7 @@
 package company.facebook;
 /**
- * 410. Given an array which consists of non-negative integers and an integer m, you can split the array into m non-empty continuous subarrays. Write an algorithm to minimize the largest sum among these m subarrays.
+ * 410. Given an array which consists of non-negative integers and an integer m, 
+ * you can split the array into m non-empty continuous subarrays. Write an algorithm to minimize the largest sum among these m subarrays.
 
 Note:
 If n is the length of array, assume the following constraints are satisfied:
@@ -51,7 +52,8 @@ public class SplitArrayLargestSum {
         https://discuss.leetcode.com/topic/61315/java-easy-binary-search-solution-8ms/2
         you are returning 18, but how did you make sure 18 is a sum of subarray ?
         i'm not sure if it is possible : every sum of subarray is small than 18 but NO equals.
-        If none sum of the subarrays is 18, then there exists a sum that is the largest sum of these subarrays, say, 17. The binary search returns the FIRST one that is feasible, so 17 will be returned instead.
+        If none sum of the subarrays is 18, then there exists a sum that is the largest sum of these subarrays, say, 17. 
+        The binary search returns the FIRST one that is feasible, so 17 will be returned instead.
         */
     }
 	    

@@ -40,9 +40,10 @@ public class RearrangeArray {
 	    int N = a.size();
 	    
 	    for (int i = 0; i < a.size(); i++) {
-	        int val1 = a.get(i);
+	        int val = a.get(i);
+	        // a.set(i, val + (a.get(val) % N) * N);
 	        
-	        a.set(i, a.get(i) + (a.get(a.get(i)) % N) * N);
+	        a.set(i, a.get(i) + (a.get(a.get(i)) % N) * N); // 这个太重要
 	    }
 	    
 	    for (int i = 0; i < a.size(); i++) {

@@ -1,4 +1,4 @@
-package company.linkedin;
+package company.facebook;
 /**
  * 189. Rotate an array of n elements to the right by k steps.
 
@@ -25,9 +25,9 @@ public class RotateArray {
 		int len = nums.length;
 		k = k % len;
 		
-		reverse(nums, 0, len - 1); // All
-		reverse(nums, 0, k - 1); // Left
-		reverse(nums, k, len - 1); // Right
+		reverse(nums, 0, len - 1);
+		reverse(nums, 0, k - 1);
+		reverse(nums, k, len - 1);
 		
 		for (int val : nums) {
 			System.err.println(val);

@@ -62,7 +62,7 @@ public class PopulatingNextRightPointersInEachNode2 {
         
         Queue<TreeLinkNode> queue = new LinkedList<TreeLinkNode>();
         queue.offer(root);
-        TreeLinkNode prev = null; // Here is the only change, move this prev node out from while loop
+        TreeLinkNode prev = null; // Here is the only change, move this prev node out from while loop, Nice!!!
         
         while (!queue.isEmpty()) {
             int size = queue.size();

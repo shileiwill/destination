@@ -4,7 +4,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 /**
- * 239. Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
+ * 239. Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very right. 
+ * You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
 For example,
 Given nums = [1,3,-1,-3,5,3,6,7], and k = 3.
@@ -63,7 +64,8 @@ public class SlidingWindowMaximum {
         return res;
     }
     
-    // O(N)
+    // O(N) 的方法很好，得记住
+    // O(N) 有点像histogram， trapping rain water 维护一个单调递减数列
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0 || nums.length < k) {
             return new int[]{};
@@ -74,11 +76,11 @@ public class SlidingWindowMaximum {
         LinkedList<Integer> list = new LinkedList<Integer>(); // 需要两头同时操作，所以LinkedList
         
         for (int i = 0; i < nums.length; i++) {
-            if (!list.isEmpty() && list.peekFirst() < i - k + 1) {
+            if (!list.isEmpty() && list.peekFirst() < i - k + 1) { // 最左边的过时了
                 list.pollFirst();
             }
             
-            while (!list.isEmpty() && nums[i] > nums[list.peekLast()]) {
+            while (!list.isEmpty() && nums[i] > nums[list.peekLast()]) { // 只留下大数，小数不管用 最终是个递减数列
                 list.pollLast();
             }
             

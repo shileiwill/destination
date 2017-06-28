@@ -10,6 +10,16 @@ Minimize the total number of operations.
  */
 public class MoveZeroes {
 	
+	public static void main(String[] args) {
+		MoveZeroes mz = new MoveZeroes();
+		int[] nums = {0, 1, 0, 5, 3, 12};
+		mz.moveZeroesNoOrderMoreMoves(nums);
+		
+		for (int val : nums) {
+			System.out.print(val + "---");
+		}
+	}
+	
 	// By myself!!!
     public void moveZeroesBest(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -34,6 +44,54 @@ public class MoveZeroes {
             left++;
             right++;
         }
+    }
+    
+    // If I dont care about the order, just move non-0 to left
+    public void moveZeroesNoOrder(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            while (left < right && nums[left] != 0) {
+            	left++;
+            }
+            
+            while (left < right && nums[right] == 0) {
+            	right--;
+            }
+            
+            if (left < right) {
+            	swap(nums, left, right);
+            }
+            
+            left++;
+            right--;
+        }
+        
+        if (nums[left] == 0) {
+        	System.out.println("here");
+        	System.out.println(left - 1);
+        } else {
+        	System.out.println(left);
+        }
+    }
+    
+    // You can also do this, but not as good as above. This requires more move()
+    public void moveZeroesNoOrderMoreMoves(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        
+        int size = 0;
+        for (int i = 0; i < nums.length; i++) {
+        	if (nums[i] != 0) {
+        		nums[size++] = nums[i]; // I dont care about anything after non-0
+        	}
+        }
+        
+        System.out.println(size);
     }
     
     // Use insert index. 这个的write比上边的方案多

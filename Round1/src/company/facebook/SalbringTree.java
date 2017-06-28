@@ -19,6 +19,8 @@ import chapter3.binaryTree.TreeNode;
 2 ——3
 ｜
 4——5——6
+
+看透本质，实际上是一个Level order Traversal
  */
 public class SalbringTree {
 
@@ -56,19 +58,15 @@ public class SalbringTree {
             int size = queue.size();
             
             TreeNode prev = null;
-            TreeNode now = null;
             for (int i = 0; i < size; i++) {
+            	TreeNode now = queue.poll();
                 if (i == 0) {
-                	prev = queue.poll();
-                	now = prev;
-                	
+                	prev = now;
                 	if (up != null) { // Set left child of up node
-                		up.left = prev;
+                		up.left = now;
                 	}
-                	up = prev;
+                	up = now;
                 } else {
-                    now = queue.poll();
-                	
                     prev.right = now; // Set right child of prev node
                     prev = now;
                 }

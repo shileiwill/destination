@@ -62,6 +62,4 @@ public class PrintMaxDepthPathOfBinaryTree {
 		helper(list, root.right, level + 1);
 		list.remove(list.size() - 1);
 	}
-	
-	
 }

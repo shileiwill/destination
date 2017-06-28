@@ -57,4 +57,47 @@ public class DecodeWays {
 		
 		return num2;
 	}
+	
+	/*
+	 * 1. 如果现在字符跟数字之间的map不是连续的怎么办，复杂度是多少。例如：1 -> 36， 2 -> 200之类的。我说如果我们有reverse map的话，还是可以o n，这里好虚
+	 * 2. 见过一个follow up，但是限制最大是两位，可以用map来存一下，解法还是一样的。但是如果你这个不知道多少位的，就麻烦了
+	 * 
+	 * 3. 但是input String可以包含 *
+	比如 1*2，可以有  102 （1），112 （3）， 122（3），132(2), 142(2), 152(2), 162(2), 172(2) 182(2) 192 (2)  一共 21种解法。
+	返回多少解, 刚开始想还挺简单的，写起来并不简单，比如 1**1 ，两个*都要判断
+	 */
+	int numberOfWaysWithStar(String s) {
+		int[] hash = new int[s.length() + 1];
+		
+		hash[0] = 1;
+		hash[1] = s.charAt(0) == '*' ? 9 : 1; // 单独自己一位的时候不能选0
+		
+		for (int i = 2; i <= s.length(); i++) {
+			if (s.charAt(i - 1) != '*' && s.charAt(i - 2) != '*') {
+				int digit1 = Integer.valueOf(s.substring(i - 1, i));
+				int digit2 = Integer.valueOf(s.substring(i - 2, i));
+				
+				if (digit1 >= 1 && digit1 <= 9) {
+					hash[i] += hash[i - 1];
+				}
+				
+				if (digit2 >= 10 && digit2 <= 26) {
+					hash[i] += hash[i - 2];
+				}
+			} else if (s.charAt(i - 1) == '*') {
+				int digit1 = 9;
+				int digit2 = 0;
+				
+				if (s.charAt(i - 2) == 1) {
+					digit2 = 10;
+				} else if (s.charAt(i - 2) == 2) {
+					digit2 = 7;
+				}
+				
+				hash[i] += 
+			}
+		}
+		
+		return hash[s.length()];
+	}
 }

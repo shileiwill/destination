@@ -2,7 +2,7 @@ package company.facebook;
 /**
  * 第三轮 given list of integers， give you a number k，rearrange the array to be like this： 
  * all numbers smaller than k should be on the left， those equals should be in the middle，and larger numbers on the right。
- * followup ：if given k category instead of 3（bucket sort？） 
+ * followup ：if given k category instead of 3（bucket sort?) 
  * 
  * 你可以像sort color一样，分两次partition, < K, >= K, then == k, > K
  */

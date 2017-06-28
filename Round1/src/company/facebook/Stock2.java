@@ -62,6 +62,7 @@ public class Stock2 {
 		return hash[len - 1][k];
 	}
 	
+	// 这个我还不会呢
 	//Stock with charge/fee:
 		// maintain a veriable which is the profit we make 
 		// when the prices is continuously acending,

@@ -53,22 +53,20 @@ public class Subsets {
     // Iteration
     public static List<List<Integer>> combinationOf(int[] arr){
         Arrays.sort(arr);
-        List<List<Integer>> r = new ArrayList();
-        r.add(new ArrayList());
+        List<List<Integer>> res = new ArrayList();
+        res.add(new ArrayList());
         for(int i=0;i<arr.length;i++){
             int cur = arr[i];
             
-            int size = r.size();
+            int size = res.size();
             for(int j=0; j<size; j++){
-                List <Integer> one = r.get(j);
+                List <Integer> one = res.get(j);
                 List<Integer> clone = new ArrayList(one);
                 clone.add(cur);
-                r.add(clone);
-
+                res.add(clone);
             }
-
         }
-        return r;
+        return res;
     }
     
     public static void main(String[] args) {
@@ -109,6 +107,7 @@ public class Subsets {
     }
     
     /**
+     * 这是一个好题
      * 给一个set，求有多少个subsets，里面的min和max之和小于k。国人小哥很nice的提示了可以先排序，然后two pointer从两头往中间找。
      */
     int subsetsMinMaxLessThanK(int[] arr, int k) {

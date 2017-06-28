@@ -33,7 +33,7 @@ public class PrimeNumberCombinationProduct {
 
 	// Product一直在变， 随时加到result中。这是combination问题的变种
 	private void helper(int[] arr, List<Integer> res, int product, int pos) {
-		if (product != 1) {
+		if (product != 1) { // 那如果数组中本身有1呢， 1是质数吗
 			res.add(product);
 		}
 

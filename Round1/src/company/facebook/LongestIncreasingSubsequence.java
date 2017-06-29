@@ -107,19 +107,19 @@ public class LongestIncreasingSubsequence {
         return false;
     }
     
-    // Wrong
+    // Wrong 哪里错了？ 我看没错， 好题
     public int lengthOfLongestConsecutiveIncreasingSequence(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        // i 之前，并且以i结尾的字符，最长序列长度
+        // i 之前，并且以i结尾的字符，最长递增连续序列长度
         int[] hash = new int[nums.length];
         hash[0] = 1;
         
         for (int i = 1; i < nums.length; i++) {
-            hash[i] = 1;
+            hash[i] = 1; // 默认是他自己
             if (nums[i] > nums[i - 1]) { // 去前边遍历所有小于nums[i]的数，看看他们的frequency， 并且+1
-                hash[i] = hash[i - 1] + 1; // Will not work, need to loop
+                hash[i] = hash[i - 1] + 1; // Will not work, need to loop。 因为我们只关心连续递增，所以没问题
             }
         }
         
@@ -129,5 +129,24 @@ public class LongestIncreasingSubsequence {
         return hash[nums.length - 1];
     }
     
-
+    // int[] arr = {3, 1, 4, 5, 6, 8, 9, 10, 11}; return 4
+	int findLongestConsecutive(int[] arr) {
+		int max = 1;
+		int len = 1;
+		
+		for (int i = 1; i < arr.length;) {
+			while (i < arr.length && arr[i] == arr[i - 1] + 1) {
+				len++;
+				i++;
+			}
+			max = Math.max(len, max);
+			
+			if (i < arr.length) { // Still have other possibilities
+				len = 1; // Save current char, reset
+				i++; // Go to next char
+			}
+		}
+		
+		return max;
+	}
 }

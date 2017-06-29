@@ -1,5 +1,5 @@
 package company.facebook;
-
+//重要
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -113,7 +113,7 @@ public class MinimumWindowSubstring {
                 res.add(left);
             }
             
-            if (right - left == n) {
+            if (right - left == n) { // 一个if就够了 不能再长了
                 char leftChar = s.charAt(left);
                 if (hash[leftChar] >= 0) {
                     count++;

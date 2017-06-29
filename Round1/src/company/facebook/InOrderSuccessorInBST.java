@@ -110,7 +110,7 @@ public class InOrderSuccessorInBST {
 		
 	}
     
-    // Remember this guy!!! without using extra space
+    // Remember this guy!!! without using extra space. This one takes advantage of Binary Search Tree
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         if (p.right != null) {
             TreeNode node = p.right;

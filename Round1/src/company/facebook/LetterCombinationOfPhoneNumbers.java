@@ -2,8 +2,10 @@ package company.facebook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * 17. Given a digit string, return all possible letter combinations that the number could represent.
@@ -12,12 +14,20 @@ A mapping of digit to letters (just like on the telephone buttons) is given belo
 
 Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+
+Recursive BFS
+Recursive DFS
+Iterative BFS
+Iterative DFS
+如果还有大于10的数字怎么办 e.g. 1: "abcde", 2: "", 3: "f", ..., 10: "x", 11: "y", 12: "z", ...
  */
 public class LetterCombinationOfPhoneNumbers {
 
 	public static void main(String[] args) {
 		LetterCombinationOfPhoneNumbers lc = new LetterCombinationOfPhoneNumbers();
 		lc.find("23");
+		System.out.println();
+		lc.findQueue("23");
 	}
 
 
@@ -34,8 +44,8 @@ public class LetterCombinationOfPhoneNumbers {
         return res;
     }
     
+    // Recursive DFS
     private void helper(List<String> res, String sb, String digits, Map<Character, char[]> map) {
-        
         if (sb.length() == digits.length()) {
             res.add(sb);
             return;
@@ -61,7 +71,7 @@ public class LetterCombinationOfPhoneNumbers {
         return map;
     }
 
-    // Iterative, Very good. It is by myself!
+    // Iterative BFS, Very good. It is by myself!
     void find(String digits) {
         Map<Character, char[]> map = buildMap();
         List<String> res = new ArrayList<String>();
@@ -86,6 +96,34 @@ public class LetterCombinationOfPhoneNumbers {
         }
         
         for (String s : res) {
+        	System.out.println(s);
+        }
+    }
+    
+    // 这个是你熟悉的queue BFS
+    void findQueue(String digits) {
+        Map<Character, char[]> map = buildMap();
+        Queue<String> queue = new LinkedList<String>();
+        
+        for (int i = 0; i < map.get(digits.charAt(0)).length; i++) {
+        	queue.offer(map.get(digits.charAt(0))[i] + "");
+        }
+        
+        int pos = 1;
+        while (pos < digits.length()) {
+        	int size = queue.size();
+        	char[] arr = map.get(digits.charAt(pos));
+        	for (int i = 0; i < size; i++) {
+        		String prefix = queue.poll();
+        		for (char c : arr) {
+        			queue.offer(prefix + c);
+        		}
+        	}
+        	
+        	pos++;
+        }
+        
+        for (String s : queue) {
         	System.out.println(s);
         }
     }

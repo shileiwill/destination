@@ -41,7 +41,7 @@ public class NumberOfIslands {
 		for (int[] dir : directions) {
 			int x = i + dir[0];
 			int y = j + dir[1];
-			
+			// what if 锯齿状数组, 记录一下行数，以及Map<Row, Column Count>, grid[x].length 那一行的列数
 			if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == '1') {
 				grid[x][y] = '0';
 				area[0] = area[0] + 1;

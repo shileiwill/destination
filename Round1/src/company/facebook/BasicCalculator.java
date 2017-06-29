@@ -1,5 +1,5 @@
 package company.facebook;
-
+//重要
 import java.util.Stack;
 /**
  * 227. Implement a basic calculator to evaluate a simple expression string.
@@ -112,6 +112,17 @@ public class BasicCalculator {
 		return res;
 	}
 	
+	/**
+	 * 如果运算符只有 +, -的话，可以直接把括号打开，
+	 * 之后进行替换， 还得考虑如果前边是减号， 里边变号问题，不是这么容易
+	 * +- 变成 - 
+	 * -+ 变成 -
+	 * ++ 变成 +
+	 * -- 变成 +
+	 * 
+	 * @param s
+	 * @return
+	 */
     public int calculate2(String s) {
         while (s.indexOf("(") != -1) {
             int open = s.lastIndexOf("(");

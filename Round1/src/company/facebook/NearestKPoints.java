@@ -1,5 +1,5 @@
 package company.facebook;
-
+//重要
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -7,6 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * 
+Solution 1 make heap of size K and collect points by minimal distance O(NLogK) complexity.
+
+Solution 2: Take an array of size N and Sort by distance. Should be used QuickSort (Hoare modification). 
+As answer take first K points. This is also NlogN complexity but it is possible optimize to approximate O(N). 
+If skip sorting of unnecessary sub arrays. When you split array by 2 sub arrays you should take only array where Kth index located. 
+complexity will be : N +N/2 +N/4 + ... = O(N).
+
+Solution 3: search Kth element in result array and takes all point lesser then founded. Exists O(N) alghoritm, similar to search of median.
+
+Notes: better use sqr of distance to avoid of sqrt operations, it will be greater faster if point has integer coordinates.
+
+Solution 3 is quickselect algorithm. Store all the distances in an array. Find the index which gives the kth smallest element using method similar to quicksort (Chapter 9 CLRS), then element from index 0 to k-1 will give all the required k points
+O(N) in solution 2 & 3 is average case complexity. Worst case is still O(NLogK) 
+ */
 public class NearestKPoints {
 
 	public static void main(String[] args) {
@@ -83,7 +99,7 @@ public class NearestKPoints {
 		List<Point> res = new ArrayList<Point>();
 		for (int i = 0; i < bucket.length && res.size() < k; i++) {
 			if (bucket[i] != null) {
-				res.addAll(bucket[i]); // 有可能会超了K
+				res.addAll(bucket[i]); // 有可能会超了K. 输出所有大于等于top k频率的元素呢，还是只要取top k个就可以了
 			}
 		}
 		
@@ -102,10 +118,23 @@ public class NearestKPoints {
 		return helper(points, p, k - 1, 0, points.length - 1);
 		
 		// If want to find the k points, just use a for loop, searching for index 0 to k - 1
+		// Above statement is wrong, rather than get one by one, why not just make first K sorted in one shot
 	}
 	
+	public List<Point> findNearestAllKPoints(Point[] points, Point p, int k) {
+		quickSelect(points, p, k);
+		
+		List<Point> res = new ArrayList<Point>();
+		for (int i = 0; i < k; i++) {
+			res.add(points[i]);
+		}
+		
+		return res;
+	}
+	
+	// 貌似helper跟quickSelect没啥区别， 一个用的是递归，一个用的迭代， 只要找到了K,左边的都是小于，右边都大于，没差
 	Point helper(Point[] points, Point p, int k, int left, int right) {
-		int pos = partition(points, p, k, left, right);
+		int pos = partition(points, p, left, right);
 		
 		if (pos == k) {
 			return points[k];
@@ -116,7 +145,23 @@ public class NearestKPoints {
 		}
 	}
 	
-	int partition(Point[] points, Point p, int k, int left, int right) {
+	private void quickSelect(Point[] points, Point p, int k) {
+		int left = 0, right = points.length - 1;
+		
+		while (left < right) {
+			int pos = partition(points, p, left, right);
+			
+			if (pos == k) { // 当是k的时候， 左边的全都是小于points[k]的
+				return;
+			} else if (pos < k) {
+				left = pos + 1;
+			} else {
+				right = pos - 1;
+			}
+		}
+	}
+	
+	int partition(Point[] points, Point p, int left, int right) {
 		int pivot = left;
 		
 		while (left < right) {

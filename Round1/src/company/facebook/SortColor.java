@@ -50,7 +50,7 @@ public class SortColor {
 		}
 	}
 	
-	public void sortColors(List<Integer> a) {
+	public void sortColors(List<Integer> a) { // 两个指针从同一侧扫
 	    int pos1 = 0, pos2 = 0;
 	    while (pos1 < a.size() && pos2 < a.size()) {
 	        while (pos1 < a.size() && a.get(pos1) == 0) {

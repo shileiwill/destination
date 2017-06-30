@@ -1,5 +1,5 @@
 package company.facebook;
-// LC 91
+// LC 91 很重要
 public class DecodeWays {
 
 	public static void main(String[] args) {
@@ -32,13 +32,39 @@ public class DecodeWays {
 		return hash[s.length()];
 	}
 	
+	// 2^N
+	int numberOfWaysRecursive(String s) {
+		return helper(s, 0);
+	}
+	
+	private int helper(String s, int pos) {
+		if (pos == s.length()) {
+			return 1;
+		}
+		
+		if (s.charAt(pos) == '0') {
+			return 0;
+		}
+		
+		// one digit
+		int res = helper(s, pos + 1);
+		
+		// two digits
+		if (pos < s.length() - 1 && (s.charAt(pos) == '1' || (s.charAt(pos) == '2' && s.charAt(pos + 1) <= '6'))) {
+			res += helper(s, pos + 2);
+		}
+		
+		return res;
+	}
+
 	// 优化成三个变量
 	int numberOfWays3(String s) {
 		int num1 = 1;
 		int num2 = 1;
-		int num3 = 0;
 		
 		for (int i = 2; i <= s.length(); i++) {
+			int num3 = 0;
+
 			int digit1 = Integer.valueOf(s.substring(i - 1, i));
 			int digit2 = Integer.valueOf(s.substring(i - 2, i));
 			
@@ -52,7 +78,6 @@ public class DecodeWays {
 			
 			num1 = num2;
 			num2 = num3;
-			num3 = 0;
 		}
 		
 		return num2;

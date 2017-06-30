@@ -1,4 +1,4 @@
-package leetcode1.array;
+package company.facebook;
 /**
  * 48. You are given an n x n 2D matrix representing an image.
 

@@ -1,5 +1,6 @@
 package company.facebook;
-
+//重要
+// 给一个array，还有一个windows size。 滑动window，求最大。 follow up，一样的参数，要求是从array里选3个windows，求所有windows的item sum最大，window 不能相互重合
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -39,7 +40,7 @@ public class SlidingWindowMaximum {
         }
         
         int[] res = new int[nums.length - k + 1];
-        int index = 0;
+        int index = 0; // 单独用一个index计数 方便省事儿
         
         PriorityQueue<Integer> heap = new PriorityQueue<Integer>(k, new Comparator<Integer>(){
             public int compare(Integer val1, Integer val2) {
@@ -50,9 +51,9 @@ public class SlidingWindowMaximum {
         for (int i = 0; i < k; i++) {
             heap.offer(nums[i]);
         }
-        res[index++] = heap.peek();
+        res[index++] = heap.peek(); // 在外边就添加进去
         
-        for (int i = k; i < nums.length; i++) {
+        for (int i = k; i < nums.length; i++) { // N * (K + log(K))
             int old = nums[i - k];
             heap.remove(old);
             
@@ -73,13 +74,14 @@ public class SlidingWindowMaximum {
         
         int len = nums.length;
         int[] res = new int[len - k + 1];
-        LinkedList<Integer> list = new LinkedList<Integer>(); // 需要两头同时操作，所以LinkedList
+        LinkedList<Integer> list = new LinkedList<Integer>(); // 需要两头同时操作，所以LinkedList 实际上是一个双向链表
         
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) { // List存index
             if (!list.isEmpty() && list.peekFirst() < i - k + 1) { // 最左边的过时了
                 list.pollFirst();
             }
             
+            // 我们只关心在一个section中的max, 如果左边的值小于新加入的值，左边的小值就没价值了，直接扔掉，这样保证List最左边就总是下一个max
             while (!list.isEmpty() && nums[i] > nums[list.peekLast()]) { // 只留下大数，小数不管用 最终是个递减数列
                 list.pollLast();
             }

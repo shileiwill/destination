@@ -2,6 +2,11 @@ package company.facebook;
 
 import java.util.*;
 //重要
+/**
+ * Given a set of candidate numbers (C) (with duplicates) and a target number (T), 
+ * find all unique combinations in C where the candidate numbers sums to T. 
+ * The same repeated number may be chosen from C unlimited number of times. 
+ */
 public class CombinationSum {
 
 	public static void main(String[] args) {
@@ -58,7 +63,7 @@ public class CombinationSum {
 	}
 	
 	/**
-	 * Given a collection of candidate numbers (C) and a target number (T), 
+	 * Given a collection of candidate numbers (C) (with duplicates) and a target number (T), 
 	 * find all unique combinations in C where the candidate numbers sums to T.
 
 	Each number in C may only be used once in the combination.

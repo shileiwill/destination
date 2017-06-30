@@ -78,7 +78,13 @@ public class MoveZeroes {
         }
     }
     
-    // You can also do this, but not as good as above. This requires more move()
+    // You can also do this, but not as good as above. This requires more move().
+    // However, this requires only 1 loop
+    /**
+     *  第一题也是 move zeros， 我一上来就用的双指针的做法， 复杂度是o(n)， 但是我用的两个 while loop， 然后他说不行要改， 
+     *  最后改成了一个loop，但本质是一样的。 然后followup 就是用的收尾指针 swap
+     * @param nums
+     */
     public void moveZeroesNoOrderMoreMoves(int[] nums) {
         if (nums == null || nums.length == 0) {
             return;

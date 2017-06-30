@@ -1,10 +1,10 @@
 package company.facebook;
-
+// 重要
 import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
 
-public class BSTToLinkedList {
+public class ConvertBSTToLinkedList {
 
 	public static void main(String[] args) {
 		TreeNode n2 = new TreeNode(2);
@@ -19,7 +19,7 @@ public class BSTToLinkedList {
 //		n1.left = n5;
 		n4.right = n5;
 		
-		BSTToLinkedList bst = new BSTToLinkedList();
+		ConvertBSTToLinkedList bst = new ConvertBSTToLinkedList();
 //		System.out.println(bst.deepCopy(n3).val);
 		DListNode d = bst.bstToLinkedListPreOrderTraversal(n3);
 		
@@ -28,7 +28,7 @@ public class BSTToLinkedList {
 //			d = d.next;
 //		}
 		
-		TreeNode root = bst.balancedBST(d);
+		TreeNode root = bst.buildFromPreOrderTraversalMyStyle(d);
 		System.out.println(root.val);
 	}
 	
@@ -57,12 +57,12 @@ public class BSTToLinkedList {
 		
 		return true;
 		
-		// This is better, because of lazy initialization
+		// This is better(code is cleaner), because of lazy initialization
 		// return isFullTree(node.left) && isFullTree(node.right);
 	}
 	
 	// You can also use Map, BFS. Anyway, need to traverse through the tree
-	TreeNode deepCopy(TreeNode node) {
+	TreeNode deepCopy(TreeNode node) { // Tree is easy, since there is no loop
 		if (node == null) {
 			return null;
 		}
@@ -134,6 +134,8 @@ public class BSTToLinkedList {
 	
 	// Not sure if there is any bug
 	// Build a balanced binary search tree based on the above linked list
+	// 如果原来的BST不是balanced 你想转成一个balanced BST, 你需要inorder traversal, 之后每次取中点
+	// 如果你不care是否是balanced, 你只想还原原来的Binary Search Tree, 那么你preorder traversal, 之后用下边的方法
 	TreeNode balancedBST(DListNode head) {
 		if (head == null) {
 			return null;
@@ -163,6 +165,56 @@ public class BSTToLinkedList {
 		}
 		
 		return cur == null ? null : prev;
+	}
+	
+	TreeNode buildFromPreOrderTraversalMyStyle(DListNode head) {
+		if (head == null) {
+			return null;
+		}
+		
+		if (head.next == null) {
+			return new TreeNode(head.val);
+		}
+		
+		TreeNode root = new TreeNode(head.val);
+		DListNode preLarger = findPreLargerMyStyle(head);
+		
+		if (preLarger == null) {
+			root.left = buildFromPreOrderTraversalMyStyle(preLarger.next);
+			return root;
+		} else if (preLarger == head) {
+			root.right = buildFromPreOrderTraversalMyStyle(preLarger.next);
+			return root;
+		} else {
+			DListNode head1 = head.next;
+			DListNode head2 = preLarger.next;
+			preLarger.next = null;
+			
+			root.left = buildFromPreOrderTraversalMyStyle(head1);
+			root.right = buildFromPreOrderTraversalMyStyle(head2);
+			return root;
+		}
+	}
+
+	private DListNode findPreLargerMyStyle(DListNode head) {
+		int val = head.val;
+		DListNode prev = head;
+		DListNode cur = head.next;
+		
+		while (cur != null) {
+			if (cur.val > val) {
+				break;
+			}
+			
+			prev = cur;
+			cur = cur.next;
+		}
+		
+		if (cur == null) {
+			return null; // No larger found
+		} else {
+			return prev;
+		}
 	}
 }
 

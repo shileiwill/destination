@@ -1,5 +1,5 @@
 package company.facebook;
-
+// 重要
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -106,8 +106,9 @@ public class Subsets {
         }
     }
     
+    // 重要
     /**
-     * 这是一个好题
+     * 这是一个好题 找 所有 subset的个数，并且subset的 max + min < 给定k
      * 给一个set，求有多少个subsets，里面的min和max之和小于k。国人小哥很nice的提示了可以先排序，然后two pointer从两头往中间找。
      */
     int subsetsMinMaxLessThanK(int[] arr, int k) {

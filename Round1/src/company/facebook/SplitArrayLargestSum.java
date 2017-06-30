@@ -1,4 +1,6 @@
 package company.facebook;
+// 重要！给一个array，还有一个windows size。 滑动window，求最大(Sliding Window Maximum)。 
+// follow up，一样的参数，要求是从array里选3个windows，求所有windows的item sum最大，window 不能相互重合
 /**
  * 410. Given an array which consists of non-negative integers and an integer m, 
  * you can split the array into m non-empty continuous subarrays. Write an algorithm to minimize the largest sum among these m subarrays.
@@ -21,6 +23,7 @@ Explanation:
 There are four ways to split nums into two subarrays.
 The best way is to split it into [7,2,5] and [10,8],
 where the largest sum among the two subarrays is only 18.
+
  */
 public class SplitArrayLargestSum {
     public int splitArray(int[] nums, int m) {
@@ -35,7 +38,7 @@ public class SplitArrayLargestSum {
         long left = maxVal, right = sum;
         while (left + 1 < right) {
             long mid = left + (right - left) / 2;
-            if (isValid(mid, nums, m)) {
+            if (isValid(mid, nums, m)) { // 这里使用的mid可能不是一个合法的值，但是这个binary search会一直往左， 小的方向搜，直到找到一个边界值，which is exactly the result
                 right = mid;
             } else {
                 left = mid;
@@ -78,9 +81,9 @@ public class SplitArrayLargestSum {
 	    }
 	    
 	    /**
-	     * ALG: K-window Max-Sum LintCode
+	     * K-window Max-Sum
 		Given a num array, find a window of size k, that has a maximum sum of the k entries.
-		ALG, follow-up: Find three non-overlap windows of size k, that together has a maximum sum of the 3k entries, time complexity O(n^2)
+		follow-up: Find three non-overlap windows of size k, that together has a maximum sum of the 3k entries, time complexity O(n^2)
 	     */
 	    int[] kWindowSum(int[] arr, int k) {
 	    	int len = arr.length;
@@ -103,11 +106,17 @@ public class SplitArrayLargestSum {
 	    }
 	    
 	    /**
+	     * 在一个array 里面找到 sum最大，长度为 k 的 subarray， 返回sum。 这题太简单应该没算分，但是还让我写了。 
+	     * 第二个 题 找 sum最大，每个长度都是k 的三个subarray。 三个subarray不能有overlap。 举个栗子 1,2,1,2,6,7,5,1。k = 2。 
+	     * 这个里面找到的就应该是[1,2], 1,[2,6],[7,5],1 同样返回和。 楼猪这题傻逼的写了个 N^3的解法。铁定跪了。回学校问了下大神，大神说dp， 我也明白dp怎么写了，O(N)。
+	     * 
 	     *  这个其实可以优化到O(n)时间。
 			建从左端到每个下标的最大window数组，再建从右端到每个下标的最大window数组。
 			再从左往右走一遍所有的size k window，将其和与上一步建的两个数组一起加起来。遍历一遍取最大值即可。
 			
 			有点类似于买卖股票3, 一左一右， 这里维护三个window
+			
+			数组分成3个连续小数组，目标是小数组的和最大化
 	     */
 	    public static int find(int[] arr, int k) {
 	    	int res = Integer.MIN_VALUE;

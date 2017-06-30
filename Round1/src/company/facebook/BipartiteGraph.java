@@ -1,5 +1,5 @@
 package company.facebook;
-
+// 重要 判断一个图是不是两端。
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -92,7 +92,7 @@ public class BipartiteGraph {
 		}
 	}
 	
-	// Using Map is better, easier
+	// Using Map is better, easier if it is undirected graph
 	// If the graph has more than 1 independent parts, this Map couldn't cover all.
 	boolean isGraphBipartite(Map<Integer, Set<Integer>> graph) {
 		Set<Integer> group1 = new HashSet<Integer>();
@@ -189,6 +189,7 @@ public class BipartiteGraph {
 	}
 
 	// If there are A -> B and B -> A at the same time, need to use visited set to avoid stack over flow
+	// This will work with no issues if it is directed graph and make sure it is single direction
 	private boolean dfs(List<Node> graph, Set<Node> group1, Set<Node> group2, boolean isGroup1) {
 		for (Node node : graph) {
 			if (isGroup1) {

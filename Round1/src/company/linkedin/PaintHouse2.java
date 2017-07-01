@@ -12,6 +12,8 @@ All costs are positive integers.
 
 Follow up:
 Could you solve it in O(nk) runtime?
+
+好题
  */
 public class PaintHouse2 {
     public int minCostII(int[][] costs) {

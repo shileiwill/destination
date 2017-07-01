@@ -21,6 +21,7 @@ public class FlatternNestedInteger {
 		return stack.pop().getInteger();
 	}
 	
+	//  把逻辑放到hasNext()中，很好的解决了[] 空的问题
 	boolean hasNext() {
 		if (stack.isEmpty()) {
 			return false;

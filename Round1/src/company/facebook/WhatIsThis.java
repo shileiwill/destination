@@ -34,10 +34,58 @@ public class WhatIsThis {
 		return index;
 	}
 	
+	/**
+	 *  是否单调
+	 *  1. detect an array is monotonic or not. 
+		1,2,3,4 -> T
+		1,1,1,4 -> T
+		4,3,2,1 -> T
+		1, 1 ->T
+	 */
+	boolean isMonotonic(int[] arr) {
+		if (arr == null || arr.length <= 2) {
+			return true; //corner cases
+		}
+		
+		Boolean increasing = null;
+		int preVal = arr[0];
+		int pos = 1;
+		
+		while (pos < arr.length) {
+			while (pos < arr.length && arr[pos] == preVal) {
+				pos++;
+			}
+			
+			if (pos < arr.length) {
+				if (increasing == null) {
+					increasing = arr[pos] - preVal > 0 ? true : false;
+				} else {
+					if (increasing) {
+						if (arr[pos] < preVal) {
+							return false;
+						}
+					} else {
+						if (arr[pos] > preVal) {
+							return false;
+						}
+					}
+				}
+				
+				preVal = arr[pos];
+				pos++;
+			}
+		}
+		
+		return true;
+	}
+	
 	public static void main(String[] args) {
-		int[] arr = {3, 4, 1, 8, 9, 9, 4, 1, 9, 3};
+		int[] arr = {1, 3, 2};
 		WhatIsThis what = new WhatIsThis();
-		int res = what.findMaxRandom(arr);
+//		int res = what.findMaxRandom(arr);
+//		System.out.println(res);
+		
+		boolean res = what.isMonotonic(arr);
 		System.out.println(res);
 	}
 }

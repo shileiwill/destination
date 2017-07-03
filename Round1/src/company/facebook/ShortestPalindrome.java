@@ -13,6 +13,7 @@ Given "abcd", return "dcbabcd".
  */
 public class ShortestPalindrome {
     // Using 3 pointers to find the longest palindrome starting from index 0
+	// Time complexity is O(N^2)
     public String shortestPalindrome3Pointers(String s) {
         int i = 0;
         int j = s.length() - 1;

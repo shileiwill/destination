@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * 301. Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
@@ -115,7 +116,66 @@ public class RemoveInvalidParentheses {
     
     /*
      * fb问的remove parenthese都是只要一个正确答案，而不是所有，所以走一遍O(n)就行，如果要找出所有，不可能O（n）搞定吧。
+     * 
+     * 2. balance parentheses in a string 
+例子：
+"(a)()" -> "(a)()"
+"((bc)" -> "(bc)"
+")))a((" -> "a"
+"(a(b)" ->"(ab)" or "a(b)"
+
+Note: balance的意思就是把原来string里unpaired的括号变成paired的形式。如果有多个可能的结果， 比如上述最后一种情况，我们就只需要输出一个对的结果即可，
+所以这点简化了题目的难度。
+感受： 遍历string， 用一个stack存储每个open parenthesis的index，也就是'('的index, 每当遇到closed parenthesis就执行一次pop操作。
+注意两种unbalanced的情况：
+1. 出现多余的')':
+    对应情况就是stack为空，但遇到了一个')'。
+2. 出现多余的'(':
+    对应情况就是遍历结束，stack未空
+
+解决这两种情况即可
+对于java，我们需要把string转换成char array来做，因为在java中string is immutable.
+
+follow-up:
+Q：分析复杂度，问怎么不用stack来做？
+A：想了一会儿，感觉用two-pointer可行，一个指头， 一个指尾， 头index找'('， 找到就移动尾index找')'。面试官虽然没说，但一开始反应有点惊讶，说明他头脑里准备的是另一个解法。这里就请各位大神
      */
+    
+    String balanceParenthese(String s) {
+    	char[] arr = s.toCharArray();
+    	LinkedList<Integer> extraOpen = new LinkedList<Integer>();
+    	LinkedList<Integer> extraClose = new LinkedList<Integer>();
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		char c = s.charAt(i);
+    		
+    		if (c == '(') {
+    			extraOpen.addLast(i);
+    		} else if (c == ')') {
+    			if (extraOpen.isEmpty()) {
+    				extraClose.addLast(i);
+    			} else {
+    				extraOpen.removeLast();
+    			}
+    		}
+    	}
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		if (!extraOpen.isEmpty() && extraOpen.peekFirst() == i) {
+    			extraOpen.removeFirst();
+    		} else if (!extraClose.isEmpty() && extraClose.peekFirst() == i) {
+    			extraClose.removeFirst();
+    		} else {
+    			sb.append(arr[i]);
+    		}
+    	}
+    	
+    	return sb.toString();
+    }
+    
+    // 从后边remove肯定是对的
     String findOneValid(String s) {
     	int open = 0;
     	int close = 0;
@@ -128,7 +188,7 @@ public class RemoveInvalidParentheses {
     			open++;
     			sb.append(c);
     		} else if (c == ')') {
-    			if (open > close) {
+    			if (open > close) { // Dont add extra close
     				close++;
     				sb.append(c);
     			}
@@ -137,14 +197,14 @@ public class RemoveInvalidParentheses {
     		}
     	}
     	
-    	// After above, there could be redundant leading (
+    	// After above, there could be redundant leading (, need to remove from the end. ()()((()
     	int extra = open - close;
     	
-    	for (int i = 0; i < s.length() && extra > 0; i++) {
-			if (s.charAt(i) == '(') {
+    	for (int i = sb.length() - 1; i >= 0 && extra > 0; i--) { // Remove extra open
+			if (sb.charAt(i) == '(') {
 				extra--;
 				// if i is the only element, it will throw exception
-				if (i + 1 == s.length()) {
+				if (i + 1 == sb.length()) {
 					return "";
 				}
 				sb.deleteCharAt(i);
@@ -159,12 +219,15 @@ public class RemoveInvalidParentheses {
 		RemoveInvalidParentheses ri = new RemoveInvalidParentheses();
 		String s1 = "()())()";
 		String s2 = "(a)())()";
-		String s3 = ")(";
+		String s3 = "()()((()";
+		String s4 = "()()))))))";
 		String res1 = ri.findOneValid(s1);
 		String res2 = ri.findOneValid(s2);
 		String res3 = ri.findOneValid(s3);
+		String res4 = ri.findOneValid(s4);
 		System.out.println(res1);
-		System.out.println(res3);
 		System.out.println(res2);
+		System.out.println(res3);
+		System.out.println(res4);
 	}
 }

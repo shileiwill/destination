@@ -45,7 +45,7 @@ public class SparseDotProduct {
 		List<Node> C = Arrays.asList(arr3);
 		List<Node> D = Arrays.asList(arr4);
 		
-		int res = sdp.multiply2(C, D);
+		int res = sdp.multiply3Better(C, D);
 		System.out.println(res);
 	}
 
@@ -125,6 +125,29 @@ public class SparseDotProduct {
     		}
     		
     		pos1++;
+    	}
+    	
+    	return res;
+    }
+    
+    public int multiply3Better(List<Node> A, List<Node> B) {
+    	int res = 0;
+    	int pos1 = 0;
+    	int pos2 = 0;
+    	
+    	while (pos1 < A.size() && pos2 < B.size()) {
+    		Node nodeA = A.get(pos1);
+    		Node nodeB = B.get(pos2);
+    		
+    		if (nodeA.index == nodeB.index) {
+    			res += nodeA.value * nodeB.value;
+    			pos1++;
+    			pos2++;
+    		} else if (nodeA.index < nodeB.index) {
+    			pos1++;
+    		} else {
+    			pos2++;
+    		}
     	}
     	
     	return res;

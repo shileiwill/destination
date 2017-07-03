@@ -81,7 +81,7 @@ public class SplitArrayLargestSum {
 	    }
 	    
 	    /**
-	     * K-window Max-Sum
+	     * K-window Max-Sum 在一个array 里面找到 sum最大，长度为 k 的 subarray， 返回sum。 这题太简单应该没算分，但是还让我写了。 
 		Given a num array, find a window of size k, that has a maximum sum of the k entries.
 		follow-up: Find three non-overlap windows of size k, that together has a maximum sum of the 3k entries, time complexity O(n^2)
 	     */
@@ -106,7 +106,6 @@ public class SplitArrayLargestSum {
 	    }
 	    
 	    /**
-	     * 在一个array 里面找到 sum最大，长度为 k 的 subarray， 返回sum。 这题太简单应该没算分，但是还让我写了。 
 	     * 第二个 题 找 sum最大，每个长度都是k 的三个subarray。 三个subarray不能有overlap。 举个栗子 1,2,1,2,6,7,5,1。k = 2。 
 	     * 这个里面找到的就应该是[1,2], 1,[2,6],[7,5],1 同样返回和。 楼猪这题傻逼的写了个 N^3的解法。铁定跪了。回学校问了下大神，大神说dp， 我也明白dp怎么写了，O(N)。
 	     * 

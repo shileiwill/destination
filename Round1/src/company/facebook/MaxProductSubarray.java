@@ -2,6 +2,7 @@ package company.facebook;
 
 public class MaxProductSubarray {
 
+	// subarray 必须是连续的
 	public int maxProduct(int[] nums) {
 		int[] min = new int[nums.length];
 		int[] max = new int[nums.length];

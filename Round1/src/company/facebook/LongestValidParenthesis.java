@@ -10,7 +10,7 @@ public class LongestValidParenthesis {
 
 	public int longestValidParentheses(String s) {
 		Stack<Integer> stack = new Stack<Integer>(); // Stack contains indexes
-		stack.push(-1); // 起始
+		stack.push(-1); // 起始 padding 好使
 		int res = 0;
 		
 		for (int i = 0; i < s.length(); i++) {
@@ -18,8 +18,8 @@ public class LongestValidParenthesis {
 			
 			if (now == ')' && stack.size() > 1 && s.charAt(stack.peek()) == '(') { // 这一串条件很关键
 				stack.pop(); // Throw the left (
-				res = Math.max(res, i - stack.peek() + 1);
-			} else { // Could be ( and )
+				res = Math.max(res, i - stack.peek());
+			} else { // Could be ( and ), 全都得放，用来记录左边的新的valid的边界
 				stack.push(i);
 			}
 		}

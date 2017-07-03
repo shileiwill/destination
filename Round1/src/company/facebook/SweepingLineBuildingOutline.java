@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 /**
- * Given N buildings in a x-axis，each building is a rectangle and can be represented by a triple (start, end, height)，where start is the start position on x-axis, end is the end position on x-axis and height is the height of the building. Buildings may overlap if you see them from far away，find the outline of them。
+ * Given N buildings in a x-axis，each building is a rectangle and can be represented by a triple (start, end, height)，
+ * where start is the start position on x-axis, end is the end position on x-axis and height is the height of the building. 
+ * Buildings may overlap if you see them from far away，find the outline of them。
 
-An outline can be represented by a triple, (start, end, height), where start is the start position on x-axis of the outline, end is the end position on x-axis and height is the height of the outline.
+An outline can be represented by a triple, (start, end, height), where start is the start position on x-axis of the outline, 
+end is the end position on x-axis and height is the height of the outline.
 
 Building Outline
 
@@ -15,7 +18,6 @@ Building Outline
 
 Please merge the adjacent outlines if they have the same height and make sure different outlines cant overlap on x-axis.
 
-Have you met this question in a real interview? Yes
 Example
 Given 3 buildings：
 

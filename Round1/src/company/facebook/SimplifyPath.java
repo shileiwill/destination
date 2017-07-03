@@ -9,7 +9,6 @@ import java.util.Stack;
 For example,
 path = "/home/", => "/home"
 path = "/a/./b/../../c/", => "/c"
-click to show corner cases.
 
 Corner Cases:
 Did you consider the case where path = "/../"?

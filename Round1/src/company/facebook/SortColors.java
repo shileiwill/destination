@@ -1,4 +1,8 @@
 package company.facebook;
+
+import java.util.Arrays;
+import java.util.List;
+
 //重点
 /**
  * 75. Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, 
@@ -12,9 +16,37 @@ Color sort: think about when there are K colors
 public class SortColors {
 
 	public static void main(String[] args) {
-
+		int[] arr = {0, 1, 2, 1, 2, 1, 0, 1, 1, 0, 0, 3, 0, 2, 3};
+		SortColors sc = new SortColors();
+		sc.sortColors2Best(arr, 4);
+		
+		for (int val : arr) {
+			System.out.print(val + " ");
+		}
+	}
+	
+	// Need 1 pass solution, 3 pointers, similar to 3 sliding window with size K, maximum sum
+	void sortColors1Pass(int[] arr) {
+		int pos0 = 0; // Red 0
+		int pos1 = 0; // White 1
+		int pos2 = arr.length - 1; // Blue 2
+		
+		while (pos1 < pos2 + 1) { // It is possible there is no Blue at all.
+			if (arr[pos1] == 0) {
+				swap(arr, pos0, pos1);
+				pos0++;
+				pos1++;
+			} else if (arr[pos1] == 2) {
+				swap(arr, pos1, pos2);
+				pos2--;
+			} else {
+				pos1++;
+			}
+		}
 	}
 
+	// This is 2 pass, you can also use counting sort to solve this, using 2 pass
+	// But this solution is stable. It can keep original order of 0s, 1s, 2s
     public void sortColors(int[] nums) {
         if (nums == null || nums.length == 0) {
             return;
@@ -58,7 +90,6 @@ You are not suppose to use the library's sort function for this problem.
 
 k <= n
 
-Have you met this question in a real interview? Yes
 Example
 Given colors=[3, 2, 2, 1, 4], k=4, your code should sort colors in-place to [1, 2, 2, 3, 4].
 
@@ -110,7 +141,7 @@ while（getCategory(nums[back]) > high） back--;
         if (colors == null || colors.length == 0) {
             return;
         }
-        rainbowSort(colors, 0, colors.length - 1, 1, k);
+        rainbowSort(colors, 0, colors.length - 1, 0, k - 1);
     }
     
     public void rainbowSort(int[] colors, int left, int right, int colorFrom, int colorTo) {

@@ -103,7 +103,7 @@ public class ReorderList {
 	        len++;
 	        ListNode next = node.next;
 	        
-	        ListNode now = new ListNode(node.val);
+	        ListNode now = new ListNode(node.val); // Deep copy
 	        
 	        now.next = prev;
 	        prev = now;

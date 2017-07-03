@@ -131,8 +131,10 @@ public class UniquePaths2 {
      *  
      *  My thoughts:
      *  Need to have a visited[] to avoid revisit empty space
-     *  Need to have a obstacle[] to remember known obstacles. Only if move() to that position, can we find out if it is obstacle. So, important to remember
-     *  We dont know the start point, but there is one. We will treat that as (0,0), move from there. ID is based on the start point and distance. ID is a string now
+     *  Need to have a obstacle[] to remember known obstacles. Only if move() to that position, can we find out if it is obstacle. 
+     *  So, important to remember
+     *  We dont know the start point, but there is one. We will treat that as (0,0), move from there. ID is based on the start point and distance. 
+     *  ID is a string now
      *  Use DFS is easier
      *  encode() and moveBack() are helpful sub-methods
      *  There is only 1 move(UP, DOWN, LEFT, RIGHT), no int[][] dashboard for us. We dont know the borders, but move() can take us to 4 directions

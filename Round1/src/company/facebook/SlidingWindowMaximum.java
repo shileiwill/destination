@@ -65,6 +65,33 @@ public class SlidingWindowMaximum {
         return res;
     }
     
+    public int[] maxSlidingWindowHeapCleaner(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || nums.length < k) {
+            return new int[]{};
+        }
+        
+        int[] res = new int[nums.length - k + 1];
+        
+        PriorityQueue<Integer> heap = new PriorityQueue<Integer>(k, new Comparator<Integer>(){
+            public int compare(Integer val1, Integer val2) {
+                return val2 - val1;
+            }
+        });
+        
+        for (int i = 0; i < nums.length; i++) { // N * (K + log(K))
+            if (i - k >= 0) { // from k
+            	heap.remove(nums[i - k]);
+            }
+            heap.offer(nums[i]);
+            
+            if (i - k + 1 >= 0) { // from k - 1
+            	res[i - k + 1] = heap.peek();
+            }
+        }
+        
+        return res;
+    }
+    
     // O(N) 的方法很好，得记住
     // O(N) 有点像histogram， trapping rain water 维护一个单调递减数列
     public int[] maxSlidingWindow(int[] nums, int k) {

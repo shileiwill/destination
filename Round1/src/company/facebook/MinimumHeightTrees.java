@@ -2,8 +2,12 @@ package company.facebook;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -96,5 +100,55 @@ public class MinimumHeightTrees {
         }
         
         return leaves;
+    }
+    
+    public List<Integer> findMinHeightTreesMyStyle(int n, int[][] edges) {
+        if (n == 1) {
+            return Collections.singletonList(0);
+        }
+        
+        Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, new HashSet<Integer>());
+        }
+        
+        for (int[] edge : edges) {
+            int p1 = edge[0];
+            int p2 = edge[1];
+            
+            map.get(p1).add(p2);
+            map.get(p2).add(p1);
+        }
+        
+        // 可以转成你熟悉的queue
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        for (int i = 0; i < map.size(); i++) {
+            if (map.get(i).size() == 1) {
+                queue.offer(i);
+            }
+        }
+        
+        // 剪枝
+        // The only possible results' sizes are 1 or 2. 
+        while (n > 2) {
+            int size = queue.size();
+            n -= size;
+            
+            for (int i = 0; i < size; i++) {
+            	int leaf = queue.poll();
+            	
+            	for (int otherEnd : map.get(leaf)) {
+            		map.get(otherEnd).remove(leaf);
+            		
+            		if (map.get(otherEnd).size() == 1) {
+            			queue.offer(otherEnd);
+            		}
+            	}
+            	
+            	map.remove(leaf);
+            }
+        }
+        
+        return queue;
     }
 }

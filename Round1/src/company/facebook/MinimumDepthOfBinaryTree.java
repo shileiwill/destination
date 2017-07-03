@@ -62,6 +62,7 @@ public class MinimumDepthOfBinaryTree {
         return Math.min(left, right) + 1;
     }
     
+    // This is good
     public int minDepthBFS(TreeNode root) {
         if (root == null) {
             return 0;

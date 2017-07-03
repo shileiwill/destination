@@ -20,7 +20,9 @@ Solution 3: search Kth element in result array and takes all point lesser then f
 
 Notes: better use sqr of distance to avoid of sqrt operations, it will be greater faster if point has integer coordinates.
 
-Solution 3 is quickselect algorithm. Store all the distances in an array. Find the index which gives the kth smallest element using method similar to quicksort (Chapter 9 CLRS), then element from index 0 to k-1 will give all the required k points
+Solution 3 is quickselect algorithm. Store all the distances in an array. 
+Find the index which gives the kth smallest element using method similar to quicksort (Chapter 9 CLRS), 
+then element from index 0 to k-1 will give all the required k points
 O(N) in solution 2 & 3 is average case complexity. Worst case is still O(NLogK) 
  */
 public class NearestKPoints {
@@ -50,7 +52,7 @@ public class NearestKPoints {
 		System.out.println(p.x + "==" + p.y);
 	}
 
-	// Using Heap: N * KlogK
+	// Using Heap: N * logK
 	public List<Point> findNearestPoints(Point p, int k, Point[] points) {
 		PriorityQueue<Point> heap = new PriorityQueue<Point>(k + 1, new Comparator<Point>(){
 			public int compare(Point p1, Point p2) {

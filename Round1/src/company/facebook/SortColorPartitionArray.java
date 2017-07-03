@@ -6,7 +6,7 @@ package company.facebook;
  * 
  * 你可以像sort color一样，分两次partition, < K, >= K, then == k, > K
  */
-public class PartitionArray {
+public class SortColorPartitionArray {
 
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 5, 2, 2, 8};
@@ -58,21 +58,20 @@ public class PartitionArray {
     }
     
     public static void partArray(int[] arr, int k) {
-    	int left = -1; // 2 edges, not inclusive
-    	int right = arr.length;
-    	int pos = 0;
+    	int small = 0;
+    	int equal = 0;
+    	int large = arr.length - 1;
     	
-    	while (pos < right) {
-    		if (arr[pos] < k) {
-    			left++;
-    			swap(arr, pos, left);
-    			pos++;
-    		} else if (arr[pos] == k) {
-    			pos++;
+    	while (equal <= large) {
+    		if (arr[equal] < k) {
+    			swap(arr, small, equal);
+    			small++;
+    			equal++;
+    		} else if (arr[equal] > k) {
+    			swap(arr, equal, large);
+    			large--;
     		} else {
-    			right--;
-    			swap(arr, pos, right);
-//    			pos++;
+    			equal++;
     		}
     	}
     }

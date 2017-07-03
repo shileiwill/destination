@@ -22,7 +22,7 @@ public class PrintRootToLeaf {
 		n3.left = n1;
 		
 		PrintRootToLeaf pr = new PrintRootToLeaf();
-		List<List<TreeNode>> res = pr.printPath(n2);
+		List<List<TreeNode>> res = pr.printPathMyStyle(n2);
 		
 		for (List<TreeNode> list : res) {
 			for (TreeNode node : list) {
@@ -59,12 +59,38 @@ public class PrintRootToLeaf {
 		}
 	}
 	
+	// MyStyle works
+	List<List<TreeNode>> printPathMyStyle(TreeNode root) {
+		List<List<TreeNode>> res = new ArrayList<List<TreeNode>>();
+		List<TreeNode> list = new ArrayList<TreeNode>();
+		helperMyStyle(res, list, root);
+		return res;
+	}
+
+	private void helperMyStyle(List<List<TreeNode>> res, List<TreeNode> list, TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		
+		if (root.left == null && root.right == null) {
+			list.add(root);
+			res.add(new ArrayList<TreeNode>(list));
+			list.remove(list.size() - 1);
+			return;
+		}
+		
+		list.add(root);
+		helperMyStyle(res, list, root.left);
+		helperMyStyle(res, list, root.right);
+		list.remove(list.size() - 1);
+	}
+	
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
         if (root == null) {
             return res;    
         }
-        helper(root, "", res);
+        helperMyStyle(root, "", res);
         return res;
     }
     
@@ -79,5 +105,19 @@ public class PrintRootToLeaf {
         if (node.right != null) {
             helper(node.right, path + node.val + "->", res);
         }
+    }
+    
+    void helperMyStyle(TreeNode node, String path, List<String> res) {
+    	if (node == null) {
+    		return;
+    	}
+    	
+        if (node.left == null && node.right == null) { // When to end
+            res.add(path + node.val);
+            return;
+        }
+        
+        helperMyStyle(node.left, path + node.val + "->", res);
+        helperMyStyle(node.right, path + node.val + "->", res);
     }
 }

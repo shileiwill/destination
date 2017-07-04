@@ -11,7 +11,7 @@ public class MaxProductSubarray {
 		
 		for (int i = 1; i < nums.length; i++) {
 			if (nums[i] < 0) {
-				min[i] = Math.min(nums[i], max[i - 1] * nums[i]);
+				min[i] = Math.min(nums[i], max[i - 1] * nums[i]); // 必须是连续的
 				max[i] = Math.max(nums[i], min[i - 1] * nums[i]);
 				
 				res = Math.max(res, max[i]);

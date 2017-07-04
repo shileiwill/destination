@@ -14,7 +14,7 @@ public class RetainBestCache<K, V> {
 	}
 
 	private Map<K, V> cache; 
-	private TreeMap<Integer, Set<K>> rank; 
+	private TreeMap<Integer, Set<K>> rank; // Since it is ordered by Rank, an integer, TreeMap is super important
 	private DataSource<K, V> dataSource; 
 	private int capacity; 
 

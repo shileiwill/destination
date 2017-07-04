@@ -48,6 +48,7 @@ public class GraphValidTree {
 		}
 		
 		// Do we still need to BFS the Tree and use a visted set? Or must be true here?
+		// Need to do BFS, Above cant find cycle, A to B and B to A
 		return true;
 	}
 

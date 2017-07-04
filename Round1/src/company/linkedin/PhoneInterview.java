@@ -1,5 +1,8 @@
 package company.linkedin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PhoneInterview {
 
 }
@@ -41,7 +44,7 @@ public boolean isIsomorphic(String firstWord, String secondWord) {
   Map<Character, Character> map2 = HashMap<Character, Character>(); // secondWord -> firstWord
   
   int pos = 0; // Since they share same length, one pos is enough
-  while (pos < firstWord.length) {
+  while (pos < firstWord.length()) {
       char firstChar = firstWord.charAt(pos);
       char secondChar = secondWord.charAt(pos);
       

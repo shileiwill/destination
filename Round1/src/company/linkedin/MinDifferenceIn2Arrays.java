@@ -45,7 +45,7 @@ public class MinDifferenceIn2Arrays {
 		int[][] hash = new int[a.length + 1][b.length + 1];
 		
 		for (int i = 1; i <= a.length; i++) {
-			hash[i][0] = Integer.MAX_VALUE;
+			hash[i][0] = Integer.MAX_VALUE; // Need to initialize this because we need hash[i][j - 1]
 		}
 		
 		for (int i = 1; i <= a.length; i++) {

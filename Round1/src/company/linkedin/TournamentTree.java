@@ -3,7 +3,7 @@ package company.linkedin;
 import chapter3.binaryTree.TreeNode;
 
 /**
- * Tournament tree 找secMin;. 
+ * Tournament tree 找secMin; It is complete binary tree
 
 Tournament tree 的定义是parent 是孩子node的最小值， 如下例 return 5
 
@@ -18,7 +18,25 @@ Tournament tree 的定义是parent 是孩子node的最小值， 如下例 return
 public class TournamentTree {
 
 	public static void main(String[] args) {
-
+		TreeNode n21 = new TreeNode(2);
+		TreeNode n22 = new TreeNode(2);
+		TreeNode n71 = new TreeNode(7);
+		TreeNode n51 = new TreeNode(5);
+		TreeNode n23 = new TreeNode(2);
+		TreeNode n8 = new TreeNode(8);
+		TreeNode n72 = new TreeNode(7);
+		
+		n21.left = n22;
+		n21.right = n71;
+		n22.left = n51;
+		n22.right = n23;
+		n71.left = n8;
+		n71.right = n72;
+		
+		TournamentTree tt = new TournamentTree();
+		int res = tt.findSecondMinRecursion(n21);
+		
+		System.out.println(res);
 	}
 
 	int findSecondMin(TreeNode root) {
@@ -32,6 +50,22 @@ public class TournamentTree {
 				secondMin = Math.min(secondMin, root.left.val);
 				root = root.right;
 			}
+		}
+		
+		return secondMin;
+	}
+	
+	int findSecondMinRecursion(TreeNode root) {
+		int secondMin = Integer.MAX_VALUE;
+		
+		if (root.left == null && root.right == null) {
+			return Integer.MAX_VALUE;
+		}
+		
+		if (root.val == root.left.val) {
+			secondMin = Math.min(root.right.val, findSecondMinRecursion(root.left));
+		} else {
+			secondMin = Math.min(root.left.val, findSecondMinRecursion(root.right));
 		}
 		
 		return secondMin;

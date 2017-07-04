@@ -22,7 +22,7 @@ public class ReplaceString {
 			return original;
 		}
 		
-	// 4. 字符串替换就是给你一个原字符串s，一个目标串p，一个替换字符串t，把s里面所有的p替换成t，比如给s="abcdefg", p="bc",
+		// 4. 字符串替换就是给你一个原字符串s，一个目标串p，一个替换字符串t，把s里面所有的p替换成t，比如给s="abcdefg", p="bc",
 		// t="x"，返回"axdefg"
 		// 面试官期望的是O(n)的解法，比如用一个sliding window记录当前窗口每个字符出现频率，只有出现频率符合目标串p里面字符频率才进行字符串比较，我说如果遇见"aaaaaa", 
 		// 目标串为"aa",这种情况是会退化成O(n^2)的，面试官说是的，但是平均来说是O(n)

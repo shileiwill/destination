@@ -42,9 +42,13 @@ public class ValidParenthese {
 			if (!map.containsKey(c)) {
 				stack.push(c);
 			} else {
-				char prev = stack.pop();
-				if (map.get(c) != prev) {
+				if (stack.isEmpty()) {
 					return false;
+				} else {
+					char prev = stack.pop(); // what if stack is empty
+					if (map.get(c) != prev) {
+						return false;
+					}
 				}
 			}
 		}

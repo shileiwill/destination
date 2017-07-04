@@ -1,6 +1,6 @@
 package company.linkedin;
 /**
- * 然后开始做题。第一题三哥出的，给了一堆server，然后让找出first available server，我想这不是first missing positive吗，leetcode原题，但L家面试题里从来没见过，虽然最近没 写，
+ * 然后开始做题。第一题三哥出的，给了一堆server，然后让找出first available server，我想这不是first missing positive吗，leetcode原题，但L家面试题里从来没见过，
 但方法是记得的，但开始还是假装说最intuitive的办法就说sort，但肯定有更好的办法，容我想想！三哥很急的说，ok ok let me give you a hint, 
 我当时就急了心中大喊我不要hint!我这演技已经是影后的水平了吗！大概三哥听到我心里的呐喊，就说我再等你想想。我哪还敢等，马上开始写。
 写完过了test case，这时已经33分钟了。. 

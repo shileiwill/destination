@@ -16,7 +16,7 @@ public class UnionIntersectionOfLists {
 		List<Integer> list1 = Arrays.asList(arr1);
 		List<Integer> list2 = Arrays.asList(arr2);
 		
-		List<Integer> res = unionIntersect.intersection(list1, list2);
+		List<Integer> res = unionIntersect.intersectionIteratorBetter(list1, list2);
 		for (int val : res) {
 			System.out.print(val + "==");
 		}
@@ -124,6 +124,41 @@ public class UnionIntersectionOfLists {
 				pos1++;
 			} else {
 				pos2++;
+			}
+		}
+		
+		return res;
+	}
+	
+	// Without Wrapper
+	List<Integer> intersectionIteratorBetter(List<Integer> list1, List<Integer> list2) {
+		List<Integer> res = new ArrayList<Integer>();
+		Collections.sort(list1);
+		Collections.sort(list2);
+		
+		Iterator<Integer> it1 = list1.iterator();
+		Iterator<Integer> it2 = list2.iterator();
+		
+		Integer val1 = null;
+		Integer val2 = null;
+		
+		while ((it1.hasNext() || val1 != null) && (it2.hasNext() || val2 != null)) {
+			if (val1 == null) {
+				val1 = it1.next();
+			}
+			
+			if (val2 == null) {
+				val2 = it2.next();
+			}
+			
+			if (val1 == val2) {
+				res.add(val1);
+				val1 = null;
+				val2 = null;
+			} else if (val1 < val2) {
+				val1 = null;
+			} else {
+				val2 = null;
 			}
 		}
 		

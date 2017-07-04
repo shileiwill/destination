@@ -48,7 +48,7 @@ public class Sqrt {
 		double precision = 0.0000000000000000000000001;
 		
 		while (left < right) {
-			double mid = (left + right) / 2.0;
+			double mid = (left + right) / 2.0;  // 都是double, 出来的mid也是double
 			
 			if (Math.abs(mid * mid - x) <= precision) {
 				return mid;

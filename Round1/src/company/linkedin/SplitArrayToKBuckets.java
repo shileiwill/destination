@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 
 /**
  * 给一个数组， 给一个数字 k. 问能不能把数组里面的数字分到k个桶里面， 使得每个桶里面所有的数字和相同。 DFS暴力解。
-// sort the array, always take the current number into the bucket whose sum is the smallest
+ * 活学活用DFS backtracking, 寻找各种方案
  */
 public class SplitArrayToKBuckets {
 
@@ -17,39 +17,6 @@ public class SplitArrayToKBuckets {
 		int[] arr = {1,2, 4, 5, 3, 8, 9, 4, 1, 3};
 		int k = 5;
 		System.out.println(s.canSplitBruteForce(arr, k));
-	}
-
-    
-	// 贪婪算法，想法很好，但是不对！
-	boolean canSplit(int[] arr, int k) {
-		// Min Heap by default. This heap is the buckets
-		PriorityQueue<Integer> heap = new PriorityQueue<Integer>(k);
-		
-		for (int i = 0; i < k; i++) {
-			heap.offer(0);
-		}
-		
-		Arrays.sort(arr);
-		int sum = 0;
-		for (int val : arr) {
-			int smallestBucketInHeap = heap.poll();
-			smallestBucketInHeap += val;
-			sum += val;
-			heap.offer(smallestBucketInHeap);
-		}
-		
-		if (sum % k != 0) {
-			return false;
-		}
-		
-		while (!heap.isEmpty()) {
-			int bucket = heap.poll();
-			if (bucket != sum / k) {
-				return false;
-			}
-		}
-		
-		return true;
 	}
 	
 	boolean canSplitBruteForce(int[] arr, int k) {

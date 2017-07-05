@@ -9,7 +9,7 @@ public class FactorCombination {
 
 	public static void main(String[] args) {
 		FactorCombination fc = new FactorCombination();
-		List<Integer> factors = fc.getFactors(38);
+		List<Integer> factors = fc.getFactors(36);
 		
 		for (int factor : factors) {
 			System.out.print(factor + "==");
@@ -48,13 +48,14 @@ public class FactorCombination {
 		return res;
 	}
 	
-	void helper(List<List<Integer>> res, List<Integer> list, int target, int factor) {
+	// factor is a position
+	void helper(List<List<Integer>> res, List<Integer> list, int target, int pos) {
 		if (target == 1) { // Termination point is 1
 			res.add(new ArrayList<>(list));
 			return;
 		}
 		
-		for (int i = factor; i >= 2; i--) {
+		for (int i = pos; i >= 2; i--) {
 			if (target % i == 0) {
 				list.add(i);
 				helper(res, list, target / i, i);

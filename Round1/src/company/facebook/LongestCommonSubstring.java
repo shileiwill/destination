@@ -12,8 +12,8 @@ Longest common substring
 public class LongestCommonSubstring {
 
 	public static void main(String[] args) {
-		String s1 = "leetcodabcde";
-		String s2 = "codyabcdef";
+		String s1 = "leetcode";
+		String s2 = "codyabc";
 		commonString(s1, s2, 3);
 	}
 
@@ -21,35 +21,22 @@ public class LongestCommonSubstring {
 		int m = s1.length();
 		int n = s2.length();
 		
-		int[][] hash = new int[m + 1][n + 1];
-		hash[0][0] = 1;
+		int[][] hash = new int[m][n];
 		
-		for (int i = 1; i <= n; i++) {
-			hash[0][i - 1] = 0;
-		}
-		
-		for (int j = 1; j <= m; j++) {
-			hash[j - 1][0] = 0;
-		}
-		
-		for (int i = 1; i <= m; i++) {
-			for (int j = 1; j <= n; j++) {
-				char c1 = s1.charAt(i - 1);
-				char c2 = s2.charAt(j - 1);
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				char c1 = s1.charAt(i);
+				char c2 = s2.charAt(j);
 				
 				if (c1 == c2) {
-					hash[i][j] = hash[i - 1][j - 1] + 1;
+					hash[i][j] = ((i == 0 || j == 0) ? 0 : hash[i - 1][j - 1]) + 1;
 				} else {
-					hash[i][j] = Math.max(hash[i - 1][j], hash[i][j - 1]);
+					hash[i][j] = 0;
 				}
 				
-				System.out.println("i : " + i + " : j : " + j + " : "+ hash[i][j]);
 				if (hash[i][j] >= k) {
 					System.out.println("found one!");
-					int len = hash[i][j];
-					String sub = s1.substring(i - len, i);
-					System.out.println(sub);
-					//return true;
+					return true;
 				}
 			}
 		}

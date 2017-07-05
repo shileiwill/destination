@@ -42,7 +42,7 @@ public class DiffK {
 	        
 	        if (diff > b) {
 	            left++;
-	            right = Math.max(left + 1, right);
+	            right = Math.max(left + 1, right); // 这个很巧妙，保证right总在left后边
 	        } else {
 	            right++;
 	        }
@@ -55,10 +55,10 @@ public class DiffK {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i = 0; i < list.size(); i++) {
 			int num = list.get(i);
-			int toFind = num - target; // Need to sort list first?
+			int toFind = num - target; // list is sorted
 			
 			if (map.containsKey(toFind)) {
-				if (target == 0) {
+				if (target == 0) { // 特殊情况特殊考虑
 					if (map.get(toFind) >= 1) {
 						return true;
 					}

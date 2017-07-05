@@ -1,7 +1,6 @@
 package company.facebook;
 
 import java.util.Arrays;
-
 /*
  * 最长等差数列
  * Given a set of numbers, find the Length of the Longest Arithmetic Progression (LLAP) in it.

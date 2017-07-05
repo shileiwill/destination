@@ -1,5 +1,18 @@
 package company.facebook;
+/**
+ * Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), 
+ * write a function to check whether these edges make up a valid tree.
 
+ Notice
+
+You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and 
+thus will not appear together in edges.
+
+Example
+Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+ */
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -48,9 +61,12 @@ public class GraphValidTree {
 		}
 		
 		// Do we still need to BFS the Tree and use a visted set? Or must be true here?
+		// Yes, still need to deal with circle
 		return true;
 	}
 
+	// Remember this BFS　approach from Jiuzhang 因为是无向图，所以不care环？
+	// 这个应该是正解
     public boolean validTree(int n, int[][] edges) {
         if (edges.length == 0) {
             return n == 1;
@@ -72,9 +88,10 @@ public class GraphValidTree {
             }
             map.get(y).add(x);
         }
+        
         // Change Queue to Stack, it will be dfs
         Queue<Integer> queue = new LinkedList<Integer>();
-        int id = map.keySet().iterator().next();
+        int id = map.keySet().iterator().next(); // 随便提溜出一个来都能当root
         queue.offer(id);
         visited.add(id);
         
@@ -83,7 +100,7 @@ public class GraphValidTree {
             
             for (int next : map.get(now)) {
                 if (visited.contains(next)) {
-                    return false;
+                    return false; // 保证无环
                 }
                 
                 map.get(next).remove(now);
@@ -91,10 +108,10 @@ public class GraphValidTree {
                 queue.offer(next);
             }
             
-            // Can remove now from map? map.remove(now)
+            map.remove(now);
         }
         
-        return n == visited.size();
+        return n == visited.size(); // It should cover all, eventually， 保证不落单
     }
     public boolean validTreeUF(int n, int[][] edges) {
         UnionFind uf = new UnionFind(n);

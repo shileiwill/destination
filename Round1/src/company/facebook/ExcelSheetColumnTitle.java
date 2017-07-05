@@ -19,7 +19,7 @@ public class ExcelSheetColumnTitle {
         StringBuilder sb = new StringBuilder();
         while (n != 0) {
             n--;
-            sb.insert(0, (char)('A' + n % 26));
+            sb.insert(0, (char)('A' + n % 26)); // 从后边开始加
             n = n / 26;
         }
         

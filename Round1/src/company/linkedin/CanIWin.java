@@ -52,7 +52,8 @@ public class CanIWin {
 	}
 	
 	/**
-	 * There are n coins in a line. Two players take turns to take a coin from one of the ends of the line until there are no more coins left. The player with the larger amount of money wins.
+	 * There are n coins in a line. Two players take turns to take a coin from one of the ends of the line until there are no more coins left. 
+	 * The player with the larger amount of money wins.
 
 	Could you please decide the first player will win or lose?
 	
@@ -66,6 +67,7 @@ public class CanIWin {
 	 */
     public boolean firstWillWin(int[] values) {
         int len = values.length;
+        // 这个只能从两头取，所以可以用下标记录
         Integer[][] hash = new Integer[len + 1][len + 1];
 
         int sum = 0;

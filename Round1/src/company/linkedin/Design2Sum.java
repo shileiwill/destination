@@ -36,6 +36,10 @@ public class Design2Sum {
 		return false;
 	}
 	
+	/**
+	 * TreeSet: This implementation provides guaranteed log(n) time cost for the basic operations (add, remove and contains)
+	 */
+	
 	// NLog(N)
 	List<int[]> findUniquePairs1(int[] arr, int target) {
 		Arrays.sort(arr);;

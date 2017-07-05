@@ -4,7 +4,7 @@ public class DecodeWays {
 
 	public static void main(String[] args) {
 		DecodeWays dw = new DecodeWays();
-		int res1 = dw.numberOfWays("123");
+		int res1 = dw.numberOfWaysRecursive("123");
 		int res2 = dw.numberOfWays3("123");
 		
 		System.out.println(res1 + "==" + res2);
@@ -34,7 +34,7 @@ public class DecodeWays {
 	
 	// 2^N
 	int numberOfWaysRecursive(String s) {
-		return helper(s, 0);
+		return helperMyStyle(s, 0);
 	}
 	
 	private int helper(String s, int pos) {
@@ -55,6 +55,29 @@ public class DecodeWays {
 		}
 		
 		return res;
+	}
+	
+	// Better
+	private int helperMyStyle(String s, int pos) {
+		if (pos == s.length()) {
+			return 1; // 总得有个地方不是0
+		}
+		
+		int count = 0;
+		
+		int val1 = Integer.valueOf(s.substring(pos, pos + 1));
+		if (val1 >= 1 && val1 <= 9) {
+			count += helperMyStyle(s, pos + 1);
+		}
+		
+		if (pos + 2 <= s.length()) {
+			int val2 = Integer.valueOf(s.substring(pos, pos + 2));
+			if (val2 >= 10 && val2 <= 26) {
+				count += helperMyStyle(s, pos + 2);
+			}
+		}
+		
+		return count;
 	}
 
 	// 优化成三个变量

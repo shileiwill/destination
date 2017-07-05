@@ -140,37 +140,6 @@ An empty tree is represented by "" instead of "()".
 		return root;
 	}
 	
-	// Not correct, not working
-	NaryTreeNode helper(String s, int[] pos) {
-		String value = "";
-		NaryTreeNode root = null;
-		
-		while (pos[0] < s.length() && Character.isDigit(s.charAt(pos[0]))) {
-			value += s.charAt(pos[0]);
-			pos[0] = pos[0] + 1;
-		}
-		
-		if (value.equals("")) {
-			return null;
-		} else {
-			root = new NaryTreeNode(Integer.valueOf(value));
-		}
-		
-		while (pos[0] < s.length()) {
-			if (s.charAt(pos[0]) == '[') { // a new sub start
-				pos[0] = pos[0] + 1;
-				NaryTreeNode node = helper(s, pos);
-				
-				root.children.add(node);
-				pos[0] = pos[0] + 1;
-			} else {
-				break;
-			}
-		}
-		
-		return root;
-	}
-	
 	Node deserialize(String s) {
 		Node root = null;
 		Node parent = null;

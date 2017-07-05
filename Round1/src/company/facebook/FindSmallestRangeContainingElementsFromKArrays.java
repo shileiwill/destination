@@ -61,7 +61,7 @@ public class FindSmallestRangeContainingElementsFromKArrays {
 			public int compare(Node n1, Node n2) {
 				return n1.val - n2.val;
 			}
-		});
+		}); // Heap 正好横跨了所有K个list
 		
 		for (List<Integer> list : source) {
 			Iterator<Integer> it = list.iterator();
@@ -85,9 +85,9 @@ public class FindSmallestRangeContainingElementsFromKArrays {
 		while (!heap.isEmpty()) {
 			Node now = heap.poll();
 			
-			min = now.val;
+			min = now.val; // min一直在变
 			
-			if (max - min + 1 < range) {
+			if (max - min + 1 < range) { // 每次有变化，都要比较
 				range = max - min + 1;
 				start = min;
 				end = max;
@@ -95,7 +95,7 @@ public class FindSmallestRangeContainingElementsFromKArrays {
 			
 			if (now.it.hasNext()) {
 				now.val = now.it.next();
-				if (now.val > max) {
+				if (now.val > max) { // 也要记得跟踪max, 在加入的时候
 					max = now.val;
 				}
 				heap.offer(now);

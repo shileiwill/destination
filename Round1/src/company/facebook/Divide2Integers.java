@@ -59,7 +59,7 @@ public class Divide2Integers {
 		}
 		
 		if (C == 0 || C < D) {
-			return 0;
+			return C;
 		}
 		
 		if (D == 0) {
@@ -76,7 +76,7 @@ public class Divide2Integers {
 			if (mid == val) {
 				return 0;
 			} else if (mid < val) {
-				if ((mid + 1) > val) {
+				if ((mid + 1) > val) { // 也是求商，只不过最终return的时候转一下
 					return (C - mid * D) * flag;
 				}
 				left = mid + 1;

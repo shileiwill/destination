@@ -52,6 +52,8 @@ public class GraphValidTree {
 		return true;
 	}
 
+	// Remember this BFS　approach from Jiuzhang 因为是无向图，所以不care环？
+	// 这个应该是正解
     public boolean validTree(int n, int[][] edges) {
         if (edges.length == 0) {
             return n == 1;
@@ -73,9 +75,10 @@ public class GraphValidTree {
             }
             map.get(y).add(x);
         }
+        
         // Change Queue to Stack, it will be dfs
         Queue<Integer> queue = new LinkedList<Integer>();
-        int id = map.keySet().iterator().next();
+        int id = map.keySet().iterator().next(); // 随便提溜出一个来都能当root
         queue.offer(id);
         visited.add(id);
         
@@ -84,16 +87,18 @@ public class GraphValidTree {
             
             for (int next : map.get(now)) {
                 if (visited.contains(next)) {
-                    return false;
+                    return false; // 保证无环
                 }
                 
                 map.get(next).remove(now);
                 visited.add(next);
                 queue.offer(next);
             }
+            
+            map.remove(now);
         }
         
-        return n == visited.size();
+        return n == visited.size(); // It should cover all, eventually， 保证不落单
     }
     public boolean validTreeUF(int n, int[][] edges) {
         UnionFind uf = new UnionFind(n);

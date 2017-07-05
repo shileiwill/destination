@@ -68,6 +68,7 @@ public class FindLeaves {
 	 * One big difference is, tree only has 1 path between 2 nodes, while graph can have several paths, which forms a circle
 	 * @param graph could be isolated, but in our case, it is a connected graph
 	 * @return
+	 * 只用一个Set<Node> visited 不行，因为graph里边可以重复visit 但是不能有环。 所以用Map, 上次还没计算出结果来呢，又来了， 说明有环
 	 */
 	List<List<Integer>> findLeavesInGraph(TreeNode graph) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();

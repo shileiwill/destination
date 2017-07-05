@@ -143,7 +143,7 @@ public class CombinationSum {
 			return;
 		}
 		
-		for (int i = pos; i < arr.length; i++) {
+		for (int i = pos; i < arr.length; i++) { // 求Combination不用visited, 求Permutation 不仅要下边的，还得需要visited
 			if (i != pos && arr[i] == arr[i - 1]) { // This guy must be there, as there are duplicates in sorted array, 1, 1, 1,
 				continue;
 			}

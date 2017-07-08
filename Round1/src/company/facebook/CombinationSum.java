@@ -209,6 +209,7 @@ public class CombinationSum {
 	}
 	
 	// 每个元素只能用一次，求装满书包的可能性. 这个可以有重复元素
+	// 只要use only once 就必须得二维
 	public int combinationSum4_5(int[] nums, int target) {
 		int[][] hash = new int[nums.length + 1][target + 1];
 		hash[0][0] = 1;

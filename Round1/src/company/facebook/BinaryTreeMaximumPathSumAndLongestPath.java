@@ -1,7 +1,6 @@
 package company.facebook;
 
 import chapter3.binaryTree.TreeNode;
-import company.facebook.MaximumPathSum.ResultType;
 
 public class BinaryTreeMaximumPathSumAndLongestPath {
 
@@ -95,7 +94,7 @@ public class BinaryTreeMaximumPathSumAndLongestPath {
     
     ResultType helper2(TreeNode node) {
         if (node == null) {
-            return new ResultType(0, Integer.MIN_VALUE);
+            return new ResultType(0, Integer.MIN_VALUE); // 这个MIN很重要
         }
         
         // Divide 

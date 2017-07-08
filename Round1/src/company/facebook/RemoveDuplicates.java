@@ -1,5 +1,5 @@
 package company.facebook;
-
+// 重要
 public class RemoveDuplicates {
 
 	public static void main(String[] args) {

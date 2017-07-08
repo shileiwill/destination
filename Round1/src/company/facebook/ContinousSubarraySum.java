@@ -30,7 +30,7 @@ public class ContinousSubarraySum {
         for (int i = 0; i < nums.length; i++) {
             runningSum += nums[i];
             
-            if (k != 0) {
+            if (k != 0) { // 巧妙 使用同一个变量
                 runningSum = runningSum % k;
             }
             

@@ -179,11 +179,11 @@ public class ConvertBSTToLinkedList {
 		TreeNode root = new TreeNode(head.val);
 		DListNode preLarger = findPreLargerMyStyle(head);
 		
-		if (preLarger == null) {
-			root.left = buildFromPreOrderTraversalMyStyle(preLarger.next);
+		if (preLarger == null) { // 右边没有更大的 只有左节点
+			root.left = buildFromPreOrderTraversalMyStyle(head.next);
 			return root;
-		} else if (preLarger == head) {
-			root.right = buildFromPreOrderTraversalMyStyle(preLarger.next);
+		} else if (preLarger == head) { // 右边第一个就是更大的 只有右节点
+			root.right = buildFromPreOrderTraversalMyStyle(head.next);
 			return root;
 		} else {
 			DListNode head1 = head.next;

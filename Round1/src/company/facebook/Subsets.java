@@ -22,7 +22,6 @@ If nums = [1,2,3], a solution is:
   [1,2],
   []
 ]
- * @author Lei
  *
  */
 public class Subsets {
@@ -51,26 +50,27 @@ public class Subsets {
     }
     
     // Iteration
-    public static List<List<Integer>> combinationOf(int[] arr){
-        Arrays.sort(arr);
-        List<List<Integer>> res = new ArrayList();
-        res.add(new ArrayList());
-        for(int i=0;i<arr.length;i++){
-            int cur = arr[i];
-            
-            int size = res.size();
-            for(int j=0; j<size; j++){
-                List <Integer> one = res.get(j);
-                List<Integer> clone = new ArrayList(one);
-                clone.add(cur);
-                res.add(clone);
-            }
-        }
-        return res;
+    public static List<List<Integer>> subsetsIteration(int[] arr) {
+    	List<List<Integer>> res = new ArrayList<List<Integer>>();
+    	res.add(new ArrayList<Integer>());
+    	
+    	for (int i = 0; i < arr.length; i++) { // Every element
+    		int val = arr[i];
+    		
+    		int size = res.size(); // Fix the size here
+    		for (int j = 0; j < size; j++) {
+    			List<Integer> list = res.get(j);
+    			List<Integer> copy = new ArrayList<Integer>(list); // Make a deep copy
+    			copy.add(val);
+    			res.add(copy);
+    		}
+    	}
+    	
+    	return res;
     }
     
     public static void main(String[] args) {
-       List<List<Integer>> r =  combinationOf(new int[]{1,2,3});
+       List<List<Integer>> r =  subsetsIteration(new int[]{1,2,3});
        for(List <Integer> one : r){
            System.out.println(Arrays.toString(one.toArray()));
        }

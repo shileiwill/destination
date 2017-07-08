@@ -75,7 +75,7 @@ public class LongestArithmeticProgression {
 			int i = j - 1;
 			int k = j + 1;
 			
-			// i   j   k
+			// i   j   k 三个指针的思想
 			while (i >= 0 && k < len) {
 				if (arr[j] - arr[i] > arr[k] - arr[j]) {
 					k++; // 继续往右边搜，可能能搜到

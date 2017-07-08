@@ -82,7 +82,7 @@ public class AlienDictionary {
 				} else {
 					Set<Character> set = map.getOrDefault(c1, new HashSet<Character>());
 					
-					if (!set.contains(c2)) {
+					if (!set.contains(c2)) { // Add only if set doesnt have this character
 						set.add(c2);
 						map.put(c1, set);
 						degree.put(c2, degree.get(c2) + 1);

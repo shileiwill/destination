@@ -24,6 +24,8 @@ For interval list
   [4,7]
 ]
 Return 3
+
+1.2 find the point which have the maximum overlap of intervals
  */
 public class SweepingLine_NumberOfAirplanesInTheSky {
 	// 我自己的土办法 O(M * N)

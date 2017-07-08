@@ -17,7 +17,7 @@ import java.util.TreeMap;
 public class BlackBoxLinkedList {
 
 	public static void main(String[] args) {
-		int[] arr = {4, 2, 1, 6, 3, 8, 9};
+		int[] arr = {4, 2, 1, 16, 13, 0, 9};
 		boolean res = increasing(arr);
 		System.out.println(res);
 	}
@@ -54,10 +54,10 @@ public class BlackBoxLinkedList {
 			Map.Entry<Integer, Integer> floorEntry = map.floorEntry(arr[i]);
 			
 			if (floorEntry == null) {
-				map.put(arr[i], 0);
+				map.put(arr[i], 1); // Include itself
 			} else {
 				int smallerCount = floorEntry.getValue();
-				if (smallerCount >= 1) {
+				if (smallerCount >= 2) {
 					return true;
 				} else {
 					map.put(arr[i], smallerCount + 1);

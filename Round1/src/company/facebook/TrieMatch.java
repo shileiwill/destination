@@ -16,6 +16,9 @@ search("pad") -> false
 search("bad") -> true
 search(".ad") -> true
 search("b..") -> true
+
+設計一個class, add(word): 把word加進去， 然後 isMember(word): 如果word之前有加進去的話， return True
+難點是: add(Apple) -> isMember(A*pl*) 要return true，isMember(*****) 也要return true.
  */
 public class TrieMatch {
 

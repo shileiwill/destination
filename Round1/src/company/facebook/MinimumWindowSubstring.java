@@ -19,10 +19,6 @@ If there are multiple such windows, you are guaranteed that there will always be
  */
 public class MinimumWindowSubstring {
 
-	public static void main(String[] args) {
-
-	}
-
     public String minWindow(String s, String t) {
         int[] hash = new int[256];
         

@@ -105,7 +105,7 @@ public class MaxSumofRectangleNoLargerThanK {
         for (int r1 = 0; r1 < m; r1++) {
             for (int r2 = r1; r2 < m; r2++) {
                 TreeSet<Integer> tree = new TreeSet<Integer>();
-                tree.add(0); // Padding 不明白为啥加这个
+                tree.add(0); // Padding 不明白为啥加这个 因为最头上，啥也不减 就是0
                 for (int c = 0; c < n; c++) {
                     int cur = sum[r2][c];
                     if (r1 - 1 >= 0) {

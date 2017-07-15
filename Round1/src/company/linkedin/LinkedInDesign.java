@@ -1,5 +1,15 @@
+package company.linkedin;
 '2. system design, 设计一个系统来监控各个应用以及服务器产生的异常。
 'http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=218010&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+
+大概就是，首先各个机器先要log到自己的机器上，然后在自己的机器上做一次整合，整合之后，每隔一段时间集体发给一台中心节点存储起来。整合包括了，比如某个request在一秒钟之内发生了10次，没有必要记录了成10个requests对吧。
+
+乍一看有两种思路啊，各路大神不要喷我：
+1，利用log，比如抓取服务器的exception的log做counter，设计一个异步log整合系统
+。或直接导入到logstash进行aggregation也可以。
+2，利用jvm底层字节流软件，比如像profiler或appdanamics之类的libagent在字节流
+层面上抓取和监听异常事件
+
 
 5.1 设计word里面提示错别字的功能。follow up是可以加什么advanced features。
 5.2 top k visited URLs in last 24 hr/1 hr/5min。最后有个follow up是怎么保证对全球各地用户的响应速度。
@@ -19,12 +29,12 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=218214&extra=page%3
 
 3 design web游戏hangman
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212481&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
+http://www.jiuzhang.com/qa/2655/
 
 4. Sytem design, top 10 logs in last 60 min. Design the entire product, 
 from how to get log data to how to show it in UI.（遇到很给力的国人）
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=215128&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
+首先各个机器先要log到自己的机器上，然后在自己的机器上做一次整合，整合之后，每隔一段时间集体发给一台中心节点存储起来。整合包括了，比如某个request在一秒钟之内发生了10次，没有必要记录了成10个requests
 
 3.    
 Design. 烙印 设计google/outlook calendar
@@ -32,7 +42,8 @@ create event
 invite user
 notify users at specific time or periodically
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=215640&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
+http://www.jiuzhang.com/qa/3498/
+http://www.jiuzhang.com/qa/2897/
 
 design1: design 3层connections的functions和存储方式。. 
 design2: design 一个monitering system。没什么要求，一直让我遐想。
@@ -182,3 +193,23 @@ canlendar design
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=175497&page=1#pid2272026
 
 最后让设计search similar people的API，大致说一下前端，后端，不用太细。
+
+Design Uber
+http://www.jiuzhang.com/qa/410/
+
+Partner team:
+
+Phil Rabin  Rider App,  Bar raiser, What i am working on, how deep i can go, previous job experience, logging flow, end to end. Good communicator, huge impact, driving best practice, how work collaboar working with others, OOD, Design, Coding as well 
+
+
+Jay Bobzin  Dev Platform Team
+Adam Rogal  Sr. Director is hiring manager  45 min  Learn more about myself
+Goutham Nath  New manager will shadow Adam
+Riaz Majid  Rider experience GEO location, figure out best way. Uber Pool
+Patrick Slattery
+
+Integration with FB API, Airport, Millitary
+
+call Uber from FB
+
+Caching layer

@@ -63,6 +63,8 @@ getMachineIdByHashCode(91)
 每个数据同时在这个圆上也有一个点，通过hashcode算出来（0 - 2^64中的一个数），得到这个hashcode之后，我们以这个点为起点，在圆上顺时针找到第一个随机点（micro-shards）所属的机器，存进去。
 
 挂了的问题，如果一个机器挂了，那么受影响的是从这个机器开始，逆时针一直找，直到上一个机器之间的这些点，那么我们把这些点存到挂了的机器开始，顺时针找到的下一个机器上。
+
+replica 就是存在顺时针的下两个virtual node里。所以步骤就是 hash 得到一个virtual node，然偶顺时针取两个 virtual nodes，然后存上去。
  * */
 
 public class ConsistentHashingII {

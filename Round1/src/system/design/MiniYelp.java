@@ -101,7 +101,8 @@ public class MiniYelp {
         return rt;
     }
 
-    // geoHash这个string的长度决定了精度，这个方法是根据要搜索的范围，大体估算出geoHash需要的长度来
+    // geoHash这个string的长度决定了精度，这个方法是根据要搜索的范围，大体估算出geoHash需要的长度来. 长度为1时， 误差为2500KM, 长度为8时，误差为19M
+    // Refer to https://en.wikipedia.org/wiki/Geohash
     int get_length(double k) {
         double[] ERROR = {2500, 630, 78, 20, 2.4, 0.61, 0.076, 0.01911, 0.00478, 0.0005971, 0.0001492, 0.0000186};
         for (int i = 0; i < 12; ++i)

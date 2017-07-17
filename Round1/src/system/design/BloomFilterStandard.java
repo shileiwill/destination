@@ -37,6 +37,10 @@ class HashFunction {
         this.seed = seed;
     }
 
+    /**
+     * 基本的思路就是对于字符串中的每一个字符，用计算得到的值乘一个数（seed），加上这个字符，再膜一个数，最后得到的数就是hash的结果
+	一般情况下，乘的数选取一个素数(Prime)，这样的碰撞更少
+     */
     public int hash(String content) {
         int res = 0;
         int len = content.length();

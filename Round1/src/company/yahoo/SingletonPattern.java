@@ -2,11 +2,13 @@ package company.yahoo;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import system.design.Elevator;
+
 public class SingletonPattern {
-	private SingletonPattern instance = null;
-	private ReentrantLock lock = new ReentrantLock();
-	
-	public SingletonPattern getInstance() {
+	private static SingletonPattern instance = null;
+	private static ReentrantLock lock = new ReentrantLock();
+
+	public static SingletonPattern getInstance() {
 		if (instance == null) {
 			lock.lock();
 			if (instance == null) {
@@ -16,8 +18,20 @@ public class SingletonPattern {
 		}
 		return instance;
 	}
-	
+
+	public static SingletonPattern getInstance2() {
+		if (instance == null) {
+			synchronized (Elevator.class) {
+				if (instance == null) {
+					instance = new SingletonPattern();
+				}
+			}
+		}
+
+		return instance;
+	}
+
 	private SingletonPattern() {
-		
+
 	}
 }

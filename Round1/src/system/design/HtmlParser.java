@@ -46,7 +46,7 @@ You should return the Urls in it:
         Matcher matcher = pattern.matcher(content);
 
         while (matcher.find()) {
-        	String url = matcher.group(2);
+        	String url = matcher.group(2); // 正则表达式里第3个括号里匹配的内容
             if (url.length() == 0 || url.startsWith("#"))
                 continue;
             links.add(url);

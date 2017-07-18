@@ -2,7 +2,8 @@ package company.linkedin;
 '2. system design, 设计一个系统来监控各个应用以及服务器产生的异常。
 'http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=218010&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-大概就是，首先各个机器先要log到自己的机器上，然后在自己的机器上做一次整合，整合之后，每隔一段时间集体发给一台中心节点存储起来。整合包括了，比如某个request在一秒钟之内发生了10次，没有必要记录了成10个requests对吧。
+大概就是，首先各个机器先要log到自己的机器上，然后在自己的机器上做一次整合，整合之后，每隔一段时间集体发给一台中心节点存储起来。整合包括了，比如某个request在一秒钟之内发生了10次，
+没有必要记录了成10个requests对吧。
 
 乍一看有两种思路啊，各路大神不要喷我：
 1，利用log，比如抓取服务器的exception的log做counter，设计一个异步log整合系统
@@ -10,15 +11,11 @@ package company.linkedin;
 2，利用jvm底层字节流软件，比如像profiler或appdanamics之类的libagent在字节流
 层面上抓取和监听异常事件
 
-
 5.1 设计word里面提示错别字的功能。follow up是可以加什么advanced features。
 5.2 top k visited URLs in last 24 hr/1 hr/5min。最后有个follow up是怎么保证对全球各地用户的响应速度。
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=218646&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
-
 design a system to get top k exceptions/errors within a system for the given period of time.
-
 1. there are large number of servers. 
 2. there are large number of exceptions
 3. k is subject to change
@@ -32,7 +29,7 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212481&extra=page%3
 http://www.jiuzhang.com/qa/2655/
 
 4. Sytem design, top 10 logs in last 60 min. Design the entire product, 
-from how to get log data to how to show it in UI.（遇到很给力的国人）
+from how to get log data to how to show it in UI.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=215128&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 首先各个机器先要log到自己的机器上，然后在自己的机器上做一次整合，整合之后，每隔一段时间集体发给一台中心节点存储起来。整合包括了，比如某个request在一秒钟之内发生了10次，没有必要记录了成10个requests
 
@@ -50,58 +47,47 @@ design2: design 一个monitering system。没什么要求，一直让我遐想�
 design3: design 多线程的functions window(Msec msec)，可以返回这段时间内的平均值。add（int val）时可以调用一个给好的getTime function得到时间。
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=216630&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-5. design，design api。给定一个get_friends_lists() 问怎么判断两个是1 degree friends，2 degree friends 还是 3 degree friends。面经里也有类似的
+5. design，design api。给定一个get_friends_lists() 问怎么判断两个是1 degree friends，2 degree friends 还是 3 degree friends
 6. design，design monitor system，比较麻烦，考虑了partition，replication，easy to use，还有一些其他乱七八糟的。面试的时候一定要小心shadow。。。
 因为shadow没经验，肯定会问些乱七八糟的东西，这一轮的那个shadow不问死我我算完
 7. design， 见http://www.1point3acres.com/bbs/thread-147555-1-1.html 
 第三轮，这一轮的时候太累了，脑子抽了，直接导致面试官给提示都听不懂，搞了个比较麻烦的方法来解决，会用额外的空间。。。但是后来想一下可能会更快
-
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=208020&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
-第四轮：中亚人+国人shadown。要求设计一个calendar system。要求1000用户，并可能拓展到100M+（我xxx）。这轮应该是挂了，作死的选了个cassandra
+第四轮：中亚人+国人shadown。要求设计一个calendar system。要求1000用户，并可能拓展到100M+。这轮应该是挂了，作死的选了个cassandra
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=174614&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
 第四轮system design: hangman
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=214713&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 34.
-第一轮：系统设计
 已知一个函数，输入用户ID，可以返回该用户的所有友好（degree 1 friends），按好友ID从小到大排序。
 要求实现函数来输出返回一个用户的所有好友的好友(degree 2 friends), 以及 degree 3 friends。
 
-这里感觉主要是聊天看思路，中间会临时加一些限制条件，来进行时间或者空间的优化。. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+这里感觉主要是聊天看思路，中间会临时加一些限制条件，来进行时间或者空间的优化。
 
 '第三轮：系统设计
 对于key，value pairs， 在给定的文件系统中实现 put，get，delete 的方法。其中key比较小，全部key可以放在内存中，value有的会比较大
 已知一个文件系统，可以
-create files, delete files, sequentially scan file content, read file content randomly, append file content. 
-'
+create files, delete files, sequentially scan file content, read file content randomly, append file content. '
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=147555&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 35.
 １.ｄｅｓｉｇｎ，给一个ｍａｐ函数输入一个值输出一个值，一个ｒｅｄｕｃｅ函数输入２个参数返回一个值，
 ｎ个ｔｈｒｅａｄ，设计一个函数先ｍａｐ再ｒｅｄｕｃｅ，最大化利用所有ｔｈｒｅａｄｓ
-２．ｄｅｉｓｇｎ，地里有，求１ｓｔ，２ｎｄ，３ｒｄ，ｃｏｎｎｅｃｔｉｏｎｓ. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+２．ｄｅｉｓｇｎ，地里有，求１ｓｔ，２ｎｄ，３ｒｄ，ｃｏｎｎｅｃｔｉｏｎｓ
 ３．ｄｅｓｉｇｎ，推荐过去５ｍｉｎ，１ｈｏｕｒ，２４ｈｏｕｒｓ　的ｔｏｐ１００　ｓｈａｒｅｄ文章
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=209589&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 36.
 Design 
 设计一个找系统里面所有符合要求文件的function, 要求能不停的添加新的条件
-type linkedin.com url 后发生什么, 这轮说概念上有些confusion.
+type linkedin.com url 后发生什么
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=204503&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 37.
 r3: tiny URL
-r4: mgr
-
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=171681&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 38.
 'design
@@ -110,18 +96,14 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=175538&extra=page%3
 
 
 39.
-2. 华人
 Design a system to report top N 500 server exceptions.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=198297&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 40.
 5.设计短网址服务器构架。讨论流量，服务器架构和数据库架构。纯设计，半点代码都不碰。各种挑战。
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=203816&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 41.
-系统设计：
 设计日历（不用考虑重复事件，用户少）
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=204207&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
@@ -131,24 +113,21 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=204207&extra=page%3
 a restful server with 4GB,  
 given a request such as: http://seq=4?len=60?xxxxdata
 the system will store the binary data with that sequence number.
-given a request: http://startseq=3?maxLen=100, t
-he system returns all data objects with sequence >= 3 with total data length less equal than 100.
+given a request: http://startseq=3?maxLen=100, the system returns all data objects with sequence >= 3 with total data length less equal than 100.
 
-multiple clients calling simutaneous
-what data structure, concurrency, locking, etc..
+multiple clients calling simultaneously
+what data structure, concurrency, locking, etc.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=99469&extra=page%3D3%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 43.
- system design: design a system to monitors the top exceptions during last hour, last 24 hours.
- http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=198457&extra=page%3D3%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+system design: design a system to monitors the top exceptions during last hour, last 24 hours.
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=198457&extra=page%3D3%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-desig设计过去5min 1hr 24hr各类系统的exception-
+desig设计过去5min 1hr 24hr各类系统的exception
 http://www.mitbbs.com/article_t/JobHunting/33226795.html
 
 Design tiny URL 问了很多细节，最后居然问到了怎么配置memcache
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=145037&extra=page%3D6%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 design a notebook application like evernote or onenote, it should support search, collabration.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=148877&extra=page%3D6%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
@@ -163,10 +142,8 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=145426&extra=page%3
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=169441&highlight=%C9%E8%BC%C6Amazon%2BProduct%2BPage
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=143335&highlight=%C9%E8%BC%C6Amazon%2BProduct%2BPage
 
-
 top N exceptions in recent K time, 基本是frequency estimation of streaming data，然后再讨论下如果要处理N台机器的log怎么做分布式。
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=222643&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
-
 
 第四轮 system design 楼主以为这个是要high level的设计一个系统或者service，包括分析QPS， concurrent user那些，到后台用哪种database存，push or pull，
 这些，结果完全又不按套路出牌，让设计一个日历
@@ -178,38 +155,16 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=224947&extra=page%3
 Design Youtube.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=225081&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
-Design LinkedIn. . 鍥磋鎴戜滑@1point 3 acres
-search功能里inverted index 和data of user , data of company 怎么存，分别用Nosql还是sql？然后设计timeline， 问我push/pull模型在哪儿看的
+Design LinkedIn
+search功能里inverted index 和data of user , data of company 怎么存，分别用Nosql还是sql？然后设计timeline，问我push/pull模型在哪儿看的
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=175538&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 canlendar design
-准备了二十几道L家design题没准备这道，主要我还看见面经了，我当下想抽自己，不过还好其他design题也不是白准备的就照样侃。
 几个主要功能，添加修改删除event，邀请别人，看别人的availability。 
 然后跟server怎么交互，数据怎么load，数据库schema设计等等。说完功能考量scalability，都常规的design题步骤走一下. 
-我自认为（注意是自认为）聊得还可以
-
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=175497&page=1#pid2272026
 
 最后让设计search similar people的API，大致说一下前端，后端，不用太细。
 
 Design Uber
 http://www.jiuzhang.com/qa/410/
-
-Partner team:
-
-Phil Rabin  Rider App,  Bar raiser, What i am working on, how deep i can go, previous job experience, logging flow, end to end. Good communicator, huge impact, driving best practice, how work collaboar working with others, OOD, Design, Coding as well 
-
-
-Jay Bobzin  Dev Platform Team
-Adam Rogal  Sr. Director is hiring manager  45 min  Learn more about myself
-Goutham Nath  New manager will shadow Adam
-Riaz Majid  Rider experience GEO location, figure out best way. Uber Pool
-Patrick Slattery
-
-Integration with FB API, Airport, Millitary
-
-call Uber from FB
-
-Caching layer

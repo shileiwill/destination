@@ -64,6 +64,11 @@ public class MiniYelp {
     // @param k an integer, distance smaller than k miles
     // @return a list of restaurant's name and sort by 
     // distance from near to far.
+    /**
+     * 在字符串结尾加一个{（比较大的ascci码的字符）可以查询的时候包含边界上的数据。
+	比如Xqc90 变成 Xqc90{, 可以包含任意Xqc90开头的string，比如Xqc90p < Xqc90{则可以被查询到。
+	但是如果不加{, 用Xqc90去查询，那么Xqc90p > Xqc90 则查询不到。
+     */
     public List<String> neighbors(Location location, double k) {
         // Write your code here
         int len = get_length(k);

@@ -1,0 +1,112 @@
+#############################
+#
+# Most Important
+#
+#############################
+
+Why Uber
+
+
+#############################
+#
+# Algorithm
+#
+#############################
+
+Coding: 给一颗二叉树，每一个节点有一个value，找出一堆不相邻的节点，使得他们value的和最大。节点之间有link就算相邻，比如parent和children
+Coding: Rate limiter (http://blog.gssxgss.me/not-a-simple-problem-rate-limiting/) token bucket, leaky buckt   
+Coding: LRU Cache， follow-up 为什么用double linked list, Complexity, 修改为thread-safe的code                   
+Coding: Sudoku validate + solver                                                                              
+Coding: 找出string里所有是palindrome的subsequence                                                                
+Coding: Number of Islands I/II                                                                                
+Coding: Sorting algorithms
+Coding: Course schedule II                                                                                    
+Coding: Nested Iterator
+Coding: Recover Binary Search Tree                                                                            
+Coding: House Robber                                                                                          
+Coding: merge two sorted linked list，lc原题。只是又问了两个follow up，一个是去除重复元素merge怎么做，另一个是merge的时候不算重复的数字怎么做
+Coding: BST怎么找到kth smallest element
+Coding: reverse words of string                                                                   
+Coding: Implement TimeTravelingHashTable的get和insert方法.                                          
+* TimeTravelingHashTable
+* insert(key, value, timestamp)
+* get(key, timestamp)
+* get(key) // returns value associated with key at latest time
+Coding: LeetCode304, LeetCode308 (know quad tree solution)                                                                              
+Coding:  http://www.fgdsb.com/2015/01/25/group-contacts/ (union find)
+Coding: LeetCode Word Search II                                                                         
+Coding: 3Sum/4Sum                                                                                 
+Coding: Weighted Random Gen
+Coding: word pattern I 和word pattern II                                                          
+Coding: LCA                                                                                       
+Coding: Reverse nodes in pairs                                                                    
+Coding: Clone Graph                                                                                 
+Coding: CSV parser                                                                                
+Coding: find element in rotated array                                                             
+Coding: Word Ladder
+Coding: TreeMap/RedBlack Tree
+Coding: Spiral Matrix                                                                             
+Coding: Happy Number                                                                              
+Coding: Count and Say                                                                             
+Coding: Serialize/Deserialize N-ary Tree                                                          
+
+##############################
+#
+# Sys Design
+#
+###############################
+
+Design Uber/Uber eat
+Design Uber fare split                 
+Design Netflix
+Design Youtube                          
+Design auto suggest/auto complete       
+Design Excel/Google Spread Sheet/find circle in cell dependency(topological sort)
+Design Tiny URL                         
+Design Facebook Messenger
+Design Spotify
+Design Bus tracking app
+Design Online multiplayer blackjack
+
+
+Kafka                                   
+Thrift                                  
+Riak
+Redis                                   
+Spark Streaming
+BigTable                                
+Ringpop
+Uber schemaless 
+
+#############################
+#
+# Userful links
+#
+#############################                               
+
+http://highscalability.com/blog/2015/9/14/how-uber-scales-their-real-time-market-platform.html
+https://github.com/checkcheckzz/system-design-interview
+https://eng.uber.com/
+http://basho.com/posts/technical/ubers-ringpop-and-riak/
+https://www.youtube.com/watch?v=-W9F__D3oY4
+
+
+
+Partner team:
+
+Phil Rabin  Rider App,  Bar raiser, What i am working on, how deep i can go, previous job experience, logging flow, end to end. Good communicator, huge impact, driving best practice, how work collaboar working with others, OOD, Design, Coding as well 
+
+# All those folks are from Dev Platform team
+Jay Bobzin  Developer Platform
+Adam Rogal  Sr. Director is hiring manager  45 min  Learn more about myself
+Goutham Nath  New manager will shadow Adam
+Riaz Majid  Rider experience GEO location, figure out best way. Uber Pool
+Patrick Slattery
+
+Integration with FB API, Airport, Millitary
+
+call Uber from FB
+
+Caching layer
+
+Ask clarifying questions before writing, try to figure out best solution

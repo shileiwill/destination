@@ -127,4 +127,45 @@ public class MergeAndIntersectIntervals {
 		
 		return res;
 	}
+	
+	/**
+	 * 163. Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
+	For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"].
+	
+	两个input：
+1）desired time range to arrange a meeting -- TimeRange desired_time 
+2）a list of busy intervals -- List<TimeRange> busy_intervals
+. From 1point 3acres bbs
+output: 
+list of time ranges where a meeting can be scheduled, 会议没有时长限制 -- List<TimeRange>
+
+class TimeRange {
+    double start,
+    double end
+}
+
+1. input: [9 - 14.5], [[8 - 10], [9 - 12.5], [14 - 15]] 
+   output: [[12.5 - 14]]
+2. input: [10 - 12], [[8 - 9], [13 - 14]]
+    output: [[10 - 12]].
+	 */
+    public List<String> findMissingRanges(int[] nums, int lower, int upper) {
+        List<String> res = new ArrayList<String>();
+        
+        long prev = lower - 1;
+        for (int i = 0; i <= nums.length; i++) {
+            long cur = (i == nums.length) ? upper + 1 : nums[i];
+            if (cur - prev >= 2) {
+                res.add(getRange(prev + 1, cur - 1));
+            }
+            
+            prev = cur;
+        }
+        
+        return res;
+    }
+    
+    String getRange(long start, long end) {
+        return start == end ? start + "" : start + "->" + end;
+    }
 }

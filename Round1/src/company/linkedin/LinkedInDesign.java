@@ -168,3 +168,5 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=175497&page=1#pid22
 
 Design Uber
 http://www.jiuzhang.com/qa/410/
+
+Blacklist IP。这个list会增加删减条目，每一个request都会来lookup这个list

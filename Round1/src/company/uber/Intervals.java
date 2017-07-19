@@ -10,6 +10,8 @@ import java.util.List;
 输出并集 <1,7> 要求是如果前一个interval的end是后一个的start-1要合并
 
 维护双指针，但是最重要的原则是，比较两个指针but每次只移动一个指针
+
+New: merge interval的变种，把两个list里的overlap 的interval merge起来
  */
 public class Intervals {
 

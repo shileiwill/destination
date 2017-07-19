@@ -1,15 +1,14 @@
 package company.linkedin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * given a list of numbers, see if you can seperate them in to k groups such that each group has the same sum.
  * 给一个数组， 给一个数字 k. 问能不能把数组里面的数字分到k个桶里面， 使得每个桶里面所有的数字和相同。 DFS暴力解。
  * 活学活用DFS backtracking, 寻找各种方案
+ * 
+ * New: num array问能不能平均放在k个bucket，这应该是NP吧，中间说可能有负数，结果出了俩bug
  */
 public class SplitArrayToKBuckets {
 

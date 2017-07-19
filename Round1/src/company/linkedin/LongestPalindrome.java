@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
+// New
 public class LongestPalindrome {
 
 	public static void main(String[] args) {

@@ -11,12 +11,10 @@ import chapter3.binaryTree.TreeNode;
  * Coding  每一轮所有叶子脱落，直到root最后脱落，要求打印所有轮；
 followup： 每个node还是有left，right指针，但是结构并非tree，而是graph怎么算， 考虑有/无circular dependency 两种情况；
 方法是用hashmap 记录计算过的node level 和 一个Set 记录dependent node
+
+New
  */
 public class FindLeaves {
-
-	public static void main(String[] args) {
-
-	}
 
 	List<List<Integer>> findLeaves(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -63,8 +61,7 @@ public class FindLeaves {
 		}
 	}
 	
-	// It is graph, rather than tree
-	/**
+	/**It is graph, rather than tree
 	 * One big difference is, tree only has 1 path between 2 nodes, while graph can have several paths, which forms a circle
 	 * @param graph could be isolated, but in our case, it is a connected graph
 	 * @return

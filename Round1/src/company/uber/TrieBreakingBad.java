@@ -14,6 +14,8 @@ import java.util.Map;
  * output就是ad 这里因为b可以匹配到b，bc可以匹配到bc而且更长所以答案就是这样。
  * 
  * 写出一个auto complete的程序 要求程序可以跑test。当时写出了trie 就差最后的dfs没写完 面试官不允许我用boolean去标记 说是不适合同一时间很多搜索
+ * 
+ * 给一堆词，每个词可能出现多次，找出以某个 sequence为prefix的top k个词。说可以用trie做的
  */
 public class TrieBreakingBad {
 

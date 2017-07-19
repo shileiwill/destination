@@ -50,7 +50,7 @@ public class FaceBookDesign {
 	               阅览好友的相册
 	    要求： 满足功能的同时减少对手机的能耗。
 	21 design：tiny url
-	22 System design： instgram
+	22 System design： instgram  https://www.educative.io/collection/page/5668639101419520/5649050225344512/5673385510043648
 	23 Culture fit： 有200M个用户，现在让你进行分组，将他们分成大概20个组，每个
 	组里大概有10M的用户，尽量让用户interaction多的在一起
 	24 design看了下几篇文章，知道个大意，google的mapreduce, file system, big table,
@@ -83,6 +83,12 @@ public class FaceBookDesign {
 	http://www.mitbbs.com/article_t/JobHunting/32984309.html
 
 	如何设计一个fb的privacy framework/system
+	http://www.1point3acres.com/bbs/thread-283571-1-1.html
+	privacy setting, 就是被everyone可见，只被朋友的朋友可见，group可见，问底层SQL怎么存（每一column是什么，怎么Join)，问存friend mapping怎么存，
+	用SQL存和用noSQ存friend mapping的trade off. 然后问friend of friend怎么找，之前看过面经，直接说出最基本的n^2和两种O(n)方法，
+	结果没一种是面试官想要，只能跟着面试官的提示走，一路看面试官的语气、表情、以及对我提出方案的反应，揣测面试官想要的解法。之后就是判断需要多少server存等，
+	group是每个user可以自己设些group，把一些user加进每个Group，其他用户不知道他设的group是什么，然后sql怎么存group，其实就是听面试官的提示和意图。
+	仔细体会面试官的反馈和意图很重要，每个面试官想要的可能不一样
 
 	Desgin an Advertisement (AD) statistic system. 每次用户登录的时候，系统都会show几个广告给他。广告总共有K种类别，可以认为K<=10。用户看到广告可能会点击，Click Through Ratio (CTR) = 用户点的广告数量/给用户看的广告数量。注意若同一个广告被用户点击了多次，只算一个click。设计一个系统，answer the following two types of queries:
 	1. Given a user, return his CTR for all types of ADs.
@@ -90,4 +96,20 @@ public class FaceBookDesign {
 	Follow ups: 
 	a. What if K becomes very large? for example, we consider each product as one type, thus K can be as large as 10000.
 	b. New query type: Given an AD type, return the top-X users with highest CTR. 1< X < 100.
+
+	设计是 news API design, 也是面经了。   注意 pagination. 看看twitter 的 API developer's guide 会有帮助。 
+
+
+	通常面试官会要求你在45分钟内设计Netflix（或支持数亿用户的某种弹性服务）。这个问题看似无法完成，因为 45分钟太短，根本无法详细讨论其中任何一个模块。这些服务是由成百上千名工程师耗时多年开发完成，你是不可能把所有这些工作简明扼要的写在5x5的白板上的。
+	既然完成这个问题基本是不可能的，那么面试官到底想知道些什么？其实他希望你给他一个的概述，定义高级模块，并尽可能简洁地描述组件之间的交互。大概分三个阶段：
+	1.画一个大框架来表示系统
+	2.放大框架并把它打散变成5-6个模块
+	3.简要讨论每个模块的功能。计算，存储，前端，后端，缓存，队列，网络，负载均衡等
+
+	design fb inbox search    —> just focus the post
+	Design autocomplete in a search engine
+	Design Youtube
 }
+
+
+细节讲清楚，project要够high-level

@@ -69,6 +69,18 @@ Design Bus tracking app
 Design Online multiplayer blackjack
 
 
+设计个类似coursera的网站，主要是设计数据库&存储数据
+设计surge pricing
+design elevator system
+design battleship : 看一下那个游戏的功能，他会问需要什么class， 什么数据结构，什么变量来存，然后就是执行游戏的某一部分操作的时候需要怎么update，完全照着游戏来就差不多感觉！  印度小哥，ood， 设计一个battleship game 
+design airline ticket systems
+给定时间段和地点，判断给定的条件是否满足？问的是数据怎么存？
+OOD, car sale website
+扫QR code借自行车的问题。也是geo location相关的。例如找车啊，开始用自行车啊，怎么锁车解锁之类的。api design？
+好像是设计url。只是太不了解这个过程而且背景差太远完全没有还手之力。例如被问怎么个socket通信，我只知道在java建一个socket，
+然后塞个ip什么地就通信。还问你说用sql db，用什么sql db啊，sql有好多种的？我说，呃，我不知道postgress跟mysql到底有什么不一样...
+
+
 Kafka                                   
 Thrift                                  
 Riak

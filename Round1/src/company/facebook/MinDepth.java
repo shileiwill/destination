@@ -1,8 +1,13 @@
-package chapter3.binaryTree;
+package company.facebook;
+
+import chapter3.binaryTree.TreeNode;
+
 /**
  * 111. Given a binary tree, find its minimum depth.
 
 The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+minimum depth of binary tree follow up : what if this tree left subtree may be infinite. bfs秒之
  *
  */
 public class MinDepth {

@@ -1,6 +1,8 @@
 package company.facebook;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -11,10 +13,14 @@ import java.util.TreeMap;
 public class ReserviorSampling {
 
 	public static void main(String[] args) {
-		double[] res = new ReserviorSampling().distribute(5, 100);
-		for (double val : res) {
-			System.out.println(val);
-		}
+//		double[] res = new ReserviorSampling().distribute(5, 100);
+//		for (double val : res) {
+//			System.out.println(val);
+//		}
+		ReserviorSampling reserviorSampling = new ReserviorSampling();
+		int[][] grid = reserviorSampling.getGrid(5, 5, 5);
+		System.out.println();
+		reserviorSampling.countLandmine(grid);
 	}
 
 	int[] randomK(Iterator<Integer> it, int k) {
@@ -100,6 +106,74 @@ public class ReserviorSampling {
     	}
     	
     	return res;
+    }
+    
+    /**
+     * 扫雷地图，给一个地图的长和宽，以及雷的数量，要求返回一个让雷随机分布的grid，雷用-1表示，随机函数直接用random函数就行
+     * follow up: 如果一个位置没有雷，要求在没有雷的地方标出周围雷的数量，周围就是指上下左右对角线一共八个位置
+
+		我就写了一个遍历整个地图的function，面试官又问：如果是sparse grid该怎么样？当时很紧张，时间还剩5分钟没有答出来，然后就是问还有没有问题，我说没有就挂了电话。
+		
+		挂了电话才想出来，如果是sparse grid可以把随机生成的雷的坐标保存在一个list里面，这样标雷数量的时候就只用遍历雷的坐标就可以了
+     */
+    int[][] getGrid(int rowNum, int colNum, int landmineNum) {
+    	int[][] M = new int[rowNum][colNum];
+    	int count = 0;
+    	Random ran = new Random();
+    	// If it is sparse
+    	List<int[]> list = new ArrayList<int[]>();
+    	
+    	while (count < landmineNum) {
+    		int X = ran.nextInt(rowNum);
+    		int Y = ran.nextInt(colNum);
+    		
+    		if (M[X][Y] != -1) {
+    			M[X][Y] = -1;
+    			count++;
+    			list.add(new int[]{X, Y});
+    		}
+    	}
+    	
+    	for (int i = 0; i < rowNum; i++) {
+    		for (int j = 0; j < colNum; j++) {
+    			System.out.print(M[i][j] + " ");
+    		}
+    		System.out.println();
+    	}
+    	
+    	return M;
+    }
+    
+    void countLandmine(int[][] M) {
+    	int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+    	
+    	for (int i = 0; i < M.length; i++) {
+    		for (int j = 0; j < M[i].length; j++) {
+    			if (M[i][j] == -1) { // A landmine
+    				continue;
+    			}
+    			
+    			int count = 0;
+    			
+    			for (int[] dir : directions) {
+    				int x = i + dir[0];
+    				int y = j + dir[1];
+    				
+    				if (x >= 0 && x < M.length && y >= 0 && y < M[0].length && M[x][y] == -1) {
+    					count++;
+    				}
+    			}
+    			
+    			M[i][j] = count;
+    		}
+    	}
+    	
+    	for (int i = 0; i < M.length; i++) {
+    		for (int j = 0; j < M[i].length; j++) {
+    			System.out.print(M[i][j] + " ");
+    		}
+    		System.out.println();
+    	}
     }
 }
 

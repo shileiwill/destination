@@ -11,37 +11,44 @@ public class BasicCalculator {
 	}
 
 	// Check my own version below
-	int calculator(String s) {
+	int calculatorMyStyle2(String s) {
 		Stack<Integer> stack = new Stack<Integer>();
 		int num = 0; // To be prepared
 		char sign = '+'; // This sign is the sign before num.
 		
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
+		int pos = 0;
+		while (pos < s.length()) {
+			// Skip space here using while loop
+			char now = s.charAt(pos);
 			
-			if (Character.isDigit(c)) {
-				num = num * 10 + (c - '0');
-			}
-			
-			if ((!Character.isDigit(c) && c != ' ') || i == s.length() - 1) { // It is an operator or it is the last digit
-				switch (sign) {
-					case '+':
-						stack.push(num);
-						break;
-					case '-':
-						stack.push(-num);
-						break;
-					case '*':
-						stack.push(stack.pop() * num);
-						break;
-					case '/':
-						stack.push(stack.pop() / num);
-						break;
-				}
+			if (Character.isDigit(now)) {
+				num = num * 10 + (now - '0');
+				pos++;
 				
-				sign = c;
-				num = 0;
+				if (pos != s.length()) { // Pay attention to the last one
+					continue;
+				}
 			}
+			
+			switch (sign) {
+				case '+':
+					stack.push(num);
+					break;
+				case '-':
+					stack.push(-num);
+					break;
+				case '*':
+					stack.push(stack.pop() * num);
+					break;
+				case '/':
+					stack.push(stack.pop() / num);
+					break;
+			}
+			
+			// Skip space here again
+			sign = now;
+			num = 0;
+			pos++;
 		}
 		
 		int res = 0;

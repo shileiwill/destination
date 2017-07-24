@@ -3,7 +3,7 @@ package company.linkedin;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Similar to 53. Maximum Subarray
+ * Similar to 53. Maximum sum of Subarray
  * what if the input is a stream
  */
 public class MaxSubarray {

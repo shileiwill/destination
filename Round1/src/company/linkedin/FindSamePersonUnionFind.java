@@ -69,7 +69,6 @@ public class FindSamePersonUnionFind {
 			for (String email : emails) {
 				if (!emailToPerson.containsKey(email)) {// A new email
 					emailToPerson.put(email, personId);
-					continue;
 				} else {
 					int newRoot = findRoot(emailToPerson.get(email));
 					personToRoot.put(personId, newRoot);

@@ -18,6 +18,10 @@ Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and su
 Note:
 The length of the array won't exceed 10,000.
 You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
+
+is there subarray summed to a target. 像523，但是值可正可负，我用了map, follow-up问全部non-negative怎么办，应该是用two pointer就好了.
+
+刚考了
  */
 public class ContinousSubarraySum {
 	// One Pass
@@ -71,4 +75,59 @@ public class ContinousSubarraySum {
         
         return false;
     }
+    
+    // All numbers are non-negative. 有负数的话这个双指针方法就不行了
+    boolean subarraySumToTarget(int[] arr, int target) {
+    	int[] sum = new int[arr.length + 1];
+    	sum[0] = 0;
+    	
+    	for (int i = 1; i <= arr.length; i++) {
+    		sum[i] = sum[i - 1] + arr[i - 1];
+    	}
+    	
+    	int left = 0, right = 1; // From the same side
+    	while (right <= arr.length) { // sum array is increasing order
+    		int now = sum[right] - sum[left];
+    		if (now == target) {
+    			return true;
+    		}
+    		
+    		if (now < target) {
+    			right++;
+    		} else {
+    			left++;
+    		}
+    		
+    		right = Math.max(right, left + 1);
+    	}
+    	
+    	return false;
+    }
+    
+    boolean subarraySumToTarget2(int[] arr, int target) {
+    	Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // Since we dont care about index, Set<Integer> will also work
+    	map.put(0, -1);
+    	
+    	int runningSum = 0;
+    	for (int i = 0; i < arr.length; i++) {
+    		runningSum += arr[i];
+    		
+    		int toFind = runningSum - target;
+    		if (map.containsKey(toFind)) {
+    			return true;
+    		}
+    		
+    		map.put(runningSum, i);
+    	}
+    	
+    	return false;
+    }
+    
+    public static void main(String[] args) {
+    	ContinousSubarraySum subarraySum = new ContinousSubarraySum();
+    	int[] arr = {-1, -3, -2, -5, 8, 6};
+    	int target = 4;
+    	System.out.println(subarraySum.subarraySumToTarget(arr, target));
+    	System.out.println(subarraySum.subarraySumToTarget2(arr, target));
+	}
 }

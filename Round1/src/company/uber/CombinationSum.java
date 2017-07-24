@@ -61,7 +61,7 @@ public class CombinationSum {
 	 * Given a collection of candidate numbers (C) and a target number (T), 
 	 * find all unique combinations in C where the candidate numbers sums to T.
 
-	Each number in C may only be used once in the combination.
+	Each number in C may only be used once in the combination. 数组中可能有重复，每个只能取一次
 	
 	Note:
 	All numbers (including target) will be positive integers.
@@ -188,7 +188,7 @@ public class CombinationSum {
 	What limitation we need to add to the question to allow negative numbers?
 	 */
 	public int combinationSum4(int[] nums, int target) {
-		int[] hash = new int[target + 1];
+		int[] hash = new int[target + 1]; // (1, 2, 1) (2, 1, 1) 算两个，一维数组
 		hash[0] = 1;
 		
 		for (int t = 1; t <= target; t++) {

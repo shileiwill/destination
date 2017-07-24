@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 // Interval has height, get the area
+// 参考SweepingLineBuildingOutline 其实就是找建筑的面积
 public class IntervalArea {
 
 	public static void main(String[] args) {

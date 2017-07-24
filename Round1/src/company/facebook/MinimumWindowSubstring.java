@@ -16,6 +16,8 @@ Note:
 If there is no such window in S that covers all characters in T, return the empty string "".
 
 If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
+
+这题我每次碰到更小的都更新返回值，这样每次都可能调用substring, 造成计算量和内存使用空间增加，应该保存起始和结束坐标，最后求一次substring最好，大家要注意
  */
 public class MinimumWindowSubstring {
 

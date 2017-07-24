@@ -1,8 +1,5 @@
 package company.linkedin;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
 // 一个pizza 切n刀 问最多能切几块 注意不一定要所有切线都在同一个交点
 // 在切第n刀的时候 最多能和之前的n-1刀相交 这个多出来的1刀多制造出了n块pizza 
 public class CutPizza {

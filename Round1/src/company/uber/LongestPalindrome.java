@@ -9,13 +9,16 @@ public class LongestPalindrome {
 
 	public static void main(String[] args) {
 		LongestPalindrome lp = new LongestPalindrome();
-		String s = "cbcdsafasdfwgsfgfdjyrsadfasdfadfADFADGHFDUADFGSDFDASDFAFsdfsadsadfasdfbc";
+		String s2 = "cbcdsafasdfwgsfgfdjyrsadfasdfadfADFADGHFDUADFGSDFDASDFAFsdfsadsadfasdfbc";
 //		String res = lp.longestPalindromeSubstring(s);
 //		System.out.println(res);
-		
+		String s = "abcc4b1a7";
 		int res = lp.longestPalindromeSubseq2(s);
 		System.out.println(res);
-//		for (String str : res) {
+		
+		int res2 = lp.longestPalindromeSubseq3(s);
+		System.out.println(res2);
+		//		for (String str : res) {
 //			System.out.println(str);
 //		}
 	}
@@ -93,6 +96,35 @@ public class LongestPalindrome {
     	}
     	
     	return hash[left][right];
+    }
+    
+    public int longestPalindromeSubseq3(String s) {
+    	int[][] hash = new int[s.length()][s.length()];
+    	int max = 0;
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		hash[i][i] = 1;
+    	}
+    	
+    	for (int i = 1; i < s.length(); i++) {
+    		if (s.charAt(i - 1) == s.charAt(i)) {
+    			hash[i - 1][i] = 2;
+    		}
+    	}
+    	
+    	for (int len = 2; len <= s.length(); len++) {
+    		for (int i = 0; i + len <= s.length(); i++) {
+    			if (s.charAt(i) == s.charAt(i + len - 1)) {
+    				hash[i][i + len - 1] = hash[i + 1][i + len - 2] + 2;
+    			} else {
+//    				System.out.println(i +  "=====" + len);
+    				hash[i][i + len - 1] = Math.max(hash[i + 1][i + len - 1], hash[i][i + len - 2]);
+    			}
+    			max = Math.max(max, hash[i][i + len - 1]);
+    		}
+    	}
+    	
+    	return max;
     }
     
     // find all palidrome string by deleting any letter from the given string. 这题比较难，我只做了dfs的bf解, 

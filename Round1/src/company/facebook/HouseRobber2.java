@@ -33,7 +33,7 @@ public class HouseRobber2 {
         
         // Don't Rob the first house, 1 -> nums.length - 1
         hash2[1] = nums[1];
-        hash2[2] = Math.max(nums[1], nums[2]);
+        hash2[2] = Math.max(nums[1], nums[2]); // 初始化两个
         
         for (int i = 3; i <= nums.length - 1; i++) {
             hash2[i] = Math.max(hash2[i - 1], hash2[i - 2] + nums[i]);

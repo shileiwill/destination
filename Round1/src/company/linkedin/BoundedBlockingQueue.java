@@ -17,7 +17,7 @@ Producers fill up the queue. If the queue is full, producers should wait;
 On the other hand, consumers take elements from the queue. If the queue is empty, consumers should wait.
 Solution
 
-The make the actions of adding or removing an element from the underlying queue, we need to either use lock or 
+To make the actions of adding or removing an element from the underlying queue, we need to either use lock or 
 synchronized the relative blocks that conduct the actions.
 
 Here is an implementation with synchronized.
@@ -124,7 +124,7 @@ class BoundedBlockingQueue1<E> {
 		
 		try {
 			addLock.lock();
-			while (count.get() == capacity) {
+			while (count.get() == capacity) { // 这边用if还是while? H2O是用if
 				addCondition.await();
 			}
 			

@@ -5,10 +5,12 @@ import java.util.Stack;
 public class LongestValidParenthesis {
 
 	public static void main(String[] args) {
-
+		String s = "((())";
+		int res = longestValidParentheses(s);
+		System.out.println(res);
 	}
 
-	public int longestValidParentheses(String s) {
+	public static int longestValidParentheses(String s) {
 		Stack<Integer> stack = new Stack<Integer>(); // Stack contains indexes
 		stack.push(-1);
 		int res = 0;
@@ -18,7 +20,7 @@ public class LongestValidParenthesis {
 			
 			if (now == ')' && stack.size() > 1 && s.charAt(stack.peek()) == '(') {
 				stack.pop(); // Throw the left (
-				res = Math.max(res, i - stack.peek() + 1);
+				res = Math.max(res, i - stack.peek());
 			} else { // Could be ( and )
 				stack.push(i);
 			}

@@ -59,7 +59,7 @@ public class TournamentTree {
 		int secondMin = Integer.MAX_VALUE;
 		
 		if (root.left == null && root.right == null) {
-			return Integer.MAX_VALUE;
+			return Integer.MAX_VALUE; // 这边必须return MAX吗 必须的 否则就总return最小值了
 		}
 		
 		if (root.val == root.left.val) {

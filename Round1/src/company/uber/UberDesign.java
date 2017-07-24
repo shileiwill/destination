@@ -80,6 +80,7 @@ OOD, car sale website
 好像是设计url。只是太不了解这个过程而且背景差太远完全没有还手之力。例如被问怎么个socket通信，我只知道在java建一个socket，
 然后塞个ip什么地就通信。还问你说用sql db，用什么sql db啊，sql有好多种的？我说，呃，我不知道postgress跟mysql到底有什么不一样...
 
+design 一个手机 app, 每天早上6点，给你发notification, 告诉你有那些popular 的apps, 或者根据 你现在手机上装的apps, 给你一个list of recommending apps. 从前端扯到后端.
 
 Kafka                                   
 Thrift                                  

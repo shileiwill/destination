@@ -28,6 +28,7 @@ public class CustomizedHashMap<K, V> {
 	
 	CustomizedHashMap(int capacity) {
 		arr = (Entry<K, V>[])new Object[capacity];
+		// arr = new Entry<K, V>[capacity]; In java, we couldnt create generic array
 		this.capacity = capacity;
 		
 		locks = new ArrayList<ReentrantReadWriteLock>(capacity);
@@ -37,11 +38,11 @@ public class CustomizedHashMap<K, V> {
 	}
 	
 	boolean isEmpty() {
-		return arr.length == 0;
+		return arr.length == 0; // This is not correct
 	}
 	
 	boolean isFull() {
-		return arr.length == capacity;
+		return arr.length == capacity; // This is not correct
 	}
 	
 	void put(K key, V val) {

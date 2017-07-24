@@ -72,6 +72,29 @@ public class StringOperation {
 		System.out.println(res);
 	}
 	
+	// 利用indexOf进行切分
+	double[] parse2(String S) {
+		double[] res = new double[3];
+		
+		int xIndex = S.indexOf("x");
+		StringBuilder xSB = new StringBuilder();
+		while (xIndex >= 0) {
+			char c = S.charAt(xIndex);
+			if (Character.isDigit(c)) {
+				xSB.insert(0, c);
+				xIndex--;
+			} else if (c == ' ') {
+				xIndex--;
+			} else {
+				break;
+			}
+		}
+		
+		S = S.substring(0, xIndex) + S.substring(S.indexOf("x") + 1).trim();
+		
+		return res;
+	}
+	
 	double[] parse(String S) {
 		double[] res = new double[3];
 		int pos = 0;

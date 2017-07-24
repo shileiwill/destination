@@ -13,7 +13,7 @@ public class CalculatePI {
 	double calculatePI() {
 		Random ran = new Random();
 		
-		int N = 10000;
+		int N = 1000000;
 		int inside = 0;
 		
 		for (int i = 0; i < N; i++) {

@@ -24,7 +24,7 @@ public class ConvexHull {
 
 			int leftMost = 0;// Sentinel. Default could be anyone
 			for (int i = 1; i < list.size(); i++) { // Compare with all others
-				// If line current->leftmost is to the left of current->point[i], wrong?
+				// If line current->point[i] is to the left of current->leftmost
 				if (isLeft(cur, list.get(i), list.get(leftMost))) {
 					leftMost = i;
 				}

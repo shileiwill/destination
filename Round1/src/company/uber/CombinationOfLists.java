@@ -36,7 +36,7 @@ public class CombinationOfLists {
 		col.combinations(source);
 	}
 
-	// Do we need the visited set?
+	// Do we need the visited set? 貌似不用
 	List<List<Integer>> combinations(List<List<Integer>> source) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -47,6 +47,7 @@ public class CombinationOfLists {
 		}
 		
 		helper(res, list, source, 0, visitedList);
+		System.out.println(res.size());
 		return res;
 	}
 	
@@ -64,13 +65,13 @@ public class CombinationOfLists {
 		List<Integer> machine = source.get(machineId);
 		
 		for (int i = 0; i < machine.size(); i++) {
-			if (!visited.contains(i)) {
+//			if (!visited.contains(i)) {
 				list.add(machine.get(i));
 				visited.add(i);
 				helper(res, list, source, machineId + 1, visitedList);
 				visited.remove(i);
 				list.remove(list.size() - 1);
-			}
+//			}
 		}
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * int read4(char[] buf);
+ * 
+ * 有  read4K_1(),  read4k_2(),  分别从两个文件读，两个文件巨大内存装不下，你最后要返回两个文件内容是不是一样
  */
 public class Read4 {
 
@@ -29,8 +31,35 @@ public class Read4 {
 
 		return list.size();
 	}
+	
+	// 有  read4K_1(),  read4k_2(),  分别从两个文件读，两个文件巨大内存装不下，你最后要返回两个文件内容是不是一样
+	boolean isSameRead4K() {
+		while (true) {
+			char[] arr1 = new char[4000];
+			char[] arr2 = new char[4000];
+			
+			int count1 = read4K_1(arr1);
+			int count2 = read4K_2(arr2);
+			
+			if (count1 != count2) {
+				return false;
+			}
+			
+			int pos = 0;
+			while (pos < count1) {
+				if (arr1[pos] != arr2[pos]) {
+					return false;
+				}
+				pos++;
+			}
+			
+			if (count1 < 4000 && count2 < 4000) { // end.
+				return true;
+			}
+		}
+	}
 
-	/*
+	/* 这个代码写的很好
 	 * // Read4K - Given a function which reads from a file or network stream
 	 * up to 4k at a time, give a function which can satisfy requests for
 	 * arbitrary amounts of data 

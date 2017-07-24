@@ -4,7 +4,7 @@ public class MakingChange {
 	// Time complexity of this method is (arr.length * target)
 	int makingChange(int[] arr, int target) {
 		// Use first i item to form target j, how many solutions?
-		int[][] hash = new int[arr.length + 1][target + 1];
+		int[][] hash = new int[arr.length + 1][target + 1]; // 不能重复使用，必须二维数组
 		
 		for (int i = 0; i < hash.length; i++) {
 			hash[i][0] = 1; // From first i items to form target 0, it has 1 solution. Just pick up nothing.
@@ -29,7 +29,7 @@ public class MakingChange {
 	public static void main(String[] args) {
 		MakingChange tm = new MakingChange();
 	    int[] arr = {1, 2, 5, 10};
-	    int target = 4;
+	    int target = 13;
 	    int res = tm.makingChange(arr, target);
 	    System.out.println(res);
 	}

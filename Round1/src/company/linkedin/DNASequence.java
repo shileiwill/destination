@@ -71,7 +71,7 @@ public class DNASequence {
         StringBuilder sb = new StringBuilder(s.substring(0, 10));
         seen.add(sb.toString());
         
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 10; i < s.length(); i++) {
         	sb.deleteCharAt(0); // deleteCharAt() is a linear-time operation
         	sb.append(s.charAt(i));
         	
@@ -93,7 +93,7 @@ public class DNASequence {
         Set<String> seen = new HashSet<String>();
         
         StringBuilder sb = new StringBuilder();
-        int count = 0;
+        int count = 0; // count可以用sb.length()
         while (count < 10 && it.hasNext()) {
         	sb.append(it.next());
         }

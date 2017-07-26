@@ -35,6 +35,7 @@ public class Intervals {
 	}
 
 	// 可以用bucket sort的思想
+	// 先把list 自己merge好，保证没有overlap
 	List<Interval> intersection(List<Interval> A, List<Interval> B) {
 		List<Interval> res = new ArrayList<Interval>();
 		int pos1 = 0;

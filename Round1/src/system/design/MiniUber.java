@@ -69,7 +69,7 @@ class Helper {
 public class MiniUber {
 
     Map<Integer, Trip> driver2Trip = null;
-    Map<Integer, Location> driver2Location = null;
+    Map<Integer, Location> driver2Location = null; // Only the drivers which don't have trip yet
 
     public MiniUber() {
         // initialize your data structure here.

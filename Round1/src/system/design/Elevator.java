@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * 跟Uber Pool有点类似，如何能接到更多的顺路者
- * 参考九章上的State Machine
+ * 参考九章Video上的State Machine
+ * 
+ * Request, RequestHandler, Elevator
  */
 public class Elevator {
 	private int currentFloor;
-	private int targetFloor;
-	private int status; // 0 standby, 1 up, 2 down
+	private int status; // 0 standby, 1 up, 2 down, 3 maintanance
 	private static volatile Elevator instance = null;
 
 	private Elevator() {
 		this.currentFloor = 0;
-		this.targetFloor = 0;
 		this.status = 0;
 	}
 
@@ -92,8 +92,7 @@ class RequestHandler {
 		int shortestdistance = Integer.MAX_VALUE;
 		Request next = null;
 
-		for (Request req : requests) { // Only shortest distance? dont care
-										// about direction?
+		for (Request req : requests) { // Only shortest distance? dont care about direction?
 			if (Math.abs(req.getFromFloor() - currentFloor) < shortestdistance) {
 				next = req;
 			}

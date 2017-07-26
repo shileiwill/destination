@@ -1,10 +1,11 @@
 package company.uber;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * 具体介绍一下这个题， input是String array(大小写都有), 和一个String name（全小写） 
@@ -24,14 +25,14 @@ public class TrieBreakingBad {
 		TrieBreakingBad t = new TrieBreakingBad();
 		
 		String source = "helloword";
-		String[] dict = {"abc", "dec", "UDA", "abcde", "bcdef", "abfeU"};
+		String[] dict = {"abc", "dec", "UDA", "abcde", "abd", "abfeU"};
 		
 		// Build Trie
 		for (String s : dict) {
 			t.root.insert(s, 0);
 		}
 		
-		List<String> list = t.autoComplete("abc");
+		List<String> list = t.autoComplete("ab");
 		for (String s : list) {
 			System.out.println(s);
 		}
@@ -65,20 +66,71 @@ public class TrieBreakingBad {
 		return res;
 	}
 
+	boolean flag = false;
 	private void dfs(List<String> res, TrieNode node) {
+		if (flag) {
+			return;
+		}
+		
 		for (Map.Entry<Character, TrieNode> child : node.children.entrySet()) {
 			TrieNode childNode = child.getValue();
 			
 			if (childNode.hasWord) {
 				res.add(childNode.word);
+				
+				if (res.size() == 3) {
+					flag = true;
+					return;
+				}
 			}
 			
 			dfs(res, childNode);
 		}
 	}
 	
+	/**
+	 * implement a prefix search - given a set of characters, return the top-10 most relevant results. 
+	 * Relevancy here being the shorter word is more relevant than a longer word. An empty prefix is not a valid input. 
+	 * 中途问了一下如果定义relevance为根据lexico order又应该怎么做的问题（即bathroom < baths，对于bath来说）。
+	 * shorter word relevance用BFS，lex-order用DFS会更简单一点
+	 * 在word end的node用boolean indicator就好，千万不要存string，BFS的时候可以用一个queue存candidate node，一个queue来存对应prefix string来construct string
+	 */
+	List<String> autoCompleteBFS(String s) {
+		TrieNode node = root.search(s, 0);
+		
+		List<String> res = new ArrayList<String>();
+		if (node == null) {
+			return res;
+		}
+		
+		if (node.hasWord) {
+			res.add(node.word);
+		}
+		
+		Queue<TrieNode> queue = new LinkedList<TrieNode>();
+		queue.addAll(node.children.values());
+		
+		while (!queue.isEmpty()) {
+			TrieNode now = queue.poll();
+			
+			if (now.hasWord) {
+				res.add(now.word);
+			}
+			
+			if (res.size() == 3) {
+				break;
+			}
+			
+			if (!now.children.isEmpty()) {
+				queue.addAll(now.children.values());
+			}
+		}
+		
+		return res;
+	}
+	
 	static class TrieNode {
-		Map<Character, TrieNode> children = null;
+		Map<Character, TrieNode> children = null; // Could use TreeMap to make sure it is sorted
 		boolean hasWord = false;
 		String word = null;
 		

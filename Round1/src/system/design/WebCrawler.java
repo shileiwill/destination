@@ -90,17 +90,9 @@ class WebCrawler extends Thread {
 			} catch (MalformedURLException e) {
 				// e.printStackTrace();
 			}
-
-			if (!visited.contains(url) && domain.endsWith("wikipedia.org")) { // not
-																				// visited
-																				// yet,
-																				// and
-																				// we
-																				// care
-																				// only
-																				// this
-																				// domain
-																				// name
+			
+			// not visited yet, and we care only this domain name
+			if (!visited.contains(url) && domain.endsWith("wikipedia.org")) {
 				visited.add(url);
 				res.add(url);
 
@@ -225,8 +217,7 @@ class Solution2 {
 			thread_pools[i].start();
 		}
 
-		while (CrawlerThread.getCounter() > 0)
-			; // 只要有线程在跑 就一直循环
+		while (CrawlerThread.getCounter() > 0); // 只要有线程在跑 就一直循环
 
 		for (int i = 0; i < thread_num; ++i) {
 			thread_pools[i].stop();

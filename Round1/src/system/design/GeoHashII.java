@@ -17,7 +17,7 @@ public class GeoHashII {
             int val = _base32.indexOf(geohash.charAt(i));
             for (int j = 0; j < 5; j++) {
                 if (is_even) {
-                    refine_interval(lon, val, mask[j]);
+                    refine_interval(lon, val, mask[j]); // 在字符串中的第一位，实际上是二进制中的10000
                 } else {
                     refine_interval(lat, val, mask[j]);
                 }
@@ -29,7 +29,7 @@ public class GeoHashII {
     }
 
     public void refine_interval(double[] interval, int val, int mask) {
-        if ((val & mask) > 0) { // 看看那一位是0还是1
+        if ((val & mask) == 1) { // 看看那一位是0还是1
             interval[0] = (interval[0] + interval[1]) / 2.0; // left增大
         } else {
             interval[1] = (interval[0] + interval[1]) / 2.0; // right减小

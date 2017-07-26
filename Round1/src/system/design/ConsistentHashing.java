@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* comment */
 /*
+ * DHT, distributed hash table.
  一般的数据库进行horizontal shard的方法是指，把 id 对 数据库服务器总数 n 取模，然后来得到他在哪台机器上。
  这种方法的缺点是，当数据继续增加，我们需要增加数据库服务器，将 n 变为 n+1 时，几乎所有的数据都要移动，这就造成了不 consistent。
  为了减少这种 naive 的 hash方法(%n) 带来的缺陷，出现了一种新的hash算法：一致性哈希的算法——Consistent Hashing。
@@ -83,7 +83,7 @@ public class ConsistentHashing {
         machine.add(359);
         machine.add(1);
         results.add(machine);
-        for (int i = 1; i < n; ++i) {
+        for (int i = 1; i < n; i++) {
             List<Integer> new_machine = new ArrayList<Integer>();
             int index = 0;
             for (int j = 1; j < i; ++j) {

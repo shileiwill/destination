@@ -167,6 +167,7 @@ public class ConvertBSTToLinkedList {
 		return cur == null ? null : prev;
 	}
 	
+	// This is good, use this one!
 	TreeNode buildFromPreOrderTraversalMyStyle(DListNode head) {
 		if (head == null) {
 			return null;
@@ -179,10 +180,10 @@ public class ConvertBSTToLinkedList {
 		TreeNode root = new TreeNode(head.val);
 		DListNode preLarger = findPreLargerMyStyle(head);
 		
-		if (preLarger == null) { // 右边没有更大的 只有左节点
+		if (preLarger == null) { // 右边没有更大的 只有左节点 没有右孩子
 			root.left = buildFromPreOrderTraversalMyStyle(head.next);
 			return root;
-		} else if (preLarger == head) { // 右边第一个就是更大的 只有右节点
+		} else if (preLarger == head) { // 右边第一个就是更大的 只有右节点 没有左孩子
 			root.right = buildFromPreOrderTraversalMyStyle(head.next);
 			return root;
 		} else {

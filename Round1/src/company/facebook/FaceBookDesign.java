@@ -112,6 +112,11 @@ public class FaceBookDesign {
 
 	设计脸书search
 	TinyUrl
+	网络爬虫系统
+	client 给 server 传输文件 的系统。 一个/多个clients <-> 一个／多个 server 
+
+	4. 设计 网页爬虫，给一千台机器，每台机器的带宽有限，每个url只能爬一次。
+5. 设计 poi
 }
 
 

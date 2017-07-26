@@ -31,7 +31,7 @@ neighbors(10.5, 9.6, 6.7) // return []
 */
 // Definition of Location:
 public class MiniYelp {
-    public NavigableMap<String, Restaurant> restaurants; // GeoHash+ID, Restaurant
+    public NavigableMap<String, Restaurant> restaurants; // GeoHash+ID, Restaurant. Sorted!
     public Map<Integer, String> ids; // <RestaurantID, GeoHash+ID> 同一个地点可能有好多饭店
     
     public MiniYelp() {
@@ -78,8 +78,7 @@ public class MiniYelp {
         List<Node> res = new ArrayList<Node>();
         NavigableMap<String, Restaurant> subMap = restaurants.subMap(hashcode, true, hashcode + "{", true); // In ASCII, { == z + 1
         
-		for (Map.Entry<String, Restaurant> entry : 
-                subMap.entrySet()) {
+		for (Map.Entry<String, Restaurant> entry : subMap.entrySet()) {
             String key = entry.getKey();
             Restaurant value = entry.getValue();
             double distance = Helper.get_distance(location, value.location);
@@ -88,10 +87,10 @@ public class MiniYelp {
         }
 		
         Collections.sort(res, new Comparator<Node>(){  
-            public int compare(Node arg0, Node arg1) {  
-                if (arg0.distance < arg1.distance)
+            public int compare(Node node1, Node node2) {  
+                if (node1.distance < node2.distance)
                     return -1;
-                else if (arg0.distance > arg1.distance)
+                else if (node1.distance > node2.distance)
                     return 1;
                 else
                     return 0;
@@ -111,7 +110,7 @@ public class MiniYelp {
     int get_length(double k) {
         double[] ERROR = {2500, 630, 78, 20, 2.4, 0.61, 0.076, 0.01911, 0.00478, 0.0005971, 0.0001492, 0.0000186};
         for (int i = 0; i < 12; ++i)
-            if (k  > ERROR[i])
+            if (k > ERROR[i])
                 return i;
         return 12;
     }

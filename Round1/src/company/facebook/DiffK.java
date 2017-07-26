@@ -58,7 +58,7 @@ public class DiffK {
 			int toFind = num - target; // list is sorted
 			
 			if (map.containsKey(toFind)) {
-				if (target == 0) { // 特殊情况特殊考虑
+				if (target == 0) { // 特殊情况特殊考虑。 不需要吧， 前边如果存在，肯定是之前有过
 					if (map.get(toFind) >= 1) {
 						return true;
 					}

@@ -10,7 +10,7 @@ import java.util.TreeSet;
 /*
 Friendship Service
 Support follow & unfollow, getFollowers, getFollowings.
-follow(1, 3)
+follow(1, 3) // 3 follow 1
 getFollowers(1) // return [3]
 getFollowings(3) // return [1]
 follow(2, 3)
@@ -38,7 +38,7 @@ select smaller_user_id from friendship where bigger_user_id=200; => 得到 100
 https://explainextended.com/2009/03/07/selecting-friends/
 */
 
-public class FriendshipService { 
+public class FriendshipService {
 
     private Map<Integer, Set<Integer>> followers, followings; // 这个答案正好反了
 

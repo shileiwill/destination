@@ -12,6 +12,8 @@ Example:
 Given “25525511135”,
 
 return [“255.255.11.135”, “255.255.111.35”]. (Make sure the returned strings are sorted in order)
+
+FB: valid IP in string format and return the uint32 format
  */
 public class ValidIPAddresses {
 	public ArrayList<String> restoreIpAddresses(String a) {

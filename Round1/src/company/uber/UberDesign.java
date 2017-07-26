@@ -82,6 +82,8 @@ OOD, car sale website
 
 design 一个手机 app, 每天早上6点，给你发notification, 告诉你有那些popular 的apps, 或者根据 你现在手机上装的apps, 给你一个list of recommending apps. 从前端扯到后端.
 
+第三轮 System design 设计一个类似message center的black box。 从producer定时拿一批数据，然后进入到message center，然后存入中间的类似备份的数据库，然后返回前端。中 间涉及一些format的转换。包括收到任何消息，都要给producer发回执。听细节的，和面试官多讨论讨论。
+
 Kafka                                   
 Thrift                                  
 Riak

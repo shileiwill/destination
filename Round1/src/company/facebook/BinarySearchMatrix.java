@@ -43,4 +43,17 @@ public class BinarySearchMatrix {
 		
 		return res;
 	}
+	
+    public int findLeftOneLearntFromOthers(int[][] matrix) {
+        int left = matrix[0].length; // right end
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < left; j++) {
+                if (matrix[i][j] == 1) {
+                    left = j;
+                    break;
+                }
+            }
+        }
+        return left;
+    }
 }

@@ -54,7 +54,7 @@ public class ConvexPolygon {
                 positive = true;
             }
             
-            if (positive && negative) {
+            if (positive && negative) { // 这里使用的思想跟判断数列是否单调是一样的
                 return false;
             }
             

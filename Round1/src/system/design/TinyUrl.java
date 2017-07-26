@@ -72,7 +72,7 @@ class TinyUrlBase62 {
 		 return url.substring(startIndex);
 	 }
 	
-	 private int toBase62(char c) {
+	 private int toBase62(char c) { // 这个其实可以直接用indexOf()
 	     if (c >= '0' && c <= '9') {
 	         return c - '0';
 	     }

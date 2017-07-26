@@ -36,7 +36,7 @@ public class BinaryTreeMaximumPathSumAndLongestPath {
 
 	/*
 	 * 给定一个二叉树，任意两个节点之间必然是有一条路径相通的，假定父节点和它的孩子节点的距离为单位1，求二叉树中相距最远的两个节点间的路径长度
-	 * 二叉树最长路径 不必经过root
+	 * 二叉树最长路径 不必经过root， 这不就是Diameter吗
 	 * Leaf to Leaf longest path
 	 */
 	int max = 0;
@@ -64,7 +64,8 @@ public class BinaryTreeMaximumPathSumAndLongestPath {
 	 * 124. Binary Tree Maximum Path Sum
 	 * Given a binary tree, find the maximum path sum.
 
-	For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. 
+	For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree 
+	along the parent-child（来回都可以） connections. 
 	The path must contain at least one node and does not need to go through the root.
 	
 	For example:
@@ -73,6 +74,7 @@ public class BinaryTreeMaximumPathSumAndLongestPath {
 	       1
 	      / \
 	     2   3
+	Return 6.
 	 */
 	// singleSum: 从root往下走到任意点的最大路径，这条路径可以不包含任何点
     // maxSum: 从树中任意到任意点的最大路径，这条路径至少包含一个点

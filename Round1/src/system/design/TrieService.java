@@ -16,7 +16,7 @@ Return <a[9,4,2]<b[9,2]<c[2]<>>c[4]<>>>, and denote the following tree structure
    /
  c(2)
 int value可以看做是document ID, 这个char在哪个document中出现过（Inverted Index）
-把输入的单词放进树中，在放入频率的时候按从大到小顺序插入top10 List中即可。
+把输入的单词放进树中，在放入频率的时候按从大到小顺序插入top10 List中即可
 如果top10 List大小大于10，则删掉最后一个元素。
 */
 import java.util.*;

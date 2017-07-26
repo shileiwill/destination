@@ -56,18 +56,16 @@ getMachineIdByHashCode(91)
 
 因为有replica在，所以你数据全都丢掉的概率就很小。
 
-记住一句话，系统设计不是要让你的系统100%不会出问题，而是要尽可能的降低出问题的概率和出问题之后的影响。你可以说这种方法仍然是有很极端的情况会发生的，但是这个概率及其小。
-
 先有个概念，在复杂版本中，把机器和数据都看做一个点。
 在简单版本中，原来一个圆不是分360份么，现在是分2^64份，然后每加入一个机器，随机在这个圆上找1000个随机点（不重复的micro-shards），这样这个机器就加入进去了（机器也变成点了）。
 每个数据同时在这个圆上也有一个点，通过hashcode算出来（0 - 2^64中的一个数），得到这个hashcode之后，我们以这个点为起点，在圆上顺时针找到第一个随机点（micro-shards）所属的机器，存进去。
 
 挂了的问题，如果一个机器挂了，那么受影响的是从这个机器开始，逆时针一直找，直到上一个机器之间的这些点，那么我们把这些点存到挂了的机器开始，顺时针找到的下一个机器上。
 
-replica 就是存在顺时针的下两个virtual node里。所以步骤就是 hash 得到一个virtual node，然偶顺时针取两个 virtual nodes，然后存上去。
+replica 就是存在顺时针的下两个virtual node里。所以步骤就是 hash 得到一个virtual node，然后顺时针取两个 virtual nodes，然后存上去。
 
-一个数据该属于那台机器负责管理，是按照该数据对应的圆周上的点在圆上顺时针碰到的第一个 micro-shard 点所属的机器来决定。 通过给定的hashcode（也就是点的位置）按照题意去查找到应该属于哪台机器。
-查找的时候就是遍历所有机器，找出所有机器中顺时针方向离hashcode位置最近的点，取最近的即为答案。
+一个数据该属于那台机器负责管理，是按照该数据对应的圆周上的点在圆上顺时针碰到的第一个 micro-shard 点所属的机器来决定。 通过给定的hashcode（也就是点的位置）
+按照题意去查找到应该属于哪台机器。查找的时候就是遍历所有机器，找出所有机器中顺时针方向离hashcode位置最近的点，取最近的即为答案。
 找的过程中:
 方法一：因为[0, 360) 都是整数 所以可以用一个数组记录一下 每个点属于的机器，每次遍历这个数组。
 方法二：对每台机器的所有点存一个有序表，对每台机器查找的时候，在有序表中用二分检索
@@ -75,8 +73,8 @@ replica 就是存在顺时针的下两个virtual node里。所以步骤就是 ha
 
 public class ConsistentHashingII {
     public int n, k;
-    public Set<Integer> ids = null; // 已经有机器的一堆point, 不能再使用了
-    public Map<Integer, List<Integer>> machines = null; // 机器的ID 对应的在环上的Points
+    public Set<Integer> usedSpots = null; // 已经有机器的一堆point, 不能再使用了
+    public Map<Integer, List<Integer>> machineSpotsMap = null; // 机器的ID 对应的在环上的Points
 
     // @param n a positive integer 环上的区间（Point）个数
     // @param k a positive integer 每个机器需要多少个Points (replica)
@@ -86,8 +84,8 @@ public class ConsistentHashingII {
     	ConsistentHashingII solution = new ConsistentHashingII();
         solution.n = n;
         solution.k = k;
-        solution.ids = new TreeSet<Integer>();
-        solution.machines = new HashMap<Integer, List<Integer>>();
+        solution.usedSpots = new TreeSet<Integer>();
+        solution.machineSpotsMap = new HashMap<Integer, List<Integer>>();
         return solution;
     }
 
@@ -98,14 +96,14 @@ public class ConsistentHashingII {
         List<Integer> random_nums = new ArrayList<Integer>();
         for (int i = 0; i < k; ++i) {
             int index = ra.nextInt(n);
-            while (ids.contains(index))
+            while (usedSpots.contains(index))
                 index = ra.nextInt(n);
-            ids.add(index);
+            usedSpots.add(index);
             random_nums.add(index);
         }
 
         Collections.sort(random_nums);
-        machines.put(machine_id, random_nums);
+        machineSpotsMap.put(machine_id, random_nums);
         return random_nums;
     }
 
@@ -115,7 +113,7 @@ public class ConsistentHashingII {
         int distance = n + 1;
         int machineId = 0;
         
-        for (Map.Entry<Integer, List<Integer>> entry : machines.entrySet()) {
+        for (Map.Entry<Integer, List<Integer>> entry : machineSpotsMap.entrySet()) {
             int curMachineId = entry.getKey();
             List<Integer> curPoints = entry.getValue();
             
@@ -175,7 +173,7 @@ class SolutionWithTreeMap {
     // @return a list of shard ids  
     public List<Integer> addMachine(int machine_id) {  
         List<Integer> ids = new ArrayList<>();  
-        for(int i = 0; i < this.k; i++) {  
+        for(int i = 0; i < this.k; i++) {
             int id = this.arr[size++ % this.arr.length];  
             ids.add(id);  
             this.treeMap.put(id, machine_id);  

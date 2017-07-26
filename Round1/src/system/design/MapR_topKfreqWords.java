@@ -23,15 +23,14 @@ The k is given in the constructor of TopK class.
 For the words with same frequency, rank them with alphabet.
 
 Given document A =
-
 lintcode is the best online judge
 I love lintcode
-and document B =
 
+and document B =
 lintcode is an online judge for coding interview
 you can test your code online at lintcode
-The top 2 words and their frequencies should be
 
+The top 2 words and their frequencies should be
 lintcode, 4
 online, 3
  * */
@@ -44,15 +43,15 @@ class Pair {
 	        this.key = key;
 	        this.count = value;
 	    }
-	}
+}
 
 public class MapR_topKfreqWords {
     public static class Map {
-        public void map(Document value,
+        public void map(Document doc,
                         OutputCollector<String, Integer> output) {
             // Output the results into output buffer.
             // Ps. output.collect(String key, int value);
-            String[] words = value.content.split("\\s+");
+            String[] words = doc.content.split("\\s+");
             
             for (String word : words) {
             	if (word.length() > 0) {

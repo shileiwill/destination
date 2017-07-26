@@ -46,19 +46,19 @@ hence the relative rarity of b32 versus b64 (which is more efficient space-wise)
  */
 public class GeoHash {
     /**
-     * @param latitude, longitude a location coordinate pair 
+     * @param latitude(纬度), longitude(经度) a location coordinate pair 
      * @param precision an integer between 1 to 12
      * @return a base32 string
      */
     public String encode(double latitude, double longitude, int precision) {
         String _base32 = "0123456789bcdefghjkmnpqrstuvwxyz";
         String lat_bin = getBin(latitude, -90, 90);
-        String lng_bin = getBin(longitude, -180, 180); // 长度为30
+        String lng_bin = getBin(longitude, -180, 180); 
         
         StringBuffer hash_code = new StringBuffer();
         StringBuffer sb = new StringBuffer();
         
-        for (int i = 0; i < 30; ++i) {
+        for (int i = 0; i < 30; ++i) {// 长度为30
             sb.append(lng_bin.charAt(i));
             sb.append(lat_bin.charAt(i)); // latitude与longitude交叉 mix
         }

@@ -121,6 +121,28 @@ A rather straight forward solution is a two-pass algorithm using counting sort. 
         }
     }
     
+	public void sortKColorsLearntFromOthers(int[] nums, int k) {
+		int left = 0;
+		int right = nums.length - 1;
+		int minColor = 1;
+		int maxColor = k;
+		
+		while (minColor < maxColor) {
+			for (int i = left; i <= right; i++) {
+				while (nums[i] == maxColor && i < right) {
+					swap(nums, i, right--);
+				} // 直到i不是maxColor
+				
+				if (nums[i] == minColor) {
+					swap(nums, i, left++);
+				}
+			}
+			
+			minColor++;
+			maxColor--; // 每一回合都把minColor和maxColor安顿好
+		}
+	}
+    
     /**
      * 大家很多人提到了一道sort color的变种，我今天就遇到了，趁现在还记得详细跟大家说一下。
 给定一个API getCategory(int n)， return {L| M| H} 三种category

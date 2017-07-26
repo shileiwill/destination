@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Created by weixwu on 7/10/2017.
+ * Do binary search using a running pointer
  */
 public class CountOccurence {
 
@@ -33,10 +34,10 @@ public class CountOccurence {
     }
 
     class Pair{
-        int c;
+        int val;
         int count;
-        public Pair(int c, int count) {
-            this.c = c;
+        public Pair(int val, int count) {
+            this.val = val;
             this.count = count;
         }
     }
@@ -46,7 +47,7 @@ public class CountOccurence {
         CountOccurence d = new CountOccurence();
         List<Pair> res = d.getCount(arr);
         for (Pair p : res) {
-            System.out.println(p.c + ": " + p.count);
+            System.out.println(p.val + ": " + p.count);
         }
     }
 }

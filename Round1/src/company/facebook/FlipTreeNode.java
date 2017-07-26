@@ -82,6 +82,7 @@ public class FlipTreeNode {
 	}
 
 	private static void flipCurrentNode(TreeNode node) {
+		// node.val = 1 - node.val;
 		if (node.val == 1) {
 			node.val = 0;
 		} else {

@@ -19,6 +19,67 @@ A follow up, Iterator for a list of BSTs (heap contain each BST’s iterator)
  */
 public class BSTIterator {
 
+	/*
+	 * given BST and two vals(lo an hi), return sum of nodes whose val in [lo , hi]。 O(N) and O(logN) solution
+	 * O(N): Just iterate through the tree and find out any nodes in [lo , hi]
+	 * O(logN): If the getSum(int low, int high) is called multiple times, Could preprocess the tree, and add sum field in each node,
+	 * Next time, just use getSum(high) - getSum(first element smaller than low), which will be 2log(N)
+	 */
+	TreeNode rebuildTree(TreeNode root) {
+		if (root == null) {
+			return null;
+		}
+		
+		int runningSum = 0;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode cur = root;
+		
+		while (cur != null || !stack.isEmpty()) {
+			while (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			}
+			
+			TreeNode node = stack.pop();
+			runningSum += node.val;
+			node.sum = runningSum;
+			
+			cur = node.right;
+		}
+		
+		return root;
+	}
+	
+	int getRangeSumInBST(TreeNode root, int low, int high) {
+		int lowSum = helper(root, low);
+		int highSum = helper(root, high);
+		
+		return highSum - lowSum; // Sum includes current node's value
+	}
+	
+	int helper(TreeNode root, int target) { // Find the value which is first smaller than or equal to target
+		TreeNode prev = null;
+		
+		while (root != null) {
+			if (root.val == target) {
+				return root.sum;
+			}
+			
+			prev = root;
+			if (root.val < target) {
+				root = root.right;
+			} else {
+				root = root.left;
+			}
+		}
+		
+		if (prev.val > target) {
+			return 0; // In case there is no node smaller than target
+		}
+		
+		return prev.sum;
+	}
+	
     Queue<TreeNode> queue = new LinkedList<TreeNode>();
     
     void helper(TreeNode node) {

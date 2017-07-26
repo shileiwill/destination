@@ -30,6 +30,7 @@ The flattened tree should look like:
  */
 public class BinaryTreeFlattenToLinkedList {
 
+	// 如果倒着看结果的话，是先visit右节点，再左节点，再自己
     TreeNode prev = null;
     public void flatten(TreeNode root) {
         if (root == null) {

@@ -116,7 +116,9 @@ public class FaceBookDesign {
 	client 给 server 传输文件 的系统。 一个/多个clients <-> 一个／多个 server 
 
 	4. 设计 网页爬虫，给一千台机器，每台机器的带宽有限，每个url只能爬一次。
-5. 设计 poi
+		就是考个sharding, 没什么特别的，把url 按consistent hashing 分配到对应机器上去。follow up是有机器挂了怎么办。每个机器要有back up，看一看cassandra的cluster management就有思路了，基本套着讲。
+
+	5. 设计 poi
 }
 
 

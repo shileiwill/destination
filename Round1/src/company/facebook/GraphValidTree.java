@@ -71,7 +71,7 @@ public class GraphValidTree {
         if (edges.length == 0) {
             return n == 1;
         }
-        Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
+        Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>(); // With Map, I can easily get its children
         Set<Integer> visited = new HashSet<Integer>();
         
         for (int[] edge : edges) {
@@ -103,7 +103,7 @@ public class GraphValidTree {
                     return false; // 保证无环
                 }
                 
-                map.get(next).remove(now);
+                map.get(next).remove(now); // 一定要remove！
                 visited.add(next);
                 queue.offer(next);
             }

@@ -25,7 +25,7 @@ public class HouseRobber2 {
         
         // Rob the first house, 0 -> nums.length - 2
         hash[0] = nums[0];
-        hash[1] = Math.max(nums[0], nums[1]);
+        hash[1] = Math.max(nums[0], nums[1]); // 还是得比较一下的，记住！
         
         for (int i = 2; i <= nums.length - 2; i++) {
             hash[i] = Math.max(hash[i - 1], hash[i - 2] + nums[i]);

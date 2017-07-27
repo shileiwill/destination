@@ -28,7 +28,7 @@ public class IntervalsSearch {
 			List<Interval> list = source.get(i);
 			
 			int left = 0, right = list.size() - 1;
-			while (left < right) {
+			while (left <= right) {
 				int mid = (left + right) / 2;
 				Interval in = list.get(mid);
 				

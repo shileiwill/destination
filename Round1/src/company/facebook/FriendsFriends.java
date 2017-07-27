@@ -57,7 +57,7 @@ public class FriendsFriends {
 			for (int i = 0; i < size; i++) {
 				UndirectedGraphNode now = queue.poll();
 				for (UndirectedGraphNode next : now.friends) {
-					if (visited.contains(next)) {
+					if (!visited.contains(next)) {
 						queue.offer(next);
 						visited.add(next);
 					}

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import chapter3.binaryTree.TreeNode;
 
-public class LargestDistance {
+public class DiameterOfTree {
 
 	public static void main(String[] args) {
 		TreeNode n2 = new TreeNode(2);
@@ -29,7 +29,7 @@ public class LargestDistance {
 		n8.left = n7;
 		n1.right = n9;
 		
-		LargestDistance ld = new LargestDistance();
+		DiameterOfTree ld = new DiameterOfTree();
 		int res = ld.height(n2);
 		System.out.println(ld.max);
 	}

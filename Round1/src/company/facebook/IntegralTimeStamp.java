@@ -33,6 +33,7 @@ public class IntegralTimeStamp {
 		}
 	}
 
+	// 这个是bucket的思想
 	int min = Integer.MAX_VALUE;
 	int max = 0;
 	void findMinMax(Interval[] intervals) {

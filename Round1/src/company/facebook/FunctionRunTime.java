@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * 3. Coding：给一些函数运行的log，计算每个函数的inclusive time（函数总运行时间）和exclusive time（函数总运行时间-子函数运行时间）。
 例如
-fun_name enter/exit time
+fun_name     enter/exit     time
 f1             enter         1
 f2             enter         2
 f2             exit          3

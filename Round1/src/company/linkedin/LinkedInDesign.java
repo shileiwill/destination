@@ -170,3 +170,7 @@ Design Uber
 http://www.jiuzhang.com/qa/410/
 
 Blacklist IP。这个list会增加删减条目，每一个request都会来lookup这个list
+
+交流就是尽量往他们的文化上靠，什么be bold, act as owner. 讲项目的时候，就说我过去怎么怎么了，就是be bold, act as owner.
+问你为什么来linkedin，因为你们这个文化好啊，我就是这么一个人，鼓吹自己一番，然后说你看我多么合适。
+在家多练习练习。

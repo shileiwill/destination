@@ -9,6 +9,8 @@ Some examples:
 "1 a" => false
 "2e10" => true
 Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
+
+LinkedIn, isNumber，给一个string，判断是不是数字，true： 0.01，001，12.2；false：1.，00.，.23 小数点不能再最后或者最前
  */
 public class ValidNumber {
     /*  All we need is to have a couple of flags so we can process the string in linear time:

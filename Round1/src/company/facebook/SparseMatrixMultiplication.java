@@ -1,7 +1,6 @@
 package company.facebook;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 /**
  * 311. Given two sparse matrices A and B, return the result of AB.
@@ -122,7 +121,7 @@ public class SparseMatrixMultiplication {
         Map<Integer, HashMap<Integer, Integer>> tableB = new HashMap<>();
         
         for(int k = 0; k < n; k++) {
-            tableB.put(k, new HashMap<Integer, Integer>());
+            tableB.put(k, new HashMap<Integer, Integer>()); // 无论有没有，扔进去，保证不空
             for(int j = 0; j < l; j++) {
                 if (B[k][j] != 0){
                     tableB.get(k).put(j, B[k][j]);
@@ -133,7 +132,7 @@ public class SparseMatrixMultiplication {
         for(int rowA = 0; rowA < m; rowA++) {
             for(int colA = 0; colA < n; colA++) {
                 if (A[rowA][colA] != 0){
-                    for (Integer colB: tableB.get(colA).keySet()) {
+                    for (Integer colB: tableB.get(colA).keySet()) { // 这边不用check null
                         res[rowA][colB] += A[rowA][colA] * tableB.get(colA).get(colB);
                     }
                 }

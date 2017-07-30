@@ -175,7 +175,7 @@ A：想了一会儿，感觉用two-pointer可行，一个指头， 一个指尾�
     	return sb.toString();
     }
     
-    // 从后边remove肯定是对的
+    // 从后边remove肯定是对的 记住这个不用额外空间的
     String findOneValid(String s) {
     	int open = 0;
     	int close = 0;
@@ -215,17 +215,19 @@ A：想了一会儿，感觉用two-pointer可行，一个指头， 一个指尾�
     	return sb.toString();
     }
     
+    // 记住这一个stack的
 	public String removeInvalidLearntFromOthers(String s) {
 		Stack<Integer> stack = new Stack<>();
-		StringBuilder sb = new StringBuilder(s);
+		char[] arr = s.toCharArray();
+		int len = arr.length;
 
 		// 这个for循环只能查出多余的)
-		for (int i = 0; i < s.length(); i++) {
-			char cur = s.charAt(i);
+		for (int i = 0; i < len; i++) {
+			char cur = arr[i];
 
 			if (cur == ')') {
 				if (stack.isEmpty()) { // 这个)是多余的
-					sb.replace(i, i + 1, "*");
+					arr[i] = '*';
 				} else { // 扔掉一个(
 					stack.pop();
 				}
@@ -237,10 +239,17 @@ A：想了一会儿，感觉用two-pointer可行，一个指头， 一个指尾�
 		// 这个while循环找出多余的(
 		while (!stack.isEmpty()) {
 			int cur = stack.pop();
-			sb.replace(cur, cur + 1, "*");
+			arr[cur] = '*';
 		}
 		
-		return sb.toString().replaceAll("\\*", "");
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < len; i++) {
+			if (arr[i] != '*') {
+				sb.append(arr[i]);
+			}
+		}
+		
+		return sb.toString();
 	}
     
     public static void main(String[] args) {

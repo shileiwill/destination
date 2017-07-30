@@ -135,7 +135,6 @@ public class MergeAndIntersectIntervals {
 	两个input：
 1）desired time range to arrange a meeting -- TimeRange desired_time 
 2）a list of busy intervals -- List<TimeRange> busy_intervals
-. From 1point 3acres bbs
 output: 
 list of time ranges where a meeting can be scheduled, 会议没有时长限制 -- List<TimeRange>
 

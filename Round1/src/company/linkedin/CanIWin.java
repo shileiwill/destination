@@ -7,7 +7,10 @@ import java.util.Map;
 public class CanIWin {
 
 	public static void main(String[] args) {
-
+		CanIWin ci = new CanIWin();
+		int[] arr = {3,2,1};
+		int[] arr2 = {1,20,4};
+		ci.firstWillWin(arr);
 	}
 
 	// Choose from 1 to max, inclusive. Whoever first meet target will win
@@ -77,7 +80,11 @@ public class CanIWin {
             sum += val;
         }
         
-        return sum < 2 * helper(values, 0, len - 1, hash);
+        int res = helper(values, 0, len - 1, hash);
+        System.out.println(res);
+		boolean bool = sum < 2 * res;
+		System.out.println(bool);
+		return bool;
     }
     
     // 这个helper是直接得到一个number 很好！
@@ -93,7 +100,7 @@ public class CanIWin {
         } else if (left + 1 == right) {
             hash[left][right] = Math.max(arr[left], arr[right]);
         } else {
-            // 这个是对方能得到的， 所以用min, 哈
+            // 为啥用min? 我们假设对方也是聪明的，肯定会取大的数，所以留给我们的肯定是min的
             int pickLeft = Math.min(helper(arr, left + 2, right, hash), helper(arr, left + 1, right - 1, hash)) + arr[left];
             int pickRight = Math.min(helper(arr, left + 1, right - 1, hash), helper(arr, left, right - 2, hash)) + arr[right];
             

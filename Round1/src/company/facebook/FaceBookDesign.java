@@ -119,6 +119,10 @@ public class FaceBookDesign {
 		就是考个sharding, 没什么特别的，把url 按consistent hashing 分配到对应机器上去。follow up是有机器挂了怎么办。每个机器要有back up，看一看cassandra的cluster management就有思路了，基本套着讲。
 
 	5. 设计 poi
+
+	网页event售票系统， 随便聊聊画画conponent图和数据表，讲讲哪里容易failure，说说API，信用卡信息谁处理，遇到大流量怎么分流
+
+	Seats checking/booking system. 1. Get 10 seats, 2. get another 10 different seats which should be different from all seats seen before. 3. Book the seats. Primarily talking about the sql database, a little about transaction. At the end talks a little about large qps, shard the data..鏈
 }
 
 

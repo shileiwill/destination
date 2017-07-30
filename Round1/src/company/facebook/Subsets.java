@@ -85,7 +85,7 @@ public class Subsets {
             return null;
         }
         
-        Arrays.sort(nums); // Sort and reconigize duplicate elements easily
+        Arrays.sort(nums); // Sort and recognize duplicate elements easily
         helper2(res, list, nums, 0);
         
         return res;

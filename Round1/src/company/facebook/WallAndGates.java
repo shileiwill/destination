@@ -84,7 +84,7 @@ public class WallAndGates {
 			int x = i + dir[0];
 			int y = j + dir[1];
 			
-			if (x >= 0 && x < m && y >= 0 && y < n && rooms[x][y] > rooms[i][j]) {
+			if (x >= 0 && x < m && y >= 0 && y < n && rooms[x][y] > rooms[i][j] + 1) {
 				rooms[x][y] = rooms[i][j] + 1;
 				dfs(rooms, x, y);
 			}

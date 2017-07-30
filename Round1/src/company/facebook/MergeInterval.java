@@ -146,7 +146,7 @@ public class MergeInterval {
     }
 }
 
-// Above is based on call frequencey. what about using TreeSet, which could sort as well.
+// Above is based on call frequency. what about using TreeSet, which could sort as well.
 class IntervalTreeSet {
 	// Here we can use TreeSet to sort based on start time/end time
 	TreeSet<Interval> treeSet = new TreeSet<Interval>(new Comparator<Interval>(){
@@ -157,8 +157,6 @@ class IntervalTreeSet {
 			return in1.end - in2.end;
 		}
 	});
-	
-	
 	
 	void add(int start, int end) {
 		if (start > end) {

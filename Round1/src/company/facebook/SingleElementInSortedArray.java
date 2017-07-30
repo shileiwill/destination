@@ -28,7 +28,7 @@ public class SingleElementInSortedArray {
             if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]) { // 这个操作挺危险，得保证每个section至少有三个元素
                 return nums[mid];
             } else if (nums[mid] == nums[mid + 1] && mid % 2 == 0) { // 每次remove偶数个元素，所以剩下的section总是奇数，包含the single number
-                left = mid + 1;
+                left = mid;
             } else if (nums[mid] == nums[mid - 1] && mid % 2 == 1) {
                 left = mid + 1;
             } else {

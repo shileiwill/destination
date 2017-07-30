@@ -84,6 +84,16 @@ design 一个手机 app, 每天早上6点，给你发notification, 告诉你有�
 
 第三轮 System design 设计一个类似message center的black box。 从producer定时拿一批数据，然后进入到message center，然后存入中间的类似备份的数据库，然后返回前端。中 间涉及一些format的转换。包括收到任何消息，都要给producer发回执。听细节的，和面试官多讨论讨论。
 
+design pokemonGo. pokemonGo有三个要求，显示pokemonStop, spinpokeMonstop, catchPokemon. 在提到要把pokemonStop信息存储的时候，卡住了。
+因为pokemonstop的数目很多要多台DB, 如何sharding成了问题。如果按照id sharding，用坐标查询附近的stop就很麻烦。如果按城市存储，查询的坐标正好落在城市边缘就要去另外一个数据库查询。
+如果DB存一些周围城市stop 的duplication, consistence 就成了问题。请高手指点如何存储stop 的信息并且方便按cutomer的位置进行快速的查询。
+
+假设有5billion个分布在全球的停车场sensor，可以不断汇报各个车位是空的还是满的，设计一个服务能够支持查询离用户最近的5个空车位。答得一般，最后谈存储的时候认为我的schema太浪费空间，
+卡了，最后提示下才想出来可以用array的index做sensor id直接存储代表sensor状态的boolean变量，这样就可以直接用单机内存存储所有数据了
+
+设计一个next stop bus 的app，能够支持查找离用户最近的5个车站各趟线路的ETA。
+先讨论了如何获得各个ETA的方案，然后在此基础上增加限制条件减少数据的写入，最后要求设计出一套完整的data path
+
 Kafka                                   
 Thrift                                  
 Riak

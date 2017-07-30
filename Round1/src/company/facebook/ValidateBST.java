@@ -3,7 +3,14 @@ package company.facebook;
 import java.util.Stack;
 
 import chapter3.binaryTree.TreeNode;
-
+/**
+ * 15分钟coding判断一个tree是否是BST,时间比较短就没有用Morris遍历写，写了个简单的递归实现，用递归的时候可以包装一个result class,
+class Result{
+                boolean isBST; // 以此为root是否是BST
+                int val; //本输出点的值 Note: 只track这个value行吗，我的方案是记录min, max
+}
+，然后和他讲了一下morris怎么做
+ */
 public class ValidateBST {
 	boolean validateBSTInOrderTraversal(TreeNode root) {
 		Stack<TreeNode> stack = new Stack<TreeNode>();

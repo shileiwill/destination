@@ -143,7 +143,7 @@ public class LowestCommonAncestorInNaryTree {
 		for (int i = 1; i < res.size(); i++) {
 			Result now = res.get(i);
 			if (now.depth != deepest.depth) {
-				sameDepth = false;
+				sameDepth = false; // This is wrong, as long as 2 nodes has same depth, root is ancestor
 				if (now.depth > deepest.depth) {
 					deepest.depth = now.depth + 1;
 					deepest.root = now.root;
@@ -219,7 +219,7 @@ public class LowestCommonAncestorInNaryTree {
 			// the leftMost and rightMost have the same height
 			TreeNode leftP = map.get(leftMost);
 			TreeNode rightP = map.get(rithtMost);
-			while (leftP != null && rightP != null && leftP != rightP) { // backtrack, Nice!
+			while (leftP != null && rightP != null && leftP != rightP) { // backtrack, Nice! No need to check null here since worst case is root
 				leftP = map.get(leftP);
 				rightP = map.get(rightP);
 			}

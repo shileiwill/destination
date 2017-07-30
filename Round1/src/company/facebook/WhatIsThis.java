@@ -27,7 +27,7 @@ public class WhatIsThis {
 	 * 注意一些corner case， 比如输入0.3333什么的注意四舍五入
 	 */
 	int findByPercent(Iterator<Integer> it, double percent) {
-		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>(); // No need to use TreeMap, HashMap is good enough
 		int count = 0;
 		
 		while (it.hasNext()) {

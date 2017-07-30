@@ -15,36 +15,8 @@ public class TaskCoolDown {
 
 	public static void main(String[] args) {
 		TaskCoolDown tcd = new TaskCoolDown();
-		String res = tcd.minLength("1242353", 4);
+		String res = tcd.minLength2("1242353", 4);
 		System.out.println(res);
-	}
-	// First version
-	String minLength(String s, int coolDown) {
-		Map<Character, Integer> map = new HashMap<Character, Integer>();
-		StringBuilder sb = new StringBuilder();
-		
-		for (char c : s.toCharArray()) {
-			if (map.containsKey(c)) {
-				int oldIndex = map.get(c);
-				int newIndex = sb.length();
-				
-				if (newIndex - oldIndex > coolDown + 1) { // Doesn't matter
-					map.put(c, sb.length());
-					sb.append(c);
-				} else { // Need to add extra space
-					for (int i = 0; i < coolDown - (newIndex - oldIndex) + 1; i++) {
-						sb.append("*");
-					}
-					map.put(c, sb.length());
-					sb.append(c);
-				}
-			} else {
-				map.put(c, sb.length());
-				sb.append(c);
-			}
-		}
-		
-		return sb.toString();
 	}
 	
 	// Second version
@@ -57,10 +29,8 @@ public class TaskCoolDown {
 				int oldIndex = map.get(c);
 				int newIndex = sb.length();
 				
-				if (newIndex - oldIndex <= coolDown + 1) {
-					for (int i = 0; i < coolDown - (newIndex - oldIndex) + 1; i++) {
-						sb.append("*");
-					}
+				for (int i = newIndex; i <= coolDown + oldIndex; i++) {
+					sb.append("*");
 				}
 			}
 			map.put(c, sb.length());

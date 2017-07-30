@@ -85,7 +85,8 @@ public class UniquePaths2 {
 		1. A path for A is also a path for B, just reverse it.
 		2. If there is only 1 path available, then definitely it will collide
 		3. If there are more than 1 paths, need to check if there are 2 paths which don't meet in the middle step, (m + n - 2) / 2;
-		4. If you want to remember the path, use a Map<Integer, Integer> for backtracking, but it is not necessary in our case. BFS走（m+n-2）/2步，把这些点标记成障碍，但不是1，而是标记成2
+		4. If you want to remember the path, use a Map<Integer, Integer> for backtracking, but it is not necessary in our case. 
+		   BFS走（m+n-2）/2步，把这些点标记成障碍，但不是1，而是标记成2
      */
     int[][] downRight = {{1, 0}, {0, 1}};
     int[][] upLeft = {{-1, 0}, {0, -1}};
@@ -123,7 +124,7 @@ public class UniquePaths2 {
 		}
 	}
 
-	/**
+	/** This is a good one
      *  题目是一个机器人在一个空间里面，不知道大小形状，也不知道初始位置。
      *  空间里有障碍物， 有一个move function, 如果前面是障碍物的话，会return false, 不是return true. 
      *  求所有可以到达位置的面积。Note: move 是真的move, 就算是障碍物也会move到那里，但是会return false。

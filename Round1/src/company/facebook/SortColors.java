@@ -1,8 +1,5 @@
 package company.facebook;
 
-import java.util.Arrays;
-import java.util.List;
-
 //重点
 /**
  * 75. Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, 

@@ -74,6 +74,7 @@ public class MaxSumofRectangleNoLargerThanK {
         return res;
     }
     
+    // O(n^3logn)
     public int maxSumSubmatrix(int[][] matrix, int k) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return -1;    

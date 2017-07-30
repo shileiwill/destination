@@ -113,7 +113,7 @@ public class MaxSizeSubarray {
             
             if (sum == 0) {
                 max = i + 1;
-            } else if (map.containsKey(-sum)) {
+            } else if (map.containsKey(-sum)) { // -sum还是sum?
                 max = Math.max(max, i - map.get(-sum));
             }
             

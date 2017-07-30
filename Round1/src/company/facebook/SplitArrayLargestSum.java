@@ -23,7 +23,6 @@ Explanation:
 There are four ways to split nums into two subarrays.
 The best way is to split it into [7,2,5] and [10,8],
 where the largest sum among the two subarrays is only 18.
-
  */
 public class SplitArrayLargestSum {
     public int splitArray(int[] nums, int m) {
@@ -105,6 +104,29 @@ public class SplitArrayLargestSum {
 	    	return res;
 	    }
 	    
+	    // Will this be cleaner, which is easier to understand
+	    int[] kWindowSumCleaner(int[] arr, int k) {
+	    	int len = arr.length;
+	    	if (arr == null || arr.length < k || k <= 0) {
+	    		return null;
+	    	}
+	    	
+	    	int[] res = new int[len - k + 1];
+
+	    	int sum = 0;
+	    	for (int i = 0; i < len; i++) {
+	    		if (i - k >= 0) {
+	    			sum -= arr[i - k];
+	    		}
+	    		sum += arr[i];
+	    		if (i - k + 1 >= 0) {
+	    			res[i - k + 1] = sum;
+	    		}
+	    	}
+	    	
+	    	return res;
+	    }
+	    
 	    /**
 	     * 第二个 题 找 sum最大，每个长度都是k 的三个subarray。 三个subarray不能有overlap。 举个栗子 1,2,1,2,6,7,5,1。k = 2。 
 	     * 这个里面找到的就应该是[1,2], 1,[2,6],[7,5],1 同样返回和。 楼猪这题傻逼的写了个 N^3的解法。铁定跪了。回学校问了下大神，大神说dp， 我也明白dp怎么写了，O(N)。
@@ -129,7 +151,7 @@ public class SplitArrayLargestSum {
 	    			leftSum -= arr[i - k];
 	    		}
 	    		if (i - k + 1 >= 0) {
-	    			left[i] = Math.max(leftSum, i >= 1 ? left[i - 1] : 0); 
+	    			left[i] = Math.max(leftSum, i >= 1 ? left[i - 1] : 0); // left的下标从0开始
 	    		}
 	    	}
 	    	
@@ -153,7 +175,7 @@ public class SplitArrayLargestSum {
 	    		}
 	    		
 	    		if (i >= k + k - 1) {
-	    			res = Math.max(res, midSum + left[i - k] + right[i + 1]);
+	    			res = Math.max(res, midSum + left[i - k] + right[i + 1]); // 注意下标again
 	    		}
 	    	}
 	    	

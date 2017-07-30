@@ -16,7 +16,7 @@ cba
 
 follow up 是 如果有重复的怎么去重， 我用的hashset， 他问有没有 不用额外空间的， 当时没想出来， 他提醒了可以sort， 就很快给了答案，没时间写这个。。
 
-问了java pass by value／referecne，  recursion vs dfs ， 这个基本问题。 关键是边写边解释。
+问了java pass by value／reference，  recursion vs dfs ， 这个基本问题。 关键是边写边解释。
  */
 public class Permutation {
 

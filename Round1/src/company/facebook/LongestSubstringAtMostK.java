@@ -10,7 +10,7 @@ public class LongestSubstringAtMostK {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
         int left = 0, right = 0, count = 0; // The count of duplicates
         int len = 0;
-        int[] hash = new int[256];
+        int[] hash = new int[256]; // 直接用Map是不是简单点，就不用count了
         
         while (right < s.length()) {
             char rightChar = s.charAt(right);

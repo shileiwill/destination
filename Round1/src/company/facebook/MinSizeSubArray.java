@@ -1,6 +1,7 @@
 package company.facebook;
 /**
- * 209. Given an array of n positive integers and a positive integer s, find the minimal length of a subarray of which the sum ≥ s. If there isn't one, return 0 instead. 
+ * 209. Given an array of n positive integers and a positive integer s, find the minimal length of a subarray of which the sum ≥ s. 
+ * If there isn't one, return 0 instead. 
 For example, given the array [2,3,1,2,4,3] and s = 7,
 the subarray [4,3] has the minimal length under the problem constraint. 
 click to show more practice.
@@ -10,6 +11,36 @@ If you have figured out the O(n) solution, try coding another solution of which 
 Important! 跟面经中提到的一样， 把 >=改成=
  */
 public class MinSizeSubArray {
+	
+    // O(N)
+    public int minSubArrayLenMyStyle(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        int[] sum = new int[nums.length + 1];
+        sum[0] = 0;
+        
+        for (int i = 1; i <= nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1]; 
+        }
+        
+        int min = Integer.MAX_VALUE;
+        int left = 0, right = 1;
+        while (right < sum.length) {
+            int now = sum[right] - sum[left];
+            if (now >= s) {
+                min = Math.min(min, right - left);
+                left++;
+            } else {
+                right++;
+            }
+        }
+        
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+    
+    // Still O(N), but no extra space
     public int minSubArrayLen1(int s, int[] nums) {
         int res = Integer.MAX_VALUE;
         int start = 0, end = 0;
@@ -83,7 +114,7 @@ public class MinSizeSubArray {
         int res = Integer.MAX_VALUE;
         for (int i = 0; i < sum.length; i++) {
             int index = binarySearch(sum, sum[i] + s, i); // From i, find the first bigger than sum[i] + s
-            if (index == - 1) {
+            if (index == -1) {
                 break;
             }
             res = Math.min(res, index - i);

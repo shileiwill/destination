@@ -99,7 +99,6 @@ public class FaceBookDesign {
 
 	设计是 news API design, 也是面经了。   注意 pagination. 看看twitter 的 API developer's guide 会有帮助。 
 
-
 	通常面试官会要求你在45分钟内设计Netflix（或支持数亿用户的某种弹性服务）。这个问题看似无法完成，因为 45分钟太短，根本无法详细讨论其中任何一个模块。这些服务是由成百上千名工程师耗时多年开发完成，你是不可能把所有这些工作简明扼要的写在5x5的白板上的。
 	既然完成这个问题基本是不可能的，那么面试官到底想知道些什么？其实他希望你给他一个的概述，定义高级模块，并尽可能简洁地描述组件之间的交互。大概分三个阶段：
 	1.画一个大框架来表示系统
@@ -116,13 +115,15 @@ public class FaceBookDesign {
 	client 给 server 传输文件 的系统。 一个/多个clients <-> 一个／多个 server 
 
 	4. 设计 网页爬虫，给一千台机器，每台机器的带宽有限，每个url只能爬一次。
-		就是考个sharding, 没什么特别的，把url 按consistent hashing 分配到对应机器上去。follow up是有机器挂了怎么办。每个机器要有back up，看一看cassandra的cluster management就有思路了，基本套着讲。
+		就是考个sharding, 没什么特别的，把url 按consistent hashing 分配到对应机器上去。follow up是有机器挂了怎么办。每个机器要有back up，
+		看一看cassandra的cluster management就有思路了，基本套着讲。
 
 	5. 设计 poi
 
-	网页event售票系统， 随便聊聊画画conponent图和数据表，讲讲哪里容易failure，说说API，信用卡信息谁处理，遇到大流量怎么分流
+	网页event售票系统， 随便聊聊画画component图和数据表，讲讲哪里容易failure，说说API，信用卡信息谁处理，遇到大流量怎么分流
 
-	Seats checking/booking system. 1. Get 10 seats, 2. get another 10 different seats which should be different from all seats seen before. 3. Book the seats. Primarily talking about the sql database, a little about transaction. At the end talks a little about large qps, shard the data..鏈
+	Seats checking/booking system. 1. Get 10 seats, 2. get another 10 different seats which should be different from all seats seen before. 
+	3. Book the seats. Primarily talking about the sql database, a little about transaction. At the end talks a little about large qps, shard the data..
 }
 
 

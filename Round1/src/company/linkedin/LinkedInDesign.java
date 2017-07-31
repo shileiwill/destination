@@ -23,7 +23,6 @@ design a system to get top k exceptions/errors within a system for the given per
 5. granularity of time is minute level
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=218214&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 3 design web游戏hangman
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212481&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 http://www.jiuzhang.com/qa/2655/
@@ -107,7 +106,6 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=203816&extra=page%3
 设计日历（不用考虑重复事件，用户少）
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=204207&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-
 42.
 5: 设计题:  
 a restful server with 4GB,  
@@ -123,17 +121,36 @@ http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=99469&extra=page%3D
 system design: design a system to monitors the top exceptions during last hour, last 24 hours.
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=198457&extra=page%3D3%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-desig设计过去5min 1hr 24hr各类系统的exception
+desig设计过去5min 1hr 24hr各类系统的exception Top K
 http://www.mitbbs.com/article_t/JobHunting/33226795.html
+
+5min: Queue<Map<Exception, Integer>> queue.size() == 300s
+1hr: Queue<Map<Exception, Integer>> queue.size() == 60min
+24hr: Queue<Map<Exception, Integer>> queue.size() == 24hr
+这个设计好吗？ 时间是固定的一个小时吧
+
+思路是用queue+heap来解。这里假设window size = 5min，queue用来存过去5min的request及timestamp，每当过去1s就移除掉queue头部过期的数据，并且在尾部加入这1s进入的新数据。
+用heap来maintain requests, 其中value是次数，每当新进来数据，则频次递增1，每当需要删除老数据，则频次-1。（频次的加减在heap中用增删节点来做）。最后所需的top k就是heap最顶k个。 
+5min, 1hr, 24hr还涉及到一个内存上限的问题，简单思路如下：
+5分钟 纯内存 
+1小时 内存+外存 
+24小时 内存+外村+颗粒（将每5min视作1个颗粒）
 
 Design tiny URL 问了很多细节，最后居然问到了怎么配置memcache
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=145037&extra=page%3D6%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
-design a notebook application like evernote or onenote, it should support search, collabration.
+design a notebook application like evernote or onenote, it should support search, collabration. inverted index + google doc?
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=148877&extra=page%3D6%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
 2. 中国大哥（斯坦福毕业的大牛）+加拿大白人（步步追问，不问出最优设计不甘心） system design http://www.1point3acres.com/bbs/thread-147555-1-1.html 第三题 
+对于key，value pairs， 在给定的文件系统中实现 put，get，delete 的方法。其中key比较小，全部key可以放在内存中，value有的会比较大
+已知一个文件系统，可以
+create files, delete files, sequentially scan file content, read file content randomly, append file content
+
 3. 俩白人小哥，很幽默。。。气氛轻松活跃 system design http://www.1point3acres.com/bbs/thread-147555-1-1.html 第一题 
+已知一个函数，输入用户ID，可以返回该用户的所有友好（degree 1 friends），按好友ID从小到大排序。
+要求实现函数来输出返回一个用户的所有好友的好友(degree 2 friends), 以及 degree 3 friends。
+
 http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=159920&extra=page%3D6%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
 面试官进来就跟我唠嗑唠了很…… 然后叫我介绍一下我自己，我就随便说了暑假在Amazon实习，她就说：噢……我本来想叫你设计Amazon Product Page的但必须换个题目了（
@@ -170,6 +187,11 @@ Design Uber
 http://www.jiuzhang.com/qa/410/
 
 Blacklist IP。这个list会增加删减条目，每一个request都会来lookup这个list
+
+Design an E-Commerce platform - features include products in different categories, order processing, multiple users be able to operate at the same time, 
+have reviews for the products and when a user enters the website daily, he has to be shown top 5 products sold in the last week 
+( consider the amount of data while querying - and make the system efficient )
+
 
 交流就是尽量往他们的文化上靠，什么be bold, act as owner. 讲项目的时候，就说我过去怎么怎么了，就是be bold, act as owner.
 问你为什么来linkedin，因为你们这个文化好啊，我就是这么一个人，鼓吹自己一番，然后说你看我多么合适。

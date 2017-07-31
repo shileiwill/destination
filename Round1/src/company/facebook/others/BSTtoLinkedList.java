@@ -1,5 +1,10 @@
 package company.facebook.others;
 
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
 /**
  * Created by weixwu on 7/10/2017.
  * Binary search tree to circular linked list, using TreeNode in place
@@ -100,19 +105,75 @@ public class BSTtoLinkedList {
 }
 
     public static void main(String args[]){
-        TreeNode root = new TreeNode(8);
-        root.left = new TreeNode(5);
-        root.right = new TreeNode(12);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(6);
-        root.right.left = new TreeNode(11);
-        //root.right.right = new TreeNode(14);
-        BSTtoLinkedList sl = new BSTtoLinkedList();
-        TreeNode res = sl.bstToDll(root);
-        
-        while (res != null) {
-        	System.out.println(res.val);
-        	res = res.next;
-        }
+//        TreeNode root = new TreeNode(8);
+//        root.left = new TreeNode(5);
+//        root.right = new TreeNode(12);
+//        root.left.left = new TreeNode(4);
+//        root.left.right = new TreeNode(6);
+//        root.right.left = new TreeNode(11);
+//        //root.right.right = new TreeNode(14);
+//        BSTtoLinkedList sl = new BSTtoLinkedList();
+//        TreeNode res = sl.bstToDll(root);
+//        
+//        while (res != null) {
+//        	System.out.println(res.val);
+//        	res = res.next;
+//        }
+    	
+    	/**
+    	 * Write a program to find top two candidates winning the election.
+
+You are the administrator of an election system. The back end is offline and election results are requested.
+All votes are logged to vote.log(stream). We want to see results in real time.
+
+Rules:
+
+A single voter can vote for 3 candidates.
+A voter cannot vote for the same candidate more than once.
+Using the log find the top 5 candidates and detect fraud by printing the voter id and not counting the vote.
+
+Fraud is candidate voting more than 3 times and/or a candidate more than once.
+
+Need to use Node
+Use a Map<Voter, Integer> to track how many candidates a voter voted. If < 3, accept this vote, otherwise, deny and print out this voter as fraud.
+Use a Map<Candidate, Integer> to track how many tickets each candidate got.
+Use a Heap<Map.Entry<Candidate, Integer>> to monitor the top 2 candidates.
+    	 */
+    	
+    	Map<String, Node> map = new HashMap<String, Node>();
+    	PriorityQueue<Node> heap = new PriorityQueue<Node>(10, new Comparator<Node>() {
+    		public int compare(Node en1, Node en2) {
+    			return en2.count - en1.count;
+    		}
+    	});
+    	
+    	map.put("Tom", new Node("Tom", 4));
+    	map.put("Jack", new Node("Jack", 6));
+    	
+    	heap.addAll(map.values());
+    	
+    	if (map.containsKey("Tom")) {
+    		Node node = map.get("Tom");
+    		System.out.println(node.count);
+    		node.count += 10;
+    		
+    		if (heap.contains(node)) {
+    			System.out.println("Contains");
+    			heap.remove(node);
+    			heap.offer(node);
+    		}
+    	}
+    	
+    	System.out.println(heap.peek().count);
+    }
+    
+    static class Node {
+    	String name;
+    	int count;
+    	
+    	public Node(String name, int count) {
+    		this.name = name;
+    		this.count = count;
+    	}
     }
 }

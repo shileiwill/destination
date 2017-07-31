@@ -7,6 +7,25 @@ import java.util.TreeMap;
 
 /**
  * given a stream of integer, randomly choose k elements from n, ensure each value among k has equal probability.  
+ * 
+ * Given a function Rand01Uniform() which generates a random integer number from [0,1] with a uniform distribution, 
+ * write a function Rand06Uniform() which generates a random integer number from [0,6] with a uniform distribution.
+ * 
+ * Flip Rand01Uniform 3 times, and associate each result as follows:
+000: 0
+001: 1
+010: 2
+011: 3
+100: 4
+101: 5
+110: 6
+111: reflip
+
+# R = Rand01Uniform
+def Rand06Uniform():
+  while True:
+    roll = 4 * R() + 2 * R() + R()
+    if roll < 7: return roll
  */
 public class ReserviorSampling {
 

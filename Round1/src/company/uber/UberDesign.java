@@ -72,7 +72,8 @@ Design Online multiplayer blackjack
 设计个类似coursera的网站，主要是设计数据库&存储数据
 设计surge pricing
 design elevator system
-design battleship : 看一下那个游戏的功能，他会问需要什么class， 什么数据结构，什么变量来存，然后就是执行游戏的某一部分操作的时候需要怎么update，完全照着游戏来就差不多感觉！  印度小哥，ood， 设计一个battleship game 
+design battleship : 看一下那个游戏的功能，他会问需要什么class， 什么数据结构，什么变量来存，然后就是执行游戏的某一部分操作的时候需要怎么update，完全照着游戏来就差不多感觉！  
+印度小哥，ood， 设计一个battleship game 
 design airline ticket systems
 给定时间段和地点，判断给定的条件是否满足？问的是数据怎么存？
 OOD, car sale website
@@ -82,7 +83,8 @@ OOD, car sale website
 
 design 一个手机 app, 每天早上6点，给你发notification, 告诉你有那些popular 的apps, 或者根据 你现在手机上装的apps, 给你一个list of recommending apps. 从前端扯到后端.
 
-第三轮 System design 设计一个类似message center的black box。 从producer定时拿一批数据，然后进入到message center，然后存入中间的类似备份的数据库，然后返回前端。中 间涉及一些format的转换。包括收到任何消息，都要给producer发回执。听细节的，和面试官多讨论讨论。
+第三轮 System design 设计一个类似message center的black box。 从producer定时拿一批数据，然后进入到message center，然后存入中间的类似备份的数据库，然后返回前端。
+中间涉及一些format的转换。包括收到任何消息，都要给producer发回执。
 
 design pokemonGo. pokemonGo有三个要求，显示pokemonStop, spinpokeMonstop, catchPokemon. 在提到要把pokemonStop信息存储的时候，卡住了。
 因为pokemonstop的数目很多要多台DB, 如何sharding成了问题。如果按照id sharding，用坐标查询附近的stop就很麻烦。如果按城市存储，查询的坐标正好落在城市边缘就要去另外一个数据库查询。
@@ -93,6 +95,13 @@ design pokemonGo. pokemonGo有三个要求，显示pokemonStop, spinpokeMonstop,
 
 设计一个next stop bus 的app，能够支持查找离用户最近的5个车站各趟线路的ETA。
 先讨论了如何获得各个ETA的方案，然后在此基础上增加限制条件减少数据的写入，最后要求设计出一套完整的data path
+
+
+Post trip pipeline. A lot of processing must happen after a trip has completed.
+Collect ratings.
+Send emails.
+Update databases.
+Schedule payments.
 
 Kafka                                   
 Thrift                                  

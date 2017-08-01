@@ -41,6 +41,30 @@ public class DecodeWays {
 		return hash[s.length()];
 	}
 
+	/**
+	 * 639. A message containing letters from A-Z is being encoded to numbers using the following mapping way:
+
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+Beyond that, now the encoded string can also contain the character '*', which can be treated as one of the numbers from 1 to 9.
+
+Given the encoded message containing digits and the character '*', return the total number of ways to decode it.
+
+Also, since the answer may be very large, you should return the output mod 109 + 7.
+
+Example 1:
+Input: "*"
+Output: 9
+Explanation: The encoded message can be decoded to the string: "A", "B", "C", "D", "E", "F", "G", "H", "I".
+Example 2:
+Input: "1*"
+Output: 9 + 9 = 18
+Note:
+The length of the input string will fit in range [1, 105].
+The input string will only contain the character '*' and digits '0' - '9'.
+	 */
 	// * can match any number from 0 to 9 好题
 	public int decodeWays(String s) {
 		int len = s.length();
@@ -62,11 +86,11 @@ public class DecodeWays {
 				
 				// Try 2 digits
 				if (prev == '*') { // 2 consecutive stars could stand for 10 - 19, 20 - 26
-					hash[i] += hash[i - 2] * 17; 
+					hash[i] += hash[i - 2] * 15; // * is [1-9], so 11 - 26 except 20 
 				} else if (prev == '1') {
-					hash[i] += hash[i - 2] * 10; // 10 - 19
-				} else if (prev == '2') { // 20 - 26
-					hash[i] += hash[i - 2] * 7;
+					hash[i] += hash[i - 2] * 9; // 11 - 19
+				} else if (prev == '2') { // 21 - 26
+					hash[i] += hash[i - 2] * 6;
 				}
 			} else {
 				// single digit
@@ -91,12 +115,13 @@ public class DecodeWays {
 			}
 		}
 
-		return hash[len];
+		return hash[len] % (int)(Math.pow(10, 9) + 7);
 	}
 
 	public static void main(String args[]) {
 		DecodeWays dw = new DecodeWays();
 		System.out.println(dw.numberOfWays("109"));
 		System.out.print(dw.decodeWays("1*"));
+		System.out.print(dw.decodeWays("**********1111111111"));
 	}
 }

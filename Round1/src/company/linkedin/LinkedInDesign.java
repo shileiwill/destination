@@ -193,6 +193,8 @@ have reviews for the products and when a user enters the website daily, he has t
 ( consider the amount of data while querying - and make the system efficient )
 
 
+Design POI: https://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational-data-stores
+
 交流就是尽量往他们的文化上靠，什么be bold, act as owner. 讲项目的时候，就说我过去怎么怎么了，就是be bold, act as owner.
 问你为什么来linkedin，因为你们这个文化好啊，我就是这么一个人，鼓吹自己一番，然后说你看我多么合适。
 在家多练习练习。

@@ -10,6 +10,21 @@ Explanation : All palindrome substring are : "aba" , "aa" , "baab"
 Input : str = "abbaeae"
 Output: 4
 Explanation : All palindrome substring are : "bb" , "abba" ,"aea","eae"
+
+647 Given a string, your task is to count how many palindromic substrings in this string.
+
+The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+
+Example 1:
+Input: "abc"
+Output: 3
+Explanation: Three palindromic strings: "a", "b", "c".
+Example 2:
+Input: "aaa"
+Output: 6
+Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+Note:
+The input string length won't exceed 1000.
  */
 public class CountPalindrome {
 
@@ -56,4 +71,44 @@ public class CountPalindrome {
 		
 		System.out.println(count);
 	}
+	
+	// My new version, no difference
+    public int countSubstrings(String s) {
+        if (s == null) {
+            return -1;
+        }
+        
+        int len = s.length();
+        int count = 0;
+        
+        boolean[][] hash = new boolean[len][len];
+        
+        for (int i = 0; i < len; i++) {
+            hash[i][i] = true;
+            count++;
+        }
+        
+        for (int i = 1; i < len; i++) {
+            if (s.charAt(i - 1) == s.charAt(i)) {
+                hash[i - 1][i] = true;
+                count++;
+            }
+        }
+        
+        for (int l = 2; l < len; l++) {
+            for (int i = 0; i + l < len; i++) {
+                char c1 = s.charAt(i);
+                char c2 = s.charAt(i + l);
+                
+                if (c1 == c2) {
+                    if (hash[i + 1][i + l - 1]) {
+                        hash[i][i + l] = true;
+                        count++;
+                    }
+                }
+            }
+        }
+        
+        return count;
+    }
 }

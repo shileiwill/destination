@@ -1,6 +1,8 @@
 package company.facebook;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 /*
  * 最长等差数列
  * Given a set of numbers, find the Length of the Longest Arithmetic Progression (LLAP) in it.
@@ -19,12 +21,13 @@ public class LongestArithmeticProgression {
 
 	public static void main(String[] args) {
 		int[] arr = {5, 10, 15, 20, 25, 30};
+		int[] arr2 = {2, 4, 6, 8, 10};
 		int max = longestArithmeticProgressionDP(arr);
-		int max2 = longestArithmeticProgressionDPBad(arr);
 		int max3 = longestArithmeticProgression(arr);
+		int count = countOfArithmeticProgression(arr2);
 		System.out.println(max);
-		System.out.println(max2);
 		System.out.println(max3);
+		System.out.println(count);
 	}
 
 	/**
@@ -56,7 +59,7 @@ public class LongestArithmeticProgression {
 	}
 	
 	/**
-	 * DP could reduce to O(N^2)
+	 * DP could reduce to O(N^2) 这个是找到最长的
 	 * @param arr
 	 * @return 
 	 * j必须从右边开始扫吗 必须的啊， hash[i][j] = hash[j][k] + 1; 需要使用后边的值
@@ -100,43 +103,33 @@ public class LongestArithmeticProgression {
 		return max;
 	}
 	
-	// 不对啊，必须得从后边扫才行
-	static int longestArithmeticProgressionDPBad(int[] arr) {
+	// 这个是找出一共多少个，{2， 4， 6， 8， 10} return 7. 
+	// {2, 4, 6}, {4, 6, 8}, {6, 8, 10}, {2, 4, 6, 8}, {4, 6, 8, 10}, {2, 4, 6, 8, 10}, {2, 6, 10}
+	static int countOfArithmeticProgression(int[] arr) {
+		if (arr == null || arr.length < 3) {
+			return 0;
+		}
+		
+		int res = 0;
 		int len = arr.length;
-		int[][] hash = new int[len][len];
-		int max = 0;
+		Map<Integer, Integer>[] map = new Map[len]; // 后边不能加Generic Type
 		
-		for (int i = 0; i < len - 1; i++) {
-			hash[i][len - 1] = 2;
-		}
-		
-		// Consider every element as second/middle element
-		for (int j = 1; j < len - 1; j++) { // 目标是hash[i][j]
-			int i = j - 1;
-			int k = j + 1;
+		for (int i = 0; i < len; i++) {
+			map[i] = new HashMap<Integer, Integer>();
 			
-			// i   j   k
-			while (i >= 0 && k < len) {
-				if (arr[j] - arr[i] > arr[k] - arr[j]) {
-					k++; // 继续往右边搜，可能能搜到
-				} else if (arr[j] - arr[i] < arr[k] - arr[j]) {
-					hash[i][j] = 2; //右边的更大了
-					i--;
-				} else { // equal
-					hash[i][j] = hash[j][k] + 1;
-					max = Math.max(max, hash[i][j]);
-					i--;
-					k++;
-				}
-			}
-			
-			// If there is leftover on left side
-			while (i >= 0) {
-				hash[i][j] = 2;
-				i--;
+			for (int j = 0; j < i; j++) {
+				int diff = arr[i] - arr[j];
+				
+				int map_i_d = map[i].getOrDefault(diff, 0);
+				int map_j_d = map[j].getOrDefault(diff, 0);
+				
+				map_i_d += map_j_d + 1;
+				map[i].put(diff, map_i_d);
+				
+				res += map_j_d; // 加的是j
 			}
 		}
 		
-		return max;
+		return res;
 	}
 }

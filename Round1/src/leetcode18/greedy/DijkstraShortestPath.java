@@ -1,66 +1,48 @@
 package leetcode18.greedy;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 // http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/
 // http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 public class DijkstraShortestPath {
 
-	public static void main(String[] args) {
-
-	}
-
 	final List<Node> nodes;
 	final List<Edge> edges;
 	Set<Node> settledNodes = new HashSet<Node>();
-	Set<Node> unsettledNodes = new HashSet<Node>(); // This could be a PriorityQueue, as we want MIN each time
+	PriorityQueue<Node> unsettledNodes = new PriorityQueue<Node>(new Comparator<Node>(){
+		public int compare(Node node1, Node node2) {
+			return distance.get(node1) - distance.get(node2);
+		}
+	});
+	
 	Map<Node, Integer> distance = new HashMap<Node, Integer>(); // 距离source的距离
 	Map<Node, Node> predecessor = new HashMap<Node, Node>(); // 目标是构建这个Map, 能够回溯出所有点到source的路径
 	
 	DijkstraShortestPath(Graph graph) {
 		this.nodes = graph.nodes;
 		this.edges = graph.edges;
+		
+		for (Node node : nodes) {
+			distance.put(node, Integer.MAX_VALUE); // 默认距离是无穷大
+		}
 	}
 	
 	void execute(Node source) {
 		distance.put(source, 0);
-		unsettledNodes.add(source);
+		unsettledNodes.offer(source);
 		
 		while (!unsettledNodes.isEmpty()) {
-			Node now = findMinInUnsettled(unsettledNodes);
-			unsettledNodes.remove(now);
+			Node now = unsettledNodes.poll();
 			settledNodes.add(now); // Finalize this node, done
 			updateMinDistanceInNeighbors(now);
-		}
-	}
-	
-	Node findMinInUnsettled(Set<Node> unsettledNodes) {
-		Node min = null;
-		for (Node node : unsettledNodes) {
-			if (min == null) {
-				min = node;
-			} else {
-				if (getShortestDistance(node) < getShortestDistance(min)) {
-					min = node;
-				}
-			}
-		}
-		
-		return min;
-	}
-	
-	int getShortestDistance(Node node) {
-		Integer dis = distance.get(node);
-		if (dis == null) {
-			return Integer.MAX_VALUE;
-		} else {
-			return dis;
 		}
 	}
 	
@@ -68,13 +50,13 @@ public class DijkstraShortestPath {
 		List<Node> neighbors = findUnsettledNeighbors(node);
 		
 		for (Node target : neighbors) {
-			int oldDist = getShortestDistance(target);
-			int newDist = getShortestDistance(node) + getDistance(node, target); // What about going through the new settled node?!
+			int oldDist = distance.get(target);
+			int newDist = distance.get(node) + getDistance(node, target); // What about going through the new settled node?!
 			
 			if (oldDist > newDist) { // Update
 				distance.put(target, newDist); // Here is the only place we put and add. If old <= new, that means the distance is not MAX_VALUE, it is already put.
 				predecessor.put(target, node);
-				unsettledNodes.add(target);
+				unsettledNodes.offer(target);
 			}
 		}
 	}

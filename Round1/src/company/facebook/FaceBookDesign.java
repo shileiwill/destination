@@ -124,6 +124,8 @@ public class FaceBookDesign {
 
 	Seats checking/booking system. 1. Get 10 seats, 2. get another 10 different seats which should be different from all seats seen before. 
 	3. Book the seats. Primarily talking about the sql database, a little about transaction. At the end talks a little about large qps, shard the data..
+
+	Memcache + Hashtable
 }
 
 

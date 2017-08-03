@@ -65,7 +65,7 @@ Note:
 The length of the input string will fit in range [1, 105].
 The input string will only contain the character '*' and digits '0' - '9'.
 	 */
-	// * can match any number from 0 to 9 好题
+	// * can match any number from 0 to 9 好题 Leetcode上是match 1 - 9
 	public int decodeWays(String s) {
 		int len = s.length();
 		if (s == null || len == 0) {
@@ -85,7 +85,7 @@ The input string will only contain the character '*' and digits '0' - '9'.
 				hash[i] += hash[i - 1] * 9;
 				
 				// Try 2 digits
-				if (prev == '*') { // 2 consecutive stars could stand for 10 - 19, 20 - 26
+				if (prev == '*') { // 2 consecutive stars could stand for 11 - 19, 21 - 26
 					hash[i] += hash[i - 2] * 15; // * is [1-9], so 11 - 26 except 20 
 				} else if (prev == '1') {
 					hash[i] += hash[i - 2] * 9; // 11 - 19
@@ -121,7 +121,9 @@ The input string will only contain the character '*' and digits '0' - '9'.
 	public static void main(String args[]) {
 		DecodeWays dw = new DecodeWays();
 		System.out.println(dw.numberOfWays("109"));
-		System.out.print(dw.decodeWays("1*"));
-		System.out.print(dw.decodeWays("**********1111111111"));
+		System.out.println(dw.decodeWays("1*"));
+		System.out.println(dw.decodeWays("**********1111111111"));
+		
+		System.out.println("abc".substring(3)); // it doesnt throw exception if the parameter is length
 	}
 }

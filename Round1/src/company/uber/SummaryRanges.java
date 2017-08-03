@@ -1,4 +1,4 @@
-package leetcode1.array;
+package company.uber;
 
 import java.util.ArrayList;
 import java.util.List;

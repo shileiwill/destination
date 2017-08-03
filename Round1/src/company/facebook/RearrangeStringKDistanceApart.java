@@ -106,7 +106,7 @@ The integer n is in the range [0, 100].
 		while (!heap.isEmpty()) {
 			Map.Entry<Character, Integer> now = heap.poll(); // Current largest occurance
 			
-            if (sb.lastIndexOf(now.getKey() + "") != -1) {
+            if (sb.lastIndexOf(now.getKey() + "") != -1) { // 这是一个区别，需要看看填多少*
                 int oldIndex = sb.lastIndexOf(now.getKey() + "");
                 
                 for (int i = sb.length(); i - oldIndex <= k; i++) {

@@ -18,6 +18,7 @@ public class AtLeastTwoMaxSubarray {
         return maxSoFar;
     }
     
+    // O(N) this is the good one
     public int maxSubarrayDPWithArray(int[] nums){
         int max = Integer.MIN_VALUE;
         int[] hash = new int[nums.length];
@@ -32,6 +33,7 @@ public class AtLeastTwoMaxSubarray {
         return max;
     }
     
+    // O(N^2)
     public int maxSubarrayMyStyle(int[] arr){
     	int len = arr.length;
     	int[] sum = new int[len + 1];

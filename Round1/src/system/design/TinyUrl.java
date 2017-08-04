@@ -98,7 +98,7 @@ class TinyUrlBase62 {
 	     String short_url = "";
 	     
 	     while (id > 0) {
-	         short_url = chars.charAt(id % 62) + short_url;
+	         short_url = chars.charAt(id % 62) + short_url; // 为啥往前放，因为不满6位要前边补0
 	         id = id / 62;
 	     }
 	     

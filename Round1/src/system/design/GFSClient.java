@@ -52,7 +52,7 @@ public class GFSClient extends BaseGFSClient {
     }
     
     // @param filename a file name
-    // @return conetent of the file given from GFS
+    // @return content of the file given from GFS
     public String read(String filename) {
         // Write your code here
         if (!chunkNum.containsKey(filename)) {

@@ -77,8 +77,8 @@ The input string will only contain the character '*' and digits '0' - '9'.
 		hash[1] = s.charAt(0) == '0' ? 0 : (s.charAt(0) == '*' ? 9 : 1);
 
 		for (int i = 2; i <= len; i++) {
-			char cur = s.charAt(i - 1);
 			char prev = s.charAt(i - 2);
+			char cur = s.charAt(i - 1);
 			
 			if (cur == '*') { // 0 - 9
 				// single digit, 9 possibilities

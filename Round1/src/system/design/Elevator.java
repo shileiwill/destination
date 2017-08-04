@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Elevator {
 	private int currentFloor;
-	private int status; // 0 standby, 1 up, 2 down, 3 maintanance
+	private int status; // 0 standby, 1 up, 2 down, 3 maintenance
 	private static volatile Elevator instance = null;
 
 	private Elevator() {
@@ -92,7 +92,7 @@ class RequestHandler {
 		int shortestdistance = Integer.MAX_VALUE;
 		Request next = null;
 
-		for (Request req : requests) { // Only shortest distance? dont care about direction?
+		for (Request req : requests) { // Only shortest distance? don't care about direction?
 			if (Math.abs(req.getFromFloor() - currentFloor) < shortestdistance) {
 				next = req;
 			}

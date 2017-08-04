@@ -5,7 +5,7 @@ package Facebook;
  */
 public class LeftMostOne {
     public int findLeftOne(int[][] matrix) {
-        int left = matrix[0].length; // right end
+        int left = matrix[0].length; // right end, becoming smaller
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < left; j++) {
                 if (matrix[i][j] == 1) {

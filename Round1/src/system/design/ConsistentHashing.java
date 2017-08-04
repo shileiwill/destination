@@ -89,7 +89,7 @@ public class ConsistentHashing {
             for (int j = 1; j < i; ++j) {
                 if (results.get(j).get(1) - results.get(j).get(0) + 1 >
                     results.get(index).get(1) - results.get(index).get(0) + 1)
-                    index = j;
+                    index = j; // Find the largest interval
             }
 
             int x = results.get(index).get(0);

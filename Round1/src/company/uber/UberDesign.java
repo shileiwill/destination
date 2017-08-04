@@ -144,3 +144,34 @@ call Uber from FB
 Caching layer
 
 Ask clarifying questions before writing, try to figure out best solution
+
+# 08032017
+https://eng.uber.com/developer-platform/
+
+Interview with Partnership team
+1. Phil Rabin,  Rider Team,  Engineer manager, Android engineer. Bar raiser. It will be project deep dive.
+
+# Following are from developer platform, what does developer platform do?
+2. Jay Bobzin, Senior Android, iOS, Data engineer. coding?
+
+3. Adam Rogal Hiring Manager, Culture fit?
+   Goutham Nath shadow, Tech Lead
+   		Since interviewing with Developer Platform, show case the Turing SDK
+   		Developer platform VS. Tools team(C2D, Git, Gerrit), How to gather requirements?
+
+4. Riaz Majid coding? Rider Team
+	Rider experience GEO location
+
+5. Patrick Slattery coding?
+
+What does developer platform do, what kind of product?
+How many rounds of design?
+Coding will be using my personal laptop? So, similar with the phone screen.
+Is there lunch time?
+What is the level or position I am interviewing with?
+
+coding,
+problem solving, API integration, design uber backend, ETA, Price. Uber eats, Uber pool. Dispatch.
+System design. Docker, Redis. 
+
+It is a Senior position.

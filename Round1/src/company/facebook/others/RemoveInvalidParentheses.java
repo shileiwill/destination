@@ -17,7 +17,8 @@ public class RemoveInvalidParentheses {
 
 			if (cur == ')') {
 				if (stack.isEmpty()) { // 这个)是多余的
-					sb.replace(i, i + 1, "*");
+//					sb.replace(i, i + 1, "*");
+					sb.setCharAt(i, '*');
 				} else { // 扔掉一个(
 					stack.pop();
 				}

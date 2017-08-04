@@ -13,9 +13,9 @@ public class ReplaceString {
 			if (posOld < s.length() - 2 && res[posOld] == '%' && res[posOld + 1] == '2'
 					&& res[posOld + 2] == '0') {
 				while (posOld < s.length() - 2 && res[posOld] == '%' && res[posOld + 1] == '2'
-						&& res[posOld + 2] == '0') {
+						&& res[posOld + 2] == '0') { // 这个思路真好
 					posOld += 3;
-				} // 找出连续的多个%20, 一起替换成一个" "
+				} // 找出连续的多个%20, 一起替换成一个" " 
 				
 				res[posNew++] = ' ';
 			} else {

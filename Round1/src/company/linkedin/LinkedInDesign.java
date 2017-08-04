@@ -195,6 +195,9 @@ have reviews for the products and when a user enters the website daily, he has t
 
 Design POI: https://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational-data-stores
 
+感觉这个面试很有代表性： http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=288520&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+LinkedIn上的用户会用到很多shared links，然后要求设计个service来统计过去五分钟， 一个小时， 一天或着一周里， 出现次数最多的Top k个shared links
+
 交流就是尽量往他们的文化上靠，什么be bold, act as owner. 讲项目的时候，就说我过去怎么怎么了，就是be bold, act as owner.
 问你为什么来linkedin，因为你们这个文化好啊，我就是这么一个人，鼓吹自己一番，然后说你看我多么合适。
 在家多练习练习。

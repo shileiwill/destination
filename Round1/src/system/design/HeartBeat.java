@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 /*
 Heart Beat
-In the Master-Slave architecture, slave server will ping master in every k seconds to tell master server he is alive. 
+In the Master-Slave architecture, slave server will ping master in every k seconds to tell master server he is alive. Slave向Master汇报
 If a master server didn't receive any ping request from a slave server in 2 * k seconds, the master will trigger an alarm 
 (for example send an email) to administrator.
 Let's mock the master server, you need to implement the following three methods:

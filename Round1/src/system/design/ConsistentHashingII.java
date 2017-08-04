@@ -119,7 +119,7 @@ public class ConsistentHashingII {
             
             for (Integer point : curPoints) {
                 int curDistance = point - hashcode;
-                if (curDistance < 0) { // Circle
+                if (curDistance < 0) { // Circle. 这一招很好，如果< 0, 就+ n, 否则不用管
                 	curDistance += n;
                 }
                 
@@ -176,7 +176,7 @@ class SolutionWithTreeMap {
         for(int i = 0; i < this.k; i++) {
             int id = this.arr[size++ % this.arr.length];  
             ids.add(id);  
-            this.treeMap.put(id, machine_id);  
+            this.treeMap.put(id, machine_id); // Key is index
         }  
         
         return ids;  

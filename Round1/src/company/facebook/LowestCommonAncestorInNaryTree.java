@@ -155,7 +155,7 @@ public class LowestCommonAncestorInNaryTree {
 			deepest.root = node;
 			deepest.depth = deepest.depth + 1;
 		} else {
-			// deepest.root =
+			deepest.depth = deepest.depth + 1;
 		}
 
 		return deepest;

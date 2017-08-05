@@ -198,6 +198,39 @@ Design POI: https://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational
 感觉这个面试很有代表性： http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=288520&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
 LinkedIn上的用户会用到很多shared links，然后要求设计个service来统计过去五分钟， 一个小时， 一天或着一周里， 出现次数最多的Top k个shared links
 
+设计界面上那个你的技能被endorse的那个系统+tiny url + DB schema设计
+
 交流就是尽量往他们的文化上靠，什么be bold, act as owner. 讲项目的时候，就说我过去怎么怎么了，就是be bold, act as owner.
 问你为什么来linkedin，因为你们这个文化好啊，我就是这么一个人，鼓吹自己一番，然后说你看我多么合适。
 在家多练习练习。
+
+Login Recommendation: Proactively do something, rather than passively do.
+
+Details for each round? How many coding, design, and behavior
+	5 rounds.
+		1 host lead
+		2 coding 
+			edge cases
+			runtime
+		1 tech communication
+			pretend onboard the new teammate. big picture. Previous experience
+		1. Design
+			Come up with a high level solution. Problem solving. Ask a lot of questions.
+	Lunch
+
+Is there a specific team I am interviewing with, or it is generial, then team match?
+	A big team, generial for Application team. Hiring community. Will do team match. Tech, projects we are working on.
+
+The position I applied is a senior role, any other difference with junior role except difficulty?
+	Very similiar. Differece is interviewers will be more senior. They would judge you as a senior. Tech leadership. How mentor people. Career movement.
+	Get the list of interviewers. The day before onsite, will get the list from coordination team.
+
+Any other pitfalls I need to pay attention before the onsite?
+	Coding, keep talking. so they understand.
+	It is tough, someone is coding, but not talking.
+	Imagine you are coaching someone.
+
+	Design, make sure ask clarifying questions.
+	Make sure go to correct direction. Am I in the correct direction?
+	How you work within a team environment. How you make decisions? Interactive.
+	Have you thought about this?

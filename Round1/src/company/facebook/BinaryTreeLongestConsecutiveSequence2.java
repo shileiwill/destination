@@ -34,7 +34,7 @@ public class BinaryTreeLongestConsecutiveSequence2 {
     }
     
     Result helper(TreeNode node) {
-        if (node == null) {
+        if (node == null) { // 这个地方return null最合适
             return null;
         }
         

@@ -64,13 +64,7 @@ public class BinaryTreeLongestConsecutiveSequence {
         	helperMyStyle(node.right, cur + 1, target + 1);
         } else {
         	max = Math.max(max, cur);
-        	
-        	if (node.left != null) {
-        		helperMyStyle(node.left, node.left.val, 0);
-        	}
-        	if (node.right != null) {
-        		helperMyStyle(node.right, node.right.val, 0);
-        	}
+        	helperMyStyle(node, 0, node.val);
         }
         
     }
@@ -80,13 +74,16 @@ public class BinaryTreeLongestConsecutiveSequence {
     	TreeNode node2 = new TreeNode(2);
     	TreeNode node3 = new TreeNode(3);
     	TreeNode node22 = new TreeNode(2);
+    	TreeNode node4 = new TreeNode(4);
+    	TreeNode node5 = new TreeNode(5);
     	
-    	node2.right = node3;
-    	node3.left = node22;
-    	node22.left = node1;
+    	node1.right = node3;
+    	node3.left = node2;
+    	node3.right = node4;
+    	node4.right = node5;
     	
     	BinaryTreeLongestConsecutiveSequence l = new BinaryTreeLongestConsecutiveSequence();
-    	int res = l.longestConsecutive(node2);
+    	int res = l.longestConsecutive(node1);
     	
     	System.out.println(res);
 	}

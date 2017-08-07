@@ -86,7 +86,7 @@ public class LongestArithmeticProgression {
 					hash[i][j] = 2; //右边的更大了
 					i--;
 				} else { // equal
-					hash[i][j] = hash[j][k] + 1;
+					hash[i][j] = hash[j][k] + 1; // It will come to [i,j] only once, so no need to use Math.max()
 					max = Math.max(max, hash[i][j]);
 					i--;
 					k++;

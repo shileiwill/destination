@@ -9,7 +9,7 @@ import java.util.List;
 题不难，是我当时脑子懵了，一直在想怎么找这个array的各个dimension上的boundary，其实input就给了。和面试官一直在交流，但我没说好，十几分钟一直在纠结这个问题。
 后来面试官举了个例子，立刻反应过来了。但也没有什么时间，就草草的说了下pseudo code，用dfs做所有dimension上的不同index的combination，然后调用那个function求和。
 
-Given a mutlidimensional arrays, compute the sum of all values. Given API getValue(dn, dn-1.... d0) dn = index at dimension.
+Given a multi-dimensional arrays, compute the sum of all values. Given API getValue(dn, dn-1.... d0) dn = index at dimension.
  */
 public class MultiDimentionalArray {
 

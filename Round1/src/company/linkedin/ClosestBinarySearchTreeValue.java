@@ -47,7 +47,7 @@ public class ClosestBinarySearchTreeValue {
         return closest;
     }
     
-    // Disregard the fact that it is a BST, just preorder traversal all. O(N)
+    // Disregard the fact that it is a BST, just preorder traversal all. O(N * logK)
     public List<Integer> closestKValues2(TreeNode root, double target, int k) {
         PriorityQueue<TreeNode> heap = new PriorityQueue<TreeNode>(k, new Comparator<TreeNode>(){
             public int compare(TreeNode node1, TreeNode node2) {

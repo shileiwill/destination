@@ -103,6 +103,10 @@ Send emails.
 Update databases.
 Schedule payments.
 
+Design uber eat (system design) : Uber?
+Design messaging platform (system design) : Chat?
+Design ads platform (system design) ： Recommendation?
+
 Kafka                                   
 Thrift                                  
 Riak

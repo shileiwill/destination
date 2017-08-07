@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * given a list of numbers, see if you can seperate them in to k groups such that each group has the same sum.
+ * given a list of numbers, see if you can separate them in to k groups such that each group has the same sum.
  * 给一个数组， 给一个数字 k. 问能不能把数组里面的数字分到k个桶里面， 使得每个桶里面所有的数字和相同。 DFS暴力解。
  * 活学活用DFS backtracking, 寻找各种方案
  * 
@@ -53,7 +53,7 @@ public class SplitArrayToKBuckets {
 		
 		if (curSum == target) {
 			res.add(new ArrayList<>(list));
-			if (res.size() == k) {
+			if (res.size() == k) { // How to make sure all elements are used?
 				flag = true;
 			}
 			return;

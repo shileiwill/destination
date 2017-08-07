@@ -27,7 +27,7 @@ public class DistinctSubsequences {
         
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                hash[i][j] = hash[i - 1][j];
+                hash[i][j] = hash[i - 1][j]; // 默认是前边的i
                 if (s.charAt(i - 1) == t.charAt(j - 1)) {
                     hash[i][j] += hash[i - 1][j - 1]; // 2. 递推公式
                 }

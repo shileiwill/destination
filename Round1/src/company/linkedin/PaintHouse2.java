@@ -36,7 +36,7 @@ public class PaintHouse2 {
             
             for (int j = 0; j < n; j++) { // color
                 if (j != last1) {
-                    hash[i][j] = costs[i][j] + ((last1 == -1) ? 0 : hash[i - 1][last1]);
+                    hash[i][j] = costs[i][j] + ((last1 == -1) ? 0 : hash[i - 1][last1]); // last1 == -1 可以 换成 i == 0
                 } else {
                     hash[i][j] = costs[i][j] + ((last2 == -1) ? 0 : hash[i - 1][last2]);
                 }

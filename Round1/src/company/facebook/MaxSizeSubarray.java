@@ -73,6 +73,32 @@ public class MaxSizeSubarray {
         return max;
     }
     
+    // Another one, my style
+    public int maxSubArrayLenOneForLoop(int[] nums, int k) {
+        int max = 0;
+        int sum = 0;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            
+            if (sum == k) {
+                max = i + 1;
+            } else {
+                int toFind = sum - k;
+                if (map.containsKey(toFind)) {
+                    max = Math.max(max, i - map.get(toFind));
+                }
+            }
+            
+            if (!map.containsKey(sum)) {
+                map.put(sum, i);
+            }
+        }
+        
+        return max;
+    }
+    
     public static int maxSubArrayLen(int[] nums, int k) {
         int max = 0;
         int sum = 0;

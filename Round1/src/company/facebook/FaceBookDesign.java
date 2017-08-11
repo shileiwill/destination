@@ -131,3 +131,15 @@ public class FaceBookDesign {
 
 
 细节讲清楚，project要够high-level
+
+1. Recap the day
+2. Can I get the schedule of the day? Interviewers' name, and how many rounds of coding, design and behavior
+	3 coding : how you attack problem. thinking process.
+	1 product & design : Product architect(*), system architect. Keep talking. Everything, trade-off. hiring manager round
+	1 career & behavior : example. mentorship, leadership example. Be able to handle by your own. Complex solution. details. STAR
+		45 min each
+
+3. Is this a general hire or to a specific team? Any job description? Any hiring manager conducting interviews? 
+4. Any other things i need to take care?
+
+

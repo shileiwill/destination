@@ -99,6 +99,7 @@ public class FunctionRunTime {
         return res;
     }
     
+    // What if I care about only 1 specific task?
 	static void getRunTime(List<Node> list, String task) {
 		int inclusive = 0;
 		int exclusive = 0;

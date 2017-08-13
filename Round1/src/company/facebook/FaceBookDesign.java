@@ -56,6 +56,8 @@ public class FaceBookDesign {
 	24 design看了下几篇文章，知道个大意，google的mapreduce, file system, big table,
 	fb的memcache, unicorn。其他看到过的觉得还不错的design资料，最后一个常见题目
 	汇总可以过过看，很有帮助:
+	https://www.adayinthelifeof.nl/2011/02/06/memcache-internals/
+
 	http://blog.csdn.net/v_july_v/article/details/7382693
 	https://www.youtube.com/watch?v=-W9F__D3oY4 
 	http://www.mitbbs.com/article_t/JobHunting/32741713.html

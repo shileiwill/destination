@@ -179,3 +179,10 @@ problem solving, API integration, design uber backend, ETA, Price. Uber eats, Ub
 System design. Docker, Redis. 
 
 It is a Senior position.
+
+The messaging platform system design was a followup because I nailed the coding question. 
+The interviewer asked my thoughts about the system they are currently building. The ads platform system design was a followup from manager round. 
+I guess they were just measuring my experience.
+For system designs, I always ask (lots of) questions about what they are looking for. 
+First I'll start with a very simple (naive) design with all major components, and then start to ask the interviewers 
+which component to improve (scale, performance, etc). I like to imagine that we are building a prototype system and then evolve the system as needed.

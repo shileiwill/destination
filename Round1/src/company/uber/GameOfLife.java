@@ -1,6 +1,6 @@
 package company.uber;
 /**
- * 289. According to the Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automaton 
+ * 289. According to the Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automation 
  * devised by the British mathematician John Horton Conway in 1970."
 
 Given a board with m by n cells, each cell has an initial state live (1) or dead (0). 

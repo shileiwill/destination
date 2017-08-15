@@ -32,6 +32,9 @@ public class PalindromePairs {
 			}
 			System.out.println();
 		}
+		
+		String s = "abc";
+		System.out.println("--" + s.substring(0, 0) + "--");
 	}
 
 	// 分析一下这个的复杂度，与暴力解的比较

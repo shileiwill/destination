@@ -42,7 +42,7 @@ public class Design2Sum {
 	
 	// NLog(N)
 	List<int[]> findUniquePairs1(int[] arr, int target) {
-		Arrays.sort(arr);;
+		Arrays.sort(arr);
 		List<int[]> res = new ArrayList<int[]>();
 		
 		int left = 0, right = arr.length - 1;

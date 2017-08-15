@@ -7,7 +7,7 @@ import java.util.Queue;
 
 import chapter3.binaryTree.TreeNode;
 /**
- * Given  a root of a tree. The tree may be of any depth and width. 
+ * Given a root of a tree. The tree may be of any depth and width. 
 Transform it in a way that each node(except probably one) would either have N or 0 children
 
 convert a binary tree to a N-ary complete tree

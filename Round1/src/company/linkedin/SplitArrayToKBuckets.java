@@ -53,7 +53,7 @@ public class SplitArrayToKBuckets {
 		
 		if (curSum == target) {
 			res.add(new ArrayList<>(list));
-			if (res.size() == k) { // How to make sure all elements are used?
+			if (res.size() == k && pos == arr.length) { // How to make sure all elements are used?
 				flag = true;
 			}
 			return;

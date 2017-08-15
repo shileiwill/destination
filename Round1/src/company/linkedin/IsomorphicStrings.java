@@ -69,7 +69,7 @@ public class IsomorphicStrings {
 
     // Another follow up, Follow up: 如果是三个String 怎么做. 下边的方法可以解决
  // follow up
- // transfer word into same isomorphic partten
+ // transfer word into same isomorphic pattern
  // every word start with 'a', every time meet a new letter
  // map it to cur char, and increase the value of cur char the then if same letter show up again, use the value in map
  // ex. foo -> abb

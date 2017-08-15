@@ -33,25 +33,21 @@ public class CombinationOfLists {
 		source.add(list5);
 		
 		CombinationOfLists col = new CombinationOfLists();
-		col.combinations(source);
+		col.iterative(source);
 	}
 
-	// Do we need the visited set? 貌似不用
+	// Do we need the visited set? 貌似不用, 不用
+	// 这个题实际上就是Combination of phone numbers
 	List<List<Integer>> combinations(List<List<Integer>> source) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> list = new ArrayList<Integer>();
 		
-		List<Set<Integer>> visitedList = new ArrayList<Set<Integer>>();
-		for (int i = 0; i < source.size(); i++) {
-			visitedList.add(new HashSet<Integer>());
-		}
-		
-		helper(res, list, source, 0, visitedList);
+		helper(res, list, source, 0);
 		System.out.println(res.size());
 		return res;
 	}
 	
-	void helper(List<List<Integer>> res, List<Integer> list, List<List<Integer>> source, int machineId, List<Set<Integer>> visitedList) {
+	void helper(List<List<Integer>> res, List<Integer> list, List<List<Integer>> source, int machineId) {
 		if (machineId == source.size()) {
 			for (int val : list) {
 				System.out.print(val + " -- ");
@@ -61,17 +57,33 @@ public class CombinationOfLists {
 			return;
 		}
 		
-		Set<Integer> visited = visitedList.get(machineId);
 		List<Integer> machine = source.get(machineId);
 		
 		for (int i = 0; i < machine.size(); i++) {
-//			if (!visited.contains(i)) {
 				list.add(machine.get(i));
-				visited.add(i);
-				helper(res, list, source, machineId + 1, visitedList);
-				visited.remove(i);
+				helper(res, list, source, machineId + 1);
 				list.remove(list.size() - 1);
-//			}
 		}
+	}
+	
+	void iterative(List<List<Integer>> source) {
+		LinkedList<List<Integer>> res = new LinkedList<List<Integer>>();
+		res.add(new LinkedList<Integer>());
+		
+		for (int i = 0; i < source.size(); i++) {
+			List<Integer> list = source.get(i);
+			int size = res.size();
+			
+			for (int j = 0; j < size; j++) {
+				List<Integer> now = res.removeLast();
+				for (int k = 0; k < list.size(); k++) {
+					List<Integer> copy = new LinkedList<Integer>(now);
+					copy.add(list.get(k));
+					res.addFirst(copy);
+				}
+			}
+		}
+		
+		System.out.println(res.size());
 	}
 }

@@ -132,6 +132,8 @@ https://www.youtube.com/watch?v=-W9F__D3oY4
 
 Partner team:
 
+New technologies takes time, how much time spent on coding and how much on researching new stuff?
+
 Phil Rabin  Rider App,  Bar raiser, What i am working on, how deep i can go, previous job experience, logging flow, end to end. Good communicator, huge impact, driving best practice, how work collaboar working with others, OOD, Design, Coding as well 
 
 # All those folks are from Dev Platform team

@@ -202,7 +202,7 @@ class IntersectionWithIterator {
 		Iterable<Integer> intersection(Iterator<Integer> a, Iterator<Integer> b) {
 			List<Integer> res = new ArrayList<Integer>();
 			Integer val1 = null;
-			Integer val2 = null;
+			Integer val2 = null;    
 			
 			while ((val1 != null || a.hasNext()) && (val2 != null || b.hasNext())) {
 				if (val1 == null) {

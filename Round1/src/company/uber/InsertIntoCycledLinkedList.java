@@ -50,6 +50,8 @@ public class InsertIntoCycledLinkedList {
 					return head;
 				}
 			}
+			
+			cur = next;
 		}
 
 		// All are duplicates in cycle, insert to anywhere

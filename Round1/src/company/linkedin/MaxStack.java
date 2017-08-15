@@ -48,7 +48,7 @@ public class MaxStack {
 		}
 		
 		int res = top.val;
-		heap.remove(res); // Remove from heap. It takes O(N) to find the element and O(logN) to heapify again. 
+		heap.remove(top); // Remove from heap. It takes O(N) to find the element and O(logN) to heapify again. 
 		top = top.prev; // To make this faster, add an auxiliary HashMap to remember <Object, Index> by implementing your own Heap. HashHeap
 		top.next = null;
 		

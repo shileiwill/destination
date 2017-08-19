@@ -20,8 +20,9 @@ The whole set is in AP
 public class LongestArithmeticProgression {
 
 	public static void main(String[] args) {
-		int[] arr = {5, 10, 15, 20, 25, 30};
+		int[] arr = {5, 10, 15, 18, 20, 25, 30};
 		int[] arr2 = {2, 4, 6, 8, 10};
+		int max0 = longestArithmeticProgressionFindTheSolution(arr);
 		int max = longestArithmeticProgressionDP(arr);
 		int max3 = longestArithmeticProgression(arr);
 		int count = countOfArithmeticProgression(arr2);
@@ -99,6 +100,55 @@ public class LongestArithmeticProgression {
 				i--;
 			}
 		}
+		
+		return max;
+	}
+	
+	static int longestArithmeticProgressionFindTheSolution(int[] arr) {
+		int len = arr.length;
+		int[][] hash = new int[len][len];
+		int max = 0;
+		int start = -1;
+		int diff = -1;
+		
+		for (int i = 0; i < len - 1; i++) {
+			hash[i][len - 1] = 2;
+		}
+		
+		// Consider every element as second/middle element
+		for (int j = len - 2; j >= 0; j--) { // 目标是hash[i][j]
+			int i = j - 1;
+			int k = j + 1;
+			
+			// i   j   k 三个指针的思想
+			while (i >= 0 && k < len) {
+				if (arr[j] - arr[i] > arr[k] - arr[j]) {
+					k++; // 继续往右边搜，可能能搜到
+				} else if (arr[j] - arr[i] < arr[k] - arr[j]) {
+					hash[i][j] = 2; //右边的更大了
+					i--;
+				} else { // equal
+					hash[i][j] = hash[j][k] + 1; // It will come to [i,j] only once, so no need to use Math.max()
+					//max = Math.max(max, hash[i][j]);
+					if (hash[i][j] > max) {
+						max = hash[i][j];
+						start = i;
+						diff = arr[j] - arr[i];
+					}
+					
+					i--;
+					k++;
+				}
+			}
+			
+			// If there is leftover on left side
+			while (i >= 0) {
+				hash[i][j] = 2;
+				i--;
+			}
+		}
+		
+		System.out.println(start + " : " + diff + " : " + max);
 		
 		return max;
 	}

@@ -19,7 +19,7 @@ public class TaskCoolDown {
 		System.out.println(res);
 	}
 	
-	// Second version
+	// Second version could use sb.lastIndexOf()
 	String minLength2(String s, int coolDown) {
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
 		StringBuilder sb = new StringBuilder();

@@ -41,7 +41,7 @@ public class SubarraySumEqualsK {
         // preSum, count
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         int sum = 0;
-        map.put(sum, 1);
+        map.put(sum, 1); // 这个<0, 1>做得好！
         int count = 0;
         
         for (int i = 0; i < nums.length; i++) {

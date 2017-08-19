@@ -63,6 +63,7 @@ public class BSTIterator {
 		while (root != null) {
 			if (root.val == target) {
 				return root.sum;
+				//break;
 			}
 			
 			prev = root;

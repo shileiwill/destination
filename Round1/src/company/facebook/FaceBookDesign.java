@@ -129,6 +129,12 @@ public class FaceBookDesign {
 	3. Book the seats. Primarily talking about the sql database, a little about transaction. At the end talks a little about large qps, shard the data..
 
 	Memcache + Hashtable
+
+	一个music app，选出 top 10 songs
+
+	use 10k IOT machine (limited cpu, bandwidth) to crawl wikipedia. 1. don't repeat same URL; 2. Minimize traffic. 3. save webpage locally (no storage problem), 
+	Started with a queue in one machine, discuss traffic up/down, distributed memory design, machine down, healthcheck, backup, consistent hashing, 
+	replica to master promotion.-goo
 }
 
 

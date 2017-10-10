@@ -1,0 +1,72 @@
+设计是 news API design, 也是面经了。   注意 pagination. 看看twitter 的 API developer's guide 会有帮助
+	我主要是讲了pagination 和 response 用json怎么返回结构化数据。 我也没做过类似的东西， 很多靠直觉了。 对了，还问了实时 Comment 怎么实现
+	pull 或者push就简单回答了一下，没有深入
+
+一个music app，选出 top 10 songs:
+	设计一个听歌app，有一个功能 top 10
+	我开始想做一个size为10的priority queue，后来证明这个pq不能达到real time 更新。他的意思是作一个counter存在DB里，sort一下，后来在他的指引下我说出来了。全程有点乱，猜不到三哥的想法。然后让我去估算每个人能听几首歌，我开始估算50.他说太少，我又说200.他问我怎么估算，我说大概看一下用户使用时间，在除以一个一首歌的平均时间。他还是不满意。后来他说你可以看看用户花了多少钱？比如他就花了五百多刀，然后一刀一首歌来算，然后我就有点懵逼。。。我感觉他这个方法也不靠谱
+	Database design
+
+类似翻译系统，但是要写具体接口函数，讨论很多很细节的问题
+
+Type ahead is a system design
+过几天收到消息，要加面一轮设计，然后前两天去面了设计，一个在搜索组做了5年的，问了typeAhead，虽然之前准备过，大的架构答得还行，但是问了几个具体的问题，答得很不好所以估计要挂。这些具体的问题还是值得思考一下的，我给大家列一下，希望能帮到后面的人：1. top n hot keyword怎么生成，问了下map reduce的东西 2. typeAhead这里的hot key words考虑多久的时效性，比如你是按照1 month，1 week，1 day 还是1 hour的数据给出hot key words。3. 大家都知道要用Trie去存数据，并且Trie是放在cache里的，那么这个cache什么时候去更新？怎么更新？要不要加TTL？你更新的这个cache的频率会对用户query的时效性产生很大的影响，并且你更新也会对数据库和服务器造成额外的负担，你怎么去平衡。最后加了一个问题说如果这个服务是面向多个国家的，过了一段时间你发现你的推荐在某些国家点击率很高，有些国家点击率很低，你要怎么优化。总之都和你之前的一系列答案有关。问得相当的细
+
+typeahead也算是各个公司面试的高频题了，试着回答一下，大家一起讨论讨论吧
+1. top n hot key word怎么生成，问了下map reduce的东西
+typeAhead 的话基本就是用trie， 生成方法就是每次用户search 或者选中一个suggestion ， 就把对应的leaf count++， 然后用这个新的count更新所有parent node的hot word list。 感觉和map reduce 没关系。。。
+2. typeAhead这里的hot key words考虑多久的时效性，比如你是按照1 month，1 week，1 day 还是1 hour的数据给出hot key words。
+思路：如果按1 day来那么就无法展现1个月的情况，如果按1个月的来，那么无法展现新的热词
+方法一：可以按 每天/每小时 平均值来算
+方法二：根据不同的场景选不同的， 比如google search 可以按一年来，新鲜事搜索可以按1个月来，新闻搜索可以按一天算
+3. 大家都知道要用Trie去存数据，并且Trie是放在cache里的，那么这个cache什么时候去更新？
+每次用户搜索后就更新；
+怎么更新？
+因为只是往trie里加分支，所以可以直接加，不用锁
+要不要加TTL？
+为了防止cache过大可以加， 可以每隔一段时间对trie清理剪枝
+你更新的这个cache的频率会对用户query的时效性产生很大的影响，并且你更新也会对数据库和服务器造成额外的负担，你怎么去平衡。
+multithread scheduling, Trie updating thread has lower priority
+
+4. 如果这个服务是面向多个国家的，过了一段时间你发现你的推荐在某些国家点击率很高，有些国家点击率很低，你要怎么优化。总之都和你之前的一系列答案有关。问得相当的细。
+方法一 不同的国家不同的Trie,但这样人们无法看到别的国家的人的热搜
+方法二 考虑各国人口，比如 count = count in country A/ population of country A
+方法三 有一些common的 hot word 还有一些country specific 的hot words.
+
+最后我觉得这种题要想在45分钟内想清楚说清楚别人用5年时间做出来的东西是不可能的，重要的是展示思路吧，这种思路既要有一定发散性，又要有一定合理性，但是也不要太在意是否以及如何实现的问题
+
+最后吐槽一句，我当时靠系统设计也考了翻译系统，然后因为唯独那一轮不好就直接给我挂了。。。。关键是翻译系统我在工作中还是做过的。。。。事后想可能需求没问清楚吧，看到是做过的太兴奋了就直接说了解法，但是忘记交代工作中一些特殊需求。。。。所以切记要问清需求啊。。。。
+
+你这个大部分都对，但是mapreduce那部分肯定是需要的，这个是和面试官确认过的。
+这个service在facebook的用户量是至少几百K每秒的请求，如果你要是一直update leaf count，再加上读的请求，会非常的耗费资源。而且还有一点，你把count放在leaf node的话，那么你的搜索时间就很高，因为你要深入到每一个leaf node里面去取前k个热词，优点是空间少。我答得是把前k个热词放在相应的node上，搜索很快，但是更新麻烦些，内存占用更多，所以处处都是trade off。具体还是得跟面试官不断商量。一般来说都是把用户选择的search的这个记录存在一个log table里，然后用map reduce去更新count。另外一个优化就是用比如1/1000的比例去log用户的搜索，这样可以减少log table的大小。另外你这个Trie是需要serialize到硬盘上，不然断电以后Cache就没了。
+
+Note: This is in Seattle. 
+网页event售票系统， 随便聊聊画画conponent图和数据表，讲讲哪里容易failure，说说API，信用卡信息谁处理，遇到大流量怎么分流，俄国哥们儿进来的时候脸绷得挺吓人，聊完了出去的时候挺开心的，估计还可以
+把component图画一画，
+写出数据存什么结构，event table,transaction table有哪些column要存
+客户的敏感信息是怎么传递的
+如果web service或者core service挂了怎么办.
+hot spot出现了应该怎么分流
+最后做做流量，qps估算
+
+Other person's thought, not sure if it is correct:
+hot spot出现了应该怎么分流：
+1. 用product id做成key来做shading，这样product会被均匀的分配到服务器上。出现某一种票突然很火的概率少一点
+2. 比如对于特别热门的event，可以考虑多几台web service，这样可以同时进行处理。
+
+如果web service或者core service挂了怎么办：
+1. 做hot back up
+2. 可以用其它的back up service来处理
+
+设计一个“脸书上消耗时间”的功能，记录每天每个用户在脸书上消耗的时间，要求尽可能的在客户端计算量少，要求设计相应数据库以及api的输入以及输出。
+计算每隔多久向服务器发送数据；以及如果用户数据错误怎么办
+my idea  用socket 维持connection , push service 定期update(ex : 10 sec ) login 的时候启动push service 用一个etl process daily agrregation 减少空间, 　用daily log 储存api 就是一个post http call 楼主为啥要求要存data base ? 计算量感觉client 端不太大? 啥情况用户数据会错误呢? 能分享下吗? thanks
+
+use 10k IOT machine (limited cpu, bandwidth) to crawl wikipedia. 1. don't repeat same URL; 2. Minimize traffic. 3. save webpage locally (no storage problem), Started with a queue in one machine, discuss traffic up/down, distributed memory design, machine down, healthcheck, backup, consistent hashing, replica to master promotion. 去重扯了扯bloomfilter
+
+设计 网页爬虫，给一千台机器，每台机器的带宽有限，每个url只能爬一次
+就是考个sharding, 没什么特别的，把url 按consistent hashing 分配到对应机器上去。follow up是有机器挂了怎么办。每个机器要有back up，看一看cassandra的cluster management就有思路了，基本套着讲。
+
+早看到这个帖子就好，我也被问了这个crawler的问题，纠缠了十几分钟后突然意识到这完全是个brain teaser式的system design，然后想到了类似UUID hashing，算是蒙混过关，又问了两个follow up问题，第二个没想好时间就到了
+1. 如何判断crawling结束
+2. 如果一半机器比另一半快怎样分配

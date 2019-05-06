@@ -1,0 +1,200 @@
+1. Two Sum
+4. Median of Two Sorted Arrays
+22. Generate Parentheses
+42. Trapping Rain Water
+54. Spiral Matrix
+59. Spiral Matrix II
+56. Merge Intervals
+68. Text Justification
+79. Word Search
+127. Word Ladder
+139. Word Break
+140. Word Break II
+146. LRU Cache
+460. LFU Cache
+200. Number of Islands
+305. Number of Islands II
+236. Lowest Common Ancestor of a Binary Tree
+253. Meeting Rooms II
+273. Integer to English Words
+289. Game of Life
+295. Find Median from Data Stream
+332. Reconstruct Itinerary
+415. Add Strings
+560. Subarray Sum Equals K
+733. Flood Fill
+
+
+From
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=205523&extra=&highlight=snapchat&page=1	
+
+- Minimum Window Substring (Sliding Window 经典题)
+Group of Friends (3) - Union - Find : 发现matrix[j] == 1 就union两人在一`起，最后遍历parent数组找独立的subset个数即可
+Meeting Room I : 简单的排序，根据meeting的开始时间升序排，从做到右找 meetings.end 和 meetings[i+1].start 有没有overlap
+Meeting Room II (2) : 难一点的排序，start 升序排，用heap排end时间，从头遍历meetings，冲突就开一个新room，否则merge两个meeting的时间
+Meeting Room III : room带有weight怎么排能出最大的weight ？？？？？？
+Game of Life (2) : LC-289主要注意的是不要直接修改cell上的数，否则会影响之后的计算。
+Valid Palindrome : two pointers经典
+Detect Cycle in a Directed Graph : Union-Find / DFS / BFS
+One Edit Distance : LC-72 : 注意两个词相同的时候返回false
+Reconstruct Itinerary: LC-332 : Backtracking
+Copy List with Random Pointer : LC-138
+Remove digits from a number to construct lowest number LC-402
+Valid Sudoku
+Sudoku Solver
+Find Minimum Path between two points in a matrix with walls : 给定起点和终点，找到从起点到终点的最短路径，如果走不通则返回-1。 BFS Follow up :墙可以打破 求最小COST
+Edit distance into Palindrome (对string 和它的 reverse 做Edit distance 左下到右上对角线的值的min 如果是奇数则取对角线和对角线上下一个格的最小值）
+Is prime number
+Count Primes : LC-204
+Pow(a, b) : LC-50
+Sqrt(x) : LC-69
+LC-290
+Burst Balloon
+Word Pattern I
+Word Pattern II (2) Backtracking 暴力解 用hashmap维护当前的mapping, hashset判断是否重复
+给一个数组，求index使得该index左侧和右侧sum相等。
+House Robber : LC-198, DP
+Combination Sum IV : DP = Sum(DP[i-nums[j]] for all nums[j] <= i)
+Word Finder : 给一个字典，chat, ever, snapchat, snap, salesperson, per, person, sales, son, whatsoever, what, so 找出所有非复合词， 比如snapchat = snap + chat。 解法：TRIE
+Log Parser (2) : http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=200906&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%255B3089%255D%255Bvalue%255D%255B2%255D%3D2%26searchoption%255B3089%255D%255Btype%255D%3Dcheckbox%26searchoption%255B3046%255D%255Bvalue%255D%3D21%26searchoption%255B3046%255D%255Btype%255D%3Dradio&page=1
+r%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B2%5D%3D2%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%3D21%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311 k-snap point BFS
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=165890&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B2%5D%3D2%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%3D21%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311 Build Tree from given string input and print it inorderly
+Reverse Linked List
+Excel Column Conversion LC-168 LC-171 注意从数字转到字符串的时候要先-1再%26得到当前位置的字母
+BST ZigZag Traversal LC-103 s
+Symmetric Tree Iterative
+Closest BST Value  LC-270
+Closest BST Value II
+
+
+Latest:
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=514215&extra=page%3D2
+	第一题是一个给一段代码说出其用途，大致是一个网络点击限流的功能
+	第二题是实现迷你堆栈
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=514067&extra=page%3D7%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+给定一个字典，问从字符串A能不能到串B。每次可以换一个字符，换了之后的串需要在字典里面。DFS/BFS。延申是问这个方法要频繁调用，怎么优化。具体是先根据字典建立图，然后搜索时候只要搜索相连节点即可。
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=512036&extra=page%3D11%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+去年面了很多公司，其中SNAP给的PACKAGE不错，就从了。
+两轮是刷题，一题是高频的安卓手机键盘解锁，一道题目是二叉树序列化的问题。恩，很多时间用在交流题目的背景上面了，其实题目本身很简单。
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=513846&extra=page%3D11%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+Talk about projects  Leetcode 46, 47, permutation I and II
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=513029&extra=page%3D11%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+4. coding：
+LC：59，原题
+
+3. LC 19 Remove Nth last element in LinkedList. the kth last element of Linkedlist
+Ex. 1->3->9->4->2->5, k = 3
+return Node 4
+4. LC 706
+
+
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=479199
+上来先贴了个代码段，大概意思就是读一个把文件A为读成key value pair，然后在文件B中找到A对应的key换位value。可以理解成language filter的一种实现。
+读完了发现其中各种bug，有点不知所谓，只能跟面试官说我猜这里是这个意思？面试官也不置可否，就让我说这是啥意思，耗了半天也没说清楚，感觉跪在这了。
+后来写了个简单的string题，给'(ab(cd))(ef)', 打印出
+'
+(
+    ab
+        (
+            cd
+        )
+)
+(
+    ef
+)
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=501865
+题目是二维的char图 和一个字符串 找到这个图里所有路径有这个字符串的
+
+
+譬如说
+# [
+#    a, v, z
+#    p, e, a
+#    t, e, p
+# ]
+
+和 ape
+
+输出就是 [[{0,0},{1,0},{1,1}], [{1,2},{2,2},{2,1}]]
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=499186
+只有一道题目，关于日志分类的。
+就是一堆日志，每个日志有时间。
+然后让你按照date，hour，minute就行排序。然后设计api来读。
+
+是把date，hour，minute合并变成一个key 然后找得时候用binary search or iterative 找这样吗?
+我当时是用分级binary search。先搜索hour，再搜索minute，然后搜索second。不过还是你这个方法好。
+
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=483782
+第二个是统计并打印所有单词在一个文本里出现次数， 频率最高的打印在最前面。第三个给一个String 比如“(hey hello (good (bye) hi))” 给这个string加上indentation。加完以后打印出来应该是
+(
+  hey
+  hello
+  (
+    good
+    (
+      bye
+    )
+    hi
+  )
+)
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=481907&highlight=snapchat
+2. 15min Read codes并解释
+             读file, extract words, 两个file做mapping+替换
+3. 30min Coding:
+  第一题: numerical order then alphabetical order
+  input=”this is a test a test”
+Output:
+         a 2
+         test 2
+         is 1
+         this 1
+第二题: hirerachy indent by parentheses
+intput=”(hi)”
+  Output: (
+               hi
+              )
+
+  Input=”(hi aloha (hello))”
+  Output:
+         (
+          hi
+          aloha
+          (
+           hello
+          )
+         )
+         
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=506889&highlight=snapchat
+1. 给一个字符数组作为字典，再给一个input String。假设用户顺序输入input String，返回input中可以auto complete的字符的个数。假定只有lowercase 字母
+举例：
+Dictionary：[ snap, snapchat, story, chat ], intput: snap. 返回： 2。原因是，只有当用户输入了sn以后，ap就可以auto complete了，ap是两个字符
+
+Dictionary: [ snap, snapchat, story], input: snap. 返回： 3. 原因是，s可以auto complete，n不行，然后ap也可以auto complete。
+
+这个题，光和面试官搞清楚问的是啥就费了老大劲。相当不好理解。
+
+2. 
+https://leetcode.com/problems/count-primes/ 变种，输出所有的prime number。
+然后问了一些OO design，该如何写test等等。
+最后问了如何实现 Math.sqrt().
+
+5. 
+https://leetcode.com/problems/nested-list-weight-sum/
+
+https://leetcode.com/problems/nested-list-weight-sum-ii/
+
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=465577
+给两个字符串A和B, 返回B里面出现的所有的A的permutation
+A = “abc”
+B = “abcfecabaqebca”
+output: [“abc”, “cab”, “bca”]
+
+You Sifang: rotated sorted array

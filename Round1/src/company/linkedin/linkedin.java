@@ -1,12 +1,12 @@
-1.
-
-2017 1.5 Onsite
-
-2. 印度小哥 Coding. Merge Intervals 写两个函数 addInterval, getTotalBusyTime。写出两种不同的实现 分析trade off(基本就是根据两个函数的调用频率决定)
-(1) LinkedList 插入使得每次插入后start保持有序并保持所有的节点都是disjointed 同时计算totalbusy。 O(N)的add时间和O(1)get时间
-(2) Binary search tree. 也就是map，treemap这种。 保持插入后有序，O(logN) add O(N) get时间
-follow up 如果需要remove interval 用哪种方式？
-http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=144989&extra=page%3D7%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+//1.
+//
+//2017 1.5 Onsite
+//
+//2. 印度小哥 Coding. Merge Intervals 写两个函数 addInterval, getTotalBusyTime。写出两种不同的实现 分析trade off(基本就是根据两个函数的调用频率决定)
+//(1) LinkedList 插入使得每次插入后start保持有序并保持所有的节点都是disjointed 同时计算totalbusy。 O(N)的add时间和O(1)get时间
+//(2) Binary search tree. 也就是map，treemap这种。 保持插入后有序，O(logN) add O(N) get时间
+//follow up 如果需要remove interval 用哪种方式？
+//http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=144989&extra=page%3D7%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D6%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
 
 // time complexity: call O(n), get O(1)
 class MergeIntervals {

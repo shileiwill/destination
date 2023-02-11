@@ -99,3 +99,49 @@ class Solution {
         return map.get(remaining);
     }
 }
+
+    public int coinChange(int[] coins, int amount) {
+        // Map<Integer, Integer> map = new HashMap<>();
+        // return helper(coins, amount, map, 0);
+        // a list of coins, repeatedly pick
+        // try to reach target amount
+        // goal is to find the min number of coins. min level to reach target, level order traversal
+        if (amount == 0) {
+            return 0;
+        }
+
+        // you need to sort it!!!
+        Arrays.sort(coins);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(0);
+        Set<Integer> visited = new HashSet<>();
+        int level = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                int cur = queue.poll();
+
+                for (int coin : coins) {
+                    int next = cur + coin;
+                    if (next == amount) {
+                        return level + 1;
+                    }
+
+                    // You need to break!!!
+                    if (next > amount) {
+                        break;
+                    }
+
+                    if (!visited.contains(next)) {
+                        visited.add(next);
+                        queue.offer(next);
+                    }
+                }
+            }
+            level++;
+        }
+
+        return -1;
+    }

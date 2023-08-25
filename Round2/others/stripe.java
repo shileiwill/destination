@@ -63,6 +63,24 @@ class Main {
       }
     }
   }
+
+  static boolean hasMutualRankFloating(Map<String, List<String>> map, String a, int rank, int range) {
+    int start = Math.max(0, rank - range - 1);
+
+    for (int i = start; i < rank; i++) {
+      String aFriend = map.get(a).get(i);
+
+      if (!map.containsKey(aFriend)) {
+        continue;
+      }
+
+      for (int j = start; j < rank; j++) {
+        if (map.get(aFriend).get(j).equals(a)) {
+          println(a + ":" + b);
+        }
+      }
+    }
+  }
     
   }
 }

@@ -18,6 +18,46 @@ import java.util.Stack;
 
 public class SerializeAndDeTree {
 
+    // Added on 08/25/2023
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        helper(root, sb);
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    void helper(TreeNode node, StringBuilder sb) {
+        if (node == null) {
+            sb.append("#,");
+            return;
+        }
+        sb.append(node.val + ",");
+        helper(node.left, sb);
+        helper(node.right, sb);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] arr = data.split(",");
+        int[] pos = {0};
+        TreeNode root = dehelper(arr, pos);
+        return root;
+    }
+
+    TreeNode dehelper(String[] arr, int[] pos) {
+        if (arr[pos[0]].equals("#")) {
+            return null;
+        }
+        TreeNode node = new TreeNode(Integer.valueOf(arr[pos[0]]));
+        pos[0] = pos[0] + 1;
+        node.left = dehelper(arr, pos);
+        pos[0] = pos[0] + 1;
+        node.right = dehelper(arr, pos);
+
+        return node;
+    }
+
 	public static void main(String[] args) {
 		TreeNode n3 = new TreeNode(3);
 		TreeNode n9 = new TreeNode(9);

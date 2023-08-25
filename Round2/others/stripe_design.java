@@ -23,3 +23,213 @@ metric 系统，侧重在client push metrics to serv‍‍‍‍‌‍‍‍‍�
 第五轮design ledger，我觉得说的也不错，国人面试官，帮我把控时间，所有问题都接住了，感觉说的不错。但是时间不够，
 有些我想到的点没说到。但是看他反应感觉也不错啊。
 
+
+
+/*
+ * Click `Run` to execute the snippet below!
+ */
+
+import java.io.*;
+import java.util.*;
+
+/*
+ * To execute Java, please define "static void main" on a class
+ * named Solution.
+ *
+ * If you need more classes, simply define them inline.
+ */
+
+//      AU: 80
+//      US: 140
+//      MX: 110
+//      SG: 120
+//      FR: 70
+
+class Solution {
+  static void move(Map<String, Integer> map) {
+    // sanity check
+    if (map == null || map.isEmpty()) {
+      throw new RuntimeException("Invalid input");
+    }
+
+    PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(
+      map.size(),
+      new Comparator<Map.Entry<String, Integer>>() {
+        // sort by the balance
+        public int compare(Map.Entry<String, Integer> account1, Map.Entry<String, Integer> account2) {
+          return account1.getValue() - account2.getValue();
+        }
+      }
+      );
+
+    PriorityQueue<Map.Entry<String, Integer>> maxHeap = new PriorityQueue<>(
+      map.size(),
+      new Comparator<Map.Entry<String, Integer>>() {
+        // sort by the balance
+        public int compare(Map.Entry<String, Integer> account1, Map.Entry<String, Integer> account2) {
+          return account2.getValue() - account1.getValue();
+        }
+      }
+      );
+
+      // minHeap: (FR: 70) (AU:80)
+      // maxHeap: (US: 140) (SG: 120) (MX: 110) 
+
+      // iterate through the input accounts in map
+      for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        String accountName = entry.getKey();
+        int accountBalance = entry.getValue();
+
+        if (accountBalance < 0) {
+          throw new RuntimeException("Invalid balance for account: " + accountName);
+        }
+
+        if (accountBalance > 100) {
+          maxHeap.offer(entry);
+        } else if (accountBalance < 100) {
+          minHeap.offer(entry);
+        }
+        // we ignored the accounts which have 100 balance
+      }
+
+      // minHeap: 
+      // maxHeap: (US: 110) (MX: 110) 
+      while (!minHeap.isEmpty()) {
+        if (maxHeap.isEmpty()) {
+          throw new RuntimeException("Insufficent fund");
+        }
+
+        // (US: 140) (SG : 120)
+        Map.Entry<String, Integer> highestAccount = maxHeap.poll();
+        // (FR: 70) (AU : 80)
+        Map.Entry<String, Integer> lowestAccount = minHeap.poll();
+
+        // check how much I should move 
+        // 140, 70 -> 40 30 -> 30
+        // amount = 20
+        int amount = Math.min(highestAccount.getValue() - 100, 100 - lowestAccount.getValue());
+
+        // update the amount of above accounts
+        // from: 140-30 = 110, to: 70 + 30 = 100
+        // from: 120-20 = 100, to: 80 + 20 = 100
+        int newAmountFrom = highestAccount.getValue() - amount; // 100
+        int newAmountTo = lowestAccount.getValue() + amount; // 90
+
+        // 30 dollars from US to FR
+        // 20 dollars from SG to AU
+        // from: US, to: AU, amount: 20  
+        System.out.println("from: " + highestAccount.getKey() + ", to : " + lowestAccount.getKey() + ", amount: " + amount);
+
+        // 110
+        if (newAmountFrom > 100) {
+          highestAccount.setValue(newAmountFrom);
+          maxHeap.offer(highestAccount);
+        } // if new amount is 100, then we skip it.
+      
+        if (newAmountTo < 100) {
+          lowestAccount.setValue(newAmountTo);
+          minHeap.offer(lowestAccount);
+        } // if new amount is 100, no need to put it back.
+      }
+  }
+
+
+//      AU: 80
+//      US: 140
+//      MX: 110
+//      SG: 120
+//      FR: 70
+
+//      CN: 10
+
+  public static void main(String[] args) {
+
+    Map<String, Integer> map = new HashMap<>();
+    map.put("AU", 80);
+    map.put("US", 1400);
+    map.put("MX", 110);
+    map.put("SG", 120);
+    map.put("FR", 70);
+    map.put("CN", -10);
+ 
+    // 50, 70, 80
+    // CN FR = 70
+    move(map);
+}
+}
+
+
+// At Stripe we keep track of where the money is and move money between bank
+// accounts to make sure their balances are not below some threshold. This is for
+// operational and regulatory reasons, e.g. we should have enough funds to pay
+// out to our users, and we are legally required to separate our users' funds
+// from our own. This interview question is a simplified version of a real-world
+// problem we have here.
+ 
+// Let's say there are at most 500 bank accounts, some of their balances are
+// above 100 and some are below. How do you move money between them so that they
+// all have at least 100?
+ 
+// Just to be clear we are not looking for the optimal solution, but a working one.
+ 
+// Example input:
+//      AU: 80
+//      US: 140
+//      MX: 110
+//      SG: 120
+//      FR: 70
+ 
+// Output:
+//      from: US, to: AU, amount: 20  
+//      from: US, to: FR, amount: 20
+//      from: MX, to: FR, amount: 10
+
+/**
+1. Greater than 100:
+US:140, SG: 120, MX: 110
+Max Heap
+
+2. Smaller than 100:
+FR:70, AU:80
+Min Heap
+
+Move from US to FR for 30
+  - US 110
+  - FR 100
+1. Greater than 100:
+SG: 120, US:110, MX: 110
+
+2. Smaller than 100:
+AU:80
+
+Move from SG to AU for 20 
+1. Greater than 100:
+US:110, MX: 110
+
+2. Smaller than 100:
+
+
+1. Greater than 100:
+SG: 110, US:110, MX: 110
+
+2. Smaller than 100:
+AU:80
+
+Move from SG to AU for 10
+
+1. Greater than 100:
+US:110, MX: 110
+
+2. Smaller than 100:
+AU:90
+
+Move from US to AU for 10
+1. Greater than 100:
+MX: 110
+
+2. Smaller than 100:
+None
+ */
+
+
+

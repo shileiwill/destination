@@ -73,5 +73,60 @@ public class LowestCommonAncestor {
         return null;
     }
 
+    // Solution 3: Get the path from root to the target node, compare the 2 paths
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> pList = new ArrayList<TreeNode>();
+        // pList.add(root);
+        helper(root, p, pList);
+
+        List<TreeNode> qList = new ArrayList<TreeNode>();
+        // qList.add(root);
+        helper(root, q, qList);
+
+        int pos = Math.min(pList.size() - 1, qList.size() - 1);
+        while (pos >= 0) {
+            TreeNode n1 = pList.get(pos);
+            TreeNode n2 = qList.get(pos);
+
+            if (n1 == n2) {
+                return n1;
+            }
+            pos--;
+        }
+
+        return root;
+    }
+
+    boolean helper (TreeNode node, TreeNode target, List<TreeNode> list) {
+        // Base conditions
+        if (node == target) {
+            list.add(node);
+            return true;
+        }
+        if (node == null) {
+            return false;
+        }
+
+        // Try current node
+        list.add(node);
+
+        // Try left path
+        boolean left = helper(node.left, target, list);
+        if (left) {
+            return true;
+        }
+
+        // Try right path
+        boolean right = helper(node.right, target, list);
+        if (right) {
+            return true;
+        }
+
+        // If it comes here, it means we tried both left and right, and we couldn't find the target
+        list.remove(list.size() - 1);
+
+        return false;
+    }
+
     //////////////END
 }

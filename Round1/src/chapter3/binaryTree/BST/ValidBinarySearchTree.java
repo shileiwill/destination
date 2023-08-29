@@ -27,6 +27,112 @@ Binary tree [1,2,3], return false.
  *
  */
 public class ValidBinarySearchTree {
+
+    // Solution 1: Pass in the List as an argument, build the in-order traversal to a List, and compare the neighbors
+    public boolean isValidBST(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+
+        List<TreeNode> res = new ArrayList<>();
+
+        inorder(root, res);
+
+        for (int i = 1; i < res.size(); i++) {
+            TreeNode prev = res.get(i - 1);
+            TreeNode cur = res.get(i);
+
+            if (cur.val <= prev.val) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void inorder(TreeNode root, List<TreeNode> res) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, res);
+        res.add(root);
+        inorder(root.right, res);
+    }
+
+    // Solution 2: Build in-order traversal to a List, use divide and conquer
+    // This way, we need to inOrder traversal, and then compare results, which is not efficient.
+    public boolean isValidBST(TreeNode root) {
+        List<TreeNode> res = new ArrayList<TreeNode>();
+        
+        //inOrderTraversal(res, root);
+        res = inOrderTraversalDC(root);
+        
+        for (int i = 0; i < res.size() - 1; i++) {
+            TreeNode left = res.get(i);
+            TreeNode right = res.get(i + 1);
+            if (left.val >= right.val) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    List<TreeNode> inOrderTraversalDC(TreeNode root) {
+        List<TreeNode> res = new ArrayList<TreeNode>();
+        if (root == null) {
+            return res;
+        }
+        
+        List<TreeNode> left = inOrderTraversalDC(root.left);
+        res.addAll(left);
+        
+        res.add(root);
+        
+        List<TreeNode> right = inOrderTraversalDC(root.right);
+        res.addAll(right);
+        
+        return res;
+    }
+
+
+    // Solution 3: Compare as we go, use a public variable to track previous node
+    // In order traversal using recursion
+    public boolean isValidBSTRecursion(TreeNode root) {
+        return helperRecursion(root);
+    }
+    
+    TreeNode pre = null;
+    boolean helperRecursion(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        
+        boolean left = helperRecursion(node.left);
+        
+        if (pre != null && pre.val >= node.val) {
+            return false;
+        }
+        
+        pre = node;
+        boolean right = helperRecursion(node.right);
+        
+        return left && right;
+    }
+
+    /////////////////////END
+    
+    void inOrderTraversal(List<TreeNode> res, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        
+        inOrderTraversal(res, root.left);
+        res.add(root);
+        inOrderTraversal(res, root.right);
+    }
+
+
 	
 	// My new version using inorder iteration
     // In order traversal using iteration
@@ -134,48 +240,5 @@ public class ValidBinarySearchTree {
         return true;
     }
     
-	// This way, we need to inOrder traversal, and then compare results, which is not efficient.
-    public boolean isValidBST(TreeNode root) {
-        List<TreeNode> res = new ArrayList<TreeNode>();
-        
-        //inOrderTraversal(res, root);
-        res = inOrderTraversalDC(root);
-        
-        for (int i = 0; i < res.size() - 1; i++) {
-            TreeNode left = res.get(i);
-            TreeNode right = res.get(i + 1);
-            if (left.val >= right.val) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
-    
-    List<TreeNode> inOrderTraversalDC(TreeNode root) {
-        List<TreeNode> res = new ArrayList<TreeNode>();
-        if (root == null) {
-            return res;
-        }
-        
-        List<TreeNode> left = inOrderTraversalDC(root.left);
-        res.addAll(left);
-        
-        res.add(root);
-        
-        List<TreeNode> right = inOrderTraversalDC(root.right);
-        res.addAll(right);
-        
-        return res;
-    }
-    
-    void inOrderTraversal(List<TreeNode> res, TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        
-        inOrderTraversal(res, root.left);
-        res.add(root);
-        inOrderTraversal(res, root.right);
-    }
+
 }

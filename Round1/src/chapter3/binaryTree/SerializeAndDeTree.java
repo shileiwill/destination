@@ -18,6 +18,7 @@ import java.util.Stack;
 
 public class SerializeAndDeTree {
 
+    // Solution 1:
     // Added on 08/25/2023
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
@@ -57,6 +58,32 @@ public class SerializeAndDeTree {
 
         return node;
     }
+
+    // Solution 2: I dont like wrapping the single int to an array.
+    // Instead of passing in the cursor, let's change the array as we go
+    public TreeNode rdeserialize(List<String> list) {
+        // Recursive deserialization.
+        if (list.get(0).equals("null")) {
+          list.remove(0);
+          return null;
+        }
+
+        TreeNode root = new TreeNode(Integer.valueOf(list.get(0)));
+        list.remove(0);
+        root.left = rdeserialize(list);
+        root.right = rdeserialize(list);
+
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] data_array = data.split(",");
+        List<String> data_list = new LinkedList<String>(Arrays.asList(data_array));
+        return rdeserialize(data_list);
+    }
+
+    /////////////////END
 
 	public static void main(String[] args) {
 		TreeNode n3 = new TreeNode(3);

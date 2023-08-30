@@ -22,6 +22,13 @@ public class LowestCommonAncestor {
         if (!covers(root, p) || !covers(root, q)) { // Error check, if P or Q is not in tree
             return null;
         }
+
+        if (covers(p, q)) {
+            return p;
+        }
+        if (covers(q, p)) {
+            return q;
+        }
         
         boolean isPOnLeft = covers(root.left, p);
         boolean isQOnLeft = covers(root.left, q);

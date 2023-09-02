@@ -28,6 +28,7 @@ public class Permutations {
 		List<List<Integer>> res = permutations.permute(nums);
 	}
 
+    // Solution 1: Use backtracking
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         List<Integer> list = new ArrayList<Integer>();

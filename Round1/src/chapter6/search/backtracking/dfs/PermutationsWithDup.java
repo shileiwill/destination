@@ -25,6 +25,7 @@ public class PermutationsWithDup {
 		List<List<Integer>> res = permutations.permute(nums);
 	}
 
+    // Solution 1: Introduce visited array and use index to skip certain elements
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         List<Integer> list = new ArrayList<Integer>();

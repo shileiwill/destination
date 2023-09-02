@@ -26,6 +26,7 @@ public class Combinations {
 
 	}
 
+    // Solution 1: Use position, which is different than Permutation
     public List<List<Integer>> combine(int n, int k) {
         int[] nums = getArray(n);
         List<List<Integer>> res = new ArrayList<List<Integer>>();

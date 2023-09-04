@@ -83,6 +83,28 @@ public class HowManyWays {
         
         return count1 + count2;
     }
+
+    // Solution 3: use stack to mock recursion
+    static int count(int target) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(target);
+        int res = 0;
+        
+        while (!stack.isEmpty()) {
+            int cur = stack.pop();
+            
+            if (cur == 0) {
+                res++;
+            }
+            if (cur >= 3) {
+                stack.push(cur - 3);
+            }
+            if (cur >= 7) {
+                stack.push(cur - 7);
+            }
+        }
+        return res;
+    }
 }
 
 

@@ -83,6 +83,63 @@ public class SerializeAndDeTree {
         return rdeserialize(data_list);
     }
 
+
+    // Solution 3: Use level order traversal, breath first search
+    public String serializeBFS(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                TreeNode cur = queue.poll();
+
+                if (cur == null) {
+                    sb.append("#,");
+                } else {
+                    sb.append(cur.val + ",");
+                    queue.offer(cur.left);
+                    queue.offer(cur.right);
+                }
+            }
+        }
+
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    // Use queue again, can't use recursion
+    public TreeNode deserializeBFS(String data) {
+        String[] arr = data.split(",");
+        List<String> list = new LinkedList<String>(Arrays.asList(arr));
+
+        if (list.get(0).equals("#")) {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(Integer.valueOf(list.get(0)));
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        for (int i = 1; i < list.size(); i += 2) {
+            TreeNode cur = queue.poll();
+
+            if (!list.get(i).equals("#")) {
+                TreeNode leftNode = new TreeNode(Integer.valueOf(list.get(i)));
+                queue.offer(leftNode);
+                cur.left = leftNode;
+            }
+            if (i + 1 < list.size() && !list.get(i + 1).equals("#")) {
+                TreeNode rightNode = new TreeNode(Integer.valueOf(list.get(i + 1)));
+                queue.offer(rightNode);
+                cur.right = rightNode;
+            }
+        }
+
+        return root;
+    }
+
     /////////////////END
 
 	public static void main(String[] args) {

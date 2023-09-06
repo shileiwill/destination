@@ -28,12 +28,14 @@ public class MergeKSortedArrays {
 
 	}
 
+	 // Solution 1: Node in Heap
 	 public List<Integer> mergekSortedArrays(int[][] arrays) {
 		 Comparator<Node> comp = new Comparator<Node>() {
 			public int compare(Node n1, Node n2) {
 				return n1.val - n2.val;
 			}
 		 };
+
 		 PriorityQueue<Node> heap = new PriorityQueue<Node>(arrays.length, comp); // Get min by default
 		 List<Integer> res = new ArrayList<Integer>();
 		 

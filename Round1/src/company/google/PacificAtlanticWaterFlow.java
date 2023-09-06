@@ -35,6 +35,7 @@ public class PacificAtlanticWaterFlow {
     // https://discuss.leetcode.com/topic/62379/java-bfs-dfs-from-ocean
     int[][] direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     
+    // Solution 1: BFS
     public List<int[]> pacificAtlanticBFS(int[][] matrix) {
         List<int[]> res = new ArrayList<int[]>();
         
@@ -100,6 +101,7 @@ public class PacificAtlanticWaterFlow {
         }
     }
     
+    // Solution 2: DFS
     public List<int[]> pacificAtlantic(int[][] matrix) {
         List<int[]> res = new ArrayList<int[]>();
         

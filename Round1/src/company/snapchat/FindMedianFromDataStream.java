@@ -36,6 +36,7 @@ public class FindMedianFromDataStream {
 		System.out.println(heap.poll());
 	}
 
+    // Solution 1: max and min heaps
 	// 取出最小值来，这个堆用来放大数
     PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
     // 取出最大值来， 这个堆用来放小数

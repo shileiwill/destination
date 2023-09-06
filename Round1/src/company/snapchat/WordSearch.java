@@ -7,6 +7,100 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 // 212, 79
+
+
+class Solution {
+    int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int M = -1;
+    int N = -1;
+
+    // Solution 1: Use DFS, backtracking
+    public boolean exist(char[][] board, String word) {
+        M = board.length;
+        N = board[0].length;
+
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    boolean[][] visited = new boolean[M][N];
+                    visited[i][j] = true;
+                    boolean res = dfs(board, i, j, visited, word, 1);
+                    if (res) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    boolean dfs(char[][] board, int i, int j, boolean[][] visited, String word, int pos) {
+        if (pos == word.length()) {
+            return true;
+        }
+
+        for (int[] dir : directions) {
+            int newX = i + dir[0];
+            int newY = j + dir[1];
+
+            if (newX >= 0 && newX < M && newY >= 0 && newY < N && !visited[newX][newY] && word.charAt(pos) == board[newX][newY]) {
+                visited[newX][newY] = true;
+                boolean res = dfs(board, newX, newY, visited, word, pos + 1);
+                if (res) {
+                    return true;
+                }
+                visited[newX][newY] = false;
+            }
+        }
+
+        return false;
+    }
+
+    // Solution 2: Use BFS
+    public boolean exist(char[][] board, String word) {
+        M = board.length;
+        N = board[0].length;
+
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    boolean[][] visited = new boolean[M][N];
+                    visited[i][j] = true;
+                    boolean res = bfs(board, i, j, visited, word, 1);
+                    if (res) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    boolean bfs(char[][] board, int i, int j, boolean[][] visited, String word, int pos) {
+        if (pos == word.length()) {
+            return true;
+        }
+
+        for (int[] dir : directions) {
+            int newX = i + dir[0];
+            int newY = j + dir[1];
+
+            if (newX >= 0 && newX < M && newY >= 0 && newY < N && !visited[newX][newY] && word.charAt(pos) == board[newX][newY]) {
+                visited[newX][newY] = true;
+                boolean res = bfs(board, newX, newY, visited, word, pos + 1);
+                if (res) {
+                    return true;
+                }
+                visited[newX][newY] = false;
+            }
+        }
+
+        return false;
+    }
+}
+
 public class WordSearch {
 
 	public static void main(String[] args) {

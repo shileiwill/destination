@@ -169,4 +169,36 @@ class LetterCasePermutation {
             helper(s, pos + 1, cur + curChar, res);
         }
     }
+
+    // Solution 3: Can we apply backtracking?
+    public List<String> letterCasePermutation(String s) {
+        List<String> res = new ArrayList<>();
+        helper(s, new StringBuilder(), res);
+
+        return res;
+    }
+
+    void helper(String originalStr, StringBuilder sb, List<String> res) {
+        // when the pos reaches the end of original string, add current string to res
+        if (sb.length() == originalStr.length()) {
+            res.add(sb.toString());
+            return;
+        }
+        
+        int pos = sb.length();
+        char curChar = originalStr.charAt(pos);
+        char[] options = new char[]{Character.toLowerCase(curChar), Character.toUpperCase(curChar)};
+        
+        if (Character.isLetter(curChar)) {
+            for (char curChar2 : options) {
+                sb.append(curChar2);
+                helper(originalStr, sb, res);
+                sb.setLength(sb.length() - 1);
+            }
+        } else {
+                sb.append(curChar);
+                helper(originalStr, sb, res);
+                sb.setLength(sb.length() - 1);
+        }
+    }
 }

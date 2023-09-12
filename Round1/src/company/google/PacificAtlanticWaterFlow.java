@@ -35,7 +35,61 @@ public class PacificAtlanticWaterFlow {
     // https://discuss.leetcode.com/topic/62379/java-bfs-dfs-from-ocean
     int[][] direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     
-    // Solution 1: BFS
+    // 1. Tell me what are the points which can come to Pacific
+    // 2. Tell me what are the points which can come to Atlantic
+    // 3. Tell me the points which can come to both
+    
+    // Solution 1: DFS
+    public List<int[]> pacificAtlantic(int[][] matrix) {
+        List<int[]> res = new ArrayList<int[]>();
+        
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return res;    
+        }
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        boolean[][] pVisited = new boolean[m][n];
+        boolean[][] aVisited = new boolean[m][n];
+        
+        for (int i = 0; i < m; i++) {
+            dfs(matrix, pVisited, i, 0);
+            dfs(matrix, aVisited, i, n - 1);
+        }
+        
+        for (int i = 0; i < n; i++) {
+            dfs(matrix, pVisited, 0, i);
+            dfs(matrix, aVisited, m - 1, i);
+        }
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (pVisited[i][j] && aVisited[i][j]) {
+                    res.add(new int[]{i, j});
+                }
+            }
+        }
+        
+        return res;
+    }
+    
+    void dfs(int[][] matrix, boolean[][] visited, int x, int y) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        visited[x][y] = true;
+        
+        for (int[] dir : direction) {
+            int newX = x + dir[0];
+            int newY = y + dir[1];
+            
+            if (newX >= 0 && newX < m && newY >= 0 && newY < n && !visited[newX][newY] && matrix[newX][newY] >= matrix[x][y]) {
+                dfs(matrix, visited, newX, newY);
+            }
+        }
+    }
+
+    // Solution 2: BFS
     public List<int[]> pacificAtlanticBFS(int[][] matrix) {
         List<int[]> res = new ArrayList<int[]>();
         
@@ -98,56 +152,6 @@ public class PacificAtlanticWaterFlow {
                     queue.offer(new int[]{newX, newY});
                 }
             } 
-        }
-    }
-    
-    // Solution 2: DFS
-    public List<int[]> pacificAtlantic(int[][] matrix) {
-        List<int[]> res = new ArrayList<int[]>();
-        
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return res;    
-        }
-        int m = matrix.length;
-        int n = matrix[0].length;
-        
-        boolean[][] pVisited = new boolean[m][n];
-        boolean[][] aVisited = new boolean[m][n];
-        
-        for (int i = 0; i < m; i++) {
-            dfs(matrix, pVisited, i, 0);
-            dfs(matrix, aVisited, i, n - 1);
-        }
-        
-        for (int i = 0; i < n; i++) {
-            dfs(matrix, pVisited, 0, i);
-            dfs(matrix, aVisited, m - 1, i);
-        }
-        
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (pVisited[i][j] && aVisited[i][j]) {
-                    res.add(new int[]{i, j});
-                }
-            }
-        }
-        
-        return res;
-    }
-    
-    void dfs(int[][] matrix, boolean[][] visited, int x, int y) {
-        int m = matrix.length;
-        int n = matrix[0].length;
-        
-        visited[x][y] = true;
-        
-        for (int[] dir : direction) {
-            int newX = x + dir[0];
-            int newY = y + dir[1];
-            
-            if (newX >= 0 && newX < m && newY >= 0 && newY < n && !visited[newX][newY] && matrix[newX][newY] >= matrix[x][y]) {
-                dfs(matrix, visited, newX, newY);
-            }
         }
     }
 }

@@ -86,6 +86,41 @@ class Solution {
 		}
 	}
 
+	// Dont pass in mutatable size, but use return
+	public int numIslands(char[][] grid) {
+    	M = grid.length;
+		N = grid[0].length;
+		int count = 0;
+		boolean[][] visited = new boolean[M][N];
+
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < N; j++) {
+				if (grid[i][j] == '1' && !visited[i][j]) {
+					count++;
+					visited[i][j] = true;
+					int size = dfs(grid, i, j, visited);
+					System.out.println("island size is: " + size);
+				}
+			}
+		}
+		return count;
+    }
+
+    // return size here
+	int dfs(char[][] grid, int i, int j, boolean[][] visited) {
+		int size = 1; // it is 1 because when we come here, we must have seen a 1
+		for (int[] dir : directions) {
+			int x = i + dir[0];
+			int y = j + dir[1];
+
+			if (x >= 0 && x < M && y >= 0 && y < N && grid[x][y] == '1' && !visited[x][y]) {
+				visited[x][y] = true;
+				size += dfs(grid, x, y, visited);
+			}
+		}
+		return size;
+	}
+
     // Solution 3: Use DFS, use visited matrix
     // modify the matrix if you dont use the visited matrix
     void dfs(char[][] grid, boolean[][] visited, int i, int j) {

@@ -95,6 +95,32 @@ class Solution {
 
         return false;
     }
+
+    // If visited is outside of for loops
+    public boolean exist(char[][] board, String word) {
+        M = board.length;
+		N = board[0].length;
+
+        boolean[][] visited = new boolean[M][N];
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < N; j++) {
+                // check visited?
+                if (board[i][j] == word.charAt(0)) {
+                    
+                    visited[i][j] = true;
+                    boolean res = dfs(board, i, j, visited, word, 1);
+                    if (res) {
+                        return true;
+                    }
+                    // If visited is outside of the double for loop, then you need to cleanup every step.
+                    // Change back to false on every step.
+                    visited[i][j] = false;
+                }
+            }
+        }
+
+        return false;
+    }
 }
 
 public class WordSearch {

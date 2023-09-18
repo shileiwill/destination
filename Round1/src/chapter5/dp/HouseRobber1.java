@@ -5,6 +5,7 @@ package chapter5.dp;
 Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
  */
 public class HouseRobber1 {
+    // Solution 1: Tabulation. Use an array to track the previous outcomes
     public int rob(int[] nums) {
         int[] hash = new int[nums.length];
         
@@ -24,7 +25,7 @@ public class HouseRobber1 {
         return hash[nums.length - 1];
     }
     
-    // Without array
+    // Solution 2: Tabulation. What if array is not allowed, just track the immediate 2 prior outcomes
     public int rob2(int[] nums) {
         if (nums.length == 0) {
             return 0;
@@ -43,4 +44,47 @@ public class HouseRobber1 {
         
         return second;
     }
+
+    // Solution 3: Recursion, without memoization
+    public int rob(int[] nums) {
+        return helper(nums, 0);
+    }
+
+    int helper(int[] nums, int pos) {
+        if (pos >= nums.length) {
+            return 0;
+        }
+
+        // Either take current or not
+        return Math.max(helper(nums, pos + 1), helper(nums, pos + 2) + nums[pos]);
+    }
+
+    // Solution 4: Memoization
+    public int rob(int[] nums) {
+        int[] memo = new int[nums.length];
+        // this is just to avoid all 0s, an edge case
+        for (int i = 0; i < memo.length; i++) {
+            memo[i] = -1;
+        }
+
+        return helper(nums, 0, memo);
+    }
+
+    int helper(int[] nums, int pos, int[] memo) {
+        if (pos >= nums.length) {
+            return 0;
+        }
+
+        if (memo[pos] != -1) {
+            return memo[pos];
+        }
+
+        // Either take current or not
+        int max = Math.max(helper(nums, pos + 1, memo), helper(nums, pos + 2, memo) + nums[pos]);
+        memo[pos] = max;
+
+        return max;
+    }
+
+    
 }

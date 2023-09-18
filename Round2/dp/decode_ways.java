@@ -1,6 +1,7 @@
 decode_ways.java
 
 class Solution {
+    // Solution 1: tabulation to deal with 2 scenarios
     public int numDecodings2(String s) {
         int N = s.length();
         int[] memo = new int[N + 1];
@@ -23,6 +24,7 @@ class Solution {
         return memo[N];
     }
 
+    // Solution 2: memoization, the base condition order matters
     public int numDecodings(String s) {
         Integer[] memo = new Integer[s.length()];
         return helper(s, 0, memo);

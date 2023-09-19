@@ -24,32 +24,51 @@ is there subarray summed to a target. 像523，但是值可正可负，我用了
 刚考了
  */
 public class ContinousSubarraySum {
-	// One Pass
-    public boolean checkSubarraySum(int[] nums, int k) {
-        // Map的key是共同的余数，只要余数相同，做差之后 就肯定是k的倍数
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>(); 
-        map.put(0, -1);
-        int runningSum = 0;
+    // First start with subarray target. You are given an array, find a subarray which sums to target
+    boolean checkSubarraySum(int[] nums, int target) {
+        int len = nums.length;
+        int[] sum = new int[len + 1];
+        sum[0] = 0;
         
-        for (int i = 0; i < nums.length; i++) {
-            runningSum += nums[i];
-            
-            if (k != 0) { // 巧妙 使用同一个变量
-                runningSum = runningSum % k;
-            }
-            
-            if (map.containsKey(runningSum)) {
-                if (i - map.get(runningSum) >= 2) {
+        for (int i = 1; i <= len; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1];
+        }
+        
+        for (int i = 0; i <= len; i++) {
+            for (int j = i + 1; j <= len; j++) {
+                int value = sum[j] - sum[i];
+                
+                if (value - target == 0) {
+                    System.out.println(i + ":" + j);
                     return true;
                 }
-            } else {
-                map.put(runningSum, i);
             }
         }
         
         return false;
     }
-    
+
+    // Second, use a map to avoid double for loops
+    boolean subarraySumToTarget2(int[] arr, int target) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // Since we dont care about index, Set<Integer> will also work
+        map.put(0, -1);
+        
+        int runningSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            runningSum += arr[i];
+            
+            int toFind = runningSum - target;
+            if (map.containsKey(toFind)) {
+                return true;
+            }
+            
+            map.put(runningSum, i);
+        }
+        
+        return false;
+    }
+
+	// Solution 1: use sum array, this will timeout
     public boolean checkSubarraySum2(int[] nums, int k) {
         int len = nums.length;
         int[] sum = new int[len + 1];
@@ -75,6 +94,34 @@ public class ContinousSubarraySum {
         
         return false;
     }
+
+    // Solution 2: This is not easy to get. One Pass, use map and use remainder
+    public boolean checkSubarraySum(int[] nums, int k) {
+        // Map的key是共同的余数，只要余数相同，做差之后 就肯定是k的倍数
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+        map.put(0, -1);
+        int runningSum = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            runningSum += nums[i];
+            
+            if (k != 0) { // 巧妙 使用同一个变量
+                runningSum = runningSum % k;
+            }
+            
+            if (map.containsKey(runningSum)) {
+                if (i - map.get(runningSum) >= 2) {
+                    return true;
+                }
+            } else {
+                map.put(runningSum, i);
+            }
+        }
+        
+        return false;
+    }
+    
+
     
     // All numbers are non-negative. 有负数的话这个双指针方法就不行了
     boolean subarraySumToTarget(int[] arr, int target) {
@@ -99,25 +146,6 @@ public class ContinousSubarraySum {
     		}
     		
     		right = Math.max(right, left + 1);
-    	}
-    	
-    	return false;
-    }
-    
-    boolean subarraySumToTarget2(int[] arr, int target) {
-    	Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // Since we dont care about index, Set<Integer> will also work
-    	map.put(0, -1);
-    	
-    	int runningSum = 0;
-    	for (int i = 0; i < arr.length; i++) {
-    		runningSum += arr[i];
-    		
-    		int toFind = runningSum - target;
-    		if (map.containsKey(toFind)) {
-    			return true;
-    		}
-    		
-    		map.put(runningSum, i);
     	}
     	
     	return false;

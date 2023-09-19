@@ -24,6 +24,50 @@ input output都是word 不是letter
  */
 public class MinimumWindowSubstring {
 
+    // Solution 1: 2 pointers with hashmap
+    public String minWindow(String s, String t) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            if (!map.containsKey(c)) {
+                map.put(c, 0);
+            }
+            map.put(c, map.get(c) + 1);
+        }
+
+        int left = 0, right = 0;
+        int len = Integer.MAX_VALUE;
+        String res = "";
+        int count = t.length();
+
+        while (right < s.length()) {
+            // 1. move right
+            char rc = s.charAt(right);
+            if (map.containsKey(rc) && map.get(rc) > 0) {
+                count--;
+            }
+            map.put(rc, map.getOrDefault(rc, 0) - 1);
+            right++;
+
+            // 2. move left, when should we move left
+            while (count == 0) {
+                // 3. result
+                if (right - left < len) {
+                    len = right - left;
+                    res = s.substring(left, right);
+                }
+
+                char lc = s.charAt(left);
+                if (map.get(lc) >= 0) {
+                    count++;
+                }
+                map.put(lc, map.get(lc) + 1);
+                left++;
+            }
+        }
+
+        return res;
+    }
+
     public String minWindow(String s, String t) {
         int[] hash = new int[256];
         

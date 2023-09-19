@@ -11,32 +11,71 @@ Given "bbbbb", the answer is "b", with the length of 1.
 Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  */
 public class ValidSubstringWithoutRepeating {
+    // Solution 1: what if we can use extra space, e.g. a Set
     public int lengthOfLongestSubstring(String s) {
-        int left = 0, right = 0, count = 0; // The count of duplicates
-        int len = 0;
-        int[] hash = new int[256];
-        
-        while (right < s.length()) {
-            char rightChar = s.charAt(right);
-            if (hash[rightChar] > 0) { // This right character exists already
-                count++;
-            }
-            // Without repeating
-            hash[rightChar]++;
-            right++;
-            
-            while (count > 0) { // As long as there is duplicate, need to move left forward
-                char leftChar = s.charAt(left);
-                if (hash[leftChar] > 1) {
-                    count--;
+        Set<Character> set = new HashSet<>();
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int cur = 0;
+            set = new HashSet<>();
+            for (int j = i; j < s.length(); j++) {
+                char c = s.charAt(j);
+                if (set.contains(c)) {
+                    break;
                 }
-                hash[leftChar]--;
+                set.add(c);
+                cur++;
+            }
+
+            count = Math.max(count, cur); 
+        }
+
+        return count;
+    }
+
+    // Solution 2: Use 2 pointers going from left
+    public int lengthOfLongestSubstring2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        if (s.length() == 1) {
+            return 1;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0, right = 0;
+        int leftRes = 0, rightRes = 0;
+        int dup = 0;
+
+        while (right < s.length()) {
+            // 1. move right
+            char rc = s.charAt(right);
+            if (map.containsKey(rc)) {
+                dup++;
+            }
+            map.put(rc, map.getOrDefault(rc, 0) + 1);
+            right++; // remember to plus
+
+            // 2. move left, when should we move left
+            while (dup != 0) {
+                char lc = s.charAt(left);
+                if (map.get(lc) > 1) {
+                    dup--;
+                }
+                map.put(lc, map.get(lc) - 1);
+                if (map.get(lc) == 0) {
+                    map.remove(lc); // remember to remove
+                }
                 left++;
             }
-            
-            len = Math.max(len, right - left);
+
+            // 3. compare with final result
+            if (right - left > rightRes - leftRes) {
+                leftRes = left;
+                rightRes = right;
+            }
         }
-        
-        return len;
+
+        return rightRes - leftRes;
     }
 }

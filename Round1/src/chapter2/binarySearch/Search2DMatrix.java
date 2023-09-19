@@ -18,6 +18,7 @@ Given target = 3, return true.
  *
  */
 public class Search2DMatrix {
+    // Solution 1: double binary searches
     public boolean searchMatrix(int[][] matrix, int target) {
         // The first column: matrix[i][0]
     	

@@ -11,6 +11,7 @@ You may assume no duplicate exists in the array.
  *
  */
 public class SearchInRotatedSortedArray {
+    // Solution 1: just binary search
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;

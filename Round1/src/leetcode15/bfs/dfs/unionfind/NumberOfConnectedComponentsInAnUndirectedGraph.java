@@ -27,33 +27,8 @@ You can assume that no duplicate edges will appear in edges. Since all edges are
  */
 public class NumberOfConnectedComponentsInAnUndirectedGraph {
     // https://discuss.leetcode.com/topic/32752/easiest-2ms-java-solution
-    public int countComponentsUnionFind(int n, int[][] edges) {
-        int[] nodes = new int[n];
-        for (int i = 0; i < n; i++) {
-            nodes[i] = i;
-        }
-        
-        for (int[] edge : edges) {
-            int p1 = find(nodes, edge[0]);
-            int p2 = find(nodes, edge[1]);
-            
-            if (p1 != p2) {
-                nodes[p1] = p2;
-                n--;
-            }
-        }
-        
-        return n;
-    }
-    
-    int find(int[] nodes, int id) {
-        while (nodes[id] != id) {
-            nodes[id] = nodes[nodes[id]]; // Optional, path compression
-            id = nodes[id];
-        }
-        return nodes[id];
-    }
-    
+
+    // Solution 1: DFS    
     public int countComponentsDFS(int n, int[][] edges) {
         List<Set<Integer>> connections = new ArrayList<Set<Integer>>();
         for (int i = 0; i < n; i++) {
@@ -92,6 +67,7 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
         }
     }
     
+    // Solution 2: BFS
     public int countComponents(int n, int[][] edges) {
         List<Set<Integer>> connections = new ArrayList<Set<Integer>>();
         for (int i = 0; i < n; i++) {
@@ -131,5 +107,33 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
         }
         
         return count;
+    }
+
+    // Solution 3: Union Find
+    public int countComponentsUnionFind(int n, int[][] edges) {
+        int[] nodes = new int[n];
+        for (int i = 0; i < n; i++) {
+            nodes[i] = i;
+        }
+        
+        for (int[] edge : edges) {
+            int p1 = find(nodes, edge[0]);
+            int p2 = find(nodes, edge[1]);
+            
+            if (p1 != p2) {
+                nodes[p1] = p2;
+                n--;
+            }
+        }
+        
+        return n;
+    }
+    
+    int find(int[] nodes, int id) {
+        while (nodes[id] != id) {
+            nodes[id] = nodes[nodes[id]]; // Optional, path compression
+            id = nodes[id];
+        }
+        return nodes[id];
     }
 }

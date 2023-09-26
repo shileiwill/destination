@@ -23,50 +23,7 @@ import java.util.Set;
 // 261   3 ways: Topological Sort, DFS/BFS, Union Find
 public class GraphValidTree {
 
-	public static void main(String[] args) {
-
-	}
-
-	static class Node {
-		int val;
-		Set<Node> friends;
-	}
-	
-	// Use topological sort
-	public boolean isValid(List<Node> nodes) {
-		if (nodes == null || nodes.size() == 0) {
-			return true;
-		}
-		
-		Map<Node, Integer> inDegree = new HashMap<Node, Integer>();
-		for (Node node : nodes) {
-			for (Node friend : node.friends) {
-				inDegree.put(friend, inDegree.getOrDefault(friend, 0) + 1);
-			}
-		}
-		
-		Queue<Node> queue = new LinkedList<Node>();
-		for (Node node : nodes) {
-			if (!inDegree.containsKey(node)) {
-				queue.offer(node); // The root node, should be only one
-			} else {
-				if (inDegree.get(node) >= 2) { // More than 2 nodes coming to this node, circle!
-					return false;
-				}
-			}
-		}
-		
-		if (queue.size() != 1) { // Root can't be 0 or > 1
-			return false;
-		}
-		
-		// Do we still need to BFS the Tree and use a visted set? Or must be true here?
-		// Yes, still need to deal with circle
-		return true;
-	}
-
-	// Remember this BFS　approach from Jiuzhang 因为是无向图，所以不care环？
-	// 这个应该是正解
+    // Solution 1: BFS. Remember this BFS　approach from Jiuzhang 因为是无向图，所以不care环？
     public boolean validTree(int n, int[][] edges) {
         if (edges.length == 0) {
             return n == 1;
@@ -113,6 +70,45 @@ public class GraphValidTree {
         
         return n == visited.size(); // It should cover all, eventually， 保证不落单
     }
+
+	static class Node {
+		int val;
+		Set<Node> friends;
+	}
+	
+	// Use topological sort, not sure if this solves the problem
+	public boolean isValid(List<Node> nodes) {
+		if (nodes == null || nodes.size() == 0) {
+			return true;
+		}
+		
+		Map<Node, Integer> inDegree = new HashMap<Node, Integer>();
+		for (Node node : nodes) {
+			for (Node friend : node.friends) {
+				inDegree.put(friend, inDegree.getOrDefault(friend, 0) + 1);
+			}
+		}
+		
+		Queue<Node> queue = new LinkedList<Node>();
+		for (Node node : nodes) {
+			if (!inDegree.containsKey(node)) {
+				queue.offer(node); // The root node, should be only one
+			} else {
+				if (inDegree.get(node) >= 2) { // More than 2 nodes coming to this node, circle!
+					return false;
+				}
+			}
+		}
+		
+		if (queue.size() != 1) { // Root can't be 0 or > 1
+			return false;
+		}
+		
+		// Do we still need to BFS the Tree and use a visted set? Or must be true here?
+		// Yes, still need to deal with circle
+		return true;
+	}
+
     public boolean validTreeUF(int n, int[][] edges) {
         UnionFind uf = new UnionFind(n);
         

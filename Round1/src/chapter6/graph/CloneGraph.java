@@ -33,45 +33,7 @@ Visually, the graph looks like the following:
  *
  */
 public class CloneGraph {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        // This is breadth first search
-        if (node == null) {
-            return null;
-        }
-        
-        ArrayList<UndirectedGraphNode> list = new ArrayList<UndirectedGraphNode>(); 
-        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>(); // old -> new 
-        
-        list.add(node);
-        map.put(node, new UndirectedGraphNode(node.label));
-        
-        int start = 0;
-        // Clone nodes
-        while (start < list.size()) {
-            UndirectedGraphNode aNode = list.get(start++);
-            List<UndirectedGraphNode> neighbors = aNode.neighbors;
-            
-            for (UndirectedGraphNode neighbor : neighbors) {
-                if (!map.containsKey(neighbor)) { // We can also use queue.contains()
-                    UndirectedGraphNode cloneNei = new UndirectedGraphNode(neighbor.label);
-                    map.put(neighbor, cloneNei);
-                    list.add(neighbor);
-                }
-            }
-        }
-        
-        // Clone edges
-        for (UndirectedGraphNode n : list) {
-            UndirectedGraphNode clonedNode = map.get(n);
-            for (UndirectedGraphNode nei : n.neighbors) {
-                clonedNode.neighbors.add(map.get(nei));
-            }
-        }
-        
-        return map.get(list.get(0));
-    }
-    
-    // A new version using Traditional Queue
+    // Solution 1: using Traditional Queue
     public UndirectedGraphNode cloneGraphQueue(UndirectedGraphNode node) {
         if (node == null) {
             return null;
@@ -108,6 +70,7 @@ public class CloneGraph {
         return map.get(node);
     }
     
+    // Solution 2: DFS
     Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
     public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
         return dfs(node);
@@ -130,6 +93,45 @@ public class CloneGraph {
         }
         
         return clone;
+    }
+
+
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        // This is breadth first search
+        if (node == null) {
+            return null;
+        }
+        
+        ArrayList<UndirectedGraphNode> list = new ArrayList<UndirectedGraphNode>(); 
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>(); // old -> new 
+        
+        list.add(node);
+        map.put(node, new UndirectedGraphNode(node.label));
+        
+        int start = 0;
+        // Clone nodes
+        while (start < list.size()) {
+            UndirectedGraphNode aNode = list.get(start++);
+            List<UndirectedGraphNode> neighbors = aNode.neighbors;
+            
+            for (UndirectedGraphNode neighbor : neighbors) {
+                if (!map.containsKey(neighbor)) { // We can also use queue.contains()
+                    UndirectedGraphNode cloneNei = new UndirectedGraphNode(neighbor.label);
+                    map.put(neighbor, cloneNei);
+                    list.add(neighbor);
+                }
+            }
+        }
+        
+        // Clone edges
+        for (UndirectedGraphNode n : list) {
+            UndirectedGraphNode clonedNode = map.get(n);
+            for (UndirectedGraphNode nei : n.neighbors) {
+                clonedNode.neighbors.add(map.get(nei));
+            }
+        }
+        
+        return map.get(list.get(0));
     }
 }
 

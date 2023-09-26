@@ -18,7 +18,7 @@ public class ReverseLinkedList {
 			rll.res = rll.res.next;
 		}
 	}
-	// In place. Swap every 2. Most important thing is to use Prev node
+	// Solution 1: In place. Swap every 2. Most important thing is to use Prev node
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -36,7 +36,7 @@ public class ReverseLinkedList {
         return prev;
     }
     
-    // Use recursion!
+    // Solution 2: Use recursion!
     ListNode pre = null;
     ListNode res = null;
     void reverseRecursion(ListNode node) {
@@ -55,6 +55,7 @@ public class ReverseLinkedList {
     	}
     }
     
+    // Solution 3: Use stack and traverse 2 times.
     public ListNode reverseList2(ListNode head) {
         if (head == null || head.next == null) {
             return head;

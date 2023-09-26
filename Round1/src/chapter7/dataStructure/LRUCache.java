@@ -29,6 +29,7 @@ public class LRUCache {
 //		2,[lru.set(2,1),lru.set(1,1),lru.get(2),lru.set(4,1),lru.get(1),lru.get(2)]
 	}
 	
+    // Solution 1: doubly linked list and a Map
     ListNode first = null;
     ListNode last = null;
     int capacity = 0;
@@ -48,6 +49,29 @@ public class LRUCache {
         }
         
         return -1;
+    }
+
+    public void set(int key, int value) {
+        if (!map.containsKey(key)) {
+            ListNode node = new ListNode(key, value);
+            if (map.size() >= capacity) { // Need to remove first
+                // First is changing, so remove from map first
+                map.remove(first.key);
+                removeElement(first);
+                setLastUsed(node);
+            } else {
+                // Just add node and update last
+                setLastUsed(node);
+            }
+            map.put(key, node);
+        } else {
+            // Just reset value and update last
+            ListNode existing = map.get(key);
+            removeElement(existing);
+            
+            existing.value = value;
+            setLastUsed(existing);
+        }
     }
     
     void removeElement(ListNode node) {
@@ -82,29 +106,6 @@ public class LRUCache {
             node.pre = last;
             
             last = node;
-        }
-    }
-    
-    public void set(int key, int value) {
-        if (!map.containsKey(key)) {
-            ListNode node = new ListNode(key, value);
-            if (map.size() >= capacity) { // Need to remove first
-            	// First is changing, so remove from map first
-            	map.remove(first.key);
-                removeElement(first);
-                setLastUsed(node);
-            } else {
-                // Just add node and update last
-                setLastUsed(node);
-            }
-            map.put(key, node);
-        } else {
-            // Just reset value and update last
-            ListNode existing = map.get(key);
-            removeElement(existing);
-            
-            existing.value = value;
-            setLastUsed(existing);
         }
     }
 }

@@ -82,6 +82,12 @@ public class HowManyWays {
         int count2 = helper2(target - 7);
         
         return count1 + count2;
+
+        // You can do memoization with this
+        // if (map.containsKey(target)) {
+        //     System.out.println("short circuited");
+        //     return map.get(target);
+        // }
     }
 
     // Solution 3: use stack to mock recursion

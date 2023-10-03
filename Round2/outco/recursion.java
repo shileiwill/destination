@@ -52,7 +52,7 @@ https://github.com/OutcoSF/outcode_master/blob/master/whiteboarding/03_recursion
 
 public class HowManyWays {
 
-	// Solution 1: Use a public variable, run recursion on the 2 scenarios
+    // Solution 1: Use a public variable, run recursion on the 2 scenarios
     static int res = 0;
     
     static void helper(int target) {
@@ -102,6 +102,13 @@ public class HowManyWays {
             if (cur >= 7) {
                 stack.push(cur - 7);
             }
+
+            // Or just add a check on negative numbers, and skip the if checks on >=3 or >= 7
+            // if (cur < 0) {
+            //     continue;
+            // }
+            // stack.push(cur - 3);
+            // stack.push(cur - 7);
         }
         return res;
     }
@@ -195,6 +202,15 @@ class LetterCasePermutation {
                 helper(originalStr, sb, res);
                 sb.setLength(sb.length() - 1);
             }
+
+            // If you dont want to use the options array, then just do
+            // sb.append(Character.toLowerCase(curChar)); // try
+            // helper(res, s, pos + 1, sb); // next recursion
+            // sb.setLength(sb.length() - 1); // remove
+
+            // sb.append(Character.toUpperCase(curChar)); // try
+            // helper(res, s, pos + 1, sb); // next recursion
+            // sb.setLength(sb.length() - 1); // remove
         } else {
                 sb.append(curChar);
                 helper(originalStr, sb, res);

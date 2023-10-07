@@ -34,7 +34,49 @@ public class ValidSubstringWithoutRepeating {
         return count;
     }
 
-    // Solution 2: Use 2 pointers going from left
+    // Solution 2: 2 pointers with bool
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0, right = 0;
+        int bestLen = 0;
+        boolean hasDup = false;
+
+        // abba
+        while (right < s.length()) {
+            // 1. move right: hunting phase
+            char rc = s.charAt(right);
+            if (map.containsKey(rc) && map.get(rc) > 0) {
+                hasDup = true;
+            } 
+            map.put(rc, map.getOrDefault(rc, 0) + 1);
+            right++;
+
+            while (hasDup) {
+                // we have duplicate! need to move left, catchup phase
+                char lc = s.charAt(left); // a b
+                if (map.get(lc) > 1) {
+                    // this is a duplicate letter
+                    hasDup = false;
+                }
+                map.put(lc, map.get(lc) - 1); // 
+                // if (map.get(lc) == 0) { // you don't need to remove if you check count in L48
+                //     map.remove(lc);
+                // }
+
+                left++;
+            }
+
+            // no duplicate, we can get the length
+            int curLen = right - left;
+            if (curLen > bestLen) {
+                bestLen = curLen;
+            }
+        }
+
+        return bestLen;
+    }
+
+    // Solution 3: Use 2 pointers going from left, 1) use dup as int to track how many duplicates 2) return the substring
     public int lengthOfLongestSubstring2(String s) {
         if (s == null || s.length() == 0) {
             return 0;

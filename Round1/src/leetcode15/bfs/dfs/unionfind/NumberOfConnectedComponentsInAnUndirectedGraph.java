@@ -29,18 +29,18 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
     // https://discuss.leetcode.com/topic/32752/easiest-2ms-java-solution
 
     // Solution 1: DFS    
-    public int countComponentsDFS(int n, int[][] edges) {
-        List<Set<Integer>> connections = new ArrayList<Set<Integer>>();
+    public int countComponents(int n, int[][] edges) {
+        Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
         for (int i = 0; i < n; i++) {
-            connections.add(new HashSet<Integer>());
+            map.put(i, new HashSet<Integer>());
         }
         
         for (int[] edge : edges) {
             int p1 = edge[0];
             int p2 = edge[1];
             
-            connections.get(p1).add(p2);
-            connections.get(p2).add(p1);
+            map.get(p1).add(p2);
+            map.get(p2).add(p1);
         }
         
         Set<Integer> visited = new HashSet<Integer>();
@@ -49,7 +49,7 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
         for (int i = 0; i < n; i++) {
             if (!visited.contains(i)) {
                 visited.add(i);
-                dfs(i, visited, connections);
+                dfs(i, visited, map);
                 count++;
             }
         }
@@ -57,55 +57,61 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
         return count;
     }
     
-    void dfs(int i, Set<Integer> visited, List<Set<Integer>> conns) {
-        Set<Integer> set = conns.get(i);
+    void dfs(int i, Set<Integer> visited, Map<Integer, Set<Integer>> map) {
+        Set<Integer> set = map.get(i);
         for (int s : set) {
             if (!visited.contains(s)) {
                 visited.add(s);
-                dfs(s, visited, conns);
+                dfs(s, visited, map);
             }
         }
     }
     
     // Solution 2: BFS
     public int countComponents(int n, int[][] edges) {
-        List<Set<Integer>> connections = new ArrayList<Set<Integer>>();
-        for (int i = 0; i < n; i++) {
-            connections.add(new HashSet<Integer>());
-        }
-        
-        for (int[] edge : edges) {
-            int p1 = edge[0];
-            int p2 = edge[1];
-            
-            connections.get(p1).add(p2);
-            connections.get(p2).add(p1);
-        }
-        
-        boolean[] visited = new boolean[n];
+        Map<Integer, Set<Integer>> map = new ConcurrentHashMap<>();
         int count = 0;
-        
+
+        for (int[] edge : edges) {
+            int n1 = edge[0];
+            int n2 = edge[1];
+
+            if (!map.containsKey(n1)) {
+                map.put(n1, new HashSet<Integer>());
+            }
+            if (!map.containsKey(n2)) {
+                map.put(n2, new HashSet<Integer>());
+            }
+
+            map.get(n1).add(n2);
+            map.get(n2).add(n1);
+        }
+
+        Set<Integer> visited = new HashSet<>();
         for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                Queue<Integer> queue = new LinkedList<Integer>();
-                queue.offer(i);
-                visited[i] = true;
-                count++;
-                
-                while (!queue.isEmpty()) {
-                    int cur = queue.poll();
-                    Set<Integer> set = connections.get(cur);
-                    
-                    for (int s : set) {
-                        if (!visited[s]) {
-                            queue.offer(s);
-                            visited[s] = true;
+            if (visited.contains(i)) {
+                continue;
+            }
+
+            Queue<Integer> queue = new LinkedList<>();
+            count++;
+            queue.offer(i);
+            visited.add(i);
+
+            while (!queue.isEmpty()) {
+                int now = queue.poll();
+
+                if (map.get(now) != null) {
+                    for (int next : map.get(now)) {
+                        if (!visited.contains(next)) {
+                            queue.offer(next);
+                            visited.add(next);
                         }
                     }
                 }
             }
         }
-        
+
         return count;
     }
 

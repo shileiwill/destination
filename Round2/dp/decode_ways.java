@@ -6,7 +6,7 @@ class Solution {
         int N = s.length();
         int[] memo = new int[N + 1];
 
-        memo[0] = s.charAt(0) == '0' ? 0 : 1;
+        memo[0] = 1; // Empty string is 1 solution
         memo[1] = s.charAt(0) == '0' ? 0 : 1;
 
         for (int i = 2; i <= N; i++) {
@@ -31,6 +31,7 @@ class Solution {
     }
 
     int helper(String s, int pos, Integer[] memo) {
+        // this one is not necessary since it should never come here, should stop on pos == s.length()
         if (pos > s.length()) {
             return 0;
         }
@@ -44,7 +45,7 @@ class Solution {
             return 0;
         }
 
-        if (pos == s.length() - 1) {
+        if (pos == s.length() - 1) { // this should be after the above '0' check
             return 1;
         }
 

@@ -291,46 +291,48 @@ public class BackpackAll6 {
 
 	  base cases:
 	  if capacity <= 0, return. otherwise, keep trying.
+
+	  https://github.com/OutcoSF/outcode_master/blob/master/whiteboarding/04_dynamic_programming/321_knapsack.md
 	**/
+import java.util.*;
+class HelloWorld {
+    static int[] weights = new int[]{10, 20, 30, 40};
+    static int[] values = new int[]{130, 100, 120, 50};
+    static int capacity = 60;
 
-	import java.util.*;
-	class Main3 {
-	  static int[] weights = new int[]{10, 20, 30, 40};
-	  static int[] values = new int[]{130, 100, 120, 50};
-	  static int capacity = 60;
+    static Map<String, Integer> map = new HashMap<>();
 
-	  static Map<String, Integer> map = new HashMap<>();
-	  
-	  public static void main(String[] args) {
-	    int res = helper(capacity, 0);
-	    System.out.println("Res is " + res);
-	  }
+    public static void main(String[] args) {
+      int res = helper(capacity, 0);
+      System.out.println("Res is " + res);
+    }
 
-	  // return is the max value
-	  static int helper(int capacity, int i) {
-	    if (capacity <= 0) {
-	      return 0;
-	    }
+    static int helper(int capacity, int i) {
+      if (capacity <= 0) {
+        return 0;
+      }
 
-	    if (i >= weights.length) {
-	      return 0;
-	    }
+      if (i >= weights.length) {
+        return 0;
+      }
 
-	    if (map.containsKey(capacity + "" + i)) {
-	      return map.get(capacity + "" + i);
-	    }
+      if (map.containsKey(capacity + "" + i)) {
+        return map.get(capacity + "" + i);
+      }
 
-	    int pick = 0;
-	    if capacity >= weights[i]:
-	      pick = helper(capacity - weights[i], i + 1) + values[i];
-	    notpick = helper(capacity, i + 1)
+      int pick = 0;
+      if (capacity >= weights[i]){
+          pick = helper(capacity - weights[i], i + 1) + values[i];
+      }
 
-	    int max = Math.max(notpick, pick);
-	    map.put(capacity + "" + i, max);
-	    
-	    return max;
-	  }
-	}
+      int notpick = helper(capacity, i + 1);
+      int max = Math.max(notpick, pick);
+
+      map.put(capacity + "" + i, max);
+
+      return max;
+  }
+}
 
 
 }

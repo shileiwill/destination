@@ -39,6 +39,61 @@ public class CombinationSum4 {
 		int res = cs4.combinationSum4(nums, target);
 		System.out.println(res);
 	}
+
+    Map<Integer, Integer> map = new HashMap<>();
+
+    // 1. helper function to return. Adding Memoization
+    public int combinationSum4(int[] nums, int target) {    
+        return helper2(nums, target);
+    }
+
+    // return is how many solutions for the given input
+    int helper2(int[] nums, int remaining) {
+        if (remaining == 0) {
+            return 1; // pick nothing is one solution
+        }
+        if (remaining < 0) {
+            return 0;
+        }
+
+        if (map.containsKey(remaining)) {
+            return map.get(remaining);
+        }
+
+        int res = 0;
+        for (int num : nums) {
+            res += helper2(nums, remaining - num);
+        }
+
+        map.put(remaining, res);
+        return res;
+    }
+
+    // 2. Find all the solutions, and get size. Without Memoization
+    public int combinationSum4(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<Integer>();
+
+        helper(res, list, nums, target);
+        return res.size();
+    }
+
+    void helper(List<List<Integer>> res, List<Integer> list, int[] nums, int target) {
+        if (target == 0) {
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        if (target < 0) {
+            return;
+        }
+        for (int num : nums) {
+            list.add(num);
+            helper(res, list, nums, target - num);
+            list.remove(list.size() - 1);
+        }
+    }
+
+
 	
     // Same with Climbing stairs
     public int combinationSum4(int[] nums, int target) {
@@ -54,35 +109,6 @@ public class CombinationSum4 {
         }
         
         return hash[target];
-    }
-    
-    // Backtracking is too slow
-    public int combinationSum4Backtracking(int[] nums, int target) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        List<Integer> list = new ArrayList<Integer>();
-        
-        helper(res, list, nums, target);
-        
-        return res.size();
-    }
-    
-    void helper(List<List<Integer>> res, List<Integer> list, int[] nums, int target) {
-        if (target == 0) {
-            res.add(new ArrayList<Integer>(list));
-            for (int val : list) {
-            	System.out.print(val + " - ");
-            }
-            System.out.println();
-            return;
-        } else if (target < 0) {
-            return;
-        }
-        
-        for (int i = 0; i < nums.length; i++) {
-            list.add(nums[i]);
-            helper(res, list, nums, target - nums[i]);
-            list.remove(list.size() - 1);
-        }
     }
 
 }

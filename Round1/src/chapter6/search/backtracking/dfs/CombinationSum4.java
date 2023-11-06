@@ -69,7 +69,29 @@ public class CombinationSum4 {
         return res;
     }
 
-    // 2. Find all the solutions, and get size. Without Memoization
+    // 2. No return in helper function, use a global variable
+    // Can apply memoization? How?
+    public int combinationSum4(int[] nums, int target) {  
+        helper(nums, target);
+        return numSolutions;
+    }
+
+    int numSolutions = 0;
+    void helper(int[] nums, int target) {
+        if (target == 0) {
+            numSolutions += 1;
+            return;
+        }
+        if (target < 0) {
+            return; 
+        }
+
+        for (int num : nums) {
+            helper(nums, target - num);
+        }
+    }
+
+    // 3. Find all the solutions, and get size. Without Memoization
     public int combinationSum4(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<Integer>();

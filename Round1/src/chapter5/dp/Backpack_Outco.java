@@ -51,6 +51,7 @@
 	  https://github.com/OutcoSF/outcode_master/blob/master/whiteboarding/04_dynamic_programming/321_knapsack.md
 	**/
 import java.util.*;
+
 class HelloWorld {
     static int[] weights = new int[]{10, 20, 30, 40};
     static int[] values = new int[]{130, 100, 120, 50};
@@ -63,6 +64,7 @@ class HelloWorld {
       System.out.println("Res is " + res);
     }
 
+    // Solution 1: with return
     static int helper(int capacity, int i) {
       if (capacity <= 0) {
         return 0;
@@ -87,5 +89,36 @@ class HelloWorld {
       map.put(capacity + "" + i, max);
 
       return max;
+  }
+}
+
+class HelloWorld {
+  static int globalMax = 0;
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+    int []weights = {10, 20, 30};
+    int []values =  {60, 100, 120};
+
+    compute(weights, values, 0, 0, 50);
+    System.out.println( globalMax);
+  }
+
+  // Solution 2: no return
+  static void compute (int []weights, int []values, int i, int value, int w ){
+      if(i == weights.length){
+        return;
+      }
+
+	    if(w < 0){
+	      return;
+	    }
+    
+
+    if(w- weights[i] >= 0){
+      globalMax = Math.max(globalMax, value+ values[i]);
+      compute (weights, values, i +1,  value + values[i], w- weights[i]);
+    }
+    globalMax = Math.max(globalMax, value);
+    compute (weights, values, i +1,  value , w );
   }
 }

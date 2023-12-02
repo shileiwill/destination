@@ -63,4 +63,36 @@ class Solution {
         memo[pos] = res;
         return res;
     }
+
+    // Solution 3, more organized?
+    public int numDecodings(String s) {
+        Integer[] memo = new Integer[s.length()];
+        return helper(s, 0, memo);
+    }
+
+    int helper(String s, int pos, Integer[] memo) {
+        if (pos == s.length()) {
+            return 1;
+        }
+
+        if (memo[pos] != null) {
+            return memo[pos];
+        }
+
+        int res = 0;
+        for (int len = 1; len <= 2; len++) {
+            if (pos + len > s.length()) {
+                continue;
+            }
+
+            String sub = s.substring(pos, pos + len);
+
+            if (sub.charAt(0) != '0' && Integer.parseInt(sub) <= 26) {
+                res += helper(s, pos + len, memo);
+            }
+        }
+
+        memo[pos] = res;
+        return res;
+    }
 }

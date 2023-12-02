@@ -109,7 +109,7 @@ class HelloWorld {
         return;
       }
 
-	    if(w < 0){
+	    if(w < 0){ // we may not need this at all
 	      return;
 	    }
     

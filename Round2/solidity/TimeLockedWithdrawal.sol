@@ -3,6 +3,12 @@ pragma solidity ^0.8.20;
 
 import {OutcoToken} from "./OutcoToken.sol";
 
+/**
+2. Time unlocked ERC20 / vesting contract
+
+A payer deposits a certain amount of tokens into a contract, but the receiver can only withdraw 1/n tokens over the course of n days.
+*/
+
 contract TimeLockedWithdrawal {
     address public payer;
     address public receiver;

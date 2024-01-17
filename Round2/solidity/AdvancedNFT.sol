@@ -5,20 +5,24 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import {OutcoToken} from "./OutcoToken.sol";
 
 /**
-1. Purchase NFT with ERC20 tokens
-
-Bulld a classic NFT that can only be minted by paying with a particular ERC20 token.
+Added the functionality of setApproval so Opensea can transfer on the owner's behalf
 */
 
-contract SimpleNFT {
+contract AdvancedNFT {
     using Strings for uint256;
 
     mapping(uint256 => address) private _owners;
+    // msg.sender: {operator:true}
+    mapping(address => mapping(address => bool)) private _operators;
+
     string baseURL = "http://example.com/images/";
 
     // what if we have to pay OutcoToken in order to mint?
     address public erc20TokenAddress; // not needed
     OutcoToken public outcoToken;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);
+    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);
 
     constructor(address _erc20TokenAddress) {
         erc20TokenAddress = _erc20TokenAddress;
@@ -30,8 +34,9 @@ contract SimpleNFT {
         require(_tokenId < 100, "_tokenId too large");
 
         // Ensure that msg.sender has paid 1 OutcoToken
-        require(outcoToken.transferFrom(msg.sender, address(this), 1), "Failed to transfer 1 OutcoToken for minting");
+        // require(outcoToken.transferFrom(msg.sender, address(this), 1), "Failed to transfer 1 OutcoToken for minting");
 
+        emit Transfer(address(0), msg.sender, _tokenId);
         _owners[_tokenId] = msg.sender;
     }
 
@@ -43,8 +48,11 @@ contract SimpleNFT {
     function transferFrom(address _from, address _to, uint256 _tokenId) external payable {
         require(_owners[_tokenId] != address(0), "token doesnt exist");
         require(_owners[_tokenId] == _from, "only owner can transfer");
-        require(msg.sender == _from, "required to be owner");
+        require(msg.sender == _from || _operators[_from][msg.sender], "required to be owner or approved 3rd party");
 
+        // after the NFT is transferred, we need to reset the approval since the NFT has changed owner.
+        _operators[_from][msg.sender] = false;
+        emit Transfer(_from, _to, _tokenId);
         _owners[_tokenId] = _to;
     }
 
@@ -56,4 +64,8 @@ contract SimpleNFT {
         return string(abi.encodePacked(baseURL, _tokenId.toString(), ".jpeg"));
     }
 
+    function setApprovalForAll(address _operator, bool _approved) external {
+        _operators[msg.sender][_operator] = _approved;
+        emit ApprovalForAll(msg.sender, _operator, _approved);
+    }
 }

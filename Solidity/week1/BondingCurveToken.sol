@@ -51,3 +51,5 @@ contract BondingCurveToken is ERC20 {
         lastPrice = lastPrice - amount * incrementPerToken;
     }
 }
+
+// Consider the case someone might sandwhich attack a bonding curve. What can you do about it? seller only after certain time

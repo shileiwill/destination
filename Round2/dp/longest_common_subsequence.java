@@ -49,3 +49,37 @@ class Solution {
         return arr[pos1][pos2];
     }
 }
+
+// Ari's solution using 2 pointers doesnt work
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        int M = text1.length();
+        int N = text2.length();
+        if (N > M) {
+            return longestCommonSubsequence(text2, text1);
+        }
+
+        Map<Character, Queue<Integer>> map = new HashMap<>();
+        for (int i = 0; i < text2.length(); i++) {
+            char c = text2.charAt(i);
+            if (!map.containsKey(c)) {
+                map.put(c, new LinkedList<Integer>());
+            }
+            map.get(c).offer(i);
+        }
+
+        for (int i = 0, j = 0; i < text1.length(); i++) {
+        char c1 = text1.charAt(i);
+        if (map.get(c1) != null && !map.get(c1).isEmpty()) {
+            int indexOfC1InText2 = map.get(c1).peek();
+            if (indexOfC1InText2 >= j) {
+                count++;
+                j = indexOfC1InText2 + 1;
+                map.get(c1).poll();
+            }
+        }
+    }
+
+        return count;
+    }
+}
